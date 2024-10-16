@@ -10,7 +10,7 @@
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <title>Ganancias por Día - Reservas Hotel</title>
+        <title>Ganancias por Día - Ubooks</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes"> 
 
@@ -46,7 +46,7 @@
                     </a>
 
                     <a class="brand" href="inicio.jsp">
-                        Reservas Hotel				
+                        Ubooks				
                     </a>		
 
                     <div class="nav-collapse">

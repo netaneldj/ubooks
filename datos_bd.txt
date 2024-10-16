@@ -1,5 +1,5 @@
 DATOS BASE DE DATOS
 Usuario: root
 Contraseña: 
-BD: reservas
+BD: ubooks
 Url: localhost
