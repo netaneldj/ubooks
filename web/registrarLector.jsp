@@ -1,5 +1,5 @@
 <%@page import="Logica.Entidades.Usuario"%>
-<%@page import="Logica.Entidades.Empleado"%>
+<%@page import="Logica.Entidades.Lector"%>
 <%@page import="java.util.List"%>
 <%@page import="Logica.Controlador.ControladoraLogica"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -8,7 +8,7 @@
   
  <head>
     <meta charset="utf-8">
-    <title>Registrar Empleado - Ubooks</title>
+    <title>Registrar Lector - Ubooks</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"> 
@@ -82,9 +82,9 @@
 	
 	<div class="content clearfix">
 		
-		<form action="SvAgregarEmpleado" method="POST" id="1">
+		<form action="SvAgregarLector" method="POST" id="1">
 		
-			<h1>Registrar Empleado</h1>			
+			<h1>Registrar Lector</h1>			
 			
 			<div class="login-fields">
 				
@@ -99,16 +99,6 @@
 					<label for="apellido">Apellido:</label>	
 					<input type="text" id="apellido" name="apellido" value="" placeholder="Apellido" class="login" required/>
 				</div> <!-- /field -->
-				
-				<div class="field">
-					<label for="dni">DNI:</label>	
-					<input type="number" id="dni" name="dni" value="" placeholder="DNI" class="login" required/>
-				</div> <!-- /field -->
-                                
-                                <div class="field">
-					<label for="direccion">Dirección:</label>	
-					<input type="text" id="direccion" name="direccion" value="" placeholder="Dirección" class="login" required/>
-				</div> <!-- /field -->
                                 
                                 <div class="field">
 					<label for="nacimiento">Fecha de nacimiento:</label>	
@@ -116,15 +106,15 @@
                                 </div> <!-- /field -->
                                 
                                 <div class="field">
-					<label for="cargo">Cargo:</label>	
-					<input type="text" id="cargo" name="cargo" value="" placeholder="Cargo" class="login" required/>
-				</div> <!-- /field -->
+                                    <label for="email">Email:</label>
+                                    <input type="email" id="email" name="email" value="" placeholder="Email" class="login" required/>
+				</div> <!-- /field -->    
                                 
 				<div class="field">
 					<label for="nombreUsuario">Nombre de usuario:</label>
 					<input type="text" id="nombreUsuario" name="nombreUsuario" value="" placeholder="Nombre de usuario" class="login" required/>
 				</div> <!-- /field -->
-				
+                                                            
 				<div class="field">
 					<label for="contrasenia">Contraseña:</label>
 					<input type="password" id="contrasenia" name="contrasenia" value="" placeholder="Contraseña" class="login" onkeyup='verificarContrasenia();' required/>

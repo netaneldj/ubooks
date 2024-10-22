@@ -1,7 +1,7 @@
 package Servlets;
 
 import Logica.Controlador.ControladoraLogica;
-import Logica.Entidades.Empleado;
+import Logica.Entidades.Lector;
 import Logica.Entidades.Usuario;
 import java.io.IOException;
 import java.util.Date;
@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 
-@WebServlet(name = "SvAgregarEmpleado", urlPatterns = {"/SvAgregarEmpleado"})
-public class SvAgregarEmpleado extends HttpServlet {
+@WebServlet(name = "SvAgregarLector", urlPatterns = {"/SvAgregarLector"})
+public class SvAgregarLector extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -25,30 +25,26 @@ public class SvAgregarEmpleado extends HttpServlet {
         try {
             ControladoraLogica controladoraLogica = new ControladoraLogica();
         
-            Empleado empleado = new Empleado();
+            Lector lector = new Lector();
             Usuario usuario = new Usuario();
 
             String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellido");
-            Integer dni = Integer.parseInt(request.getParameter("dni"));
-            String direccion = request.getParameter("direccion");
             Date nacimiento = ControladoraLogica.convertirStringADate(request.getParameter("nacimiento"));
-            String cargo = request.getParameter("cargo");
             String nombreUsuario = request.getParameter("nombreUsuario");
             String contrasenia = request.getParameter("contrasenia");
+            String email = request.getParameter("email");
 
             usuario.setNombreUsuario(nombreUsuario);
             usuario.setContrasenia(contrasenia);
+            usuario.setEmail(email);
 
-            empleado.setNombre(nombre);
-            empleado.setApellido(apellido);
-            empleado.setDni(dni);
-            empleado.setDireccion(direccion);
-            empleado.setNacimiento(nacimiento);
-            empleado.setCargo(cargo);
-            empleado.setUsuario(usuario);
+            lector.setNombre(nombre);
+            lector.setApellido(apellido);
+            lector.setNacimiento(nacimiento);
+            lector.setUsuario(usuario);
 
-            boolean exito = controladoraLogica.crearEmpleadoUsuario(empleado,usuario);
+            boolean exito = controladoraLogica.crearLectorUsuario(lector,usuario);
 
             if (exito) {
                 response.sendRedirect("Exito/exito.jsp");

@@ -39,7 +39,7 @@
                     <div class="nav-collapse">
                         <ul class="nav pull-right">
                             <li class="">						
-                                <a href="registrarEmpleado.jsp" class="">
+                                <a href="registrarLector.jsp" class="">
                                     ¿Aún no está registrado?
                                 </a>
 

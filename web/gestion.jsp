@@ -71,12 +71,12 @@
                                 <span>Gestion</span> 
                             </a>
                         </li>
-                        <li class="active">
+                        <!--<li class="active">
                             <a href="reportes.jsp">
                                 <i class="icon-signal"></i>
                                 <span>Reportes</span> 
                             </a>
-                        </li>
+                        </li>-->
                    </ul>
                 </div> <!-- /container -->
             </div> <!-- /subnavbar-inner -->
@@ -97,154 +97,44 @@
                                     <div class="pricing-plans plans-4">
                                         
                                         
-                                        <!-- EMPLEADOS -->
+                                        <!-- LECTORES -->
                                         <div class="plan-container">
                                             <div class="plan green">
                                                 <div class="plan-header">
                                                     <div class="plan-title">
-                                                        Empleados del hotel	        		
+                                                        Lectores	        		
                                                     </div> <!-- /plan-title -->
 
                                                     <div class="plan-price">
-                                                        <a href="registrarEmpleado.jsp"><img src="./resources/img/empleado.png" style="max-width:100%;height:auto;"></a><span class="term"></span>
+                                                        <a href="registrarLector.jsp"><img src="./resources/img/lector.png" style="max-width:100%;height:auto;"></a><span class="term"></span>
                                                     </div> <!-- /plan-price -->
 
                                                 </div> <!-- /plan-header -->	        
 
                                                 <div class="plan-features">
                                                     <ul>
-                                                        <li><strong>Sección</strong> dedicada a la gestión de los empleados del hotel.</li>
+                                                        <li><strong>Sección</strong> dedicada a la gestión de los lectores.</li>
                                                         <li>Aqui puedes</li>
                                                         <li>Crear, listar, modificar y borrar</li>
-                                                        <li>empleados y usuarios.</li>
+                                                        <li>lectores y usuarios.</li>
                                                     </ul>
                                                 </div> <!-- /plan-features -->
 
                                                 <div class="plan-actions">				
-                                                    <a href="registrarEmpleado.jsp" class="btn">Registrar</a>				
+                                                    <a href="registrarLector.jsp" class="btn">Registrar</a>				
                                                 </div> <!-- /plan-actions -->
                                                 <div class="plan-actions">				
-                                                    <a href="listarEmpleados.jsp" class="btn">Listar</a>				
+                                                    <a href="listarLectores.jsp" class="btn">Listar</a>				
                                                 </div> <!-- /plan-actions -->
                                                 <div class="plan-actions">				
-                                                    <a href="modificarEmpleado.jsp" class="btn">Modificar</a>				
+                                                    <a href="modificarLector.jsp" class="btn">Modificar</a>				
                                                 </div> <!-- /plan-actions -->
                                                 <div class="plan-actions">				
-                                                    <a href="eliminarEmpleado.jsp" class="btn">Eliminar</a>				
+                                                    <a href="eliminarLector.jsp" class="btn">Eliminar</a>				
                                                 </div> <!-- /plan-actions -->
                                             </div> <!-- /plan -->
                                         </div> <!-- /plan-container -->
-                                        
-                                        <!-- HUESPEDES -->
-                                        <div class="plan-container">
-                                            <div class="plan green">
-                                                <div class="plan-header">
-
-                                                    <div class="plan-title">
-                                                        Huespedes del hotel	        		
-                                                    </div> <!-- /plan-title -->
-
-                                                    <div class="plan-price">
-                                                        <a href="registrarHuesped.jsp"><img src="./resources/img/huesped.png" style="max-width:100%;height:auto;"></a><span class="term"></span>
-                                                    </div> <!-- /plan-price -->
-
-                                                </div> <!-- /plan-header -->	       
-
-                                                <div class="plan-features">
-                                                    <ul>
-                                                        <li><strong>Sección</strong> dedicada a la gestion de los huespedes del hotel.</li>
-                                                        <li>Aqui puedes</li>
-                                                        <li>Crear, listar, modificar y borrar</li>
-                                                        <li>huespedes.</li>
-                                                    </ul>
-                                                </div> <!-- /plan-features -->
-
-                                                <div class="plan-actions">				
-                                                    <a href="registrarHuesped.jsp" class="btn">Registrar</a>				
-                                                </div> <!-- /plan-actions -->
-                                                <div class="plan-actions">				
-                                                    <a href="listarHuespedes.jsp" class="btn">Listar</a>				
-                                                </div> <!-- /plan-actions -->
-                                                <div class="plan-actions">				
-                                                    <a href="modificarHuesped.jsp" class="btn">Modificar</a>				
-                                                </div> <!-- /plan-actions -->
-                                                <div class="plan-actions">				
-                                                    <a href="eliminarHuesped.jsp" class="btn">Eliminar</a>				
-                                                </div> <!-- /plan-actions -->
-                                            </div> <!-- /plan -->
-                                        </div> <!-- /plan-container -->
-                                        
-                                        <!-- RESERVAS -->
-                                        <div class="plan-container">
-                                            <div class="plan green">
-                                                <div class="plan-header">
-                                                    <div class="plan-title">
-                                                        Reservas del hotel	        		
-                                                    </div> <!-- /plan-title -->
-                                                    <div class="plan-price">
-                                                        <a href="registrarReserva.jsp"><img src="./resources/img/reserva.png" style="max-width:100%;height:auto;"></a><span class="term"></span>
-                                                    </div> <!-- /plan-price -->
-                                                </div> <!-- /plan-header -->	          
-
-                                                <div class="plan-features">
-                                                    <ul>					
-                                                        <li><strong>Sección</strong> dedicada a la gestion de las reservas del hotel.</li>
-                                                        <li>Aqui puedes</li>
-                                                        <li>Crear, listar, modificar y borrar</li>
-                                                        <li>reservas.</li>
-                                                    </ul>
-                                                </div> <!-- /plan-features -->
-
-                                                <div class="plan-actions">				
-                                                    <a href="registrarReserva.jsp" class="btn">Registrar</a>				
-                                                </div> <!-- /plan-actions -->
-                                                <div class="plan-actions">				
-                                                    <a href="listarReservas.jsp" class="btn">Listar</a>				
-                                                </div> <!-- /plan-actions -->
-                                                <div class="plan-actions">				
-                                                    <a href="modificarReserva.jsp" class="btn">Modificar</a>				
-                                                </div> <!-- /plan-actions -->
-                                                <div class="plan-actions">				
-                                                    <a href="eliminarReserva.jsp" class="btn">Eliminar</a>				
-                                                </div> <!-- /plan-actions -->
-                                            </div> <!-- /plan -->
-                                        </div> <!-- /plan-container -->
-                                        
-                                        <!-- HABITACIONES -->
-                                        <div class="plan-container">
-                                            <div class="plan green">
-                                                <div class="plan-header">
-                                                    <div class="plan-title">
-                                                        Habitaciones del hotel	        		
-                                                    </div> <!-- /plan-title -->
-                                                    <div class="plan-price">
-                                                        <a href="registrarHabitacion.jsp"><img src="./resources/img/habitacion.png" style="max-width:100%;height:auto;"></a><span class="term"></span>
-                                                    </div> <!-- /plan-price -->
-                                                </div> <!-- /plan-header -->	          
-
-                                                <div class="plan-features">
-                                                    <ul>					
-                                                        <li><strong>Sección</strong> dedicada a la gestion de las habitaciones del hotel.</li>
-                                                        <li>Aqui puedes</li>
-                                                        <li>Crear, listar, modificar y borrar</li>
-                                                        <li>habitaciones.</li>
-                                                    </ul>
-                                                </div> <!-- /plan-features -->
-
-                                                <div class="plan-actions">				
-                                                    <a href="registrarHabitacion.jsp" class="btn">Registrar</a>				
-                                                </div> <!-- /plan-actions -->
-                                                <div class="plan-actions">				
-                                                    <a href="listarHabitaciones.jsp" class="btn">Listar</a>				
-                                                </div> <!-- /plan-actions -->
-                                                <div class="plan-actions">				
-                                                    <a href="modificarHabitacion.jsp" class="btn">Modificar</a>				
-                                                </div> <!-- /plan-actions -->
-                                                <div class="plan-actions">				
-                                                    <a href="eliminarHabitacion.jsp" class="btn">Eliminar</a>				
-                                                </div> <!-- /plan-actions -->
-                                            </div> <!-- /plan -->
-                                        </div> <!-- /plan-container -->
+                                  
                                     </div> <!-- /pricing-plans -->
                                 </div> <!-- /widget-content -->
                             </div> <!-- /widget -->					

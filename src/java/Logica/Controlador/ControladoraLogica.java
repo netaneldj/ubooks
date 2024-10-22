@@ -1,18 +1,13 @@
 package Logica.Controlador;
 
-import Logica.Entidades.Empleado;
-import Logica.Entidades.Habitacion;
-import Logica.Entidades.Huesped;
-import Logica.Entidades.Reserva;
+import Logica.Entidades.Lector;
 import Logica.Entidades.Usuario;
 import Persistencia.Controlador.ControladoraPersistencia;
 import java.text.SimpleDateFormat;
-import java.time.Duration;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
-import java.util.Objects;
 
 public class ControladoraLogica {
     
@@ -28,34 +23,16 @@ public class ControladoraLogica {
         return exito;
     }
     
-    public boolean crearEmpleado(Empleado empleado) {
+    public boolean crearLector(Lector lector) {
         boolean exito = false;
-        if (controladoraPersistencia.crearEmpleado(empleado)) exito = true;
+        if (controladoraPersistencia.crearLector(lector)) exito = true;
         return exito;
     }
     
-    public boolean crearHuesped(Huesped huesped) {
-        boolean exito = false;
-        if (controladoraPersistencia.crearHuesped(huesped)) exito = true;
-        return exito;
-    }
-    
-    public boolean crearHabitacion(Habitacion habitacion) {
-        boolean exito = false;
-        if (controladoraPersistencia.crearHabitacion(habitacion)) exito = true;
-        return exito;
-    }
-    
-    public boolean crearReserva(Reserva reserva) {
-        boolean exito = false;
-        if (controladoraPersistencia.crearReserva(reserva)) exito = true;
-        return exito;
-    }
-    
-    public boolean crearEmpleadoUsuario(Empleado empleado, Usuario usuario) {
+    public boolean crearLectorUsuario(Lector lector, Usuario usuario) {
         boolean exito = false;
         if (controladoraPersistencia.crearUsuario(usuario) && 
-                controladoraPersistencia.crearEmpleado(empleado)) exito = true;
+                controladoraPersistencia.crearLector(lector)) exito = true;
         return exito;
     }
     
@@ -93,44 +70,11 @@ public class ControladoraLogica {
         return existe;
     }
     
-    public boolean verificarEmpleadoPorID(int id) {
+    public boolean verificarLectorPorID(int id) {
         boolean existe = false;
-        Empleado empleado = controladoraPersistencia.obtenerEmpleadoPorID(id);
+        Lector empleado = controladoraPersistencia.obtenerLectorPorID(id);
         if (empleado != null) existe = true;
         return existe;
-    }
-    
-    public boolean verificarHuespedPorID(int id) {
-        boolean existe = false;
-        Huesped huesped = controladoraPersistencia.obtenerHuespedPorID(id);
-        if (huesped != null) existe = true;
-        return existe;
-    }
-    
-    public boolean verificarHabitacionPorID(int id) {
-        boolean existe = false;
-        Habitacion habitacion = controladoraPersistencia.obtenerHabitacionPorID(id);
-        if (habitacion != null) existe = true;
-        return existe;
-    }
-    
-    public boolean verificarReservaPorID(int id) {
-        boolean existe = false;
-        Reserva reserva = controladoraPersistencia.obtenerReservaPorID(id);
-        if (reserva != null) existe = true;
-        return existe;
-    }
-    
-    public boolean disponibilidadHabitacion(Integer id_habitacion, Date checkin, Date checkout) {
-        boolean disponible = true;
-        List<Reserva> reservas = controladoraPersistencia.obtenerReservas();
-        for (Reserva reserva: reservas) {
-            if (id_habitacion.equals(reserva.getHabitacion().getId()) && 
-                    (estaOcupadaEntreFechas(checkin, reserva.getCheckIn(), reserva.getCheckOut()) || 
-                    estaOcupadaEntreFechas(checkout, reserva.getCheckIn(), reserva.getCheckOut())))
-                disponible = false;
-        }
-        return disponible;
     }
     
     public Usuario obtenerUsuarioPorCredenciales(String nombreUsuario, String contrasenia) {
@@ -146,117 +90,57 @@ public class ControladoraLogica {
        return usuario;
     }
     
-    public Empleado obtenerEmpleadoPorUsuario(Integer id_usuario) {
-       Empleado empleado = null;
-       List<Empleado> empleados = controladoraPersistencia.obtenerEmpleados();
+    public Lector obtenerLectorPorUsuario(Integer id_usuario) {
+       Lector lector = null;
+       List<Lector> lectores = controladoraPersistencia.obtenerLectores();
 
-       for (Empleado empl : empleados) {
+       for (Lector empl : lectores) {
            if (empl.getUsuario().getId().equals(id_usuario)) {
-               empleado = empl;
+               lector = empl;
                break;
            }
        }
-       return empleado;
+       return lector;
     }
     
     public Usuario obtenerUsuarioPorID(int id) {
         return controladoraPersistencia.obtenerUsuarioPorID(id);
     }
     
-    public Empleado obtenerEmpleadoPorID(int id) {
-        return controladoraPersistencia.obtenerEmpleadoPorID(id);
-    }
-    
-    public Huesped obtenerHuespedPorID(int id) {
-        return controladoraPersistencia.obtenerHuespedPorID(id);
-    }
-    
-    public Habitacion obtenerHabitacionPorID(int id) {
-        return controladoraPersistencia.obtenerHabitacionPorID(id);
-    }
-    
-    public Reserva obtenerReservaPorID(int id) {
-        return controladoraPersistencia.obtenerReservaPorID(id);
+    public Lector obtenerLectorPorID(int id) {
+        return controladoraPersistencia.obtenerLectorPorID(id);
     }
     
     public List<Usuario> obtenerUsuarios() {
         return controladoraPersistencia.obtenerUsuarios();
     }
     
-    public List<Empleado> obtenerEmpleados() {
-        return controladoraPersistencia.obtenerEmpleados();
-    }
-    
-    public List<Huesped> obtenerHuespedes() {
-        return controladoraPersistencia.obtenerHuespedes();
-    }
-    
-    public List<Habitacion> obtenerHabitaciones() {
-        return controladoraPersistencia.obtenerHabitaciones();
-    }
-    
-    public List<Reserva> obtenerReservas() {
-        return controladoraPersistencia.obtenerReservas();
+    public List<Lector> obtenerLectores() {
+        return controladoraPersistencia.obtenerLectores();
     }
     
     public int obtenerCantidadUsuarios() {
         return controladoraPersistencia.obtenerCantidadUsuarios();
     }
     
-    public int obtenerCantidadEmpleados() {
-        return controladoraPersistencia.obtenerCantidadEmpleados();
+    public int obtenerCantidadLectores() {
+        return controladoraPersistencia.obtenerCantidadLectores();
     }
-    
-    public int obtenerCantidadHuespedes() {
-        return controladoraPersistencia.obtenerCantidadHuespedes();
-    }
-    
-    public int obtenerCantidadHabitaciones() {
-        return controladoraPersistencia.obtenerCantidadHabitaciones();
-    }
-    
-    public int obtenerCantidadReservas() {
-        return controladoraPersistencia.obtenerCantidadReservas();
-    }
-    
+     
     public boolean borrarUsuario(int id) {
         return controladoraPersistencia.borrarUsuario(id);
     }
     
-    public boolean borrarEmpleado(int id) {
-        return controladoraPersistencia.borrarEmpleado(id);
-    }
-    
-    public boolean borrarHuesped(int id) {
-        return controladoraPersistencia.borrarHuesped(id);
-    }
-    
-    public boolean borrarHabitacion(int id) {
-        return controladoraPersistencia.borrarHabitacion(id);
-    }
-    
-    public boolean borrarReserva(int id) {
-        return controladoraPersistencia.borrarReserva(id);
+    public boolean borrarLector(int id) {
+        return controladoraPersistencia.borrarLector(id);
     }
     
     public boolean modificarUsuario(Usuario usuario) {
         return controladoraPersistencia.modificarUsuario(usuario);
     }
     
-    public boolean modificarEmpleado(Empleado empleado) {
-        return controladoraPersistencia.modificarEmpleado(empleado);
-    }
-    
-    public boolean modificarHuesped(Huesped huesped) {
-        return controladoraPersistencia.modificarHuesped(huesped);
-    }
-    
-    public boolean modificarHabitacion(Habitacion habitacion) {
-        return controladoraPersistencia.modificarHabitacion(habitacion);
-    }
-    
-    public boolean modificarReserva(Reserva reserva) {
-        return controladoraPersistencia.modificarReserva(reserva);
+    public boolean modificarLector(Lector lector) {
+        return controladoraPersistencia.modificarLector(lector);
     }
     
     public static synchronized Date convertirStringADate(String fecha) {
@@ -271,14 +155,6 @@ public class ControladoraLogica {
      public static String convertirDateAString2(Date fecha) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(fecha);
-    }
-    
-    public static long calcularDiasEntreFechas(Date fecha1, Date fecha2) {
-        return Duration.between(fecha1.toInstant().atZone(ZoneId.systemDefault()), fecha2.toInstant().atZone(ZoneId.systemDefault())).toDays();
-    }
-    
-    public static boolean estaOcupadaEntreFechas(Date fecha, Date checkin, Date checkout) {
-        return (checkin.compareTo(fecha)*fecha.compareTo(checkout)>0);
     }
     
     public static String obtenerNombreDeNumeroMes(int mes) {

@@ -1,6 +1,5 @@
 <%@page import="java.util.Calendar"%>
-<%@page import="Logica.Entidades.Huesped"%>
-<%@page import="Logica.Entidades.Reserva"%>
+<%@page import="Logica.Entidades.Lector"%>
 <%@page import="java.util.List"%>
 <%@page import="Logica.Controlador.ControladoraLogica"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -72,12 +71,6 @@
                                 <span>Gestion</span> 
                             </a>
                         </li>
-                        <li class="active">
-                            <a href="reportes.jsp">
-                                <i class="icon-signal"></i>
-                                <span>Reportes</span> 
-                            </a>
-                        </li>
                     </ul>
                 </div>
                 <!-- /container --> 
@@ -93,32 +86,32 @@
                             <!-- /widget -->
                             <div class="widget">
                                 <div class="widget-header"> <i class="icon-user"></i>
-                                    <h3> Huespedes</h3>
+                                    <h3> Lectores</h3>
                                 </div>
                                 <!-- /widget-header -->
                                 <div class="widget-content">
                                     <ul class="messages_layout">
                                         <%      
-                                                    List<Huesped> huespedes = controladoraLogica.obtenerHuespedes();
-                                                            for (Huesped huesped : huespedes) {
+                                                    List<Lector> lectores = controladoraLogica.obtenerLectores();
+                                                            for (Lector lector : lectores) {
                                                 %>
-                                                <li class="from_user left"> <a href="listarHuespedes.jsp" class="avatar"><img src="resources/img/mensaje_huesped.png"/></a>
+                                                <li class="from_user leftLector" <a href="listarHuespedes.jsp" class="avatar"><img src="resources/img/mensaje_lector.png"/></a>
                                                 <div class="message_wrap"> <span class="arrow"></span>
-                                                        <div class="info"> <a class="name"><%=huesped.getNombre()+" "+huesped.getApellido()%></a>
+                                                    <div class="info"> <a class="name"><%=lector.getNombre()+" "+lector.getApellido()%></a>
                                                         <div class="options_arrow">
                                                             <div class="dropdown pull-right"> <a class="dropdown-toggle " id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#"> <i class=" icon-caret-down"></i> </a>
                                                                 <ul class="dropdown-menu " role="menu" aria-labelledby="dLabel">
-                                                                    <li><a href="registrarHuesped.jsp"><i class=" icon-plus-sign icon-large"></i> Registrar</a></li>
-                                                                    <li><a href="modificarHuesped.jsp"><i class=" icon-edit icon-large"></i> Modificar</a></li>
-                                                                    <li><a href="borrarHuesped.jsp"><i class=" icon-trash icon-large"></i> Borrar</a></li>
+                                                                    <li><a href="registrarLector.jsp"><i class=" icon-plus-sign icon-large"></i> Registrar</a></li>
+                                                                    <li><a href="modificarLector.jsp"><i class=" icon-edit icon-large"></i> Modificar</a></li>
+                                                                    <li><a href="borrarLector.jsp"><i class=" icon-trash icon-large"></i> Borrar</a></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="text"><%=huesped.getProfesion()%></div>
+                                                         <div class="text"><%=lector.getUsuario().getEmail()%></div>
                                                 </div>
                                                 </li>
-                                                <% }%>
+                                        <% }%>
                                     </ul>
                                 </div>
                                 <!-- /widget-content --> 
@@ -135,36 +128,10 @@
                                 <div class="widget-content">
                                     <div class="shortcuts"> 
                                         <a href="gestion.jsp" class="shortcut"><i class="shortcut-icon icon-list-alt"></i><span class="shortcut-label">Gestión</span> </a>
-                                        <a href="reportes.jsp" class="shortcut"><i class="shortcut-icon icon-signal"></i><span class="shortcut-label">Reportes</span>
                                         <!-- /shortcuts --> 
                                     </div>
                                     <!-- /widget-content --> 
                                 </div>
-                                <div class="widget widget-nopad">
-                                    <div class="widget-header"> <i class="icon-list-alt"></i>
-                                        <h3> Reservas</h3>
-                                    </div>
-                                    <!-- /widget-header -->
-                                    <div class="widget-content">
-                                        <ul class="news-items">
-                                                <% 
-                                                    Calendar calendario = Calendar.getInstance();
-                                                    List<Reserva> reservas = controladoraLogica.obtenerReservas();
-                                                            for (Reserva reserva : reservas) {
-                                                                calendario.setTime(reserva.getCheckIn());
-                                                %>
-                                                <li>
-                                                    <div class="news-item-date"> <span class="news-item-day"><%=calendario.get(Calendar.DAY_OF_MONTH)%></span> <span class="news-item-month"><%=ControladoraLogica.obtenerNombreDeNumeroMes(calendario.get(Calendar.MONTH))%></span> </div>
-                                                    <div class="news-item-detail"> <%=reserva.getHuesped().getNombre()+" "+reserva.getHuesped().getApellido()%>
-                                                        <p class="news-item-preview"><%="PISO "+reserva.getHabitacion().getPiso()+" - "+reserva.getHabitacion().getTipo()+" - "+reserva.getHabitacion().getTematica()%></p>
-                                                    </div>
-                                                </li>
-                                                <% }%>
-                                        </ul>
-                                    </div>
-                                    <!-- /widget-content --> 
-                                </div>
-                                <!-- /widget-nopad -->
                             </div>
                             <!-- /widget -->
                         </div>

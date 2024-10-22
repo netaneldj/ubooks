@@ -1,4 +1,5 @@
-<%@page import="Logica.Entidades.Habitacion"%>
+<%@page import="Logica.Entidades.Lector"%>
+<%@page import="Logica.Entidades.Usuario"%>
 <%@page import="java.util.List"%>
 <%@page import="Logica.Controlador.ControladoraLogica"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -6,7 +7,7 @@
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <title>Listar Habitaciones - Ubooks</title>
+        <title>Modificar Lector - Ubooks</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes"> 
 
@@ -20,7 +21,6 @@
         <link href="resources/css/pages/signin.css" rel="stylesheet" type="text/css">
         <link href="resources/css/pages/dashboard.css" rel="stylesheet">
     </head>
-
     <body>
         <%
             String id_usuario = "0";
@@ -44,7 +44,7 @@
                     </a>
 
                     <a class="brand" href="inicio.jsp">
-                        Ubooks
+                        Ubooks				
                     </a>		
 
                     <div class="nav-collapse">
@@ -62,46 +62,38 @@
             </div> <!-- /navbar-inner -->
         </div> <!-- /navbar -->
 
-
         <div class="container-fluid cata-flex">
-            <div class="row ">
-               <div class="span5 ">
-                    <div class="widget widget-table action-table">
-                        <div class="widget-header"> <i class="icon-th-list"></i>
-                            <h3>Lista Habitaciones</h3>
-                        </div>
-                        <div class="widget-content">
-                            <table class="table table-striped table-bordered">
-                                <thead>
-                                    <tr>
-                                        <th><center>ID</center></th>
-                                <th><center>Tematica</center></th>
-                                <th><center>Tipo</center></th>
-                                <th><center>Piso</center></th>
-                                <th><center>Precio</center></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <%
-                                            ControladoraLogica controladoraLogica = new ControladoraLogica();
-                                            List<Habitacion> habitaciones = controladoraLogica.obtenerHabitaciones();
-                                            for (Habitacion habitacion : habitaciones) {
-                                        %>
-                                        <td><center><%=habitacion.getId()%></center></td>
-                                <td><center><%=habitacion.getTematica()%></center></td>
-                                <td><center><%=habitacion.getTipo()%></center></td>
-                                <td><center><%=habitacion.getPiso()%></center></td>
-                                <td><center>$<%=habitacion.getPrecio()%></center></td>
-                                </tr>
-                                <% }%>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div> 
-                </div> 
+            <div class="row">
+                <div class="span5">
+                    <div class="account-container register ">
+                        <div class="content clearfix widget">
+                            <form action="SvModificarLector" method="GET">
+                                <h1>Modificar Lector</h1>			
+                                <div class="login-fields">
+                                    <p>Lector: <select name="id_lector"> </p>
+                                    <%
+                                        ControladoraLogica controladoraLogica = new ControladoraLogica();        
+                                        List<Lector> lectores = controladoraLogica.obtenerLectores();
+                                                for (Lector lector : lectores) {
+                                    %>
+                                    <option value=<%=lector.getId()%>><%=lector.getNombre()+" "+lector.getApellido()%></option>
+                                    <% }%>
+                                    </select> <!-- /field -->
+
+                                </div> <!-- /login-fields -->
+
+                                <div class="login-actions">
+                                    <button class="button btn btn-primary btn-large">Modificar</button>
+                                </div> <!-- .actions -->
+                            </form>
+                        </div> <!-- /content -->
+                    </div> <!-- /account-container -->
+
+                </div>
             </div>
         </div>
+
+
 
         <!-- Text Under Box -->
 

@@ -1,7 +1,7 @@
 package Servlets;
 
 import Logica.Controlador.ControladoraLogica;
-import Logica.Entidades.Empleado;
+import Logica.Entidades.Lector;
 import Logica.Entidades.Usuario;
 import java.io.IOException;
 import java.util.Date;
@@ -12,8 +12,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "SvModificarEmpleado", urlPatterns = {"/SvModificarEmpleado"})
-public class SvModificarEmpleado extends HttpServlet {
+@WebServlet(name = "SvModificarLector", urlPatterns = {"/SvModificarLector"})
+public class SvModificarLector extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -22,53 +22,49 @@ public class SvModificarEmpleado extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Cookie empleado = new Cookie("id_empleado", request.getParameter("id_empleado"));
-        empleado.setMaxAge(60*60);
-        response.addCookie(empleado);
-        response.sendRedirect("actualizarEmpleado.jsp");
+        Cookie lector = new Cookie("id_lector", request.getParameter("id_lector"));
+        lector.setMaxAge(60*60);
+        response.addCookie(lector);
+        response.sendRedirect("actualizarLector.jsp");
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
-            String id_empleado = "";
+            String id_lector = "";
             Cookie[] cookies = request.getCookies();
             for(Cookie cookie : cookies){
-                if(cookie.getName().equals("id_empleado")) { 
-                    id_empleado = cookie.getValue();
+                if(cookie.getName().equals("id_lector")) { 
+                    id_lector = cookie.getValue();
                     break;
                 }
             }
-            int id = Integer.parseInt(id_empleado);
+            int id = Integer.parseInt(id_lector);
             String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellido");
-            Integer dni = Integer.parseInt(request.getParameter("dni"));
-            String direccion = request.getParameter("direccion");
             Date nacimiento = ControladoraLogica.convertirStringADate(request.getParameter("nacimiento"));
-            String cargo = request.getParameter("cargo");
             String nombreUsuario = request.getParameter("nombreUsuario");
             String contrasenia = request.getParameter("contrasenia");
+            String email = request.getParameter("email");
 
             ControladoraLogica controladoraLogica = new ControladoraLogica();
-            boolean existeEmpleado = controladoraLogica.verificarEmpleadoPorID(id);
+            boolean existeLector = controladoraLogica.verificarLectorPorID(id);
 
-            if(!existeEmpleado){
+            if(!existeLector){
                 response.sendRedirect("Error/noExisteID.jsp");
             } else {
-                Empleado empleado =  controladoraLogica.obtenerEmpleadoPorID(id);
-                Usuario usuario = controladoraLogica.obtenerUsuarioPorID(empleado.getId());
-                empleado.setNombre(nombre);
-                empleado.setApellido(apellido);
-                empleado.setDni(dni);
-                empleado.setDireccion(direccion);
-                empleado.setNacimiento(nacimiento);
-                empleado.setCargo(cargo);
+                Lector lector =  controladoraLogica.obtenerLectorPorID(id);
+                Usuario usuario = controladoraLogica.obtenerUsuarioPorID(lector.getId());
+                lector.setNombre(nombre);
+                lector.setApellido(apellido);
+                lector.setNacimiento(nacimiento);
                 usuario.setNombreUsuario(nombreUsuario);
                 usuario.setContrasenia(contrasenia);
+                usuario.setEmail(email);
                 controladoraLogica.modificarUsuario(usuario);
-                empleado.setUsuario(usuario);
-                controladoraLogica.modificarEmpleado(empleado);
+                lector.setUsuario(usuario);
+                controladoraLogica.modificarLector(lector);
 
                 response.sendRedirect("Exito/exito.jsp");
             }

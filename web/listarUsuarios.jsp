@@ -75,8 +75,9 @@
                             <table class="table table-striped table-bordered">
                                 <thead>
                                     <tr>
-                                        <th><center>ID</center></th>
-                                 <th><center>Nombre de usuario</center></th>
+                                    <th><center>ID</center></th>
+                                    <th><center>Email</center></th>
+                                    <th><center>Nombre de usuario</center></th>
                                    <th><center>Contraseña</center></th>
                                 </tr>
                                 </thead>
@@ -88,8 +89,9 @@
                                             for (Usuario usuario : usuarios) {
                                         %>
                                         <td><center><%=usuario.getId()%></center></td>
-                                <td><center><%=usuario.getNombreUsuario()%></center></td>
-                                <td><center><%=usuario.getContrasenia()%></center></td>
+                                        <td><center><%=usuario.getEmail()%></center></td>
+                                        <td><center><%=usuario.getNombreUsuario()%></center></td>
+                                        <td><center><%=usuario.getContrasenia()%></center></td>
                                 </tr>
                                 <% }%>
                                 </tbody>

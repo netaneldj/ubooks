@@ -16,14 +16,16 @@ public class Usuario implements Serializable {
     @Basic
     private String nombreUsuario;
     private String contrasenia;
+    private String email;
 
     public Usuario() {
     }
 
-    public Usuario(Integer id, String nombreUsuario, String contrasenia) {
+    public Usuario(Integer id, String nombreUsuario, String contrasenia, String email) {
         this.id = id;
         this.nombreUsuario = nombreUsuario;
         this.contrasenia = contrasenia;
+        this.email = email;
     }
 
     public Integer getId() {
@@ -48,6 +50,14 @@ public class Usuario implements Serializable {
 
     public void setContrasenia(String contrasenia) {
         this.contrasenia = contrasenia;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
     
 }

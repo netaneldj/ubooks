@@ -5,7 +5,7 @@
  */
 package Persistencia.Entidades;
 
-import Logica.Entidades.Habitacion;
+import Logica.Entidades.Lector;
 import Persistencia.Entidades.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -21,13 +21,13 @@ import javax.persistence.criteria.Root;
  *
  * @author netan
  */
-public class HabitacionJpaController implements Serializable {
+public class LectorJpaController implements Serializable {
 
-    public HabitacionJpaController(EntityManagerFactory emf) {
+    public LectorJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     
-    public HabitacionJpaController(){
+    public LectorJpaController(){
         emf = Persistence.createEntityManagerFactory("UbooksPU");
     }
     
@@ -37,12 +37,12 @@ public class HabitacionJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Habitacion habitacion) {
+    public void create(Lector lector) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(habitacion);
+            em.persist(lector);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -51,19 +51,19 @@ public class HabitacionJpaController implements Serializable {
         }
     }
 
-    public void edit(Habitacion habitacion) throws NonexistentEntityException, Exception {
+    public void edit(Lector lector) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            habitacion = em.merge(habitacion);
+            lector = em.merge(lector);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = habitacion.getId();
-                if (findHabitacion(id) == null) {
-                    throw new NonexistentEntityException("The habitacion with id " + id + " no longer exists.");
+                Integer id = lector.getId();
+                if (findLector(id) == null) {
+                    throw new NonexistentEntityException("The empleado with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -79,14 +79,14 @@ public class HabitacionJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Habitacion habitacion;
+            Lector lector;
             try {
-                habitacion = em.getReference(Habitacion.class, id);
-                habitacion.getId();
+                lector = em.getReference(Lector.class, id);
+                lector.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The habitacion with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The lector with id " + id + " no longer exists.", enfe);
             }
-            em.remove(habitacion);
+            em.remove(lector);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -95,19 +95,19 @@ public class HabitacionJpaController implements Serializable {
         }
     }
 
-    public List<Habitacion> findHabitacionEntities() {
-        return findHabitacionEntities(true, -1, -1);
+    public List<Lector> findLectorEntities() {
+        return findLectorEntities(true, -1, -1);
     }
 
-    public List<Habitacion> findHabitacionEntities(int maxResults, int firstResult) {
-        return findHabitacionEntities(false, maxResults, firstResult);
+    public List<Lector> findLectorEntities(int maxResults, int firstResult) {
+        return findLectorEntities(false, maxResults, firstResult);
     }
 
-    private List<Habitacion> findHabitacionEntities(boolean all, int maxResults, int firstResult) {
+    private List<Lector> findLectorEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Habitacion.class));
+            cq.select(cq.from(Lector.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -119,20 +119,20 @@ public class HabitacionJpaController implements Serializable {
         }
     }
 
-    public Habitacion findHabitacion(Integer id) {
+    public Lector findLector(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Habitacion.class, id);
+            return em.find(Lector.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getHabitacionCount() {
+    public int getLectorCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Habitacion> rt = cq.from(Habitacion.class);
+            Root<Lector> rt = cq.from(Lector.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

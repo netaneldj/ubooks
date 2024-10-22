@@ -2,6 +2,23 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group/>
+        <group>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Logica/Entidades/IdiomaPaper.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Logica/Entidades/Habitacion.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Logica/Entidades/TematicaHabitacion.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Servlets/SvBorrarLector.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Logica/Entidades/Persona.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Servlets/SvModificarLector.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Logica/Entidades/Lector.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Logica/Entidades/TipoHabitacion.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Logica/Entidades/Reserva.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Logica/Entidades/Huesped.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Servlets/SvAgregarLector.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Logica/Entidades/Usuario.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Logica/Controlador/ControladoraLogica.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Persistencia/Entidades/LectorJpaController.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Logica/Entidades/GeneroPaper.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/actualizarLector.jsp</file>
+        </group>
     </open-files>
 </project-private>
