@@ -101,6 +101,16 @@
                                     </div> <!-- /field -->
                                     
                                     <div class="field">
+                                        <label for="idioma">Idioma preferencia:</label>	
+                                        <input type="text" id="idioma" name="idioma" value="<%=lector.getIdioma()%>" placeholder="Idioma preferencia" class="login" required/>
+                                    </div> <!-- /field -->                                    
+                                    
+                                    <div class="field">
+                                        <label for="genero">Genero preferencia:</label>	
+                                        <input type="text" id="genero" name="genero" value="<%=lector.getGenero()%>" placeholder="Genero preferencia" class="login" required/>
+                                    </div> <!-- /field -->                                                                        
+                                    
+                                    <div class="field">
                                         <label for="nombreUsuario">Nombre de usuario:</label>	
                                         <input type="text" id="nombreUsuario" name="nombreUsuario" value="<%=lector.getUsuario().getNombreUsuario()%>" placeholder="Nombre de usuario" class="login" required/>
                                     </div> <!-- /field -->

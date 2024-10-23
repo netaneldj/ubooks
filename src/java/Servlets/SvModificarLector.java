@@ -1,6 +1,8 @@
 package Servlets;
 
 import Logica.Controlador.ControladoraLogica;
+import Logica.Entidades.GeneroPaper;
+import Logica.Entidades.IdiomaPaper;
 import Logica.Entidades.Lector;
 import Logica.Entidades.Usuario;
 import java.io.IOException;
@@ -47,6 +49,8 @@ public class SvModificarLector extends HttpServlet {
             String nombreUsuario = request.getParameter("nombreUsuario");
             String contrasenia = request.getParameter("contrasenia");
             String email = request.getParameter("email");
+            IdiomaPaper dioma = IdiomaPaper.valueOf(request.getParameter("idioma"));
+            GeneroPaper genero = GeneroPaper.valueOf(request.getParameter("genero"));
 
             ControladoraLogica controladoraLogica = new ControladoraLogica();
             boolean existeLector = controladoraLogica.verificarLectorPorID(id);
@@ -59,6 +63,8 @@ public class SvModificarLector extends HttpServlet {
                 lector.setNombre(nombre);
                 lector.setApellido(apellido);
                 lector.setNacimiento(nacimiento);
+                lector.setIdioma(dioma);
+                lector.setGenero(genero);
                 usuario.setNombreUsuario(nombreUsuario);
                 usuario.setContrasenia(contrasenia);
                 usuario.setEmail(email);

@@ -1,6 +1,8 @@
 package Servlets;
 
 import Logica.Controlador.ControladoraLogica;
+import Logica.Entidades.GeneroPaper;
+import Logica.Entidades.IdiomaPaper;
 import Logica.Entidades.Lector;
 import Logica.Entidades.Usuario;
 import java.io.IOException;
@@ -34,6 +36,8 @@ public class SvAgregarLector extends HttpServlet {
             String nombreUsuario = request.getParameter("nombreUsuario");
             String contrasenia = request.getParameter("contrasenia");
             String email = request.getParameter("email");
+            IdiomaPaper dioma = IdiomaPaper.valueOf(request.getParameter("idioma"));
+            GeneroPaper genero = GeneroPaper.valueOf(request.getParameter("genero"));
 
             usuario.setNombreUsuario(nombreUsuario);
             usuario.setContrasenia(contrasenia);
@@ -43,6 +47,8 @@ public class SvAgregarLector extends HttpServlet {
             lector.setApellido(apellido);
             lector.setNacimiento(nacimiento);
             lector.setUsuario(usuario);
+            lector.setIdioma(dioma);
+            lector.setGenero(genero);
 
             boolean exito = controladoraLogica.crearLectorUsuario(lector,usuario);
 
