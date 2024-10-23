@@ -1,4 +1,6 @@
 <%@page import="Logica.Entidades.Lector"%>
+<%@page import="Logica.Entidades.IdiomaPaper"%>
+<%@page import="Logica.Entidades.GeneroPaper"%>
 <%@page import="Logica.Controlador.ControladoraLogica"%>
 <%@page import="java.util.List"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -100,15 +102,25 @@
                                         <input type="email" id="email" name="email" value="<%=lector.getUsuario().getEmail()%>" placeholder="Email" class="login" required/>
                                     </div> <!-- /field -->
                                     
-                                    <div class="field">
-                                        <label for="idioma">Idioma preferencia:</label>	
-                                        <input type="text" id="idioma" name="idioma" value="<%=lector.getIdioma()%>" placeholder="Idioma preferencia" class="login" required/>
-                                    </div> <!-- /field -->                                    
-                                    
-                                    <div class="field">
-                                        <label for="genero">Genero preferencia:</label>	
-                                        <input type="text" id="genero" name="genero" value="<%=lector.getGenero()%>" placeholder="Genero preferencia" class="login" required/>
-                                    </div> <!-- /field -->                                                                        
+                                    <p>Idioma preferencia: <select name="idioma"> </p>
+                                        <option selected><%=lector.getIdioma()%></option>
+                                    <%
+                                                for (IdiomaPaper idioma : IdiomaPaper.values()) {
+                                                    if (!idioma.equals(lector.getIdioma())){
+                                            %>
+                                    <option><%=idioma%></option>
+                                    <% }}%>
+                                    </select> <!-- /field -->
+
+                                    <p>Genero preferencia: <select name="genero"> </p>
+                                    <option selected><%=lector.getGenero()%></option>
+                                    <%
+                                                for (GeneroPaper genero : GeneroPaper.values()) {
+                                                    if (!genero.equals(lector.getGenero())){
+                                            %>
+                                    <option><%=genero%></option>
+                                    <% }}%>
+                                    </select> <!-- /field -->                                                                                                       
                                     
                                     <div class="field">
                                         <label for="nombreUsuario">Nombre de usuario:</label>	
