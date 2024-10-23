@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-private xmlns="http://www.netbeans.org/ns/project-private/1">
+    <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
+    <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
+        <group>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/registrarPaper.jsp</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/resources/img/book-logo.jpg</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/resources/img/book.png</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Persistencia/Controlador/ControladoraPersistencia.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Servlets/SvBorrarPaper.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/eliminarPaper.jsp</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/listarLectores.jsp</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/index.jsp</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Servlets/SvModificarPaper.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/actualizarPaper.jsp</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/actualizarUsuario.jsp</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/inicio.jsp</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/actualizarLector.jsp</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/gestion.jsp</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/modificarPaper.jsp</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/modificarUsuario.jsp</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Servlets/SvBorrarLector.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/resources/img/lector.png</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Persistencia/Entidades/PaperJpaController.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/listarUsuarios.jsp</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Persistencia/Entidades/UsuarioJpaController.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Servlets/SvAgregarLector.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/resources/css/style.css</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Logica/Entidades/Paper.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/listarPapers.jsp</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Logica/Controlador/ControladoraLogica.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Persistencia/Entidades/LectorJpaController.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/resources/css/pages/signin.css</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/src/java/Servlets/SvAgregarPaper.java</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/eliminarLector.jsp</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/registrarLector.jsp</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/registrarUsuario.jsp</file>
+            <file>file:/C:/Users/netan/OneDrive/Documentos/GitHub/ubooks/web/modificarLector.jsp</file>
+        </group>
+    </open-files>
+</project-private>
