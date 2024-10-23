@@ -94,7 +94,7 @@
                                 </div> <!-- /widget-header -->
 
                                 <div class="widget-content">
-                                    <div class="pricing-plans plans-4">
+                                    <div class="pricing-plans plans-2">
                                         
                                         
                                         <!-- LECTORES -->
