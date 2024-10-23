@@ -144,7 +144,7 @@
                                                     </div> <!-- /plan-title -->
 
                                                     <div class="plan-price">
-                                                        <a href="registrarPaper.jsp"><img src="./resources/img/book.png" style="max-width:100%;height:auto;"></a><span class="term"></span>
+                                                        <a href="registrarPaper.jsp"><img src="./resources/img/libro.png" style="max-width:100%;height:auto;"></a><span class="term"></span>
                                                     </div> <!-- /plan-price -->
 
                                                 </div> <!-- /plan-header -->	        
