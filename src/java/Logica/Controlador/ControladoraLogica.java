@@ -1,6 +1,7 @@
 package Logica.Controlador;
 
 import Logica.Entidades.Lector;
+import Logica.Entidades.Paper;
 import Logica.Entidades.Usuario;
 import Persistencia.Controlador.ControladoraPersistencia;
 import java.text.SimpleDateFormat;
@@ -33,6 +34,12 @@ public class ControladoraLogica {
         boolean exito = false;
         if (controladoraPersistencia.crearUsuario(usuario) && 
                 controladoraPersistencia.crearLector(lector)) exito = true;
+        return exito;
+    }
+    
+    public boolean crearPaper(Paper paper) {
+        boolean exito = false;
+        if (controladoraPersistencia.crearPaper(paper)) exito = true;
         return exito;
     }
     
@@ -72,8 +79,15 @@ public class ControladoraLogica {
     
     public boolean verificarLectorPorID(int id) {
         boolean existe = false;
-        Lector empleado = controladoraPersistencia.obtenerLectorPorID(id);
-        if (empleado != null) existe = true;
+        Lector lector = controladoraPersistencia.obtenerLectorPorID(id);
+        if (lector != null) existe = true;
+        return existe;
+    }
+    
+    public boolean verificarPaperPorId(int id) {
+        boolean existe = false;
+        Paper paper = controladoraPersistencia.obtenerPaperPorID(id);
+        if (paper != null) existe = true;
         return existe;
     }
     
@@ -111,6 +125,10 @@ public class ControladoraLogica {
         return controladoraPersistencia.obtenerLectorPorID(id);
     }
     
+    public Paper obtenerPaperPorID(int id) {
+        return controladoraPersistencia.obtenerPaperPorID(id);
+    }
+    
     public List<Usuario> obtenerUsuarios() {
         return controladoraPersistencia.obtenerUsuarios();
     }
@@ -119,12 +137,20 @@ public class ControladoraLogica {
         return controladoraPersistencia.obtenerLectores();
     }
     
+    public List<Paper> obtenerPapers() {
+        return controladoraPersistencia.obtenerPapers();
+    }
+    
     public int obtenerCantidadUsuarios() {
         return controladoraPersistencia.obtenerCantidadUsuarios();
     }
     
     public int obtenerCantidadLectores() {
         return controladoraPersistencia.obtenerCantidadLectores();
+    }
+    
+    public int obtenerCantidadPapers() {
+        return controladoraPersistencia.obtenerCantidadPapers();
     }
      
     public boolean borrarUsuario(int id) {
@@ -135,12 +161,20 @@ public class ControladoraLogica {
         return controladoraPersistencia.borrarLector(id);
     }
     
+    public boolean borrarPaper(int id) {
+        return controladoraPersistencia.borrarPaper(id);
+    }
+    
     public boolean modificarUsuario(Usuario usuario) {
         return controladoraPersistencia.modificarUsuario(usuario);
     }
     
     public boolean modificarLector(Lector lector) {
         return controladoraPersistencia.modificarLector(lector);
+    }
+    
+    public boolean modificarPaper(Paper paper) {
+        return controladoraPersistencia.modificarPaper(paper);
     }
     
     public static synchronized Date convertirStringADate(String fecha) {

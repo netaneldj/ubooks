@@ -5,7 +5,7 @@
  */
 package Persistencia.Entidades;
 
-import Logica.Entidades.Lector;
+import Logica.Entidades.Paper;
 import Persistencia.Entidades.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -21,13 +21,13 @@ import javax.persistence.criteria.Root;
  *
  * @author netan
  */
-public class LectorJpaController implements Serializable {
+public class PaperJpaController implements Serializable {
 
-    public LectorJpaController(EntityManagerFactory emf) {
+    public PaperJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     
-    public LectorJpaController(){
+    public PaperJpaController(){
         emf = Persistence.createEntityManagerFactory("UbooksPU");
     }
     
@@ -37,12 +37,12 @@ public class LectorJpaController implements Serializable {
         return emf.createEntityManager();
     }
 
-    public void create(Lector lector) {
+    public void create(Paper paper) {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            em.persist(lector);
+            em.persist(paper);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -51,19 +51,19 @@ public class LectorJpaController implements Serializable {
         }
     }
 
-    public void edit(Lector lector) throws NonexistentEntityException, Exception {
+    public void edit(Paper paper) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            lector = em.merge(lector);
+            paper = em.merge(paper);
             em.getTransaction().commit();
         } catch (Exception ex) {
             String msg = ex.getLocalizedMessage();
             if (msg == null || msg.length() == 0) {
-                Integer id = lector.getId();
-                if (findLector(id) == null) {
-                    throw new NonexistentEntityException("The lector with id " + id + " no longer exists.");
+                Integer id = paper.getId();
+                if (findPaper(id) == null) {
+                    throw new NonexistentEntityException("The paper with id " + id + " no longer exists.");
                 }
             }
             throw ex;
@@ -79,14 +79,14 @@ public class LectorJpaController implements Serializable {
         try {
             em = getEntityManager();
             em.getTransaction().begin();
-            Lector lector;
+            Paper paper;
             try {
-                lector = em.getReference(Lector.class, id);
-                lector.getId();
+                paper = em.getReference(Paper.class, id);
+                paper.getId();
             } catch (EntityNotFoundException enfe) {
-                throw new NonexistentEntityException("The lector with id " + id + " no longer exists.", enfe);
+                throw new NonexistentEntityException("The paper with id " + id + " no longer exists.", enfe);
             }
-            em.remove(lector);
+            em.remove(paper);
             em.getTransaction().commit();
         } finally {
             if (em != null) {
@@ -95,19 +95,19 @@ public class LectorJpaController implements Serializable {
         }
     }
 
-    public List<Lector> findLectorEntities() {
-        return findLectorEntities(true, -1, -1);
+    public List<Paper> findPaperEntities() {
+        return findPaperEntities(true, -1, -1);
     }
 
-    public List<Lector> findLectorEntities(int maxResults, int firstResult) {
-        return findLectorEntities(false, maxResults, firstResult);
+    public List<Paper> findPaperEntities(int maxResults, int firstResult) {
+        return findPaperEntities(false, maxResults, firstResult);
     }
 
-    private List<Lector> findLectorEntities(boolean all, int maxResults, int firstResult) {
+    private List<Paper> findPaperEntities(boolean all, int maxResults, int firstResult) {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            cq.select(cq.from(Lector.class));
+            cq.select(cq.from(Paper.class));
             Query q = em.createQuery(cq);
             if (!all) {
                 q.setMaxResults(maxResults);
@@ -119,20 +119,20 @@ public class LectorJpaController implements Serializable {
         }
     }
 
-    public Lector findLector(Integer id) {
+    public Paper findPaper(Integer id) {
         EntityManager em = getEntityManager();
         try {
-            return em.find(Lector.class, id);
+            return em.find(Paper.class, id);
         } finally {
             em.close();
         }
     }
 
-    public int getLectorCount() {
+    public int getPaperCount() {
         EntityManager em = getEntityManager();
         try {
             CriteriaQuery cq = em.getCriteriaBuilder().createQuery();
-            Root<Lector> rt = cq.from(Lector.class);
+            Root<Paper> rt = cq.from(Paper.class);
             cq.select(em.getCriteriaBuilder().count(rt));
             Query q = em.createQuery(cq);
             return ((Long) q.getSingleResult()).intValue();

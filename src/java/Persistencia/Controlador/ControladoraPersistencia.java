@@ -1,8 +1,10 @@
 package Persistencia.Controlador;
 
 import Logica.Entidades.Lector;
+import Logica.Entidades.Paper;
 import Logica.Entidades.Usuario;
 import Persistencia.Entidades.LectorJpaController;
+import Persistencia.Entidades.PaperJpaController;
 import Persistencia.Entidades.UsuarioJpaController;
 import Persistencia.Entidades.exceptions.NonexistentEntityException;
 import java.util.List;
@@ -14,6 +16,7 @@ public class ControladoraPersistencia {
     
     LectorJpaController lectorJpaController = new LectorJpaController();
     UsuarioJpaController usuarioJpaController = new UsuarioJpaController();
+    PaperJpaController paperJpaController = new PaperJpaController();
 
     public ControladoraPersistencia() {}
     
@@ -34,6 +37,18 @@ public class ControladoraPersistencia {
         try {
             lectorJpaController.create(lector);
             logger.log(Level.INFO, "ControladoraPersistencia: Lector creado con exito!");
+            exito = true;
+        } catch(Exception e){
+            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al crear lector: %s",e.getMessage());
+        }
+        return exito;
+    }
+    
+    public boolean crearPaper(Paper paper){
+        boolean exito = false;
+        try {
+            paperJpaController.create(paper);
+            logger.log(Level.INFO, "ControladoraPersistencia: Paper creado con exito!");
             exito = true;
         } catch(Exception e){
             logger.log(Level.SEVERE, "ControladoraPersistencia: Error al crear lector: %s",e.getMessage());
@@ -65,6 +80,18 @@ public class ControladoraPersistencia {
         return lectorJpaController.getLectorCount();
     }
     
+     public List<Paper> obtenerPapers() {
+        return paperJpaController.findPaperEntities();
+    }
+    
+    public Paper obtenerPaperPorID(int idPaper) {
+        return paperJpaController.findPaper(idPaper);
+    }
+    
+    public int obtenerCantidadPapers() {
+        return paperJpaController.getPaperCount();
+    }
+    
     public boolean modificarUsuario(Usuario usuario) {
         boolean exito = false;
         try {
@@ -89,6 +116,18 @@ public class ControladoraPersistencia {
         return exito;
     }
     
+    public boolean modificarPaper(Paper paper) {
+        boolean exito = false;
+        try {
+            paperJpaController.edit(paper);
+            logger.log(Level.INFO, "ControladoraPersistencia: Paper modificado con exito!");
+            exito = true;
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al modificar lector: %s",e.getMessage());
+        }
+        return exito;
+    }
+    
     public boolean borrarUsuario(int id) {
         try {
             usuarioJpaController.destroy(id);
@@ -105,6 +144,18 @@ public class ControladoraPersistencia {
         try {
             lectorJpaController.destroy(id);
             logger.log(Level.INFO, "ControladoraPersistencia: Lector borrado con exito!");
+            return true;
+        } catch (NonexistentEntityException e) {
+            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al borrar lector: %s",e.getMessage());
+        }
+
+        return false;
+    }
+    
+    public boolean borrarPaper(int id) {
+        try {
+            paperJpaController.destroy(id);
+            logger.log(Level.INFO, "ControladoraPersistencia: Paper borrado con exito!");
             return true;
         } catch (NonexistentEntityException e) {
             logger.log(Level.SEVERE, "ControladoraPersistencia: Error al borrar lector: %s",e.getMessage());

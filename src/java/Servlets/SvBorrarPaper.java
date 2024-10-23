@@ -1,7 +1,7 @@
 package Servlets;
 
 import Logica.Controlador.ControladoraLogica;
-import Logica.Entidades.Lector;
+import Logica.Entidades.Paper;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -9,8 +9,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "SvBorrarLector", urlPatterns = {"/SvBorrarLector"})
-public class SvBorrarLector extends HttpServlet {
+@WebServlet(name = "SvBorrarPaper", urlPatterns = {"/SvBorrarPaper"})
+public class SvBorrarPaper extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -22,14 +22,13 @@ public class SvBorrarLector extends HttpServlet {
         try {
                 ControladoraLogica controladoraLogica = new ControladoraLogica();
                 int id = Integer.parseInt(request.getParameter("id"));
-                boolean existeLector = controladoraLogica.verificarLectorPorID(id);
+                boolean existePaper = controladoraLogica.verificarPaperPorId(id);
 
-                if(!existeLector){
+                if(!existePaper){
                     response.sendRedirect("noExisteID.jsp");
                 } else {
-                    Lector lector = controladoraLogica.obtenerLectorPorID(id);
-                    int id_usuario = lector.getUsuario().getId();
-                    if (controladoraLogica.borrarLector(id) && controladoraLogica.borrarUsuario(id_usuario))
+                    Paper paper = controladoraLogica.obtenerPaperPorID(id);
+                    if (controladoraLogica.borrarPaper(id))
                         response.sendRedirect("Exito/exito.jsp");
                     else
                         response.sendRedirect("Error/error.jsp");   

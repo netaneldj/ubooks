@@ -1,3 +1,4 @@
+<%@page import="Logica.Entidades.Paper"%>
 <%@page import="Logica.Entidades.Lector"%>
 <%@page import="Logica.Controlador.ControladoraLogica"%>
 <%@page import="java.util.List"%>
@@ -6,7 +7,7 @@
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <title>Actualizar Lector - Ubooks</title>
+        <title>Actualizar Paper - Ubooks</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes"> 
 
@@ -64,57 +65,42 @@
                 <div class="span5">
                     <div class="account-container register ">
                         <div class="content clearfix widget">
-                            <form action="SvModificarLector" method="POST" id="1">
-                                <h1>Actualizar Lector</h1>			
+                            <form action="SvModificarPaper" method="POST" id="1">
+                                <h1>Actualizar Paper</h1>			
                                 <div class="login-fields">
                                     <p>Actualizar información:</p>
                                      <%
                                         ControladoraLogica controladoraLogica = new ControladoraLogica();
-                                        String id_lector = "";
+                                        String id_paper = "";
                                         Cookie[] cookies = request.getCookies();
                                         for(Cookie cookie : cookies){
-                                                if(cookie.getName().equals("id_lector")) { 
-                                                    id_lector = cookie.getValue();
+                                                if(cookie.getName().equals("id_paper")) { 
+                                                    id_paper = cookie.getValue();
                                                     break;
                                                 }
                                             }
-                                        Lector lector = controladoraLogica.obtenerLectorPorID(Integer.parseInt(id_lector));
+                                        Paper paper = controladoraLogica.obtenerPaperPorID(Integer.parseInt(id_paper));
                                      %>
                                     <div class="field">
+                                        <label for="doi">Doi:</label>
+                                        <input type="text" id="doi" name="doi" value="<%=paper.getDoi()%>" placeholder="Doi" class="login" required/>
+                                    </div> <!-- /field -->
+                                    
+                                    <div class="field">
                                         <label for="nombre">Nombre:</label>
-                                        <input type="text" id="nombre" name="nombre" value="<%=lector.getNombre()%>" placeholder="Nombre" class="login" required/>
+                                        <input type="text" id="nombre" name="nombre" value="<%=paper.getNombre()%>" placeholder="Nombre" class="login" required/>
                                     </div> <!-- /field -->
 
                                     <div class="field">
-                                        <label for="apellido">Apellido:</label>	
-                                        <input type="text" id="apellido" name="apellido" value="<%=lector.getApellido()%>" placeholder="Apellido" class="login" required/>
+                                        <label for="autor">Autor:</label>	
+                                        <input type="text" id="autor" name="autor" value="<%=paper.getAutor()%>" placeholder="Autor" class="login" required/>
                                     </div> <!-- /field -->
                                     
                                     <div class="field">
-					<label for="nacimiento">Fecha de nacimiento:</label>	
-					<input type="date" form="1" name="nacimiento" min="1900-01-01" max="2099-12-31" value="<%=controladoraLogica.convertirDateAString2(lector.getNacimiento())%>" placeholder="" class="login" required/>
+                                        <label for="resumen">Resumen:</label>	
+                                        <input type="text" id="resumen" name="resumen" value="<%=paper.getResumen()%>" placeholder="Resumen" class="login" required/>
                                     </div> <!-- /field -->
                                     
-                                    <div class="field">
-                                        <label for="email">Email:</label>	
-                                        <input type="email" id="email" name="email" value="<%=lector.getUsuario().getEmail()%>" placeholder="Email" class="login" required/>
-                                    </div> <!-- /field -->
-                                    
-                                    <div class="field">
-                                        <label for="nombreUsuario">Nombre de usuario:</label>	
-                                        <input type="text" id="nombreUsuario" name="nombreUsuario" value="<%=lector.getUsuario().getNombreUsuario()%>" placeholder="Nombre de usuario" class="login" required/>
-                                    </div> <!-- /field -->
-                                    
-                                    <div class="field">
-                                        <label for="contrasenia">Contraseña:</label>	
-                                        <input type="password" id="contrasenia" name="contrasenia" value="<%=lector.getUsuario().getContrasenia()%>" placeholder="Contraseña" class="login" onkeyup='verificarContrasenia();' required/>
-                                    </div> <!-- /field -->
-                                    
-                                    <div class="field">
-					<label for="confirmar_contrasenia">Confirmar contraseña:</label>
-					<input type="password" id="confirmar_contrasenia" name="confirmar_contrasenia" value="<%=lector.getUsuario().getContrasenia()%>" placeholder="Confirmar contraseña" class="login" onkeyup='verificarContrasenia();' required/>
-                                        <span id='mensaje'></span>
-                                    </div> <!-- /field -->
                                 </div> <!-- /login-fields -->
 
                                 <div class="login-actions">

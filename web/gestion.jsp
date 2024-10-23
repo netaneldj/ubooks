@@ -134,6 +134,44 @@
                                                 </div> <!-- /plan-actions -->
                                             </div> <!-- /plan -->
                                         </div> <!-- /plan-container -->
+                                        
+                                        <!-- PAPERS -->
+                                        <div class="plan-container">
+                                            <div class="plan green">
+                                                <div class="plan-header">
+                                                    <div class="plan-title">
+                                                        Papers	        		
+                                                    </div> <!-- /plan-title -->
+
+                                                    <div class="plan-price">
+                                                        <a href="registrarPaper.jsp"><img src="./resources/img/book.png" style="max-width:100%;height:auto;"></a><span class="term"></span>
+                                                    </div> <!-- /plan-price -->
+
+                                                </div> <!-- /plan-header -->	        
+
+                                                <div class="plan-features">
+                                                    <ul>
+                                                        <li><strong>Sección</strong> dedicada a la gestión de los papers.</li>
+                                                        <li>Aqui puedes</li>
+                                                        <li>Crear, listar, modificar y borrar</li>
+                                                        <li>papers.</li>
+                                                    </ul>
+                                                </div> <!-- /plan-features -->
+
+                                                <div class="plan-actions">				
+                                                    <a href="registrarPaper.jsp" class="btn">Registrar</a>				
+                                                </div> <!-- /plan-actions -->
+                                                <div class="plan-actions">				
+                                                    <a href="listarPapers.jsp" class="btn">Listar</a>				
+                                                </div> <!-- /plan-actions -->
+                                                <div class="plan-actions">				
+                                                    <a href="modificarPaper.jsp" class="btn">Modificar</a>				
+                                                </div> <!-- /plan-actions -->
+                                                <div class="plan-actions">				
+                                                    <a href="eliminarPaper.jsp" class="btn">Eliminar</a>				
+                                                </div> <!-- /plan-actions -->
+                                            </div> <!-- /plan -->
+                                        </div> <!-- /plan-container -->                                        
                                   
                                     </div> <!-- /pricing-plans -->
                                 </div> <!-- /widget-content -->

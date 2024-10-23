@@ -103,7 +103,7 @@
                                                                 <ul class="dropdown-menu " role="menu" aria-labelledby="dLabel">
                                                                     <li><a href="registrarLector.jsp"><i class=" icon-plus-sign icon-large"></i> Registrar</a></li>
                                                                     <li><a href="modificarLector.jsp"><i class=" icon-edit icon-large"></i> Modificar</a></li>
-                                                                    <li><a href="borrarLector.jsp"><i class=" icon-trash icon-large"></i> Borrar</a></li>
+                                                                    <li><a href="eliminarLector.jsp"><i class=" icon-trash icon-large"></i> Borrar</a></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
