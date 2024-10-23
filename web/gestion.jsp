@@ -162,6 +162,9 @@
                                                     <a href="registrarPaper.jsp" class="btn">Registrar</a>				
                                                 </div> <!-- /plan-actions -->
                                                 <div class="plan-actions">				
+                                                    <a href="buscarPaperPorNombre.jsp" class="btn">Buscar por nombre</a>				
+                                                </div> <!-- /plan-actions -->                                                
+                                                <div class="plan-actions">				
                                                     <a href="listarPapers.jsp" class="btn">Listar</a>				
                                                 </div> <!-- /plan-actions -->
                                                 <div class="plan-actions">				

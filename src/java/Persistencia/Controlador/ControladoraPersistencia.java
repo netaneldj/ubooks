@@ -88,6 +88,10 @@ public class ControladoraPersistencia {
         return paperJpaController.findPaper(idPaper);
     }
     
+    public List<Paper> obtenerPapersPorNombre(String nombrePaper) {
+        return paperJpaController.findPapersByName(nombrePaper);
+    }
+    
     public int obtenerCantidadPapers() {
         return paperJpaController.getPaperCount();
     }

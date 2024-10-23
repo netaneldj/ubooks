@@ -14,7 +14,9 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 
 /**
@@ -127,6 +129,21 @@ public class PaperJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public List<Paper> findPapersByName(String nombre) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Paper> cq = cb.createQuery(Paper.class);
+            Root<Paper> paper = cq.from(Paper.class);
+            cq.select(paper).where(cb.like(cb.lower(paper.get("nombre")), "%" + nombre.toLowerCase() + "%"));
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+
 
     public int getPaperCount() {
         EntityManager em = getEntityManager();
