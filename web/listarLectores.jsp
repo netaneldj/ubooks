@@ -80,6 +80,8 @@
                                     <th><center>Apellido</center></th>
                                     <th><center>Fecha de nacimiento</center></th>
                                     <th><center>Email</center></th>
+                                    <th><center>Idioma</center></th>
+                                    <th><center>Genero</center></th>
                                     <th><center>Nombre de usuario</center></th>
                                     <th><center>Contraseña</center></th>
                                 </tr>
@@ -96,6 +98,8 @@
                                 <td><center><%=lector.getApellido()%></center></td>
                                 <td><center><%=controladoraLogica.convertirDateAString(lector.getNacimiento())%></center></td>
                                 <td><center><%=lector.getUsuario().getEmail()%></center></td>
+                                <td><center><%=lector.getIdioma()%></center></td>                            
+                                <td><center><%=lector.getGenero()%></center></td>
                                 <td><center><%=lector.getUsuario().getNombreUsuario()%></center></td>
                                 <td><center><%=lector.getUsuario().getContrasenia()%></center></td>
                                 </tr>

@@ -2,10 +2,6 @@ package Logica.Entidades;
 
 import java.io.Serializable;
 import java.util.Date;
-import java.util.List;
-import javax.persistence.CollectionTable;
-import javax.persistence.Column;
-import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -22,26 +18,20 @@ public class Lector extends Persona implements Serializable {
     private Integer id;
     @OneToOne
     private Usuario usuario;
-    @ElementCollection(targetClass=IdiomaPaper.class)
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name="lector_idioma")
-    @Column(name="idioma")
-    private List<IdiomaPaper> idiomas;
-    @ElementCollection(targetClass=GeneroPaper.class)
+    private IdiomaPaper idioma;
     @Enumerated(EnumType.STRING)
-    @CollectionTable(name="lector_genero")
-    @Column(name="genero")
-    private List<GeneroPaper> generos;
+    private GeneroPaper genero;
 
     public Lector() {
     }
 
-    public Lector(Integer id, Usuario usuario, String nombre, String apellido, Date nacimiento, List<IdiomaPaper> idiomas, List<GeneroPaper> generos) {
+    public Lector(Integer id, Usuario usuario, String nombre, String apellido, Date nacimiento, IdiomaPaper idioma, GeneroPaper genero) {
         super(nombre, apellido, nacimiento);
         this.id = id;
         this.usuario = usuario;
-        this.idiomas = idiomas;
-        this.generos = generos;
+        this.idioma = idioma;
+        this.genero = genero;
     }
 
     public int getId() {
@@ -60,5 +50,22 @@ public class Lector extends Persona implements Serializable {
         this.usuario = usuario;
     }
 
+    public IdiomaPaper getIdioma() {
+        return idioma;
+    }
+
+    public void setIdioma(IdiomaPaper idioma) {
+        this.idioma = idioma;
+    }
+
+    public GeneroPaper getGenero() {
+        return genero;
+    }
+
+    public void setGenero(GeneroPaper genero) {
+        this.genero = genero;
+    }
+    
+    
     
 }

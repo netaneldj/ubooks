@@ -1,5 +1,7 @@
 <%@page import="Logica.Entidades.Usuario"%>
 <%@page import="Logica.Entidades.Lector"%>
+<%@page import="Logica.Entidades.IdiomaPaper"%>
+<%@page import="Logica.Entidades.GeneroPaper"%>
 <%@page import="java.util.List"%>
 <%@page import="Logica.Controlador.ControladoraLogica"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -108,7 +110,23 @@
                                 <div class="field">
                                     <label for="email">Email:</label>
                                     <input type="email" id="email" name="email" value="" placeholder="Email" class="login" required/>
-				</div> <!-- /field -->    
+				</div> <!-- /field -->   
+                                
+                                <p>Idioma preferencia: <select name="idioma"> </p>
+                                <%
+                                            for (IdiomaPaper idioma : IdiomaPaper.values()) {
+                                        %>
+                                <option><%=idioma%></option>
+                                <% }%>
+                                </select> <!-- /field -->
+                                
+                                <p>Genero preferencia: <select name="genero"> </p>
+                                <%
+                                            for (GeneroPaper genero : GeneroPaper.values()) {
+                                        %>
+                                <option><%=genero%></option>
+                                <% }%>
+                                </select> <!-- /field -->                                
                                 
 				<div class="field">
 					<label for="nombreUsuario">Nombre de usuario:</label>
