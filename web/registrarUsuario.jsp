@@ -65,6 +65,11 @@
                     <div class="login-fields">
                         <p>Crear usuario:</p>
                         <div class="field">
+                            <label for="email">Email:</label>
+                            <input type="email" id="user" name="email" value="" placeholder="Email" class="login" required/>
+                        </div> <!-- /field -->
+                        
+                        <div class="field">
                             <label for="nombreUsuario">Nombre de usuario:</label>
                             <input type="text" id="user" name="nombreUsuario" value="" placeholder="Nombre de usuario" class="login" required/>
                         </div> <!-- /field -->

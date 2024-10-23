@@ -1,5 +1,5 @@
+<%@page import="Logica.Entidades.Lector"%>
 <%@page import="Logica.Entidades.Usuario"%>
-<%@page import="java.util.List"%>
 <%@page import="java.util.List"%>
 <%@page import="Logica.Controlador.ControladoraLogica"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -7,7 +7,7 @@
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <title>Listar Usuarios - Ubooks</title>
+        <title>Listar Lectores - Ubooks</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes"> 
 
@@ -66,32 +66,38 @@
 
         <div class="container-fluid cata-flex">
             <div class="row ">
-               <div class="span5 ">
+               <div class="span9">
                     <div class="widget widget-table action-table">
                         <div class="widget-header"> <i class="icon-th-list"></i>
-                            <h3>Lista Usuarios</h3>
+                            <h3>Lista Lectores</h3>
                         </div>
                         <div class="widget-content">
                             <table class="table table-striped table-bordered">
                                 <thead>
-                                    <tr>
+                                <tr>
                                     <th><center>ID</center></th>
+                                    <th><center>Nombre</center></th>
+                                    <th><center>Apellido</center></th>
+                                    <th><center>Fecha de nacimiento</center></th>
                                     <th><center>Email</center></th>
                                     <th><center>Nombre de usuario</center></th>
-                                   <th><center>Contraseña</center></th>
+                                    <th><center>Contraseña</center></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <%
                                             ControladoraLogica controladoraLogica = new ControladoraLogica();
-                                            List<Usuario> usuarios = controladoraLogica.obtenerUsuarios();
-                                            for (Usuario usuario : usuarios) {
+                                            List<Lector> lectores = controladoraLogica.obtenerLectores();
+                                            for (Lector lector : lectores) {
                                         %>
-                                        <td><center><%=usuario.getId()%></center></td>
-                                        <td><center><%=usuario.getEmail()%></center></td>
-                                        <td><center><%=usuario.getNombreUsuario()%></center></td>
-                                        <td><center><%=usuario.getContrasenia()%></center></td>
+                                        <td><center><%=lector.getId()%></center></td>
+                                <td><center><%=lector.getNombre()%></center></td>
+                                <td><center><%=lector.getApellido()%></center></td>
+                                <td><center><%=controladoraLogica.convertirDateAString(lector.getNacimiento())%></center></td>
+                                <td><center><%=lector.getUsuario().getEmail()%></center></td>
+                                <td><center><%=lector.getUsuario().getNombreUsuario()%></center></td>
+                                <td><center><%=lector.getUsuario().getContrasenia()%></center></td>
                                 </tr>
                                 <% }%>
                                 </tbody>
