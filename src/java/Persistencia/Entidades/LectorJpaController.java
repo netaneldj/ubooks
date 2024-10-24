@@ -6,6 +6,7 @@
 package Persistencia.Entidades;
 
 import Logica.Entidades.Lector;
+import Logica.Entidades.Paper;
 import Persistencia.Entidades.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -14,6 +15,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -123,6 +125,20 @@ public class LectorJpaController implements Serializable {
         EntityManager em = getEntityManager();
         try {
             return em.find(Lector.class, id);
+        } finally {
+            em.close();
+        }
+    }
+    
+    public List<Lector> findAutorEntities() {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Lector> cq = cb.createQuery(Lector.class);
+            Root<Lector> lector = cq.from(Lector.class);
+            cq.select(lector).where(cb.equal(lector.get("esAutor"), true));
+            Query q = em.createQuery(cq);
+            return q.getResultList();
         } finally {
             em.close();
         }

@@ -72,6 +72,10 @@ public class ControladoraPersistencia {
         return lectorJpaController.findLectorEntities();
     }
     
+    public List<Lector> obtenerAutores() {
+        return lectorJpaController.findAutorEntities();
+    }
+    
     public Lector obtenerLectorPorID(int idLector) {
         return lectorJpaController.findLector(idLector);
     }

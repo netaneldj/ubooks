@@ -38,6 +38,7 @@ public class SvAgregarLector extends HttpServlet {
             String email = request.getParameter("email");
             IdiomaPaper dioma = IdiomaPaper.valueOf(request.getParameter("idioma"));
             GeneroPaper genero = GeneroPaper.valueOf(request.getParameter("genero"));
+            Boolean esAutor = request.getParameter("autor") != null;
 
             usuario.setNombreUsuario(nombreUsuario);
             usuario.setContrasenia(contrasenia);
@@ -49,6 +50,7 @@ public class SvAgregarLector extends HttpServlet {
             lector.setUsuario(usuario);
             lector.setIdioma(dioma);
             lector.setGenero(genero);
+            lector.setEsAutor(esAutor);
 
             boolean exito = controladoraLogica.crearLectorUsuario(lector,usuario);
 

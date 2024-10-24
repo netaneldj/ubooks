@@ -100,10 +100,15 @@
 					<input type="text" id="nombre" name="nombre" value="" placeholder="Nombre" class="login" required/>
 				</div> <!-- /field -->
                                 
-                                <div class="field">
-                                    <label for="autor">Autor:</label>
-                                    <input type="text" id="autor" name="autor" value="" placeholder="Autor" class="login" required/>
-				</div> <!-- /field -->    
+                                <p>Autor: <select name="id_lector"> </p>
+                                <%
+                                    ControladoraLogica controladoraLogica = new ControladoraLogica();        
+                                    List<Lector> autores = controladoraLogica.obtenerAutores();
+                                            for (Lector autor : autores) {
+                                %>
+                                <option value=<%=autor.getId()%>><%=autor.getNombre()+" "+autor.getApellido()%></option>
+                                <% }%>
+                                </select> <!-- /field -->    
                                 
 				<div class="field">
 					<label for="resumen">Resumen:</label>
