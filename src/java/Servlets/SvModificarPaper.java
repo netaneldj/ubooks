@@ -41,13 +41,17 @@ public class SvModificarPaper extends HttpServlet {
                     break;
                 }
             }
+            
+            ControladoraLogica controladoraLogica = new ControladoraLogica();
+            
             int id = Integer.parseInt(id_paper);
             String doi = request.getParameter("doi");
             String nombre = request.getParameter("nombre");
-            String autor = request.getParameter("autor");
+            Integer idLector = Integer.parseInt(request.getParameter("id_lector"));
             String resumen = request.getParameter("resumen");
+            
+            Lector lector = controladoraLogica.obtenerLectorPorID(idLector);
 
-            ControladoraLogica controladoraLogica = new ControladoraLogica();
             boolean existePaper = controladoraLogica.verificarPaperPorId(id);
 
             if(!existePaper){
@@ -56,7 +60,7 @@ public class SvModificarPaper extends HttpServlet {
                 Paper paper =  controladoraLogica.obtenerPaperPorID(id);
                 paper.setDoi(doi);
                 paper.setNombre(nombre);
-                paper.setAutor(autor);
+                paper.setAutor(lector);
                 paper.setResumen(resumen);
                 controladoraLogica.modificarPaper(paper);
                 response.sendRedirect("Exito/exito.jsp");

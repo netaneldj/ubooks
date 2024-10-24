@@ -2,6 +2,7 @@ package Logica.Entidades;
 
 import java.io.Serializable;
 import java.util.Date;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -22,16 +23,19 @@ public class Lector extends Persona implements Serializable {
     private IdiomaPaper idioma;
     @Enumerated(EnumType.STRING)
     private GeneroPaper genero;
+    @Column(name = "es_autor")
+    private Boolean esAutor;
 
     public Lector() {
     }
 
-    public Lector(Integer id, Usuario usuario, String nombre, String apellido, Date nacimiento, IdiomaPaper idioma, GeneroPaper genero) {
+    public Lector(Integer id, Usuario usuario, String nombre, String apellido, Date nacimiento, IdiomaPaper idioma, GeneroPaper genero, Boolean esAutor) {
         super(nombre, apellido, nacimiento);
         this.id = id;
         this.usuario = usuario;
         this.idioma = idioma;
         this.genero = genero;
+        this.esAutor = esAutor;
     }
 
     public int getId() {
@@ -65,7 +69,13 @@ public class Lector extends Persona implements Serializable {
     public void setGenero(GeneroPaper genero) {
         this.genero = genero;
     }
-    
-    
+
+    public Boolean getEsAutor() {
+        return esAutor;
+    }
+
+    public void setEsAutor(Boolean esAutor) {
+        this.esAutor = esAutor;
+    }
     
 }

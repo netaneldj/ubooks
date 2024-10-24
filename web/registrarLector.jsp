@@ -126,7 +126,9 @@
                                         %>
                                 <option><%=genero%></option>
                                 <% }%>
-                                </select> <!-- /field -->                                
+                                </select> <!-- /field -->    
+                                
+                                <p>Soy autor: <input type="checkbox" id="autor" name="autor" value=false class="login" required/></p> <!-- /field -->                                      
                                 
 				<div class="field">
 					<label for="nombreUsuario">Nombre de usuario:</label>
