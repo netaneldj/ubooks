@@ -93,7 +93,7 @@
                                 <td><center><%=paper.getId()%></center></td>
                                 <td><center><%=paper.getDoi()%></center></td>                            
                                 <td><center><%=paper.getNombre()%></center></td>
-                                <td><center><%=paper.getAutor()%></center></td>
+                                <td><center><%=paper.getAutor().getNombre()+" "+paper.getAutor().getApellido()%></center></td>
                                 <td><center><%=paper.getResumen()%></center></td>
                                 </tr>
                                 <% }%>
