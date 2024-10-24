@@ -3,7 +3,7 @@
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <title>Error - Reservas Hotel</title>
+        <title>Error - Ubooks</title>
 
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes"> 
@@ -27,7 +27,7 @@
                     </a>
 
                     <a class="brand" href="../index.jsp">
-                        Reservas Hotel				
+                        Ubooks				
                     </a>		
 
                     <div class="nav-collapse">
@@ -50,7 +50,7 @@
 
                     <div class="error-container">
                         <h1> (ง︡'-'︠)ง </h1>
-                        <h2>Reservas Hotel error!</h2>
+                        <h2>Ubooks error!</h2>
                         <h2>404 - Si estas aqui es porque fallo la operacion que realizaste!</h2>
 				<div class="error-details">
 					Volve a intentar regresando a la pagina de <a href="../index.jsp"> INGRESO</a>
