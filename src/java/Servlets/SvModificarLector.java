@@ -51,6 +51,7 @@ public class SvModificarLector extends HttpServlet {
             String email = request.getParameter("email");
             IdiomaPaper dioma = IdiomaPaper.valueOf(request.getParameter("idioma"));
             GeneroPaper genero = GeneroPaper.valueOf(request.getParameter("genero"));
+            Boolean esAutor = request.getParameter("autor") != null;
 
             ControladoraLogica controladoraLogica = new ControladoraLogica();
             boolean existeLector = controladoraLogica.verificarLectorPorID(id);
@@ -70,6 +71,7 @@ public class SvModificarLector extends HttpServlet {
                 usuario.setEmail(email);
                 controladoraLogica.modificarUsuario(usuario);
                 lector.setUsuario(usuario);
+                lector.setEsAutor(esAutor);
                 controladoraLogica.modificarLector(lector);
 
                 response.sendRedirect("Exito/exito.jsp");

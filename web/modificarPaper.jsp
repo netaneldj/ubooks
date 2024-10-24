@@ -77,7 +77,7 @@
                                         List<Paper> papers = controladoraLogica.obtenerPapers();
                                                 for (Paper paper : papers) {
                                     %>
-                                    <option value=<%=paper.getId()%>><%=paper.getNombre()+" "+paper.getAutor()%></option>
+                                    <option value=<%=paper.getId()%>><%=paper.getNombre()+" "+paper.getAutor().getNombre()+" "+paper.getAutor().getApellido()%></option>
                                     <% }%>
                                     </select> <!-- /field -->
 

@@ -91,10 +91,16 @@
                                         <input type="text" id="nombre" name="nombre" value="<%=paper.getNombre()%>" placeholder="Nombre" class="login" required/>
                                     </div> <!-- /field -->
 
-                                    <div class="field">
-                                        <label for="autor">Autor:</label>	
-                                        <input type="text" id="autor" name="autor" value="<%=paper.getAutor()%>" placeholder="Autor" class="login" required/>
-                                    </div> <!-- /field -->
+                                    <p>Autor: <select name="id_lector"> </p>
+                                    <option value=<%=paper.getAutor().getId()%> selected><%=paper.getAutor().getNombre()+" "+paper.getAutor().getApellido()%></option>
+                                    <%
+                                                List<Lector> autores = controladoraLogica.obtenerAutores();
+                                                for (Lector autor : autores) {
+                                                    if (autor.getId() != paper.getAutor().getId()){
+                                    %>
+                                    <option value=<%=autor.getId()%>><%=autor.getNombre()+" "+autor.getApellido()%></option>
+                                    <% }}%>
+                                    </select> <!-- /field -->
                                     
                                     <div class="field">
                                         <label for="resumen">Resumen:</label>	

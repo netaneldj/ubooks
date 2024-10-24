@@ -141,6 +141,10 @@ public class ControladoraLogica {
         return controladoraPersistencia.obtenerLectores();
     }
     
+    public List<Lector> obtenerAutores() {
+        return controladoraPersistencia.obtenerAutores();
+    }
+    
     public List<Paper> obtenerPapers() {
         return controladoraPersistencia.obtenerPapers();
     }

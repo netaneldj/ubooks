@@ -66,11 +66,17 @@
                 <div class="container">
                     <ul class="mainnav">
                         <li class="active">
+                            <a href="inicio.jsp">
+                                <i class="icon-home"></i>
+                                <span>Inicio</span> 
+                            </a>
+                        </li>                           
+                        <li class="active">
                             <a href="gestion.jsp">
                                 <i class="icon-list-alt"></i>
                                 <span>Gestion</span> 
                             </a>
-                        </li>
+                        </li>                     
                     </ul>
                 </div>
                 <!-- /container --> 
