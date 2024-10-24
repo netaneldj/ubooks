@@ -122,7 +122,7 @@
                                     <% }}%>
                                     </select> <!-- /field -->   
                                     
-                                    <p>Soy autor: <input type="checkbox" id="autor" name="autor" value=<%=lector.getEsAutor()%> class="login" required/></p> <!-- /field -->                                                                          
+                                    <p>Soy autor: <input type="checkbox" id="autor" name="autor" value=<%=lector.getEsAutor()%> class="login"/></p> <!-- /field -->                                                                          
                                     
                                     <div class="field">
                                         <label for="nombreUsuario">Nombre de usuario:</label>	

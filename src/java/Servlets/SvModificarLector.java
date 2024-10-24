@@ -51,7 +51,7 @@ public class SvModificarLector extends HttpServlet {
             String email = request.getParameter("email");
             IdiomaPaper dioma = IdiomaPaper.valueOf(request.getParameter("idioma"));
             GeneroPaper genero = GeneroPaper.valueOf(request.getParameter("genero"));
-            Boolean esAutor = request.getParameter("autor").equals("true");
+            Boolean esAutor = request.getParameter("autor") != null;
 
             ControladoraLogica controladoraLogica = new ControladoraLogica();
             boolean existeLector = controladoraLogica.verificarLectorPorID(id);

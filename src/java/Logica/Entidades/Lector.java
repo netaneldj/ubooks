@@ -23,7 +23,7 @@ public class Lector extends Persona implements Serializable {
     private IdiomaPaper idioma;
     @Enumerated(EnumType.STRING)
     private GeneroPaper genero;
-    @Column(name = "es_autor")
+    @Column(name = "ES_AUTOR")
     private Boolean esAutor;
 
     public Lector() {
