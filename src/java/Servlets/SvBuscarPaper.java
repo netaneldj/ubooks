@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 @WebServlet(name = "SvBuscarPaperPorNombre", urlPatterns = {"/SvBuscarPaperPorNombre"})
-public class SvBuscarPaperPorNombre extends HttpServlet {
+public class SvBuscarPaper extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
