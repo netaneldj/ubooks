@@ -6,7 +6,6 @@
 package Persistencia.Entidades;
 
 import Logica.Entidades.Lector;
-import Logica.Entidades.Paper;
 import Persistencia.Entidades.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -120,6 +119,52 @@ public class LectorJpaController implements Serializable {
             em.close();
         }
     }
+    
+    /*public List<Lector> findLectoresByName(String nombre) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Lector> cq = cb.createQuery(Lector.class);
+            Root<Lector> lector = cq.from(Lector.class);
+            cq.select(lector).where(cb.like(cb.lower(lector.get("nombre")), "%" + nombre.toLowerCase() + "%"));
+            Query q = em.createQuery(cq);
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }*/
+    
+    public List<Lector> findLectoresByName(String nombre, String esAutor) {
+    EntityManager em = getEntityManager();
+    try {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Lector> cq = cb.createQuery(Lector.class);
+        Root<Lector> lector = cq.from(Lector.class);
+        
+        System.out.println("ES AUTOR " + esAutor);
+        
+        
+        
+        if( esAutor.equals("No") ){
+            cq.select(lector).where(cb.like(cb.lower(lector.get("nombre")), "%" + nombre.toLowerCase() + "%"));    
+        }else{
+            System.out.println("EN EL ELSE");
+
+            //cq.select(lector).where(cb.and(cb.like(cb.lower(lector.get("nombre")), "%" + nombre.toLowerCase() + "%")), cb.and(lector.get("es_autor"), 1) );
+            cq.select(lector)
+            .where(cb.and(
+                cb.like(cb.lower(lector.get("nombre")), "%" + nombre.toLowerCase() + "%"),
+                cb.equal(lector.get("es_autor"), 1)
+            ));
+        }
+        
+        Query q = em.createQuery(cq);
+        return q.getResultList();
+    } finally {
+        em.close();
+    }
+}
+    
 
     public Lector findLector(Integer id) {
         EntityManager em = getEntityManager();

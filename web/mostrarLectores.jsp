@@ -1,4 +1,3 @@
-<%@page import="Logica.Entidades.Paper"%>
 <%@page import="Logica.Entidades.Lector"%>
 <%@page import="Logica.Entidades.Usuario"%>
 <%@page import="java.util.List"%>
@@ -8,7 +7,7 @@
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <title>Buscar Paper Por Nombre - Ubooks</title>
+        <title>Lectores Buscados - Ubooks</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes"> 
 
@@ -22,6 +21,7 @@
         <link href="resources/css/pages/signin.css" rel="stylesheet" type="text/css">
         <link href="resources/css/pages/dashboard.css" rel="stylesheet">
     </head>
+
     <body>
         <%
             String id_usuario = "0";
@@ -63,31 +63,56 @@
             </div> <!-- /navbar-inner -->
         </div> <!-- /navbar -->
 
-        <div class="container-fluid cata-flex">
-            <div class="row">
-                <div class="span5">
-                    <div class="account-container register ">
-                        <div class="content clearfix widget">
-                            <form action="SvBuscarPaperPorNombre" method="GET">
-                                <h1>Buscar Paper</h1>			
-                                <div class="login-fields">
-                                    <div class="field">
-                                            <label for="nombre_paper">Nombre</label>
-                                            <input type="text" id="nombre_paper" name="nombre_paper" value="" placeholder="Nombre" class="login" required/>
-                                    </div> <!-- /field -->
-                                </div> <!-- /login-fields -->
-                                <div class="login-actions">
-                                    <button class="button btn btn-primary btn-large">Buscar</button>
-                                </div> <!-- .actions -->
-                            </form>
-                        </div> <!-- /content -->
-                    </div> <!-- /account-container -->
 
-                </div>
+        <div class="container-fluid cata-flex">
+            <div class="row ">
+               <div class="span9">
+                    <div class="widget widget-table action-table">
+                        <div class="widget-header"> <i class="icon-th-list"></i>
+                            <h3>Lista Lectores</h3>
+                        </div>
+                        <div class="widget-content">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th><center>ID</center></th>
+                                    <th><center>Nombre</center></th>
+                                    <th><center>Autor</center></th>
+                                    <th><center>Email</center></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <%
+                                            ControladoraLogica controladoraLogica = new ControladoraLogica();
+                                            String nombre_usuario = "";
+                                            String esAutor = "";
+
+                                            for(Cookie cookie : cookies){
+                                                    if(cookie.getName().equals("nombre_usuario") ){ 
+                                                        nombre_usuario = cookie.getValue();
+                                                    }
+                                                    if(cookie.getName().equals("es_autor")){
+                                                        esAutor = cookie.getValue();
+                                                    }
+                                                }
+
+                                            List<Lector> lectores = controladoraLogica.obtenerLectoresPorNombre(nombre_usuario, esAutor);
+                                            for (Lector lector : lectores) {
+                                        %>
+                                <td><center><%=lector.getId()%></center></td>
+                                <td><center><%=lector.getNombre()%></center></td>
+                                <td><center><%=lector.getEsAutor()%></center></td>
+                                <td><center><%=lector.getEmail()%></center></td>
+                                </tr>
+                                <% }%>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> 
+                </div> 
             </div>
         </div>
-
-
 
         <!-- Text Under Box -->
 
