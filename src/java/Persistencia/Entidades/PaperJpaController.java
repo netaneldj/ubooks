@@ -152,7 +152,8 @@ public class PaperJpaController implements Serializable {
                         (cb.and
                            (cb.like(cb.lower(paper.get("nombre")), "%" + nombre.toLowerCase() + "%"),
                             cb.or(autorNombre,
-                                  autorApellido)
+                                  cb.or(autorApellido, cb.or(cb.like(cb.lower(paper.get("autor").get("nombre")), "%" + nombreAutor.toLowerCase() + "%"),
+                                   cb.like(cb.lower(paper.get("autor").get("apellido")), "%" + nombreAutor.toLowerCase() + "%"))))
                             ));
             }else{
             cq.select(paper).
@@ -160,8 +161,9 @@ public class PaperJpaController implements Serializable {
                         (cb.and
                            (cb.like(cb.lower(paper.get("nombre")), "%" + nombre.toLowerCase() + "%"),
                            cb.and(cb.equal(paper.get("genero"), genero),
-                                  cb.or(cb.like(cb.lower(paper.get("autor").get("nombre")), "%" + nombreAutor.toLowerCase() + "%"),
-                                   cb.like(cb.lower(paper.get("autor").get("apellido")), "%" + nombreAutor.toLowerCase() + "%")))
+                                  cb.or(autorNombre,
+                                  cb.or(autorApellido, cb.or(cb.like(cb.lower(paper.get("autor").get("nombre")), "%" + nombreAutor.toLowerCase() + "%"),
+                                   cb.like(cb.lower(paper.get("autor").get("apellido")), "%" + nombreAutor.toLowerCase() + "%")))))
                            ));
             }
             Query q = em.createQuery(cq);
