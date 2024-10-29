@@ -5,9 +5,12 @@
  */
 package Persistencia.Entidades;
 
+import Logica.Entidades.GeneroPaper;
 import Logica.Entidades.Paper;
+import Logica.Entidades.Lector;
 import Persistencia.Entidades.exceptions.NonexistentEntityException;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.List;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -17,6 +20,7 @@ import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Predicate;
 import javax.persistence.criteria.Root;
 
 /**
@@ -130,20 +134,43 @@ public class PaperJpaController implements Serializable {
         }
     }
     
-    public List<Paper> findPapersByName(String nombre) {
+    
+    public List<Paper> findPapers(String nombre, String nombreAutor, GeneroPaper genero) {
         EntityManager em = getEntityManager();
         try {
             CriteriaBuilder cb = em.getCriteriaBuilder();
             CriteriaQuery<Paper> cq = cb.createQuery(Paper.class);
             Root<Paper> paper = cq.from(Paper.class);
-            cq.select(paper).where(cb.like(cb.lower(paper.get("nombre")), "%" + nombre.toLowerCase() + "%"));
+            nombre = nombre.replace('-', ' ');
+            List<String> nombresAutor = Arrays.asList(nombreAutor.split("-"));
+            Predicate autorNombre = paper.get("autor").get("nombre").in(nombresAutor);
+            Predicate autorApellido = paper.get("autor").get("apellido").in(nombresAutor);
+            //cb.in(cb.lower(paper.get("autor").get("nombre")));
+            if(genero == GeneroPaper.NINGUNO){
+                cq.select(paper).
+                    where
+                        (cb.and
+                           (cb.like(cb.lower(paper.get("nombre")), "%" + nombre.toLowerCase() + "%"),
+                            cb.or(autorNombre,
+                                  autorApellido)
+                            ));
+            }else{
+            cq.select(paper).
+                    where
+                        (cb.and
+                           (cb.like(cb.lower(paper.get("nombre")), "%" + nombre.toLowerCase() + "%"),
+                           cb.and(cb.equal(paper.get("genero"), genero),
+                                  cb.or(cb.like(cb.lower(paper.get("autor").get("nombre")), "%" + nombreAutor.toLowerCase() + "%"),
+                                   cb.like(cb.lower(paper.get("autor").get("apellido")), "%" + nombreAutor.toLowerCase() + "%")))
+                           ));
+            }
             Query q = em.createQuery(cq);
             return q.getResultList();
         } finally {
             em.close();
         }
     }
-
+    
 
     public int getPaperCount() {
         EntityManager em = getEntityManager();

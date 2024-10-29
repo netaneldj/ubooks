@@ -23,9 +23,17 @@ public class SvBuscarPaperPorNombre extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Cookie paper = new Cookie("nombre_paper", request.getParameter("nombre_paper"));
-        paper.setMaxAge(60*60);
-        response.addCookie(paper);
+        String nombrePaper = request.getParameter("nombre_paper").replace(' ', '-');
+        Cookie paper_name = new Cookie("nombre_paper", nombrePaper);
+        String autorNombre  = request.getParameter("nombre_autor").replace(' ', '-');
+        Cookie author_name = new Cookie("nombre_autor", autorNombre);
+        Cookie paper_genre = new Cookie("genero", request.getParameter("genero"));
+        paper_name.setMaxAge(60*60);
+        author_name.setMaxAge(60*60);
+        paper_genre.setMaxAge(60*60);
+        response.addCookie(paper_name);
+        response.addCookie(author_name);
+        response.addCookie(paper_genre);
         response.sendRedirect("mostrarPapers.jsp");
     }
 
