@@ -25,6 +25,7 @@ public class Lector extends Persona implements Serializable {
     private GeneroPaper genero;
     @Column(name = "ES_AUTOR")
     private Boolean esAutor;
+    
 
     public Lector() {
     }
@@ -66,6 +67,10 @@ public class Lector extends Persona implements Serializable {
         return genero;
     }
 
+    public String getEmail() {
+        return this.usuario.getEmail();
+    } 
+    
     public void setGenero(GeneroPaper genero) {
         this.genero = genero;
     }

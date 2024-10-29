@@ -6,7 +6,6 @@
 package Persistencia.Entidades;
 
 import Logica.Entidades.Lector;
-import Logica.Entidades.Paper;
 import Persistencia.Entidades.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -17,6 +16,7 @@ import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
 import javax.persistence.criteria.Root;
 
 /**
@@ -120,6 +120,35 @@ public class LectorJpaController implements Serializable {
             em.close();
         }
     }
+    
+    public List<Lector> findLectoresByName(String nombre, String esAutor) {
+    EntityManager em = getEntityManager();
+    try {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Lector> cq = cb.createQuery(Lector.class);
+        Root<Lector> lector = cq.from(Lector.class);
+         
+        Expression<String> nombreCompleto = cb.concat(lector.get("nombre"), " ");
+        nombreCompleto = cb.concat(nombreCompleto, lector.get("apellido"));
+        
+        if( esAutor.equals("No") ){
+            cq.select(lector).where(cb.like(cb.lower(nombreCompleto), "%" + nombre.toLowerCase() + "%"));    
+        }else{
+            
+            cq.select(lector)
+            .where(cb.and(           
+                cb.like(cb.lower(nombreCompleto), "%" + nombre.toLowerCase() + "%"),
+                cb.equal(lector.get("esAutor"), 1)
+            ));
+        }
+        
+        Query q = em.createQuery(cq);
+        return q.getResultList();
+    } finally {
+        em.close();
+    }
+}
+    
 
     public Lector findLector(Integer id) {
         EntityManager em = getEntityManager();

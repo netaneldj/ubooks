@@ -1,4 +1,3 @@
-<%@page import="Logica.Entidades.Paper"%>
 <%@page import="Logica.Entidades.Lector"%>
 <%@page import="Logica.Entidades.Usuario"%>
 <%@page import="java.util.List"%>
@@ -8,7 +7,7 @@
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <title>Buscar Paper Por Nombre - Ubooks</title>
+        <title>Buscar Lector Por Nombre - Ubooks</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes"> 
 
@@ -62,19 +61,22 @@
                 </div> <!-- /container -->
             </div> <!-- /navbar-inner -->
         </div> <!-- /navbar -->
-
+        
         <div class="container-fluid cata-flex">
             <div class="row">
                 <div class="span5">
                     <div class="account-container register ">
                         <div class="content clearfix widget">
-                            <form action="SvBuscarPaperPorNombre" method="GET">
-                                <h1>Buscar Paper</h1>			
+                            <form action="SvBuscarLectorPorNombre" method="GET">
+                                <h1>Buscar Lector</h1>			
                                 <div class="login-fields">
                                     <div class="field">
-                                            <label for="nombre_paper">Nombre</label>
-                                            <input type="text" id="nombre_paper" name="nombre_paper" value="" placeholder="Nombre" class="login" required/>
+                                            <label for="nombre_lector">Nombre</label>
+                                            <input type="text" id="nombre_usuario" name="nombre_usuario" value="" placeholder="Nombre" class="login" required/>
                                     </div> <!-- /field -->
+                                    
+                                    <p>Soy autor: <input type="checkbox" id="autor" name="autor" class="login"/></p> <!-- /field -->
+                                    
                                 </div> <!-- /login-fields -->
                                 <div class="login-actions">
                                     <button class="button btn btn-primary btn-large">Buscar</button>

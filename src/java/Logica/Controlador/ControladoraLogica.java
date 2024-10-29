@@ -129,9 +129,14 @@ public class ControladoraLogica {
         return controladoraPersistencia.obtenerPaperPorID(id);
     }
     
-     public List<Paper> obtenerPapersPorNombre(String nombre) {
+    public List<Paper> obtenerPapersPorNombre(String nombre) {
         return controladoraPersistencia.obtenerPapersPorNombre(nombre);
     }
+     
+    public List<Lector> obtenerLectoresPorNombre(String nombre, String esAutor) {
+        return controladoraPersistencia.obtenerLectoresPorNombre(nombre, esAutor);
+    }
+    
     
     public List<Usuario> obtenerUsuarios() {
         return controladoraPersistencia.obtenerUsuarios();
