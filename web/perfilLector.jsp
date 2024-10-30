@@ -237,7 +237,7 @@
                                         </div>
                                         <div class="field">
                                             <label for="nacimiento">Fecha de nacimiento:</label>  
-                                            <input type="date" form="1" name="nacimiento" placeholder="<%=controladoraLogica.convertirDateAString2(lector.getNacimiento())%>" class="login" readonly/>
+                                            <input type="date" form="1" name="nacimiento" value="<%=controladoraLogica.convertirDateAString2(lector.getNacimiento())%>" class="login" readonly/>
                                         </div>
                                         <div class="field">
                                             <label for="email">Email:</label>  
