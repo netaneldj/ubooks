@@ -1,6 +1,7 @@
 <%@page import="Logica.Entidades.Paper"%>
 <%@page import="Logica.Entidades.Lector"%>
 <%@page import="Logica.Entidades.Usuario"%>
+<%@page import="Logica.Entidades.GeneroPaper"%>
 <%@page import="java.util.List"%>
 <%@page import="Logica.Controlador.ControladoraLogica"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
@@ -73,8 +74,19 @@
                                 <div class="login-fields">
                                     <div class="field">
                                             <label for="nombre_paper">Nombre</label>
-                                            <input type="text" id="nombre_paper" name="nombre_paper" value="" placeholder="Nombre" class="login" required/>
+                                            <input type="text" id="nombre_paper" name="nombre_paper" value="" placeholder="Nombre" class="login"/>
                                     </div> <!-- /field -->
+                                    <div class="field">
+                                            <label for="nombre_Autor">Autor</label>
+                                            <input type="text" id="nombre_autor" name="nombre_autor" value="" placeholder="Autor" class="login"/>
+                                    </div> <!-- /field -->
+                                    <p>Genero: <select name="genero"> </p>
+                                    <%
+                                            for (GeneroPaper genero : GeneroPaper.values()) {
+                                        %>
+                                <option><%=genero%></option>
+                                    <% }%>
+                                </select> <!-- /field --> 
                                 </div> <!-- /login-fields -->
                                 <div class="login-actions">
                                     <button class="button btn btn-primary btn-large">Buscar</button>

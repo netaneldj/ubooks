@@ -1,6 +1,7 @@
 package Logica.Entidades;
 
 public enum GeneroPaper {
+    NINGUNO,
     BIOLOGIA,
     QUIMICA,
     FISICA,
@@ -14,5 +15,5 @@ public enum GeneroPaper {
     MATEMATICA,
     FILOSOFIA,
     HISTORIA,
-    LITERATURA
+    LITERATURA,
 }
