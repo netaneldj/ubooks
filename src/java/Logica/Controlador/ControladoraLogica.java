@@ -1,5 +1,6 @@
 package Logica.Controlador;
 
+import Logica.Entidades.GeneroPaper;
 import Logica.Entidades.Lector;
 import Logica.Entidades.Paper;
 import Logica.Entidades.Usuario;
@@ -129,9 +130,19 @@ public class ControladoraLogica {
         return controladoraPersistencia.obtenerPaperPorID(id);
     }
     
-     public List<Paper> obtenerPapersPorNombre(String nombre) {
-        return controladoraPersistencia.obtenerPapersPorNombre(nombre);
+
+     public List<Paper> obtenerPapers(String nombre, String nombreAutor, GeneroPaper genero) {
+        return controladoraPersistencia.obtenerPapers(nombre, nombreAutor, genero);
+     }
+
+    public List<Lector> obtenerLectoresPorNombre(String nombre, String esAutor) {
+        return controladoraPersistencia.obtenerLectoresPorNombre(nombre, esAutor);
     }
+    
+    public Lector obtenerLectorPorIdUsuario(int idUsuario) {
+        return controladoraPersistencia.obtenerLectorPorIdUsuario(idUsuario);
+    }
+    
     
     public List<Usuario> obtenerUsuarios() {
         return controladoraPersistencia.obtenerUsuarios();

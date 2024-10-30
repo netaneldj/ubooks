@@ -2,6 +2,8 @@ package Logica.Entidades;
 
 import java.io.Serializable;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -18,16 +20,19 @@ public class Paper implements Serializable {
     @OneToOne
     private Lector autor;
     private String resumen;
+    @Enumerated(EnumType.STRING)
+    private GeneroPaper genero;
 
     public Paper() {
     }
 
-    public Paper(Integer id, String doi, String nombre, Lector autor, String resumen) {
+    public Paper(Integer id, String doi, String nombre, Lector autor, String resumen, GeneroPaper genero) {
         this.id = id;
         this.doi = doi;
         this.nombre = nombre;
         this.autor = autor;
         this.resumen = resumen;
+        this.genero = genero;
     }
 
     public Integer getId() {
@@ -41,7 +46,10 @@ public class Paper implements Serializable {
     public String getDoi() {
         return doi;
     }
-
+    
+    public GeneroPaper getGenero() {
+        return genero;
+    }
     public void setDoi(String doi) {
         this.doi = doi;
     }
@@ -54,6 +62,10 @@ public class Paper implements Serializable {
         this.nombre = nombre;
     }
 
+    public void setGenero(GeneroPaper genero){
+        this.genero = genero;
+    } 
+    
     public Lector getAutor() {
         return autor;
     }

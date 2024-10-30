@@ -1,3 +1,4 @@
+<%@page import="Logica.Entidades.GeneroPaper"%>
 <%@page import="Logica.Entidades.Usuario"%>
 <%@page import="Logica.Entidades.Lector"%>
 <%@page import="java.util.List"%>
@@ -109,7 +110,13 @@
                                 <option value=<%=autor.getId()%>><%=autor.getNombre()+" "+autor.getApellido()%></option>
                                 <% }%>
                                 </select> <!-- /field -->    
-                                
+                               <p>Genero: <select name="genero"> </p>
+                                <%
+                                            for (GeneroPaper genero : GeneroPaper.values()) {
+                                        %>
+                                <option><%=genero%></option>
+                                <% }%>
+                                </select> <!-- /field -->
 				<div class="field">
 					<label for="resumen">Resumen:</label>
 					<input type="text" id="resumen" name="resumen" value="" placeholder="Resumen" class="login" required/>

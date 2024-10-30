@@ -7,7 +7,7 @@
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <title>Listar Lectores - Ubooks</title>
+        <title>Lectores Buscados - Ubooks</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes"> 
 
@@ -77,31 +77,33 @@
                                 <tr>
                                     <th><center>ID</center></th>
                                     <th><center>Nombre</center></th>
-                                    <th><center>Apellido</center></th>
-                                    <th><center>Fecha de nacimiento</center></th>
+                                    <th><center>Autor</center></th>
                                     <th><center>Email</center></th>
-                                    <th><center>Idioma</center></th>
-                                    <th><center>Genero</center></th>
-                                    <th><center>Es autor</center></th>
-                                    <th><center>Nombre de usuario</center></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <%
                                             ControladoraLogica controladoraLogica = new ControladoraLogica();
-                                            List<Lector> lectores = controladoraLogica.obtenerLectores();
+                                            String nombre_usuario = "";
+                                            String esAutor = "";
+
+                                            for(Cookie cookie : cookies){
+                                                    if(cookie.getName().equals("nombre_usuario") ){ 
+                                                        nombre_usuario = cookie.getValue();
+                                                    }
+                                                    if(cookie.getName().equals("es_autor")){
+                                                        esAutor = cookie.getValue();
+                                                    }
+                                                }
+
+                                            List<Lector> lectores = controladoraLogica.obtenerLectoresPorNombre(nombre_usuario, esAutor);
                                             for (Lector lector : lectores) {
                                         %>
-                                        <td><center><%=lector.getId()%></center></td>
+                                <td><center><%=lector.getId()%></center></td>
                                 <td><center><%=lector.getNombre()%></center></td>
-                                <td><center><%=lector.getApellido()%></center></td>
-                                <td><center><%=controladoraLogica.convertirDateAString(lector.getNacimiento())%></center></td>
-                                <td><center><%=lector.getUsuario().getEmail()%></center></td>
-                                <td><center><%=lector.getIdioma()%></center></td>                            
-                                <td><center><%=lector.getGenero()%></center></td>
-                                <td><center><%= (lector.getEsAutor() ? "Si" : "No") %></center></td>
-                                <td><center><%=lector.getUsuario().getNombreUsuario()%></center></td>
+                                <td><center><%=lector.getEsAutor()%></center></td>
+                                <td><center><%=lector.getEmail()%></center></td>
                                 </tr>
                                 <% }%>
                                 </tbody>

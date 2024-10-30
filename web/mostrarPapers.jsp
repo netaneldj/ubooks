@@ -1,3 +1,4 @@
+<%@page import="Logica.Entidades.GeneroPaper"%>
 <%@page import="Logica.Entidades.Paper"%>
 <%@page import="Logica.Entidades.Lector"%>
 <%@page import="Logica.Entidades.Usuario"%>
@@ -79,6 +80,7 @@
                                     <th><center>ID</center></th>
                                     <th><center>Doi</center></th>
                                     <th><center>Nombre</center></th>
+                                    <th><center>Genero</center></th>
                                     <th><center>Autor</center></th>
                                     <th><center>Resumen</center></th>
                                 </tr>
@@ -88,19 +90,27 @@
                                         <%
                                             ControladoraLogica controladoraLogica = new ControladoraLogica();
                                             String nombre_paper = "";
+                                            String nombre_autor = "";
+                                            GeneroPaper genero = GeneroPaper.BIOLOGIA;
                                             for(Cookie cookie : cookies){
                                                     if(cookie.getName().equals("nombre_paper")) { 
                                                         nombre_paper = cookie.getValue();
-                                                        break;
+                                                    }
+                                                    if(cookie.getName().equals("nombre_autor")){
+                                                        nombre_autor = cookie.getValue();
+                                                    }
+                                                    if(cookie.getName().equals("genero")){
+                                                        genero = GeneroPaper.valueOf(cookie.getValue());
                                                     }
                                                 }
-                                            List<Paper> papers = controladoraLogica.obtenerPapersPorNombre(nombre_paper);
+                                            List<Paper> papers = controladoraLogica.obtenerPapers(nombre_paper, nombre_autor, genero);
                                             for (Paper paper : papers) {
                                         %>
                                 <td><center><%=paper.getId()%></center></td>
                                 <td><center><%=paper.getDoi()%></center></td>                            
                                 <td><center><%=paper.getNombre()%></center></td>
-                                <td><center><%=paper.getAutor()%></center></td>
+                                <td><center><%=paper.getGenero()%></center></td>
+                                <td><center><%=paper.getAutor().getNombre()+" "+paper.getAutor().getApellido()%></center></td>
                                 <td><center><%=paper.getResumen()%></center></td>
                                 </tr>
                                 <% }%>

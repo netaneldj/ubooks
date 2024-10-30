@@ -79,6 +79,7 @@
                                     <th><center>ID</center></th>
                                     <th><center>Doi</center></th>
                                     <th><center>Nombre</center></th>
+                                    <th><center>Genero</center></th>
                                     <th><center>Autor</center></th>
                                     <th><center>Resumen</center></th>
                                 </tr>
@@ -93,6 +94,7 @@
                                 <td><center><%=paper.getId()%></center></td>
                                 <td><center><%=paper.getDoi()%></center></td>                            
                                 <td><center><%=paper.getNombre()%></center></td>
+                                <td><center><%=paper.getGenero()%></center></td>
                                 <td><center><%=paper.getAutor().getNombre()+" "+paper.getAutor().getApellido()%></center></td>
                                 <td><center><%=paper.getResumen()%></center></td>
                                 </tr>

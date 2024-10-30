@@ -1,5 +1,6 @@
 package Persistencia.Controlador;
 
+import Logica.Entidades.GeneroPaper;
 import Logica.Entidades.Lector;
 import Logica.Entidades.Paper;
 import Logica.Entidades.Usuario;
@@ -80,11 +81,15 @@ public class ControladoraPersistencia {
         return lectorJpaController.findLector(idLector);
     }
     
+      public Lector obtenerLectorPorIdUsuario(int idUsuario) {
+        return lectorJpaController.findLectorByIdUsuario(idUsuario);
+    }
+    
     public int obtenerCantidadLectores() {
         return lectorJpaController.getLectorCount();
     }
     
-     public List<Paper> obtenerPapers() {
+    public List<Paper> obtenerPapers() {
         return paperJpaController.findPaperEntities();
     }
     
@@ -92,8 +97,12 @@ public class ControladoraPersistencia {
         return paperJpaController.findPaper(idPaper);
     }
     
-    public List<Paper> obtenerPapersPorNombre(String nombrePaper) {
-        return paperJpaController.findPapersByName(nombrePaper);
+    public List<Paper> obtenerPapers(String nombrePaper, String nombreAutor, GeneroPaper genero) {
+        return paperJpaController.findPapers(nombrePaper, nombreAutor, genero);
+    }
+    
+    public List<Lector> obtenerLectoresPorNombre(String nombreLector, String esAutor) {
+        return lectorJpaController.findLectoresByName(nombreLector, esAutor);
     }
     
     public int obtenerCantidadPapers() {

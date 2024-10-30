@@ -1,6 +1,7 @@
 package Servlets;
 
 import Logica.Controlador.ControladoraLogica;
+import Logica.Entidades.GeneroPaper;
 import Logica.Entidades.Lector;
 import Logica.Entidades.Paper;
 import java.io.IOException;
@@ -29,6 +30,7 @@ public class SvAgregarPaper extends HttpServlet {
             String doi = request.getParameter("doi");
             String nombre = request.getParameter("nombre");
             String resumen = request.getParameter("resumen");
+            GeneroPaper genero = GeneroPaper.valueOf(request.getParameter("genero"));
             
             Integer idLector = Integer.parseInt(request.getParameter("id_lector"));
             Lector lector = controladoraLogica.obtenerLectorPorID(idLector);
@@ -37,6 +39,7 @@ public class SvAgregarPaper extends HttpServlet {
             paper.setNombre(nombre);
             paper.setAutor(lector);
             paper.setResumen(resumen);
+            paper.setGenero(genero);
 
             boolean exito = controladoraLogica.crearPaper(paper);
 

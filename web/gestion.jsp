@@ -52,6 +52,7 @@
                                     <%=nombreUsuario%>
                                     <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
+                                    <li><a href="perfilLector.jsp" >Perfil</a></li>
                                     <li><a href="index.jsp" >Cerrar sesion</a></li>
                                 </ul>
                             </li>
@@ -133,6 +134,9 @@
                                                     <a href="listarLectores.jsp" class="btn">Listar</a>				
                                                 </div> <!-- /plan-actions -->
                                                 <div class="plan-actions">				
+                                                    <a href="buscarLectorPorNombre.jsp" class="btn">Buscar Por Nombre</a>				
+                                                </div> <!-- /plan-actions -->
+                                                <div class="plan-actions">				
                                                     <a href="modificarLector.jsp" class="btn">Modificar</a>				
                                                 </div> <!-- /plan-actions -->
                                                 <div class="plan-actions">				
@@ -159,7 +163,7 @@
                                                     <ul>
                                                         <li><strong>Sección</strong> dedicada a la gestión de los papers.</li>
                                                         <li>Aqui puedes</li>
-                                                        <li>Crear, listar, modificar y borrar</li>
+                                                        <li>Crear, listar, buscar ,modificar y borrar</li>
                                                         <li>papers.</li>
                                                     </ul>
                                                 </div> <!-- /plan-features -->
@@ -168,7 +172,7 @@
                                                     <a href="registrarPaper.jsp" class="btn">Registrar</a>				
                                                 </div> <!-- /plan-actions -->
                                                 <div class="plan-actions">				
-                                                    <a href="buscarPaperPorNombre.jsp" class="btn">Buscar por nombre</a>				
+                                                    <a href="buscarPaper.jsp" class="btn">Buscar</a>				
                                                 </div> <!-- /plan-actions -->                                                
                                                 <div class="plan-actions">				
                                                     <a href="listarPapers.jsp" class="btn">Listar</a>				
