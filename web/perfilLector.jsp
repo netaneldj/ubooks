@@ -1,3 +1,4 @@
+<%@page import="Logica.Entidades.Paper"%>
 <%@page import="Logica.Entidades.GeneroPaper"%>
 <%@page import="Logica.Entidades.IdiomaPaper"%>
 <%@page import="Logica.Entidades.Usuario"%>
@@ -92,101 +93,184 @@
             <div class="main-inner">
                 <div class="container">
                     <div class="row">
+                        <!-- Columna de Lectores -->
                         <div class="span6">
-                            <!-- /widget -->
                             <div class="widget">
-                                <div class="widget-header"> <i class="icon-user"></i>
-                                    <h3> Lectores</h3>
+                                <div class="widget-header">
+                                    <i class="icon-book"></i>
+                                    <h3> Mis Lectores</h3>
                                 </div>
-                                <!-- /widget-header -->
                                 <div class="widget-content">
                                     <ul class="messages_layout">
                                         <%      
-                                                    List<Lector> lectores = controladoraLogica.obtenerLectores();
-                                                            for (Lector lector : lectores) {
-                                                %>
-                                                <li class="from_user leftLector" <a href="listarLectores.jsp" class="avatar"><img src="resources/img/mensaje_lector.png"/></a>
-                                                <div class="message_wrap"> <span class="arrow"></span>
-                                                    <div class="info"> <a class="name"><%=lector.getNombre()+" "+lector.getApellido()%></a>
+                                            List<Lector> lectores = controladoraLogica.obtenerLectores();
+                                            for (Lector lector : lectores) {
+                                        %>
+                                            <li class="from_user leftLector">
+                                                <a href="listarLectores.jsp" class="avatar">
+                                                    <img src="resources/img/mensaje_lector.png"/>
+                                                </a>
+                                                <div class="message_wrap"> 
+                                                    <span class="arrow"></span>
+                                                    <div class="info"> 
+                                                        <a class="name"><%=lector.getNombre() + " " + lector.getApellido()%></a>
                                                         <div class="options_arrow">
-                                                            <div class="dropdown pull-right"> <a class="dropdown-toggle " id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#"> <i class=" icon-caret-down"></i> </a>
-                                                                <ul class="dropdown-menu " role="menu" aria-labelledby="dLabel">
-                                                                    <li><a href="registrarLector.jsp"><i class=" icon-plus-sign icon-large"></i> Registrar</a></li>
-                                                                    <li><a href="modificarLector.jsp"><i class=" icon-edit icon-large"></i> Modificar</a></li>
-                                                                    <li><a href="eliminarLector.jsp"><i class=" icon-trash icon-large"></i> Borrar</a></li>
+                                                            <div class="dropdown pull-right"> 
+                                                                <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                                    <i class="icon-caret-down"></i> 
+                                                                </a>
+                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                                    <li><a href="registrarLector.jsp"><i class="icon-plus-sign icon-large"></i> Registrar</a></li>
+                                                                    <li><a href="modificarLector.jsp"><i class="icon-edit icon-large"></i> Modificar</a></li>
+                                                                    <li><a href="eliminarLector.jsp"><i class="icon-trash icon-large"></i> Borrar</a></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
                                                     </div>
-                                                         <div class="text"><%=lector.getUsuario().getEmail()%></div>
+                                                    <div class="text"><%=lector.getUsuario().getEmail()%></div>
                                                 </div>
-                                                </li>
-                                        <% }%>
+                                            </li>
+                                        <% } %>
                                     </ul>
                                 </div>
-                                <!-- /widget-content --> 
                             </div>
-                            <!-- /widget --> 
-                        </div>
-                        <!-- /span6 -->
+                        </div>           
                         <div class="span6">
                             <div class="widget">
-                                <div class="account-container register ">
-                                    <div class="content clearfix">
-                                        <form>
-                                            <h1>Perfil Lector</h1>			
-                                            <div class="login-fields">
-                                                 <%
-                                                    Lector lector = controladoraLogica.obtenerLectorPorIdUsuario(Integer.parseInt(id_usuario));
-                                                 %>
-                                                <div class="field">
-                                                    <label for="nombre">Nombre:</label>
-                                                    <input type="text" id="nombre" name="nombre" value="<%=lector.getNombre()%>" class="login" readonly/>
-                                                </div> <!-- /field -->
-
-                                                <div class="field">
-                                                    <label for="apellido">Apellido:</label>	
-                                                    <input type="text" id="apellido" name="apellido" value="<%=lector.getApellido()%>" class="login" readonly/>
-                                                </div> <!-- /field -->
-
-                                               <div class="field">
-                                                    <label for="nacimiento">Fecha de nacimiento:</label>	
-                                                    <input type="date" form="1" name="nacimiento" value="" placeholder="<%=controladoraLogica.convertirDateAString2(lector.getNacimiento())%>" class="login" readonly/>
-                                                </div> <!-- /field -->
-
-                                                <div class="field">
-                                                    <label for="email">Email:</label>	
-                                                    <input type="email" id="email" name="email" value="<%=lector.getUsuario().getEmail()%>" class="login" readonly/>
-                                                </div> <!-- /field -->
-
-                                                <p>Idioma preferencia: <select name="idioma" readonly> </p>
-                                                    <option selected readonly><%=lector.getIdioma()%></option>
-                                                </select> <!-- /field -->
-
-                                                <p>Genero preferencia: <select name="genero" readonly> </p>
-                                                <option selected readonly><%=lector.getGenero()%></option>
-                                                </select> <!-- /field -->   
-
-                                                <p>Soy autor: <input type="checkbox" id="autor" name="autor" value=<%=lector.getEsAutor()%> class="login" readonly/></p> <!-- /field -->                                                                          
-
-                                                <div class="field">
-                                                    <label for="nombreUsuario">Nombre de usuario:</label>	
-                                                    <input type="text" id="nombreUsuario" name="nombreUsuario" value="<%=lector.getUsuario().getNombreUsuario()%>" class="login" readonly/>
-                                                </div> <!-- /field -->
-                                            </div> <!-- /login-fields -->
-                                        </form>
-                                    </div> <!-- /content -->
-                                </div> <!-- /account-container -->   
+                                <div class="widget-header">
+                                    <i class="icon-pencil"></i>
+                                    <h3> Mis Autores</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <ul class="messages_layout">
+                                        <%      
+                                            List<Lector> autores = controladoraLogica.obtenerAutores();
+                                            for (Lector autor : autores) {
+                                        %>
+                                            <li class="from_user leftLector">
+                                                <a href="listarLectores.jsp" class="avatar">
+                                                    <img src="resources/img/mensaje_lector.png"/>
+                                                </a>
+                                                <div class="message_wrap"> 
+                                                    <span class="arrow"></span>
+                                                    <div class="info"> 
+                                                        <a class="name"><%=autor.getNombre() + " " + autor.getApellido()%></a>
+                                                        <div class="options_arrow">
+                                                            <div class="dropdown pull-right"> 
+                                                                <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                                    <i class="icon-caret-down"></i> 
+                                                                </a>
+                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                                    <li><a href="registrarLector.jsp"><i class="icon-plus-sign icon-large"></i> Registrar</a></li>
+                                                                    <li><a href="modificarLector.jsp"><i class="icon-edit icon-large"></i> Modificar</a></li>
+                                                                    <li><a href="eliminarLector.jsp"><i class="icon-trash icon-large"></i> Borrar</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text"><%=autor.getUsuario().getEmail()%></div>
+                                                </div>
+                                            </li>
+                                        <% } %>
+                                    </ul>
+                                </div>
                             </div>
-                            <!-- /widget -->
+                        </div>   
+                        <div class="span6">
+                            <div class="widget">
+                                <div class="widget-header">
+                                    <i class="icon-bookmark"></i>
+                                    <h3> Mis Papers</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <ul class="messages_layout">
+                                        <%      
+                                            List<Paper> papers = controladoraLogica.obtenerPapers();
+                                            for (Paper paper : papers) {
+                                        %>
+                                            <li class="from_user leftLector">
+                                                <a href="listarPapers.jsp" class="avatar">
+                                                    <img src="resources/img/mensaje_libro.png"/>
+                                                </a>
+                                                <div class="message_wrap"> 
+                                                    <span class="arrow"></span>
+                                                    <div class="info"> 
+                                                        <a class="name"><%=paper.getNombre()%></a>
+                                                        <div class="options_arrow">
+                                                            <div class="dropdown pull-right"> 
+                                                                <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                                    <i class="icon-caret-down"></i> 
+                                                                </a>
+                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                                    <li><a href="registrarPaper.jsp"><i class="icon-plus-sign icon-large"></i> Registrar</a></li>
+                                                                    <li><a href="modificarPaper.jsp"><i class="icon-edit icon-large"></i> Modificar</a></li>
+                                                                    <li><a href="eliminarPaper.jsp"><i class="icon-trash icon-large"></i> Borrar</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text"><%=paper.getAutor().getNombre()+ " " + paper.getAutor().getApellido()%></div>
+                                                </div>
+                                            </li>
+                                        <% } %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>                                       
+
+                        <div class="span6">
+                            <div class="widget" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
+                                <div class="widget-header">
+                                    <i class="icon-user"></i>
+                                    <h3> Perfil Lector</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <form>
+                                        <% Lector lector = controladoraLogica.obtenerLectorPorIdUsuario(Integer.parseInt(id_usuario)); %>
+                                        <div class="field">
+                                            <label for="nombre">Nombre:</label>
+                                            <input type="text" id="nombre" name="nombre" value="<%=lector.getNombre()%>" class="login" readonly/>
+                                        </div>
+                                        <div class="field">
+                                            <label for="apellido">Apellido:</label>  
+                                            <input type="text" id="apellido" name="apellido" value="<%=lector.getApellido()%>" class="login" readonly/>
+                                        </div>
+                                        <div class="field">
+                                            <label for="nacimiento">Fecha de nacimiento:</label>  
+                                            <input type="date" form="1" name="nacimiento" placeholder="<%=controladoraLogica.convertirDateAString2(lector.getNacimiento())%>" class="login" readonly/>
+                                        </div>
+                                        <div class="field">
+                                            <label for="email">Email:</label>  
+                                            <input type="email" id="email" name="email" value="<%=lector.getUsuario().getEmail()%>" class="login" readonly/>
+                                        </div>
+                                        <div class="field">
+                                            <label for="idioma">Idioma preferencia:</label>
+                                            <select name="idioma" readonly>
+                                                <option selected><%=lector.getIdioma()%></option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            <label for="genero">Género preferencia:</label>
+                                            <select name="genero" readonly>
+                                                <option selected><%=lector.getGenero()%></option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            <label for="autor">Soy autor:</label>
+                                            <input type="checkbox" id="autor" name="autor" <%=lector.getEsAutor() ? "checked" : ""%> readonly/>
+                                        </div>
+                                        <div class="field">
+                                            <label for="nombreUsuario">Nombre de usuario:</label>
+                                            <input type="text" id="nombreUsuario" name="nombreUsuario" value="<%=lector.getUsuario().getNombreUsuario()%>" class="login" readonly/>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
                         </div>
-                        <!-- /span6 --> 
+
                     </div>
-                    <!-- /row --> 
                 </div>
-                <!-- /container --> 
             </div>
-            <!-- /main-inner --> 
         </div>
         <!-- /main -->
 
