@@ -133,6 +133,7 @@ public class ControladoraLogica {
 
      public List<Paper> obtenerPapers(String nombre, String nombreAutor, GeneroPaper genero) {
         return controladoraPersistencia.obtenerPapers(nombre, nombreAutor, genero);
+     }
 
     public List<Lector> obtenerLectoresPorNombre(String nombre, String esAutor) {
         return controladoraPersistencia.obtenerLectoresPorNombre(nombre, esAutor);
