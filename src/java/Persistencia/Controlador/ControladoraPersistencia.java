@@ -85,7 +85,7 @@ public class ControladoraPersistencia {
         return lectorJpaController.getLectorCount();
     }
     
-     public List<Paper> obtenerPapers() {
+    public List<Paper> obtenerPapers() {
         return paperJpaController.findPaperEntities();
     }
     
@@ -95,6 +95,10 @@ public class ControladoraPersistencia {
     
     public List<Paper> obtenerPapers(String nombrePaper, String nombreAutor, GeneroPaper genero) {
         return paperJpaController.findPapers(nombrePaper, nombreAutor, genero);
+    }
+    
+    public List<Lector> obtenerLectoresPorNombre(String nombreLector, String esAutor) {
+        return lectorJpaController.findLectoresByName(nombreLector, esAutor);
     }
     
     public int obtenerCantidadPapers() {

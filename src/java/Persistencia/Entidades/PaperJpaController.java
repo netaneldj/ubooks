@@ -172,7 +172,7 @@ public class PaperJpaController implements Serializable {
             em.close();
         }
     }
-    
+
 
     public int getPaperCount() {
         EntityManager em = getEntityManager();

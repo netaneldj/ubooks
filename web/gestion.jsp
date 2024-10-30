@@ -133,6 +133,9 @@
                                                     <a href="listarLectores.jsp" class="btn">Listar</a>				
                                                 </div> <!-- /plan-actions -->
                                                 <div class="plan-actions">				
+                                                    <a href="buscarLectorPorNombre.jsp" class="btn">Buscar Por Nombre</a>				
+                                                </div> <!-- /plan-actions -->
+                                                <div class="plan-actions">				
                                                     <a href="modificarLector.jsp" class="btn">Modificar</a>				
                                                 </div> <!-- /plan-actions -->
                                                 <div class="plan-actions">				
@@ -159,7 +162,7 @@
                                                     <ul>
                                                         <li><strong>Sección</strong> dedicada a la gestión de los papers.</li>
                                                         <li>Aqui puedes</li>
-                                                        <li>Crear, listar, modificar y borrar</li>
+                                                        <li>Crear, listar, buscar ,modificar y borrar</li>
                                                         <li>papers.</li>
                                                     </ul>
                                                 </div> <!-- /plan-features -->

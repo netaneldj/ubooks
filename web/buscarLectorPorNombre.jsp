@@ -7,7 +7,7 @@
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <title>Listar Lectores - Ubooks</title>
+        <title>Buscar Lector Por Nombre - Ubooks</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes"> 
 
@@ -21,7 +21,6 @@
         <link href="resources/css/pages/signin.css" rel="stylesheet" type="text/css">
         <link href="resources/css/pages/dashboard.css" rel="stylesheet">
     </head>
-
     <body>
         <%
             String id_usuario = "0";
@@ -62,55 +61,35 @@
                 </div> <!-- /container -->
             </div> <!-- /navbar-inner -->
         </div> <!-- /navbar -->
-
-
+        
         <div class="container-fluid cata-flex">
-            <div class="row ">
-               <div class="span9">
-                    <div class="widget widget-table action-table">
-                        <div class="widget-header"> <i class="icon-th-list"></i>
-                            <h3>Lista Lectores</h3>
-                        </div>
-                        <div class="widget-content">
-                            <table class="table table-striped table-bordered">
-                                <thead>
-                                <tr>
-                                    <th><center>ID</center></th>
-                                    <th><center>Nombre</center></th>
-                                    <th><center>Apellido</center></th>
-                                    <th><center>Fecha de nacimiento</center></th>
-                                    <th><center>Email</center></th>
-                                    <th><center>Idioma</center></th>
-                                    <th><center>Genero</center></th>
-                                    <th><center>Es autor</center></th>
-                                    <th><center>Nombre de usuario</center></th>
-                                </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <%
-                                            ControladoraLogica controladoraLogica = new ControladoraLogica();
-                                            List<Lector> lectores = controladoraLogica.obtenerLectores();
-                                            for (Lector lector : lectores) {
-                                        %>
-                                        <td><center><%=lector.getId()%></center></td>
-                                <td><center><%=lector.getNombre()%></center></td>
-                                <td><center><%=lector.getApellido()%></center></td>
-                                <td><center><%=controladoraLogica.convertirDateAString(lector.getNacimiento())%></center></td>
-                                <td><center><%=lector.getUsuario().getEmail()%></center></td>
-                                <td><center><%=lector.getIdioma()%></center></td>                            
-                                <td><center><%=lector.getGenero()%></center></td>
-                                <td><center><%= (lector.getEsAutor() ? "Si" : "No") %></center></td>
-                                <td><center><%=lector.getUsuario().getNombreUsuario()%></center></td>
-                                </tr>
-                                <% }%>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div> 
-                </div> 
+            <div class="row">
+                <div class="span5">
+                    <div class="account-container register ">
+                        <div class="content clearfix widget">
+                            <form action="SvBuscarLectorPorNombre" method="GET">
+                                <h1>Buscar Lector</h1>			
+                                <div class="login-fields">
+                                    <div class="field">
+                                            <label for="nombre_lector">Nombre</label>
+                                            <input type="text" id="nombre_usuario" name="nombre_usuario" value="" placeholder="Nombre" class="login" required/>
+                                    </div> <!-- /field -->
+                                    
+                                    <p>Soy autor: <input type="checkbox" id="autor" name="autor" class="login"/></p> <!-- /field -->
+                                    
+                                </div> <!-- /login-fields -->
+                                <div class="login-actions">
+                                    <button class="button btn btn-primary btn-large">Buscar</button>
+                                </div> <!-- .actions -->
+                            </form>
+                        </div> <!-- /content -->
+                    </div> <!-- /account-container -->
+
+                </div>
             </div>
         </div>
+
+
 
         <!-- Text Under Box -->
 
