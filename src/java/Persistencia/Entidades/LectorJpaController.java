@@ -159,6 +159,20 @@ public class LectorJpaController implements Serializable {
         }
     }
     
+    public Lector findLectorByIdUsuario(Integer idUsuario) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Lector> cq = cb.createQuery(Lector.class);
+            Root<Lector> lector = cq.from(Lector.class);
+            cq.select(lector).where(cb.equal(lector.get("usuario").get("id"), idUsuario));
+            Query q = em.createQuery(cq);
+            return (Lector) q.getSingleResult();
+        } finally {
+            em.close();
+        }
+    }
+    
     public List<Lector> findAutorEntities() {
         EntityManager em = getEntityManager();
         try {

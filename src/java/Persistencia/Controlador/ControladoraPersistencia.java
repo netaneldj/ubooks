@@ -81,6 +81,10 @@ public class ControladoraPersistencia {
         return lectorJpaController.findLector(idLector);
     }
     
+      public Lector obtenerLectorPorIdUsuario(int idUsuario) {
+        return lectorJpaController.findLectorByIdUsuario(idUsuario);
+    }
+    
     public int obtenerCantidadLectores() {
         return lectorJpaController.getLectorCount();
     }

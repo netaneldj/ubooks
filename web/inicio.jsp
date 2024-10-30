@@ -49,8 +49,9 @@
                                     <%=nombreUsuario%>
                                     <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
+                                    <li><a href="perfilLector.jsp" >Perfil</a></li>
                                     <li><a href="index.jsp" >Cerrar sesion</a></li>
-                                </ul>
+                                </ul>                                    
                             </li>
                         </ul>
                     </div>
@@ -101,7 +102,7 @@
                                                     List<Lector> lectores = controladoraLogica.obtenerLectores();
                                                             for (Lector lector : lectores) {
                                                 %>
-                                                <li class="from_user leftLector" <a href="listarHuespedes.jsp" class="avatar"><img src="resources/img/mensaje_lector.png"/></a>
+                                                <li class="from_user leftLector" <a href="listarLectores.jsp" class="avatar"><img src="resources/img/mensaje_lector.png"/></a>
                                                 <div class="message_wrap"> <span class="arrow"></span>
                                                     <div class="info"> <a class="name"><%=lector.getNombre()+" "+lector.getApellido()%></a>
                                                         <div class="options_arrow">
