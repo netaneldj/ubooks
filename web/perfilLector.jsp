@@ -1,3 +1,6 @@
+<%@page import="Logica.Entidades.GeneroPaper"%>
+<%@page import="Logica.Entidades.IdiomaPaper"%>
+<%@page import="Logica.Entidades.Usuario"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="Logica.Entidades.Lector"%>
 <%@page import="java.util.List"%>
@@ -9,7 +12,7 @@
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <title>Inicio - Ubooks</title>
+        <title>Perfil - Ubooks</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -51,7 +54,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="perfilLector.jsp" >Perfil</a></li>
                                     <li><a href="index.jsp" >Cerrar sesion</a></li>
-                                </ul>                                    
+                                </ul>
                             </li>
                         </ul>
                     </div>
@@ -128,17 +131,52 @@
                         <!-- /span6 -->
                         <div class="span6">
                             <div class="widget">
-                                <div class="widget-header"> <i class="icon-bookmark"></i>
-                                    <h3> Accesos rapidos</h3>
-                                </div>
-                                <!-- /widget-header -->
-                                <div class="widget-content">
-                                    <div class="shortcuts"> 
-                                        <a href="gestion.jsp" class="shortcut"><i class="shortcut-icon icon-list-alt"></i><span class="shortcut-label">Gestión</span> </a>
-                                        <!-- /shortcuts --> 
-                                    </div>
-                                    <!-- /widget-content --> 
-                                </div>
+                                <div class="account-container register ">
+                                    <div class="content clearfix">
+                                        <form>
+                                            <h1>Perfil Lector</h1>			
+                                            <div class="login-fields">
+                                                 <%
+                                                    Lector lector = controladoraLogica.obtenerLectorPorIdUsuario(Integer.parseInt(id_usuario));
+                                                 %>
+                                                <div class="field">
+                                                    <label for="nombre">Nombre:</label>
+                                                    <input type="text" id="nombre" name="nombre" value="<%=lector.getNombre()%>" class="login" readonly/>
+                                                </div> <!-- /field -->
+
+                                                <div class="field">
+                                                    <label for="apellido">Apellido:</label>	
+                                                    <input type="text" id="apellido" name="apellido" value="<%=lector.getApellido()%>" class="login" readonly/>
+                                                </div> <!-- /field -->
+
+                                               <div class="field">
+                                                    <label for="nacimiento">Fecha de nacimiento:</label>	
+                                                    <input type="date" form="1" name="nacimiento" value="" placeholder="<%=controladoraLogica.convertirDateAString2(lector.getNacimiento())%>" class="login" readonly/>
+                                                </div> <!-- /field -->
+
+                                                <div class="field">
+                                                    <label for="email">Email:</label>	
+                                                    <input type="email" id="email" name="email" value="<%=lector.getUsuario().getEmail()%>" class="login" readonly/>
+                                                </div> <!-- /field -->
+
+                                                <p>Idioma preferencia: <select name="idioma" readonly> </p>
+                                                    <option selected readonly><%=lector.getIdioma()%></option>
+                                                </select> <!-- /field -->
+
+                                                <p>Genero preferencia: <select name="genero" readonly> </p>
+                                                <option selected readonly><%=lector.getGenero()%></option>
+                                                </select> <!-- /field -->   
+
+                                                <p>Soy autor: <input type="checkbox" id="autor" name="autor" value=<%=lector.getEsAutor()%> class="login" readonly/></p> <!-- /field -->                                                                          
+
+                                                <div class="field">
+                                                    <label for="nombreUsuario">Nombre de usuario:</label>	
+                                                    <input type="text" id="nombreUsuario" name="nombreUsuario" value="<%=lector.getUsuario().getNombreUsuario()%>" class="login" readonly/>
+                                                </div> <!-- /field -->
+                                            </div> <!-- /login-fields -->
+                                        </form>
+                                    </div> <!-- /content -->
+                                </div> <!-- /account-container -->   
                             </div>
                             <!-- /widget -->
                         </div>

@@ -52,6 +52,7 @@
                                     <%=nombreUsuario%>
                                     <b class="caret"></b></a>
                                 <ul class="dropdown-menu">
+                                    <li><a href="perfilLector.jsp" >Perfil</a></li>
                                     <li><a href="index.jsp" >Cerrar sesion</a></li>
                                 </ul>
                             </li>
