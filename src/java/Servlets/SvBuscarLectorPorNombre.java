@@ -31,7 +31,7 @@ public class SvBuscarLectorPorNombre extends HttpServlet {
         response.addCookie(usuario);
         response.addCookie(esAutor);
 
-        response.sendRedirect("mostrarLectores.jsp");
+        response.sendRedirect("seleccionarLector.jsp");
     }
 
     @Override
