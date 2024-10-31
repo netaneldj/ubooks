@@ -93,131 +93,6 @@
             <div class="main-inner">
                 <div class="container">
                     <div class="row">
-                        <!-- Columna de Lectores -->
-                        <div class="span6">
-                            <div class="widget">
-                                <div class="widget-header">
-                                    <i class="icon-book"></i>
-                                    <h3> Mis Lectores</h3>
-                                </div>
-                                <div class="widget-content">
-                                    <ul class="messages_layout">
-                                        <%      
-                                            List<Lector> lectores = controladoraLogica.obtenerLectores();
-                                            for (Lector lector : lectores) {
-                                        %>
-                                            <li class="from_user leftLector">
-                                                <a href="listarLectores.jsp" class="avatar">
-                                                    <img src="resources/img/mensaje_lector.png"/>
-                                                </a>
-                                                <div class="message_wrap"> 
-                                                    <span class="arrow"></span>
-                                                    <div class="info"> 
-                                                        <a class="name"><%=lector.getNombre() + " " + lector.getApellido()%></a>
-                                                        <div class="options_arrow">
-                                                            <div class="dropdown pull-right"> 
-                                                                <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">
-                                                                    <i class="icon-caret-down"></i> 
-                                                                </a>
-                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                                                    <li><a href="registrarLector.jsp"><i class="icon-plus-sign icon-large"></i> Registrar</a></li>
-                                                                    <li><a href="modificarLector.jsp"><i class="icon-edit icon-large"></i> Modificar</a></li>
-                                                                    <li><a href="eliminarLector.jsp"><i class="icon-trash icon-large"></i> Borrar</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="text"><%=lector.getUsuario().getEmail()%></div>
-                                                </div>
-                                            </li>
-                                        <% } %>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>           
-                        <div class="span6">
-                            <div class="widget">
-                                <div class="widget-header">
-                                    <i class="icon-pencil"></i>
-                                    <h3> Mis Autores</h3>
-                                </div>
-                                <div class="widget-content">
-                                    <ul class="messages_layout">
-                                        <%      
-                                            List<Lector> autores = controladoraLogica.obtenerAutores();
-                                            for (Lector autor : autores) {
-                                        %>
-                                            <li class="from_user leftLector">
-                                                <a href="listarLectores.jsp" class="avatar">
-                                                    <img src="resources/img/mensaje_lector.png"/>
-                                                </a>
-                                                <div class="message_wrap"> 
-                                                    <span class="arrow"></span>
-                                                    <div class="info"> 
-                                                        <a class="name"><%=autor.getNombre() + " " + autor.getApellido()%></a>
-                                                        <div class="options_arrow">
-                                                            <div class="dropdown pull-right"> 
-                                                                <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">
-                                                                    <i class="icon-caret-down"></i> 
-                                                                </a>
-                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                                                    <li><a href="registrarLector.jsp"><i class="icon-plus-sign icon-large"></i> Registrar</a></li>
-                                                                    <li><a href="modificarLector.jsp"><i class="icon-edit icon-large"></i> Modificar</a></li>
-                                                                    <li><a href="eliminarLector.jsp"><i class="icon-trash icon-large"></i> Borrar</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="text"><%=autor.getUsuario().getEmail()%></div>
-                                                </div>
-                                            </li>
-                                        <% } %>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>   
-                        <div class="span6">
-                            <div class="widget">
-                                <div class="widget-header">
-                                    <i class="icon-bookmark"></i>
-                                    <h3> Mis Papers</h3>
-                                </div>
-                                <div class="widget-content">
-                                    <ul class="messages_layout">
-                                        <%      
-                                            List<Paper> papers = controladoraLogica.obtenerPapers();
-                                            for (Paper paper : papers) {
-                                        %>
-                                            <li class="from_user leftLector">
-                                                <a href="listarPapers.jsp" class="avatar">
-                                                    <img src="resources/img/mensaje_libro.png"/>
-                                                </a>
-                                                <div class="message_wrap"> 
-                                                    <span class="arrow"></span>
-                                                    <div class="info"> 
-                                                        <a class="name"><%=paper.getNombre()%></a>
-                                                        <div class="options_arrow">
-                                                            <div class="dropdown pull-right"> 
-                                                                <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">
-                                                                    <i class="icon-caret-down"></i> 
-                                                                </a>
-                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                                                    <li><a href="registrarPaper.jsp"><i class="icon-plus-sign icon-large"></i> Registrar</a></li>
-                                                                    <li><a href="modificarPaper.jsp"><i class="icon-edit icon-large"></i> Modificar</a></li>
-                                                                    <li><a href="eliminarPaper.jsp"><i class="icon-trash icon-large"></i> Borrar</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="text"><%=paper.getAutor().getNombre()+ " " + paper.getAutor().getApellido()%></div>
-                                                </div>
-                                            </li>
-                                        <% } %>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>                                       
-
                         <div class="span6">
                             <div class="widget" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
                                 <div class="widget-header">
@@ -266,8 +141,131 @@
                                     </form>
                                 </div>
                             </div>
-                        </div>
-
+                        </div>                        
+                        <!-- Columna de Lectores -->
+                        <div class="span6">
+                            <div class="widget">
+                                <div class="widget-header">
+                                    <i class="icon-book"></i>
+                                    <h3> Mis Lectores</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <ul class="messages_layout">
+                                        <%      
+                                            List<Lector> misLectores = controladoraLogica.obtenerLectores();
+                                            for (Lector miLector : misLectores) {
+                                        %>
+                                            <li class="from_user leftLector">
+                                                <a href="listarLectores.jsp" class="avatar">
+                                                    <img src="resources/img/mensaje_lector.png"/>
+                                                </a>
+                                                <div class="message_wrap"> 
+                                                    <span class="arrow"></span>
+                                                    <div class="info"> 
+                                                        <a class="name"><%=miLector.getNombre() + " " + miLector.getApellido()%></a>
+                                                        <div class="options_arrow">
+                                                            <div class="dropdown pull-right"> 
+                                                                <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                                    <i class="icon-caret-down"></i> 
+                                                                </a>
+                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                                    <li><a href="registrarLector.jsp"><i class="icon-plus-sign icon-large"></i> Registrar</a></li>
+                                                                    <li><a href="modificarLector.jsp"><i class="icon-edit icon-large"></i> Modificar</a></li>
+                                                                    <li><a href="eliminarLector.jsp"><i class="icon-trash icon-large"></i> Borrar</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text"><%=miLector.getUsuario().getEmail()%></div>
+                                                </div>
+                                            </li>
+                                        <% } %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>           
+                        <div class="span6">
+                            <div class="widget">
+                                <div class="widget-header">
+                                    <i class="icon-pencil"></i>
+                                    <h3> Mis Autores</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <ul class="messages_layout">
+                                        <%      
+                                            List<Lector> misAutores = controladoraLogica.obtenerAutores();
+                                            for (Lector miAutor : misAutores) {
+                                        %>
+                                            <li class="from_user leftLector">
+                                                <a href="listarLectores.jsp" class="avatar">
+                                                    <img src="resources/img/mensaje_lector.png"/>
+                                                </a>
+                                                <div class="message_wrap"> 
+                                                    <span class="arrow"></span>
+                                                    <div class="info"> 
+                                                        <a class="name"><%=miAutor.getNombre() + " " + miAutor.getApellido()%></a>
+                                                        <div class="options_arrow">
+                                                            <div class="dropdown pull-right"> 
+                                                                <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                                    <i class="icon-caret-down"></i> 
+                                                                </a>
+                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                                    <li><a href="registrarLector.jsp"><i class="icon-plus-sign icon-large"></i> Registrar</a></li>
+                                                                    <li><a href="modificarLector.jsp"><i class="icon-edit icon-large"></i> Modificar</a></li>
+                                                                    <li><a href="eliminarLector.jsp"><i class="icon-trash icon-large"></i> Borrar</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text"><%=miAutor.getUsuario().getEmail()%></div>
+                                                </div>
+                                            </li>
+                                        <% } %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>   
+                        <div class="span6">
+                            <div class="widget">
+                                <div class="widget-header">
+                                    <i class="icon-bookmark"></i>
+                                    <h3> Mis Papers</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <ul class="messages_layout">
+                                        <%      
+                                            List<Paper> misPapers = controladoraLogica.obtenerPapers();
+                                            for (Paper miPaper : misPapers) {
+                                        %>
+                                            <li class="from_user leftLector">
+                                                <a href="listarPapers.jsp" class="avatar">
+                                                    <img src="resources/img/mensaje_libro.png"/>
+                                                </a>
+                                                <div class="message_wrap"> 
+                                                    <span class="arrow"></span>
+                                                    <div class="info"> 
+                                                        <a class="name"><%=miPaper.getNombre()%></a>
+                                                        <div class="options_arrow">
+                                                            <div class="dropdown pull-right"> 
+                                                                <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                                    <i class="icon-caret-down"></i> 
+                                                                </a>
+                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                                    <li><a href="registrarPaper.jsp"><i class="icon-plus-sign icon-large"></i> Registrar</a></li>
+                                                                    <li><a href="modificarPaper.jsp"><i class="icon-edit icon-large"></i> Modificar</a></li>
+                                                                    <li><a href="eliminarPaper.jsp"><i class="icon-trash icon-large"></i> Borrar</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="text"><%=miPaper.getAutor().getNombre()+ " " + miPaper.getAutor().getApellido()%></div>
+                                                </div>
+                                            </li>
+                                        <% } %>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>                                       
                     </div>
                 </div>
             </div>

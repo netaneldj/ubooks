@@ -97,6 +97,54 @@
             <div class="main-inner">
                 <div class="container">
                     <div class="row">
+                        <div class="span6">
+                            <div class="widget" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
+                                <div class="widget-header">
+                                    <i class="icon-user"></i>
+                                    <h3> Perfil Lector</h3>
+                                </div>
+                                <div class="widget-content">
+                                    <form>
+                                        <div class="field">
+                                            <label for="nombre">Nombre:</label>
+                                            <input type="text" id="nombre" name="nombre" value="<%=lector.getNombre()%>" class="login" readonly/>
+                                        </div>
+                                        <div class="field">
+                                            <label for="apellido">Apellido:</label>  
+                                            <input type="text" id="apellido" name="apellido" value="<%=lector.getApellido()%>" class="login" readonly/>
+                                        </div>
+                                        <div class="field">
+                                            <label for="nacimiento">Fecha de nacimiento:</label>  
+                                            <input type="date" form="1" name="nacimiento" value="<%=controladoraLogica.convertirDateAString2(lector.getNacimiento())%>" class="login" readonly/>
+                                        </div>
+                                        <div class="field">
+                                            <label for="email">Email:</label>  
+                                            <input type="email" id="email" name="email" value="<%=lector.getUsuario().getEmail()%>" class="login" readonly/>
+                                        </div>
+                                        <div class="field">
+                                            <label for="idioma">Idioma preferencia:</label>
+                                            <select name="idioma" readonly>
+                                                <option selected><%=lector.getIdioma()%></option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            <label for="genero">Género preferencia:</label>
+                                            <select name="genero" readonly>
+                                                <option selected><%=lector.getGenero()%></option>
+                                            </select>
+                                        </div>
+                                        <div class="field">
+                                            <label for="autor">Soy autor:</label>
+                                            <input type="checkbox" id="autor" name="autor" <%=lector.getEsAutor() ? "checked" : ""%> readonly/>
+                                        </div>
+                                        <div class="field">
+                                            <label for="nombreUsuario">Nombre de usuario:</label>
+                                            <input type="text" id="nombreUsuario" name="nombreUsuario" value="<%=lector.getUsuario().getNombreUsuario()%>" class="login" readonly/>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>                        
                         <!-- Columna de Lectores -->
                         <div class="span6">
                             <div class="widget">
@@ -221,56 +269,6 @@
                                 </div>
                             </div>
                         </div>                                       
-
-                        <div class="span6">
-                            <div class="widget" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
-                                <div class="widget-header">
-                                    <i class="icon-user"></i>
-                                    <h3> Perfil Lector</h3>
-                                </div>
-                                <div class="widget-content">
-                                    <form>
-                                        <div class="field">
-                                            <label for="nombre">Nombre:</label>
-                                            <input type="text" id="nombre" name="nombre" value="<%=lector.getNombre()%>" class="login" readonly/>
-                                        </div>
-                                        <div class="field">
-                                            <label for="apellido">Apellido:</label>  
-                                            <input type="text" id="apellido" name="apellido" value="<%=lector.getApellido()%>" class="login" readonly/>
-                                        </div>
-                                        <div class="field">
-                                            <label for="nacimiento">Fecha de nacimiento:</label>  
-                                            <input type="date" form="1" name="nacimiento" value="<%=controladoraLogica.convertirDateAString2(lector.getNacimiento())%>" class="login" readonly/>
-                                        </div>
-                                        <div class="field">
-                                            <label for="email">Email:</label>  
-                                            <input type="email" id="email" name="email" value="<%=lector.getUsuario().getEmail()%>" class="login" readonly/>
-                                        </div>
-                                        <div class="field">
-                                            <label for="idioma">Idioma preferencia:</label>
-                                            <select name="idioma" readonly>
-                                                <option selected><%=lector.getIdioma()%></option>
-                                            </select>
-                                        </div>
-                                        <div class="field">
-                                            <label for="genero">Género preferencia:</label>
-                                            <select name="genero" readonly>
-                                                <option selected><%=lector.getGenero()%></option>
-                                            </select>
-                                        </div>
-                                        <div class="field">
-                                            <label for="autor">Soy autor:</label>
-                                            <input type="checkbox" id="autor" name="autor" <%=lector.getEsAutor() ? "checked" : ""%> readonly/>
-                                        </div>
-                                        <div class="field">
-                                            <label for="nombreUsuario">Nombre de usuario:</label>
-                                            <input type="text" id="nombreUsuario" name="nombreUsuario" value="<%=lector.getUsuario().getNombreUsuario()%>" class="login" readonly/>
-                                        </div>
-                                    </form>
-                                </div>
-                            </div>
-                        </div>
-
                     </div>
                 </div>
             </div>
