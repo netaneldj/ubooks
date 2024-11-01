@@ -45,6 +45,25 @@
         else
             nombreUsuario = controladoraLogica.obtenerUsuarioPorID(Integer.parseInt(id_usuario)).getNombreUsuario();
             lector = controladoraLogica.obtenerLectorPorID(Integer.parseInt(id_lector));
+        /****************** PAGINADO ******************/
+        int itemsPorPagina = 2; // Número de items por página
+        int paginaLector = request.getParameter("paginaLector") != null ? Integer.parseInt(request.getParameter("paginaLector")) : 1;
+        int inicioLector = (paginaLector - 1) * itemsPorPagina;
+        List<Lector> misLectores = controladoraLogica.obtenerLectores();
+        int totalLectores = misLectores.size();
+        List<Lector> misLectoresPaginados = misLectores.subList(inicioLector, Math.min(inicioLector + itemsPorPagina, totalLectores));
+        
+        int paginaAutor= request.getParameter("paginaAutor") != null ? Integer.parseInt(request.getParameter("paginaAutor")) : 1;
+        int inicioAutor = (paginaAutor - 1) * itemsPorPagina;
+        List<Lector> misAutores = controladoraLogica.obtenerAutores();
+        int totalAutores = misAutores.size();
+        List<Lector> misAutoresPaginados = misAutores.subList(inicioAutor, Math.min(inicioAutor + itemsPorPagina, totalAutores));
+        
+        int paginaPaper= request.getParameter("paginaPaper") != null ? Integer.parseInt(request.getParameter("paginaPaper")) : 1;
+        int inicioPaper = (paginaPaper - 1) * itemsPorPagina;
+        List<Paper> misPapers = controladoraLogica.obtenerPapers();
+        int totalPapers = misPapers.size();
+        List<Paper> misPapersPaginados = misPapers.subList(inicioPaper, Math.min(inicioPaper + itemsPorPagina, totalPapers));            
         %>
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
@@ -153,10 +172,9 @@
                                     <h3> Mis Lectores</h3>
                                 </div>
                                 <div class="widget-content">
-                                    <ul class="messages_layout">
+                                    <ul class="messages_layout widget-list">
                                         <%      
-                                            List<Lector> misLectores = controladoraLogica.obtenerLectores();
-                                            for (Lector miLector : misLectores) {
+                                            for (Lector miLector : misLectoresPaginados) {
                                         %>
                                             <li class="from_user leftLector">
                                                 <a href="listarLectores.jsp" class="avatar">
@@ -186,6 +204,15 @@
                                     </ul>
                                 </div>
                             </div>
+                            <div class="pagination">
+                                <% if (paginaLector > 1) { %>
+                                    <a href="perfilLector.jsp?paginaLector=<%= paginaLector - 1 %>">&laquo; Anterior</a>
+                                <% } %>
+                                <span>Página <%= paginaLector %> de <%= (int) Math.ceil((double) totalLectores / itemsPorPagina) %></span>
+                                <% if (paginaLector < (int) Math.ceil((double) totalLectores / itemsPorPagina)) { %>
+                                    <a href="perfilLector.jsp?paginaLector=<%= paginaLector + 1 %>">Siguiente &raquo;</a>
+                                <% } %>
+                            </div>                                       
                         </div>           
                         <div class="span6">
                             <div class="widget">
@@ -194,10 +221,9 @@
                                     <h3> Mis Autores</h3>
                                 </div>
                                 <div class="widget-content">
-                                    <ul class="messages_layout">
+                                    <ul class="messages_layout widget-list">
                                         <%      
-                                            List<Lector> misAutores = controladoraLogica.obtenerAutores();
-                                            for (Lector miAutor : misAutores) {
+                                            for (Lector miAutor : misAutoresPaginados) {
                                         %>
                                             <li class="from_user leftLector">
                                                 <a href="listarLectores.jsp" class="avatar">
@@ -227,6 +253,15 @@
                                     </ul>
                                 </div>
                             </div>
+                            <div class="pagination">
+                                <% if (paginaAutor > 1) { %>
+                                    <a href="perfilLector.jsp?paginaAutor=<%= paginaAutor - 1 %>">&laquo; Anterior</a>
+                                <% } %>
+                                <span>Página <%= paginaAutor %> de <%= (int) Math.ceil((double) totalAutores / itemsPorPagina) %></span>
+                                <% if (paginaAutor < (int) Math.ceil((double) totalAutores / itemsPorPagina)) { %>
+                                    <a href="perfilLector.jsp?paginaAutor=<%= paginaAutor + 1 %>">Siguiente &raquo;</a>
+                                <% } %>
+                            </div>                                                                             
                         </div>   
                         <div class="span6">
                             <div class="widget">
@@ -235,10 +270,9 @@
                                     <h3> Mis Papers</h3>
                                 </div>
                                 <div class="widget-content">
-                                    <ul class="messages_layout">
+                                    <ul class="messages_layout widget-list">
                                         <%      
-                                            List<Paper> misPapers = controladoraLogica.obtenerPapers();
-                                            for (Paper miPaper : misPapers) {
+                                            for (Paper miPaper : misPapersPaginados) {
                                         %>
                                             <li class="from_user leftLector">
                                                 <a href="listarPapers.jsp" class="avatar">
@@ -268,6 +302,15 @@
                                     </ul>
                                 </div>
                             </div>
+                            <div class="pagination">
+                                <% if (paginaPaper > 1) { %>
+                                    <a href="perfilLector.jsp?paginaPaper=<%= paginaPaper - 1 %>">&laquo; Anterior</a>
+                                <% } %>
+                                <span>Página <%= paginaPaper %> de <%= (int) Math.ceil((double) totalPapers / itemsPorPagina) %></span>
+                                <% if (paginaPaper < (int) Math.ceil((double) totalPapers / itemsPorPagina)) { %>
+                                    <a href="perfilLector.jsp?paginaPaper=<%= paginaPaper + 1 %>">Siguiente &raquo;</a>
+                                <% } %>
+                            </div>                                                                        
                         </div>                                       
                     </div>
                 </div>

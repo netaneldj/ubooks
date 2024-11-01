@@ -27,7 +27,7 @@ public class SvSeleccionarLector extends HttpServlet {
         Cookie lector = new Cookie("id_lector", request.getParameter("id_lector"));
         lector.setMaxAge(60*60);
         response.addCookie(lector);
-        response.sendRedirect("verPerfilLector.jsp");
+        response.sendRedirect("perfilOtroLector.jsp");
     }
 
     @Override
