@@ -166,19 +166,10 @@
                             <div class="widget">
                                 <div class="widget-header">
                                     <i class="icon-book"></i>
-                                    <h3> Mis Lectores</h3>
-                                    <div class="pagination">
-                                        <% if (paginaLector > 1) { %>
-                                            <a href="perfilLector.jsp?paginaLector=<%= paginaLector - 1 %>">&laquo; Anterior</a>
-                                        <% } %>
-                                        <span>Página <%= paginaLector %> de <%= (int) Math.ceil((double) totalLectores / itemsPorPagina) %></span>
-                                        <% if (paginaLector < (int) Math.ceil((double) totalLectores / itemsPorPagina)) { %>
-                                            <a href="perfilLector.jsp?paginaLector=<%= paginaLector + 1 %>">Siguiente &raquo;</a>
-                                        <% } %>
-                                    </div>                                    
+                                    <h3> Mis Lectores</h3>                                   
                                 </div>
                                 <div class="widget-content">
-                                    <ul class="messages_layout">
+                                    <ul class="messages_layout widget-list">
                                         <%      
                                             for (Lector miLector : misLectoresPaginados) {
                                         %>
@@ -210,24 +201,24 @@
                                     </ul>
                                 </div>
                             </div>
+                            <div class="pagination">
+                                <% if (paginaLector > 1) { %>
+                                    <a href="perfilLector.jsp?paginaLector=<%= paginaLector - 1 %>">&laquo; Anterior</a>
+                                <% } %>
+                                <span>Página <%= paginaLector %> de <%= (int) Math.ceil((double) totalLectores / itemsPorPagina) %></span>
+                                <% if (paginaLector < (int) Math.ceil((double) totalLectores / itemsPorPagina)) { %>
+                                    <a href="perfilLector.jsp?paginaLector=<%= paginaLector + 1 %>">Siguiente &raquo;</a>
+                                <% } %>
+                            </div>                                     
                         </div>           
                         <div class="span6">
                             <div class="widget">
                                 <div class="widget-header">
                                     <i class="icon-pencil"></i>
-                                    <h3> Mis Autores</h3>
-                                    <div class="pagination">
-                                        <% if (paginaAutor > 1) { %>
-                                            <a href="perfilLector.jsp?paginaAutor=<%= paginaAutor - 1 %>">&laquo; Anterior</a>
-                                        <% } %>
-                                        <span>Página <%= paginaAutor %> de <%= (int) Math.ceil((double) totalAutores / itemsPorPagina) %></span>
-                                        <% if (paginaAutor < (int) Math.ceil((double) totalAutores / itemsPorPagina)) { %>
-                                            <a href="perfilLector.jsp?paginaAutor=<%= paginaAutor + 1 %>">Siguiente &raquo;</a>
-                                        <% } %>
-                                    </div>                                    
+                                    <h3> Mis Autores</h3>                               
                                 </div>
                                 <div class="widget-content">
-                                    <ul class="messages_layout">
+                                    <ul class="messages_layout widget-list">
                                         <%      
                                             for (Lector miAutor : misAutoresPaginados) {
                                         %>
@@ -259,24 +250,24 @@
                                     </ul>
                                 </div>
                             </div>
+                            <div class="pagination">
+                                <% if (paginaAutor > 1) { %>
+                                    <a href="perfilLector.jsp?paginaAutor=<%= paginaAutor - 1 %>">&laquo; Anterior</a>
+                                <% } %>
+                                <span>Página <%= paginaAutor %> de <%= (int) Math.ceil((double) totalAutores / itemsPorPagina) %></span>
+                                <% if (paginaAutor < (int) Math.ceil((double) totalAutores / itemsPorPagina)) { %>
+                                    <a href="perfilLector.jsp?paginaAutor=<%= paginaAutor + 1 %>">Siguiente &raquo;</a>
+                                <% } %>
+                            </div>                                         
                         </div>   
                         <div class="span6">
                             <div class="widget">
                                 <div class="widget-header">
                                     <i class="icon-bookmark"></i>
-                                    <h3> Mis Papers</h3>
-                                    <div class="pagination">
-                                        <% if (paginaPaper > 1) { %>
-                                            <a href="perfilLector.jsp?paginaPaper=<%= paginaPaper - 1 %>">&laquo; Anterior</a>
-                                        <% } %>
-                                        <span>Página <%= paginaPaper %> de <%= (int) Math.ceil((double) totalPapers / itemsPorPagina) %></span>
-                                        <% if (paginaPaper < (int) Math.ceil((double) totalPapers / itemsPorPagina)) { %>
-                                            <a href="perfilLector.jsp?paginaPaper=<%= paginaPaper + 1 %>">Siguiente &raquo;</a>
-                                        <% } %>
-                                    </div>                                      
+                                    <h3> Mis Papers</h3>                                      
                                 </div>
                                 <div class="widget-content">
-                                    <ul class="messages_layout">
+                                    <ul class="messages_layout widget-list">
                                         <%      
                                             for (Paper miPaper : misPapersPaginados) {
                                         %>
@@ -308,6 +299,15 @@
                                     </ul>
                                 </div>
                             </div>
+                            <div class="pagination">
+                                <% if (paginaPaper > 1) { %>
+                                    <a href="perfilLector.jsp?paginaPaper=<%= paginaPaper - 1 %>">&laquo; Anterior</a>
+                                <% } %>
+                                <span>Página <%= paginaPaper %> de <%= (int) Math.ceil((double) totalPapers / itemsPorPagina) %></span>
+                                <% if (paginaPaper < (int) Math.ceil((double) totalPapers / itemsPorPagina)) { %>
+                                    <a href="perfilLector.jsp?paginaPaper=<%= paginaPaper + 1 %>">Siguiente &raquo;</a>
+                                <% } %>
+                            </div>                                    
                         </div>                                       
                     </div>
                 </div>

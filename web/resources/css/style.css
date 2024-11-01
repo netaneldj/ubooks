@@ -20,6 +20,22 @@ body {
 
 }
 
+.pagination {
+    text-align: center;
+    width: 90%;
+}
+
+.widget-list .from_user {
+    margin-bottom: 15px; /* Adds space between each "lector" item */
+    margin-right: 5px;
+}
+
+.pagination a,
+.pagination span {
+    margin: 0 5px; /* Adds spacing around pagination links */
+}
+
+
 
 p { 
     font: 13px/1.7em 'Open Sans'; 	
@@ -258,7 +274,24 @@ textarea {
 [4. Main / .main]
 */
 
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
 
+/* Configurar el contenedor principal */
+.main {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+/* Asegurarse de que el contenido se ajuste correctamente */
+.main-inner {
+    flex: 1;
+}
 
 /*------------------------------------------------------------------
 [5. Extra / .extra]
@@ -309,7 +342,7 @@ textarea {
 */
 
 .footer-inner {
-    position: fixed;
+    position: relative;
     padding: 15px 0;
     bottom: 0;
     width: 100%;
