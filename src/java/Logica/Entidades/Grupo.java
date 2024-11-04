@@ -5,6 +5,7 @@
 package Logica.Entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -18,16 +19,21 @@ public class Grupo implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     private String nombre;
+    private String tema;
     private List<Integer> miembros;
     private List<Integer> papers;
     private List<Integer> comentarios;
     
     public Grupo (){
+        miembros = new ArrayList<>();
+        papers = new ArrayList<>();
+        comentarios = new ArrayList<>();
     }
     
-    public Grupo(Integer id, String nombre, List<Integer> miembros, List<Integer> papers, List<Integer> comentarios){
+    public Grupo(Integer id, String nombre, String tema, List<Integer> miembros, List<Integer> papers, List<Integer> comentarios){
         this.id = id;
         this.nombre = nombre;
+        this.tema = tema;
         this.miembros= miembros;
         this.papers = papers;
         this.comentarios = comentarios;   
@@ -47,6 +53,14 @@ public class Grupo implements Serializable {
 
     public void setNombre(String nombre) {
         this.nombre = nombre;
+    }
+    
+    public String getTema(){
+        return tema;
+    }
+    
+    public void setTema(String tema){
+        this.tema = tema;
     }
     
     public List<Integer> getMiembros(){
@@ -83,5 +97,13 @@ public class Grupo implements Serializable {
     
     public void addComentario(Integer comentario){
         comentarios.add(comentario);
+    }
+    
+    public Integer getCantidadMiembros(){
+        return miembros.size();
+    }
+    
+    public Integer getCantidadComentarios(){
+        return comentarios.size();
     }
 }
