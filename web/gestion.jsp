@@ -78,6 +78,12 @@
                                 <span>Gestion</span> 
                             </a>
                         </li>
+                        <li class="active">
+                            <a href="grupos.jsp">
+                                <i class="icon-list-alt"></i>
+                                <span>Grupos</span> 
+                            </a>
+                        </li> 
                         <!--<li class="active">
                             <a href="reportes.jsp">
                                 <i class="icon-signal"></i>

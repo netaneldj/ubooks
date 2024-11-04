@@ -101,9 +101,7 @@
                                 </div> <!-- /widget-header -->
 
                                 <div class="widget-content">
-                                    <div class="pricing-plans plans-2">
-                                        
-                                        
+                                    <div class="pricing-plans plans-1">
                                         <!-- Grupos -->
                                         <div class="plan-container">
                                             <div class="plan green">
