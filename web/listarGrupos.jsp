@@ -1,28 +1,14 @@
-<%@page import="Logica.Entidades.Paper"%>
+<%@page import="Logica.Entidades.Grupo"%>
 <%@page import="Logica.Entidades.Lector"%>
 <%@page import="Logica.Entidades.Usuario"%>
 <%@page import="java.util.List"%>
 <%@page import="Logica.Controlador.ControladoraLogica"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-
-<style>
-    .align-middle {
-        vertical-align: middle;
-    }
-    .name-btn-container {
-        display: flex;
-        align-items: center
-    }
-    .btn {
-        margin-left: 10px; /* Espacio entre el nombre y el botón */
-    }
-</style>
-
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <title>Listar Papers - Ubooks</title>
+        <title>Listar Lectores - Ubooks</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes"> 
 
@@ -84,41 +70,31 @@
                <div class="span9">
                     <div class="widget widget-table action-table">
                         <div class="widget-header"> <i class="icon-th-list"></i>
-                            <h3>Lista Papers</h3>
+                            <h3>Lista Grupos</h3>
                         </div>
                         <div class="widget-content">
                             <table class="table table-striped table-bordered">
                                 <thead>
                                 <tr>
                                     <th><center>ID</center></th>
-                                    <th><center>Doi</center></th>
                                     <th><center>Nombre</center></th>
-                                    <th><center>Genero</center></th>
-                                    <th><center>Autor</center></th>
-                                    <th><center>Resumen</center></th>
+                                    <th><center>Tema</center></th>
+                                    <th><center>Miembros</center></th>
+                                    <th><center>Comentarios</center></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <%
                                             ControladoraLogica controladoraLogica = new ControladoraLogica();
-                                            List<Paper> papers = controladoraLogica.obtenerPapers();
-                                            for (Paper paper : papers) {
+                                            List<Grupo> grupos = controladoraLogica.obtenerGrupos();
+                                            for (Grupo grupo : grupos) {
                                         %>
-                                <td><center><%=paper.getId()%></center></td>
-                                <td><center><%=paper.getDoi()%></center></td>                            
-                                <td class="align-middle">
-                                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                                        <span style="margin-right: 10px;"><%= paper.getNombre() %></span>
-                                        <form action="verPaper.jsp" method="get" style="display: inline;">
-                                            <input type="hidden" name="id" value="<%= paper.getId() %>">
-                                            <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Ver</button>
-                                        </form>
-                                    </div>
-                                </td>
-                                <td><center><%=paper.getGenero()%></center></td>
-                                <td><center><%=paper.getAutor().getNombre()+" "+paper.getAutor().getApellido()%></center></td>
-                                <td><center><%=paper.getResumen()%></center></td>
+                                        <td><center><%=grupo.getId()%></center></td>
+                                <td><center><%=grupo.getNombre()%></center></td>
+                                <td><center><%=grupo.getTema()%></center></td>
+                                <td><center><%=grupo.getCantidadMiembros()%></center></td>
+                                <td><center><%=grupo.getCantidadComentarios()%></center></td>
                                 </tr>
                                 <% }%>
                                 </tbody>

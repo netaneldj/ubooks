@@ -30,17 +30,21 @@
         HttpSession sesion = request.getSession();
         String id_usuario = "0";
         String nombreUsuario = "";
+        String id_lector = "";
+        Lector lector;
         Cookie[] cookies = request.getCookies();
         for(Cookie cookie : cookies){
             if(cookie.getName().equals("id_usuario")) { 
                 id_usuario = cookie.getValue();
-                break;
+            } else if(cookie.getName().equals("id_lector")) { 
+                id_lector = cookie.getValue();
             }
         }
         if (id_usuario.equals("0"))  
             response.sendRedirect("index.jsp");
         else
             nombreUsuario = controladoraLogica.obtenerUsuarioPorID(Integer.parseInt(id_usuario)).getNombreUsuario();
+            lector = controladoraLogica.obtenerLectorPorID(Integer.parseInt(id_lector));
         /****************** PAGINADO ******************/
         int itemsPorPagina = 2; // Número de items por página
         int paginaLector = request.getParameter("paginaLector") != null ? Integer.parseInt(request.getParameter("paginaLector")) : 1;
@@ -59,7 +63,7 @@
         int inicioPaper = (paginaPaper - 1) * itemsPorPagina;
         List<Paper> misPapers = controladoraLogica.obtenerPapers();
         int totalPapers = misPapers.size();
-        List<Paper> misPapersPaginados = misPapers.subList(inicioPaper, Math.min(inicioPaper + itemsPorPagina, totalPapers));
+        List<Paper> misPapersPaginados = misPapers.subList(inicioPaper, Math.min(inicioPaper + itemsPorPagina, totalPapers));            
         %>
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
@@ -120,7 +124,6 @@
                                 </div>
                                 <div class="widget-content">
                                     <form>
-                                        <% Lector lector = controladoraLogica.obtenerLectorPorIdUsuario(Integer.parseInt(id_usuario)); %>
                                         <div class="field">
                                             <label for="nombre">Nombre:</label>
                                             <input type="text" id="nombre" name="nombre" value="<%=lector.getNombre()%>" class="login" readonly/>
@@ -166,7 +169,7 @@
                             <div class="widget">
                                 <div class="widget-header">
                                     <i class="icon-book"></i>
-                                    <h3> Mis Lectores</h3>                                   
+                                    <h3> Mis Lectores</h3>
                                 </div>
                                 <div class="widget-content">
                                     <ul class="messages_layout widget-list">
@@ -209,13 +212,13 @@
                                 <% if (paginaLector < (int) Math.ceil((double) totalLectores / itemsPorPagina)) { %>
                                     <a href="perfilLector.jsp?paginaLector=<%= paginaLector + 1 %>">Siguiente &raquo;</a>
                                 <% } %>
-                            </div>                                     
+                            </div>                                       
                         </div>           
                         <div class="span6">
                             <div class="widget">
                                 <div class="widget-header">
                                     <i class="icon-pencil"></i>
-                                    <h3> Mis Autores</h3>                               
+                                    <h3> Mis Autores</h3>
                                 </div>
                                 <div class="widget-content">
                                     <ul class="messages_layout widget-list">
@@ -258,13 +261,13 @@
                                 <% if (paginaAutor < (int) Math.ceil((double) totalAutores / itemsPorPagina)) { %>
                                     <a href="perfilLector.jsp?paginaAutor=<%= paginaAutor + 1 %>">Siguiente &raquo;</a>
                                 <% } %>
-                            </div>                                         
+                            </div>                                                                             
                         </div>   
                         <div class="span6">
                             <div class="widget">
                                 <div class="widget-header">
                                     <i class="icon-bookmark"></i>
-                                    <h3> Mis Papers</h3>                                      
+                                    <h3> Mis Papers</h3>
                                 </div>
                                 <div class="widget-content">
                                     <ul class="messages_layout widget-list">
@@ -307,7 +310,7 @@
                                 <% if (paginaPaper < (int) Math.ceil((double) totalPapers / itemsPorPagina)) { %>
                                     <a href="perfilLector.jsp?paginaPaper=<%= paginaPaper + 1 %>">Siguiente &raquo;</a>
                                 <% } %>
-                            </div>                                    
+                            </div>                                                                        
                         </div>                                       
                     </div>
                 </div>
