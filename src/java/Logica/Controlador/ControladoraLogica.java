@@ -4,6 +4,7 @@ import Logica.Entidades.GeneroPaper;
 import Logica.Entidades.Lector;
 import Logica.Entidades.Paper;
 import Logica.Entidades.Usuario;
+import Logica.Entidades.Valoracion;
 import Persistencia.Controlador.ControladoraPersistencia;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -17,6 +18,11 @@ public class ControladoraLogica {
     
     public ControladoraLogica(){
         controladoraPersistencia = new ControladoraPersistencia();
+    }
+     
+    public boolean insertarValoracion(int idPaper, int idUsuario, int calificacion, String comentario) {
+        boolean exito = controladoraPersistencia.insertarValoracion(idPaper, idUsuario, calificacion, comentario);
+        return exito;
     }
     
     public boolean crearUsuario(Usuario usuario) {
@@ -59,7 +65,6 @@ public class ControladoraLogica {
     
     public boolean existeNombreUsuario(String nombreUsuario) {
         boolean existe = false;
-        //List<User> allUsers = new ArrayList<User>();
         List<Usuario> usuarios = controladoraPersistencia.obtenerUsuarios();
 
         for (Usuario usuario : usuarios) {
@@ -130,10 +135,9 @@ public class ControladoraLogica {
         return controladoraPersistencia.obtenerPaperPorID(id);
     }
     
-
-     public List<Paper> obtenerPapers(String nombre, String nombreAutor, GeneroPaper genero) {
+    public List<Paper> obtenerPapers(String nombre, String nombreAutor, GeneroPaper genero) {
         return controladoraPersistencia.obtenerPapers(nombre, nombreAutor, genero);
-     }
+    }
 
     public List<Lector> obtenerLectoresPorNombre(String nombre, String esAutor) {
         return controladoraPersistencia.obtenerLectoresPorNombre(nombre, esAutor);
@@ -142,7 +146,6 @@ public class ControladoraLogica {
     public Lector obtenerLectorPorIdUsuario(int idUsuario) {
         return controladoraPersistencia.obtenerLectorPorIdUsuario(idUsuario);
     }
-    
     
     public List<Usuario> obtenerUsuarios() {
         return controladoraPersistencia.obtenerUsuarios();
@@ -171,7 +174,7 @@ public class ControladoraLogica {
     public int obtenerCantidadPapers() {
         return controladoraPersistencia.obtenerCantidadPapers();
     }
-     
+    
     public boolean borrarUsuario(int id) {
         return controladoraPersistencia.borrarUsuario(id);
     }
@@ -205,53 +208,56 @@ public class ControladoraLogica {
         return dateFormat.format(fecha);
     }
     
-     public static String convertirDateAString2(Date fecha) {
+    public static String convertirDateAString2(Date fecha) {
         SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
         return dateFormat.format(fecha);
     }
     
     public static String obtenerNombreDeNumeroMes(int mes) {
-
-		String nombreMes = null;
-		switch (mes) {
-		case 0:
-			nombreMes = "Enero";
-			break;
-		case 1:
-			nombreMes = "Febrero";
-			break;
-		case 2:
-			nombreMes = "Marzo";
-			break;
-		case 3:
-			nombreMes = "Abril";
-			break;
-		case 4:
-			nombreMes = "Mayo";
-			break;
-		case 5:
-			nombreMes = "Junio";
-			break;
-		case 6:
-			nombreMes = "Julio";
-			break;
-		case 7:
-			nombreMes = "Agosto";
-			break;
-		case 8:
-			nombreMes = "Septiembre";
-			break;
-		case 9:
-			nombreMes = "Octubre";
-			break;
-		case 10:
-			nombreMes = "Noviembre";
-			break;
-		case 11:
-			nombreMes = "Diciembre";
-			break;
-		}
-
-		return nombreMes;
-	}
+        String nombreMes = null;
+        switch (mes) {
+            case 0:
+                nombreMes = "Enero";
+                break;
+            case 1:
+                nombreMes = "Febrero";
+                break;
+            case 2:
+                nombreMes = "Marzo";
+                break;
+            case 3:
+                nombreMes = "Abril";
+                break;
+            case 4:
+                nombreMes = "Mayo";
+                break;
+            case 5:
+                nombreMes = "Junio";
+                break;
+            case 6:
+                nombreMes = "Julio";
+                break;
+            case 7:
+                nombreMes = "Agosto";
+                break;
+            case 8:
+                nombreMes = "Septiembre";
+                break;
+            case 9:
+                nombreMes = "Octubre";
+                break;
+            case 10:
+                nombreMes = "Noviembre";
+                break;
+            case 11:
+                nombreMes = "Diciembre";
+                break;
+        }
+        return nombreMes;
+    }
+    
+    // Método agregado para obtener valoraciones de un Paper específico
+    public List<Valoracion> obtenerValoracionesPorPaper(int idPaper) {
+        return controladoraPersistencia.obtenerValoracionesPorPaper(idPaper);
+    }
 }
