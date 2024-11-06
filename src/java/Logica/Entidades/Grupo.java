@@ -11,6 +11,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 
 @Entity
 public class Grupo implements Serializable {
@@ -20,9 +21,12 @@ public class Grupo implements Serializable {
     private Integer id;
     private String nombre;
     private String tema;
-    private List<Integer> miembros;
-    private List<Integer> papers;
-    private List<Integer> comentarios;
+    @OneToMany
+    private List<Lector> miembros;
+    @OneToMany
+    private List<Paper> papers;
+    @OneToMany
+    private List<ComentarioGrupo> comentarios;
     
     public Grupo (){
         miembros = new ArrayList<>();
@@ -30,7 +34,7 @@ public class Grupo implements Serializable {
         comentarios = new ArrayList<>();
     }
     
-    public Grupo(Integer id, String nombre, String tema, List<Integer> miembros, List<Integer> papers, List<Integer> comentarios){
+    public Grupo(Integer id, String nombre, String tema, List<Lector> miembros, List<Paper> papers, List<ComentarioGrupo> comentarios){
         this.id = id;
         this.nombre = nombre;
         this.tema = tema;
@@ -63,39 +67,39 @@ public class Grupo implements Serializable {
         this.tema = tema;
     }
     
-    public List<Integer> getMiembros(){
+    public List<Lector> getMiembros(){
         return miembros;
     }
     
-    public void setMiembros(List<Integer> miembros){
+    public void setMiembros(List<Lector> miembros){
         this.miembros = miembros;
     }
     
-    public void addMiembro(Integer miembro){
+    public void addMiembro(Lector miembro){
         miembros.add(miembro);
     }
     
-    public List<Integer> getPapers(){
+    public List<Paper> getPapers(){
         return papers;
     }
     
-    public void setPapers(List<Integer> papers){
+    public void setPapers(List<Paper> papers){
         this.papers = papers;
     }
     
-    public void addPaper(Integer paper){
+    public void addPaper(Paper paper){
         papers.add(paper);
     }
     
-    public List<Integer> getComentarios(){
+    public List<ComentarioGrupo> getComentarios(){
         return comentarios;
     }
     
-    public void setComnetarios(List<Integer> comentarios){
+    public void setComnetarios(List<ComentarioGrupo> comentarios){
         this.comentarios = comentarios;
     }
     
-    public void addComentario(Integer comentario){
+    public void addComentario(ComentarioGrupo comentario){
         comentarios.add(comentario);
     }
     

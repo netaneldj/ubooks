@@ -9,7 +9,6 @@ import Logica.Entidades.GeneroPaper;
 import Logica.Entidades.Lector;
 import Logica.Entidades.Paper;
 import Logica.Entidades.Grupo;
-import static java.io.IO.print;
 import java.io.IOException;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -47,10 +46,10 @@ public class SvCrearGrupo extends HttpServlet {
                 break;
             }
             }
-
+            Lector lectorCreador = controladoraLogica.obtenerLectorPorUsuario(Integer.valueOf(id_usuario));
             grupo.setNombre(nombre);
             grupo.setTema(tema);
-            grupo.addMiembro(Integer.valueOf(id_usuario));
+            grupo.addMiembro(lectorCreador);
 
             boolean exito = controladoraLogica.crearGrupo(grupo);
 
