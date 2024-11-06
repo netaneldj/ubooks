@@ -182,7 +182,7 @@
                                     <label for="star3">★</label>
                                     <input type="radio" name="valoracion" id="star2" value="2" />
                                     <label for="star2">★</label>
-                                    <input type="radio" name="valoracion" id="star1" value="1" />
+                                    <input type="radio" name="valoracion" id="star1" value="1" required />
                                     <label for="star1">★</label>
                                 </div>
                                 <div class="field">
