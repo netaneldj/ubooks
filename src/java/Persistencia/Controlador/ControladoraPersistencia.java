@@ -5,10 +5,12 @@ import Logica.Entidades.Grupo;
 import Logica.Entidades.Lector;
 import Logica.Entidades.Paper;
 import Logica.Entidades.Usuario;
+import Logica.Entidades.Valoracion;
 import Persistencia.Entidades.LectorJpaController;
 import Persistencia.Entidades.PaperJpaController;
 import Persistencia.Entidades.GrupoJpaController;
 import Persistencia.Entidades.UsuarioJpaController;
+import Persistencia.Entidades.ValoracionJpaController;
 import Persistencia.Entidades.exceptions.NonexistentEntityException;
 import java.util.List;
 import java.util.logging.*;
@@ -20,6 +22,7 @@ public class ControladoraPersistencia {
     LectorJpaController lectorJpaController = new LectorJpaController();
     UsuarioJpaController usuarioJpaController = new UsuarioJpaController();
     PaperJpaController paperJpaController = new PaperJpaController();
+    ValoracionJpaController valoracionJpaController = new ValoracionJpaController();
     GrupoJpaController grupoJpaController = new GrupoJpaController();
 
     public ControladoraPersistencia() {}
@@ -31,7 +34,7 @@ public class ControladoraPersistencia {
             logger.log(Level.INFO, "ControladoraPersistencia: Usuario creado con exito!");
             exito = true;
         } catch(Exception e){
-            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al crear usuario: %s",e.getMessage());
+            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al crear usuario: {0}", e.getMessage());
         } 
         return exito;
     }
@@ -43,7 +46,7 @@ public class ControladoraPersistencia {
             logger.log(Level.INFO, "ControladoraPersistencia: Lector creado con exito!");
             exito = true;
         } catch(Exception e){
-            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al crear lector: %s",e.getMessage());
+            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al crear lector: {0}", e.getMessage());
         }
         return exito;
     }
@@ -55,7 +58,7 @@ public class ControladoraPersistencia {
             logger.log(Level.INFO, "ControladoraPersistencia: Paper creado con exito!");
             exito = true;
         } catch(Exception e){
-            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al crear lector: %s",e.getMessage());
+            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al crear paper: {0}", e.getMessage());
         }
         return exito;
     }
@@ -101,7 +104,7 @@ public class ControladoraPersistencia {
         return lectorJpaController.findLector(idLector);
     }
     
-      public Lector obtenerLectorPorIdUsuario(int idUsuario) {
+    public Lector obtenerLectorPorIdUsuario(int idUsuario) {
         return lectorJpaController.findLectorByIdUsuario(idUsuario);
     }
     
@@ -136,7 +139,7 @@ public class ControladoraPersistencia {
             logger.log(Level.INFO, "ControladoraPersistencia: Usuario modificado con exito!");
             exito = true;
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al modificar usuario: %s",e.getMessage());
+            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al modificar usuario: {0}", e.getMessage());
         }
         return exito;
     }
@@ -148,7 +151,7 @@ public class ControladoraPersistencia {
             logger.log(Level.INFO, "ControladoraPersistencia: Lector modificado con exito!");
             exito = true;
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al modificar lector: %s",e.getMessage());
+            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al modificar lector: {0}", e.getMessage());
         }
         return exito;
     }
@@ -160,7 +163,7 @@ public class ControladoraPersistencia {
             logger.log(Level.INFO, "ControladoraPersistencia: Paper modificado con exito!");
             exito = true;
         } catch (Exception e) {
-            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al modificar lector: %s",e.getMessage());
+            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al modificar paper: {0}", e.getMessage());
         }
         return exito;
     }
@@ -168,12 +171,11 @@ public class ControladoraPersistencia {
     public boolean borrarUsuario(int id) {
         try {
             usuarioJpaController.destroy(id);
-            logger.log(Level.INFO, "ControladoraPersistencia: Usuario %d borrado con exito!", id);
+            logger.log(Level.INFO, "ControladoraPersistencia: Usuario {0} borrado con exito!", id);
             return true;
         } catch (NonexistentEntityException e) {
-            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al borrar usuario: %s",e.getMessage());
+            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al borrar usuario: {0}", e.getMessage());
         }
-
         return false;
     }
     
@@ -183,9 +185,8 @@ public class ControladoraPersistencia {
             logger.log(Level.INFO, "ControladoraPersistencia: Lector borrado con exito!");
             return true;
         } catch (NonexistentEntityException e) {
-            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al borrar lector: %s",e.getMessage());
+            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al borrar lector: {0}", e.getMessage());
         }
-
         return false;
     }
     
@@ -195,9 +196,33 @@ public class ControladoraPersistencia {
             logger.log(Level.INFO, "ControladoraPersistencia: Paper borrado con exito!");
             return true;
         } catch (NonexistentEntityException e) {
-            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al borrar lector: %s",e.getMessage());
+            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al borrar paper: {0}", e.getMessage());
         }
-
         return false;
     }
+
+    public boolean insertarValoracion(int idPaper, int idUsuario, int calificacion, String comentario) {
+        boolean exito = false;
+        try {
+            // Crear una instancia de Valoracion y asignar valores
+            Valoracion valoracion = new Valoracion();
+            valoracion.setIdPaper(idPaper);
+            valoracion.setIdUsuario(idUsuario);
+            valoracion.setValoracionNumerica(calificacion);
+            valoracion.setComentario(comentario);
+
+            // Llamar al método create de ValoracionJpaController
+            valoracionJpaController.create(valoracion);
+            logger.log(Level.INFO, "ControladoraPersistencia: Valoracion insertada con exito!");
+            exito = true;
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al insertar valoracion: {0}", e.getMessage());
+        }
+        return exito;
+    }
+
+    public List<Valoracion> obtenerValoracionesPorPaper(int idPaper) {
+        return valoracionJpaController.findValoracionesByPaperId(idPaper);
+    }
+
 }

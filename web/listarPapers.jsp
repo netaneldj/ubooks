@@ -5,6 +5,20 @@
 <%@page import="Logica.Controlador.ControladoraLogica"%>
 <%@page contentType="text/html" pageEncoding="UTF-8"%>
 <!DOCTYPE html>
+
+<style>
+    .align-middle {
+        vertical-align: middle;
+    }
+    .name-btn-container {
+        display: flex;
+        align-items: center
+    }
+    .btn {
+        margin-left: 10px; /* Espacio entre el nombre y el botón */
+    }
+</style>
+
 <html lang="es">
     <head>
         <meta charset="utf-8">
@@ -93,7 +107,15 @@
                                         %>
                                 <td><center><%=paper.getId()%></center></td>
                                 <td><center><%=paper.getDoi()%></center></td>                            
-                                <td><center><%=paper.getNombre()%></center></td>
+                                <td class="align-middle">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span style="margin-right: 10px;"><%= paper.getNombre() %></span>
+                                        <form action="verPaper.jsp" method="get" style="display: inline;">
+                                            <input type="hidden" name="id" value="<%= paper.getId() %>">
+                                            <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Ver</button>
+                                        </form>
+                                    </div>
+                                </td>
                                 <td><center><%=paper.getGenero()%></center></td>
                                 <td><center><%=paper.getAutor().getNombre()+" "+paper.getAutor().getApellido()%></center></td>
                                 <td><center><%=paper.getResumen()%></center></td>
