@@ -19,60 +19,30 @@ import javax.persistence.OneToOne;
  * @author bruno
  */
 @Entity
-public class ComentarioGrupo implements Serializable {
-    @Id
-    @GeneratedValue(strategy = GenerationType.SEQUENCE)
-    private Integer id;
-    private String comentario;
-    @OneToOne
-    private Lector creador;
+public class ComentarioGrupo extends ComentarioAbstracto {
     @OneToMany
-    private List<ComentarioGrupo> respuestas;
+    private List<ComentarioRespuesta> respuestas;
     
     public ComentarioGrupo (){
         respuestas = new ArrayList<>();
     }
     
-    public ComentarioGrupo(Integer id, String comentario, Lector creador, List<ComentarioGrupo> respuestas){
+    public ComentarioGrupo(Integer id, String comentario, Lector creador, List<ComentarioRespuesta> respuestas){
         this.id = id;
         this.comentario=comentario;
         this.creador = creador;
         this.respuestas = respuestas;
     }
-     
-    public Integer getId() {
-       return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-    
-    public String getComentario(){
-        return comentario;
-    }
-    
-    public void setComentario(String comentario){
-        this.comentario=comentario;
-    }
-    
-    public Lector getCreador(){
-        return creador;
-    }
-    
-    public void setCreador(Lector creador){
-        this.creador = creador;
-    }
-    
-    public List<ComentarioGrupo> getRespuestas(){
+         
+    public List<ComentarioRespuesta> getRespuestas(){
         return respuestas;
     }
     
-    public void setRespuestas(List<ComentarioGrupo> respuestas){
+    public void setRespuestas(List<ComentarioRespuesta> respuestas){
         this.respuestas = respuestas;
     }
     
-    public void addRespuesta(ComentarioGrupo respuesta){
+    public void addRespuesta(ComentarioRespuesta respuesta){
         respuestas.add(respuesta);
     }
 }
