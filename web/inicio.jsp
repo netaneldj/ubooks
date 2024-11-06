@@ -77,7 +77,13 @@
                                 <i class="icon-list-alt"></i>
                                 <span>Gestion</span> 
                             </a>
-                        </li>                     
+                        </li>
+                        <li class="active">
+                            <a href="grupos.jsp">
+                                <i class="icon-list-alt"></i>
+                                <span>Grupos</span> 
+                            </a>
+                        </li>      
                     </ul>
                 </div>
                 <!-- /container --> 

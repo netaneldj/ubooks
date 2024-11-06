@@ -83,13 +83,7 @@
                                 <i class="icon-list-alt"></i>
                                 <span>Grupos</span> 
                             </a>
-                        </li> 
-                        <!--<li class="active">
-                            <a href="reportes.jsp">
-                                <i class="icon-signal"></i>
-                                <span>Reportes</span> 
-                            </a>
-                        </li>-->
+                        </li>    
                    </ul>
                 </div> <!-- /container -->
             </div> <!-- /subnavbar-inner -->
@@ -107,15 +101,13 @@
                                 </div> <!-- /widget-header -->
 
                                 <div class="widget-content">
-                                    <div class="pricing-plans plans-2">
-                                        
-                                        
-                                        <!-- LECTORES -->
+                                    <div class="pricing-plans plans-1">
+                                        <!-- Grupos -->
                                         <div class="plan-container">
                                             <div class="plan green">
                                                 <div class="plan-header">
                                                     <div class="plan-title">
-                                                        Lectores	        		
+                                                        Grupos	        		
                                                     </div> <!-- /plan-title -->
 
                                                     <div class="plan-price">
@@ -126,72 +118,21 @@
 
                                                 <div class="plan-features">
                                                     <ul>
-                                                        <li><strong>Sección</strong> dedicada a la gestión de los lectores.</li>
+                                                        <li><strong>Sección</strong> dedicada a la gestión de Grupos.</li>
                                                         <li>Aqui puedes</li>
                                                         <li>Crear, listar, modificar y borrar</li>
-                                                        <li>lectores y usuarios.</li>
+                                                        <li>Grupos.</li>
                                                     </ul>
                                                 </div> <!-- /plan-features -->
 
                                                 <div class="plan-actions">				
-                                                    <a href="registrarLector.jsp" class="btn">Registrar</a>				
+                                                    <a href="registrarGrupo.jsp" class="btn">Registrar</a>				
                                                 </div> <!-- /plan-actions -->
                                                 <div class="plan-actions">				
-                                                    <a href="listarLectores.jsp" class="btn">Listar</a>				
-                                                </div> <!-- /plan-actions -->
-                                                <div class="plan-actions">				
-                                                    <a href="buscarLectorPorNombre.jsp" class="btn">Buscar Por Nombre</a>				
-                                                </div> <!-- /plan-actions -->
-                                                <div class="plan-actions">				
-                                                    <a href="modificarLector.jsp" class="btn">Modificar</a>				
-                                                </div> <!-- /plan-actions -->
-                                                <div class="plan-actions">				
-                                                    <a href="eliminarLector.jsp" class="btn">Eliminar</a>				
+                                                    <a href="listarGrupos.jsp" class="btn">Listar</a>							
                                                 </div> <!-- /plan-actions -->
                                             </div> <!-- /plan -->
                                         </div> <!-- /plan-container -->
-                                        
-                                        <!-- PAPERS -->
-                                        <div class="plan-container">
-                                            <div class="plan green">
-                                                <div class="plan-header">
-                                                    <div class="plan-title">
-                                                        Papers	        		
-                                                    </div> <!-- /plan-title -->
-
-                                                    <div class="plan-price">
-                                                        <a href="registrarPaper.jsp"><img src="./resources/img/libro.png" style="max-width:100%;height:auto;"></a><span class="term"></span>
-                                                    </div> <!-- /plan-price -->
-
-                                                </div> <!-- /plan-header -->	        
-
-                                                <div class="plan-features">
-                                                    <ul>
-                                                        <li><strong>Sección</strong> dedicada a la gestión de los papers.</li>
-                                                        <li>Aqui puedes</li>
-                                                        <li>Crear, listar, buscar ,modificar y borrar</li>
-                                                        <li>papers.</li>
-                                                    </ul>
-                                                </div> <!-- /plan-features -->
-
-                                                <div class="plan-actions">				
-                                                    <a href="registrarPaper.jsp" class="btn">Registrar</a>				
-                                                </div> <!-- /plan-actions -->
-                                                <div class="plan-actions">				
-                                                    <a href="buscarPaper.jsp" class="btn">Buscar</a>				
-                                                </div> <!-- /plan-actions -->                                                
-                                                <div class="plan-actions">				
-                                                    <a href="listarPapers.jsp" class="btn">Listar</a>				
-                                                </div> <!-- /plan-actions -->
-                                                <div class="plan-actions">				
-                                                    <a href="modificarPaper.jsp" class="btn">Modificar</a>				
-                                                </div> <!-- /plan-actions -->
-                                                <div class="plan-actions">				
-                                                    <a href="eliminarPaper.jsp" class="btn">Eliminar</a>				
-                                                </div> <!-- /plan-actions -->
-                                            </div> <!-- /plan -->
-                                        </div> <!-- /plan-container -->                                        
-                                  
                                     </div> <!-- /pricing-plans -->
                                 </div> <!-- /widget-content -->
                             </div> <!-- /widget -->					

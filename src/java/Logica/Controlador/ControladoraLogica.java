@@ -1,6 +1,7 @@
 package Logica.Controlador;
 
 import Logica.Entidades.GeneroPaper;
+import Logica.Entidades.Grupo;
 import Logica.Entidades.Lector;
 import Logica.Entidades.Paper;
 import Logica.Entidades.Usuario;
@@ -47,6 +48,12 @@ public class ControladoraLogica {
     public boolean crearPaper(Paper paper) {
         boolean exito = false;
         if (controladoraPersistencia.crearPaper(paper)) exito = true;
+        return exito;
+    }
+    
+     public boolean crearGrupo(Grupo grupo) {
+        boolean exito = false;
+        if (controladoraPersistencia.crearGrupo(grupo)) exito = true;
         return exito;
     }
     
@@ -161,6 +168,10 @@ public class ControladoraLogica {
     
     public List<Paper> obtenerPapers() {
         return controladoraPersistencia.obtenerPapers();
+    }
+    
+    public List<Grupo> obtenerGrupos(){
+        return controladoraPersistencia.obtenerGrupos();
     }
     
     public int obtenerCantidadUsuarios() {

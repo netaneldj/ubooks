@@ -1,12 +1,14 @@
 package Persistencia.Controlador;
 
 import Logica.Entidades.GeneroPaper;
+import Logica.Entidades.Grupo;
 import Logica.Entidades.Lector;
 import Logica.Entidades.Paper;
 import Logica.Entidades.Usuario;
 import Logica.Entidades.Valoracion;
 import Persistencia.Entidades.LectorJpaController;
 import Persistencia.Entidades.PaperJpaController;
+import Persistencia.Entidades.GrupoJpaController;
 import Persistencia.Entidades.UsuarioJpaController;
 import Persistencia.Entidades.ValoracionJpaController;
 import Persistencia.Entidades.exceptions.NonexistentEntityException;
@@ -21,6 +23,7 @@ public class ControladoraPersistencia {
     UsuarioJpaController usuarioJpaController = new UsuarioJpaController();
     PaperJpaController paperJpaController = new PaperJpaController();
     ValoracionJpaController valoracionJpaController = new ValoracionJpaController();
+    GrupoJpaController grupoJpaController = new GrupoJpaController();
 
     public ControladoraPersistencia() {}
     
@@ -60,6 +63,19 @@ public class ControladoraPersistencia {
         return exito;
     }
     
+    public boolean crearGrupo(Grupo grupo){
+        boolean exito = false;
+        try {
+            grupoJpaController.create(grupo);
+            logger.log(Level.INFO, "ControladoraPersistencia: Grupo creado con exito!");
+            exito = true;
+        } catch(Exception e){
+            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al crear lector: %s",e.getMessage());
+        }
+        return exito;
+    }
+    
+    
     public List<Usuario> obtenerUsuarios() {
         return usuarioJpaController.findUsuarioEntities();
     }
@@ -74,6 +90,10 @@ public class ControladoraPersistencia {
     
     public List<Lector> obtenerLectores() {
         return lectorJpaController.findLectorEntities();
+    }
+    
+    public List<Grupo> obtenerGrupos(){
+        return grupoJpaController.findGrupoEntities();
     }
     
     public List<Lector> obtenerAutores() {
