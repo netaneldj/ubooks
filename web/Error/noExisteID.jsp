@@ -40,9 +40,9 @@
                                     <ul class="nav pull-right">
 
                                             <li class="">						
-                                                    <a href="../gestion.jsp" class="">
+                                                    <a href="../inicio.jsp" class="">
                                                             <i class="icon-chevron-left"></i>
-                                                            Regresar a la pagina de gestion
+                                                            Regresar al inicio
                                                     </a>
 
                                             </li>
@@ -75,10 +75,10 @@
                                     </div> <!-- /error-details -->
 
                                     <div class="error-actions">
-                                            <a href="../gestion.jsp" class="btn btn-large btn-primary">
+                                            <a href="../inicio.jsp" class="btn btn-large btn-primary">
                                                     <i class="icon-chevron-left"></i>
                                                     &nbsp;
-                                                    Regresar a la pagina de gestion						
+                                                    Regresar al inicio						
                                             </a>
 
 
