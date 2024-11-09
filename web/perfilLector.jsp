@@ -91,7 +91,7 @@
                     <ul class="mainnav">
                         <li class="active">
                             <div class="nav-collapse">
-                                <ul class="nav pull-right">
+                                <ul class="nav">
                                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                                                 class="icon-book"></i><span>Lectores</span></a>
                                         <ul class="dropdown-menu">
@@ -107,7 +107,7 @@
                         </li>
                         <li class="active">
                             <div class="nav-collapse">
-                                <ul class="nav pull-right">
+                                <ul class="nav">
                                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                                                 class="icon-pencil"></i><span>Papers</span></a>
                                         <ul class="dropdown-menu">
@@ -123,7 +123,7 @@
                         </li>
                         <li class="active">
                             <div class="nav-collapse">
-                                <ul class="nav pull-right">
+                                <ul class="nav">
                                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                                                 class="icon-user"></i><span>Grupos</span></a>
                                         <ul class="dropdown-menu">
