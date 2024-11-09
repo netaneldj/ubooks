@@ -167,7 +167,8 @@
                                 <!-- /widget-header -->
                                 <div class="widget-content">
                                     <div class="shortcuts"> 
-                                        <a href="gestion.jsp" class="shortcut"><i class="shortcut-icon icon-list-alt"></i><span class="shortcut-label">Gestión</span> </a>
+                                        <a href="buscarLectorPorNombre.jsp" class="shortcut"><i class="shortcut-icon icon-book"></i><span class="shortcut-label">Buscar Lector</span> </a>
+                                        <a href="buscarPaper.jsp" class="shortcut"><i class="shortcut-icon icon-pencil"></i><span class="shortcut-label">Buscar Paper</span> </a>
                                         <!-- /shortcuts --> 
                                     </div>
                                     <!-- /widget-content --> 
