@@ -54,36 +54,29 @@
     HttpSession sesion = request.getSession();
     String id_usuario = "0";
     String nombreUsuario = "";
-    String id_lector = "0";
-    Lector lector;
+    String id_paper = "";
+    Paper paper;
     Cookie[] cookies = request.getCookies();
     for(Cookie cookie : cookies){
         if(cookie.getName().equals("id_usuario")) { 
             id_usuario = cookie.getValue();
-        } else if(cookie.getName().equals("id_lector")) { 
-            id_lector = cookie.getValue();
-        }
+        } else if(cookie.getName().equals("id_paper")) { 
+                id_paper = cookie.getValue();
+            }
     }
     if (id_usuario.equals("0"))  
         response.sendRedirect("index.jsp");
     else
         nombreUsuario = controladoraLogica.obtenerUsuarioPorID(Integer.parseInt(id_usuario)).getNombreUsuario();
-        lector = controladoraLogica.obtenerLectorPorID(Integer.parseInt(id_lector));
+        paper = controladoraLogica.obtenerPaperPorID(Integer.parseInt(id_paper));
         
-    String idPaper = request.getParameter("id");
-    Paper paper = null;
-    if (idPaper != null) {
-        // Crear la cookie con el ID del paper
-        Cookie paperCookie = new Cookie("paper_id", idPaper);
-        paperCookie.setMaxAge(60 * 60); // 1 hora de duración
-        response.addCookie(paperCookie);
-
-        // obtener el paper
-        paper = controladoraLogica.obtenerPaperPorID(Integer.parseInt(idPaper));
-    }
-
-    // Obtener lista de valoraciones del Paper
-    List<Valoracion> valoraciones = controladoraLogica.obtenerValoracionesPorPaper(Integer.parseInt(idPaper));
+     /****************** PAGINADO ******************/
+    int itemsPorPagina = 2; // Número de items por página
+    int paginaValoracion = request.getParameter("paginaValoracion") != null ? Integer.parseInt(request.getParameter("paginaValoracion")) : 1;
+    int inicioValoracion = (paginaValoracion - 1) * itemsPorPagina;
+    List<Valoracion> misValoraciones = controladoraLogica.obtenerValoracionesPorPaper(Integer.parseInt(id_paper));
+    int totalValoraciones = misValoraciones.size();
+    List<Valoracion> misValoracionesPaginadas = misValoraciones.subList(inicioValoracion, Math.min(inicioValoracion + itemsPorPagina, totalValoraciones));
 %>
 
 <div class="navbar navbar-fixed-top">
@@ -237,9 +230,9 @@
                             <h3>Valoraciones de otros usuarios</h3>
                         </div>
                         <div class="widget-content">
-                            <% if (valoraciones != null && !valoraciones.isEmpty()) { %>
+                            <% if (misValoracionesPaginadas != null && !misValoracionesPaginadas.isEmpty()) { %>
                                 <ul class="list-group">
-                                    <% for (Valoracion valoracion : valoraciones) { %>
+                                    <% for (Valoracion valoracion : misValoracionesPaginadas) { %>
                                         <li class="list-group-item">
                                             <strong><%= controladoraLogica.obtenerUsuarioPorID(valoracion.getIdUsuario()).getNombreUsuario() %>:</strong>
                                             <span class="rating">
@@ -255,6 +248,15 @@
                                 <p>No hay valoraciones aún.</p>
                             <% } %>
                         </div>
+                        <div class="pagination">
+                            <% if (paginaValoracion > 1) { %>
+                                <a href="verPaper.jsp?paginaValoracion=<%= paginaValoracion - 1 %>">&laquo; Anterior</a>
+                            <% } %>
+                            <span>Página <%= paginaValoracion %> de <%= (int) Math.ceil((double) totalValoraciones / itemsPorPagina) %></span>
+                            <% if (paginaValoracion < (int) Math.ceil((double) totalValoraciones / itemsPorPagina)) { %>
+                                <a href="verPaper.jsp?paginaValoracion=<%= paginaValoracion + 1 %>">Siguiente &raquo;</a>
+                            <% } %>
+                        </div>  
                     </div>
                 </div>
 

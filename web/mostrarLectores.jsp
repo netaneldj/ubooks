@@ -7,7 +7,7 @@
 <html lang="es">
     <head>
         <meta charset="utf-8">
-        <title>Lectores Buscados - Ubooks</title>
+        <title>Seleccionar Lector - Ubooks</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes"> 
 
@@ -21,7 +21,6 @@
         <link href="resources/css/pages/signin.css" rel="stylesheet" type="text/css">
         <link href="resources/css/pages/dashboard.css" rel="stylesheet">
     </head>
-
     <body>
         <%
             String id_usuario = "0";
@@ -63,7 +62,6 @@
             </div> <!-- /navbar-inner -->
         </div> <!-- /navbar -->
 
-
         <div class="container-fluid cata-flex">
             <div class="row ">
                <div class="span9">
@@ -77,33 +75,55 @@
                                 <tr>
                                     <th><center>ID</center></th>
                                     <th><center>Nombre</center></th>
-                                    <th><center>Autor</center></th>
+                                    <th><center>Apellido</center></th>
+                                    <th><center>Fecha de nacimiento</center></th>
                                     <th><center>Email</center></th>
+                                    <th><center>Idioma</center></th>
+                                    <th><center>Genero</center></th>
+                                    <th><center>Es autor</center></th>
+                                    <th><center>Nombre de usuario</center></th>
+                                    <th><center>Acceder al perfil</center></th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                     <tr>
                                         <%
-                                            ControladoraLogica controladoraLogica = new ControladoraLogica();
+                                            ControladoraLogica controladoraLogica = new ControladoraLogica();        
                                             String nombre_usuario = "";
-                                            String esAutor = "";
+                                                String esAutor = "";
 
-                                            for(Cookie cookie : cookies){
-                                                    if(cookie.getName().equals("nombre_usuario") ){ 
-                                                        nombre_usuario = cookie.getValue();
+                                                for(Cookie cookie : cookies){
+                                                        if(cookie.getName().equals("nombre_usuario") ){ 
+                                                            nombre_usuario = cookie.getValue();
+                                                        }
+                                                        if(cookie.getName().equals("es_autor")){
+                                                            esAutor = cookie.getValue();
+                                                        }
                                                     }
-                                                    if(cookie.getName().equals("es_autor")){
-                                                        esAutor = cookie.getValue();
-                                                    }
-                                                }
 
-                                            List<Lector> lectores = controladoraLogica.obtenerLectoresPorNombre(nombre_usuario, esAutor);
-                                            for (Lector lector : lectores) {
+                                                List<Lector> lectores = controladoraLogica.obtenerLectoresPorNombre(nombre_usuario, esAutor);
+                                                for (Lector lector : lectores) {
+
                                         %>
                                 <td><center><%=lector.getId()%></center></td>
                                 <td><center><%=lector.getNombre()%></center></td>
-                                <td><center><%=lector.getEsAutor()%></center></td>
-                                <td><center><%=lector.getEmail()%></center></td>
+                                <td><center><%=lector.getApellido()%></center></td>
+                                <td><center><%=controladoraLogica.convertirDateAString(lector.getNacimiento())%></center></td>
+                                <td><center><%=lector.getUsuario().getEmail()%></center></td>
+                                <td><center><%=lector.getIdioma()%></center></td>                            
+                                <td><center><%=lector.getGenero()%></center></td>
+                                <td><center><%= (lector.getEsAutor() ? "Si" : "No") %></center></td>
+                                <td><center><%=lector.getUsuario().getNombreUsuario()%></center></td>
+                                <td class="align-middle">
+                                    <center>
+                                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                <form action="SvSeleccionarLector" method="GET" style="display: inline;">
+                                                    <input type="hidden" name="id_lector" value="<%= lector.getId() %>">
+                                                    <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Ver</button>
+                                                </form>
+                                            </div>
+                                    </center>
+                                </td>
                                 </tr>
                                 <% }%>
                                 </tbody>
@@ -113,6 +133,8 @@
                 </div> 
             </div>
         </div>
+
+
 
         <!-- Text Under Box -->
 
