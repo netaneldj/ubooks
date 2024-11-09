@@ -63,45 +63,74 @@
         </div> <!-- /navbar -->
 
         <div class="container-fluid cata-flex">
-            <div class="row">
-                <div class="span5">
-                    <div class="account-container register ">
-                        <div class="content clearfix widget">
-                            <form action="SvSeleccionarLector" method="GET">
-                                <h1>Seleccionar Lector</h1>			
-                                <div class="login-fields">
-                                    <p>Lector: <select name="id_lector"> </p>
-                                    <%
-                                        ControladoraLogica controladoraLogica = new ControladoraLogica();        
-                                        String nombre_usuario = "";
-                                            String esAutor = "";
+            <div class="row ">
+               <div class="span9">
+                    <div class="widget widget-table action-table">
+                        <div class="widget-header"> <i class="icon-th-list"></i>
+                            <h3>Lista Lectores</h3>
+                        </div>
+                        <div class="widget-content">
+                            <table class="table table-striped table-bordered">
+                                <thead>
+                                <tr>
+                                    <th><center>ID</center></th>
+                                    <th><center>Nombre</center></th>
+                                    <th><center>Apellido</center></th>
+                                    <th><center>Fecha de nacimiento</center></th>
+                                    <th><center>Email</center></th>
+                                    <th><center>Idioma</center></th>
+                                    <th><center>Genero</center></th>
+                                    <th><center>Es autor</center></th>
+                                    <th><center>Nombre de usuario</center></th>
+                                    <th><center>Acceder al perfil</center></th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <%
+                                            ControladoraLogica controladoraLogica = new ControladoraLogica();        
+                                            String nombre_usuario = "";
+                                                String esAutor = "";
 
-                                            for(Cookie cookie : cookies){
-                                                    if(cookie.getName().equals("nombre_usuario") ){ 
-                                                        nombre_usuario = cookie.getValue();
+                                                for(Cookie cookie : cookies){
+                                                        if(cookie.getName().equals("nombre_usuario") ){ 
+                                                            nombre_usuario = cookie.getValue();
+                                                        }
+                                                        if(cookie.getName().equals("es_autor")){
+                                                            esAutor = cookie.getValue();
+                                                        }
                                                     }
-                                                    if(cookie.getName().equals("es_autor")){
-                                                        esAutor = cookie.getValue();
-                                                    }
-                                                }
 
-                                            List<Lector> lectores = controladoraLogica.obtenerLectoresPorNombre(nombre_usuario, esAutor);
-                                            for (Lector lector : lectores) {
-                                    %>
-                                    <option value=<%=lector.getId()%>><%=lector.getNombre()+" "+lector.getApellido()%></option>
-                                    <% }%>
-                                    </select> <!-- /field -->
+                                                List<Lector> lectores = controladoraLogica.obtenerLectoresPorNombre(nombre_usuario, esAutor);
+                                                for (Lector lector : lectores) {
 
-                                </div> <!-- /login-fields -->
-
-                                <div class="login-actions">
-                                    <button class="button btn btn-primary btn-large">Ver perfil</button>
-                                </div> <!-- .actions -->
-                            </form>
-                        </div> <!-- /content -->
-                    </div> <!-- /account-container -->
-
-                </div>
+                                        %>
+                                <td><center><%=lector.getId()%></center></td>
+                                <td><center><%=lector.getNombre()%></center></td>
+                                <td><center><%=lector.getApellido()%></center></td>
+                                <td><center><%=controladoraLogica.convertirDateAString(lector.getNacimiento())%></center></td>
+                                <td><center><%=lector.getUsuario().getEmail()%></center></td>
+                                <td><center><%=lector.getIdioma()%></center></td>                            
+                                <td><center><%=lector.getGenero()%></center></td>
+                                <td><center><%= (lector.getEsAutor() ? "Si" : "No") %></center></td>
+                                <td><center><%=lector.getUsuario().getNombreUsuario()%></center></td>
+                                <td class="align-middle">
+                                    <center>
+                                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                <form action="SvSeleccionarLector" method="GET" style="display: inline;">
+                                                    <input type="hidden" name="id_lector" value="<%= lector.getId() %>">
+                                                    <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Ver</button>
+                                                </form>
+                                            </div>
+                                    </center>
+                                </td>
+                                </tr>
+                                <% }%>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div> 
+                </div> 
             </div>
         </div>
 
