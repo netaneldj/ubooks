@@ -27,7 +27,7 @@
             <div class="alert alert-success" role="alert">
                 <strong>¡Éxito! Gracias por enviarnos tu valoracion.</strong> 
             </div>
-        <a href="verPaper.jsp?id=<%= request.getParameter("id") %>" class="btn btn-primary">
+        <a href="verPaper.jsp?id=<%= request.getParameter("id_paper") %>" class="btn btn-primary">
             Volver al Paper
         </a>
     </div>

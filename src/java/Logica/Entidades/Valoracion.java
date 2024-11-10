@@ -2,10 +2,12 @@ package Logica.Entidades;
 
 import java.io.Serializable;
 import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Entity
 public class Valoracion implements Serializable {
@@ -14,22 +16,21 @@ public class Valoracion implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
 
-    @Basic
-    private Integer idPaper; // ID del paper asociado
-    @Basic
-    private Integer idUsuario; // ID del usuario que hace la valoración
-    @Basic
+    @OneToOne
+    private Paper paper; // ID del paper asociado
+    @OneToOne
+    private Lector lector; // ID del usuario que hace la valoración
+    @Column(name = "valoracion_numerica")
     private int valoracionNumerica; // Cantidad de estrellas
-    @Basic
     private String comentario; // Comentario adicional
 
     public Valoracion() {
     }
 
-    public Valoracion(Integer id, Integer idPaper, Integer idUsuario, int valoracionNumerica, String comentario) {
+    public Valoracion(Integer id, Paper paper, Lector lector, int valoracionNumerica, String comentario) {
         this.id = id;
-        this.idPaper = idPaper;
-        this.idUsuario = idUsuario;
+        this.paper = paper;
+        this.lector = lector;
         this.valoracionNumerica = valoracionNumerica;
         this.comentario = comentario;
     }
@@ -42,20 +43,20 @@ public class Valoracion implements Serializable {
         this.id = id;
     }
 
-    public Integer getIdPaper() {
-        return idPaper;
+    public Paper getPaper() {
+        return paper;
     }
 
-    public void setIdPaper(Integer idPaper) {
-        this.idPaper = idPaper;
+    public void setPaper(Paper paper) {
+        this.paper = paper;
     }
 
-    public Integer getIdUsuario() {
-        return idUsuario;
+    public Lector getLector() {
+        return lector;
     }
 
-    public void setIdUsuario(Integer idUsuario) {
-        this.idUsuario = idUsuario;
+    public void setLector(Lector lector) {
+        this.lector = lector;
     }
 
     public int getValoracionNumerica() {

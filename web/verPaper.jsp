@@ -234,10 +234,10 @@
                                 <ul class="list-group">
                                     <% for (Valoracion valoracion : misValoracionesPaginadas) { %>
                                         <li class="list-group-item">
-                                            <strong><%= controladoraLogica.obtenerUsuarioPorID(valoracion.getIdUsuario()).getNombreUsuario() %>:</strong>
+                                            <strong><%= controladoraLogica.obtenerLectorPorID(valoracion.getLector().getId()).getNombre()%>:</strong>
                                             <span class="rating">
                                                 <% for (int i = 0; i < 5; i++) { %>
-                                                    <span style="color: <%= i < valoracion.getValoracionNumerica() ? "gold" : "#ddd" %>;">★</span>
+                                                    <span style="color: <%= i < valoracion.getValoracionNumerica() ? "gold" : "#ddd" %>;"></span>
                                                 <% } %>
                                             </span>
                                             <p><%= valoracion.getComentario() %></p>
