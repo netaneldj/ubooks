@@ -311,7 +311,14 @@
                                     <a href="perfilLector.jsp?paginaPaper=<%= paginaPaper + 1 %>">Siguiente &raquo;</a>
                                 <% } %>
                             </div>                                                                        
-                        </div>                                       
+                        </div>   
+                            
+                    <div class="login-actions">
+                        <form action="SvAgregarLectorAMisLectores" method="POST">
+                            <button type="submit" class="button btn btn-primary btn-large">Agregar a mis lectores</button>
+                        </form>
+                    </div>   
+                            
                     </div>
                 </div>
             </div>

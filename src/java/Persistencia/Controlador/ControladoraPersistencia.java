@@ -92,6 +92,10 @@ public class ControladoraPersistencia {
         return lectorJpaController.findLectorEntities();
     }
     
+    public List<Lector> obtenerMisLectores() {
+        return lectorJpaController.findLectorEntities();
+    }
+    
     public List<Grupo> obtenerGrupos(){
         return grupoJpaController.findGrupoEntities();
     }
@@ -112,6 +116,7 @@ public class ControladoraPersistencia {
         return lectorJpaController.getLectorCount();
     }
     
+  
     public List<Paper> obtenerPapers() {
         return paperJpaController.findPaperEntities();
     }

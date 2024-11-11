@@ -1,7 +1,9 @@
 package Logica.Entidades;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
@@ -9,6 +11,7 @@ import javax.persistence.Enumerated;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 
 @Entity
@@ -26,7 +29,12 @@ public class Lector extends Persona implements Serializable {
     @Column(name = "ES_AUTOR")
     private Boolean esAutor;
     
-
+    @OneToMany
+    private List<Usuario> misLectores;
+    
+    @OneToMany
+    private List<Paper> misPapers;
+    
     public Lector() {
     }
 
@@ -37,6 +45,8 @@ public class Lector extends Persona implements Serializable {
         this.idioma = idioma;
         this.genero = genero;
         this.esAutor = esAutor;
+        this.misLectores = new ArrayList<Usuario>();
+        this.misPapers = new ArrayList<Paper>();
     }
 
     public int getId() {
@@ -46,6 +56,23 @@ public class Lector extends Persona implements Serializable {
     public void setId(int id) {
         this.id = id;
     }
+    
+    public List<Usuario> getMisLectores() {
+        return misLectores;
+    }
+
+    public void addMisLectores(Usuario lector) {
+        misLectores.add(lector);
+    }
+    
+    public List<Paper> getMisPapers() {
+        return misPapers;
+    }
+
+    public void addMisPapers(Paper paper) {
+        misPapers.add(paper);
+    }
+    
 
     public Usuario getUsuario() {
         return usuario;
