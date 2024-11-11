@@ -174,6 +174,10 @@ public class ControladoraLogica {
         return controladoraPersistencia.obtenerGrupos();
     }
     
+    public Grupo obtenerGrupoPorId(Integer id){
+        return controladoraPersistencia.obtenerGrupoPorId(id);
+    }
+    
     public int obtenerCantidadUsuarios() {
         return controladoraPersistencia.obtenerCantidadUsuarios();
     }
@@ -208,6 +212,10 @@ public class ControladoraLogica {
     
     public boolean modificarPaper(Paper paper) {
         return controladoraPersistencia.modificarPaper(paper);
+    }
+    
+    public boolean modificarGrupo(Grupo grupo) {
+        return controladoraPersistencia.modificarGrupo(grupo); 
     }
     
     public static synchronized Date convertirStringADate(String fecha) {
@@ -271,4 +279,6 @@ public class ControladoraLogica {
     public List<Valoracion> obtenerValoracionesPorPaper(int idPaper) {
         return controladoraPersistencia.obtenerValoracionesPorPaper(idPaper);
     }
+
+
 }

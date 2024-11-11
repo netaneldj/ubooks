@@ -168,6 +168,19 @@ public class ControladoraPersistencia {
         return exito;
     }
     
+    
+    public boolean modificarGrupo(Grupo grupo) {
+        boolean exito = false;
+        try {
+            grupoJpaController.edit(grupo);
+            logger.log(Level.INFO, "ControladoraPersistencia: Paper modificado con exito!");
+            exito = true;
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al modificar paper: {0}", e.getMessage());
+        }
+        return exito;
+    }
+    
     public boolean borrarUsuario(int id) {
         try {
             usuarioJpaController.destroy(id);
@@ -224,5 +237,10 @@ public class ControladoraPersistencia {
     public List<Valoracion> obtenerValoracionesPorPaper(int idPaper) {
         return valoracionJpaController.findValoracionesByPaperId(idPaper);
     }
+
+    public Grupo obtenerGrupoPorId(Integer id) {
+        return grupoJpaController.findGrupo(id); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
 
 }

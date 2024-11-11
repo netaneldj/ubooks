@@ -89,5 +89,37 @@ public class GrupoJpaController  implements Serializable{
         }
     }
 
+    public Grupo findGrupo(Integer id) {
+        EntityManager em = getEntityManager();
+        try {
+            return em.find(Grupo.class, id);
+        } finally {
+            em.close();
+        }
+    }
+    
+        public void edit(Grupo grupo) throws NonexistentEntityException, Exception {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            grupo = em.merge(grupo);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            String msg = ex.getLocalizedMessage();
+            if (msg == null || msg.length() == 0) {
+                Integer id = grupo.getId();
+                if (findGrupo(id) == null) {
+                    throw new NonexistentEntityException("The lector with id " + id + " no longer exists.");
+                }
+            }
+            throw ex;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
+
 
 }

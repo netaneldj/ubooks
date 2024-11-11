@@ -110,4 +110,13 @@ public class Grupo implements Serializable {
     public Integer getCantidadComentarios(){
         return comentarios.size();
     }
+    
+    public boolean esMiembro(Lector lector){
+        for(Lector miembro: miembros){
+            if(miembro.getId() == lector.getId()){
+                return true;
+            }
+        }
+        return false;
+    }
 }
