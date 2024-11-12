@@ -341,9 +341,7 @@
                                                                     <i class="icon-caret-down"></i> 
                                                                 </a>
                                                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                                                    <li><a href="registrarPaper.jsp"><i class="icon-plus-sign icon-large"></i> Registrar</a></li>
-                                                                    <li><a href="modificarPaper.jsp"><i class="icon-edit icon-large"></i> Modificar</a></li>
-                                                                    <li><a href="eliminarPaper.jsp"><i class="icon-trash icon-large"></i> Borrar</a></li>
+                                                                    <li><a href="SvVerGrupo?id=<%= miGrupo.getId() %>"><i class="icon-plus-sign icon-large"></i> Ingresar</a></li>
                                                                 </ul>
                                                             </div>
                                                         </div>
