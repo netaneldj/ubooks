@@ -28,7 +28,7 @@ public class SvUnirmeGrupo extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        //try {
+        try {
             
             String id_lector=request.getParameter("lector");
             String id_grupo = request.getParameter("grupo");
@@ -48,9 +48,9 @@ public class SvUnirmeGrupo extends HttpServlet {
             request.getContextPath();
             response.setHeader("Refresh", "0; URL=" + request.getContextPath()+'/'+ paginaOriginal);
            
-        /*} catch(Exception e) {
+        } catch(Exception e) {
             response.sendRedirect("Error/error.jsp");
-        }*/
+        }
     }
     
     

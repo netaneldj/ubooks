@@ -22,16 +22,18 @@ import javax.persistence.OneToOne;
 public class ComentarioGrupo extends ComentarioAbstracto {
     @OneToMany
     private List<ComentarioRespuesta> respuestas;
+    private String titulo;
     
     public ComentarioGrupo (){
         respuestas = new ArrayList<>();
     }
     
-    public ComentarioGrupo(Integer id, String comentario, Lector creador, List<ComentarioRespuesta> respuestas){
+    public ComentarioGrupo(Integer id, String comentario, Lector creador, List<ComentarioRespuesta> respuestas, String titulo){
         this.id = id;
         this.comentario=comentario;
         this.creador = creador;
         this.respuestas = respuestas;
+        this.titulo = titulo;
     }
          
     public List<ComentarioRespuesta> getRespuestas(){
@@ -45,4 +47,15 @@ public class ComentarioGrupo extends ComentarioAbstracto {
     public void addRespuesta(ComentarioRespuesta respuesta){
         respuestas.add(respuesta);
     }
+    
+    public void setTitulo(String titulo){
+        this.titulo = titulo;
+    }
+    
+    public String getTitulo(){
+        return titulo;
+    }
+
 }
+
+

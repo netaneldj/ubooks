@@ -98,7 +98,7 @@ public class GrupoJpaController  implements Serializable{
         }
     }
     
-        public void edit(Grupo grupo) throws NonexistentEntityException, Exception {
+    public void edit(Grupo grupo) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
             em = getEntityManager();

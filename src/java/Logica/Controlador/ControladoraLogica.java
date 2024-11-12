@@ -1,5 +1,6 @@
 package Logica.Controlador;
 
+import Logica.Entidades.ComentarioGrupo;
 import Logica.Entidades.GeneroPaper;
 import Logica.Entidades.Grupo;
 import Logica.Entidades.Lector;
@@ -278,6 +279,12 @@ public class ControladoraLogica {
     // Método agregado para obtener valoraciones de un Paper específico
     public List<Valoracion> obtenerValoracionesPorPaper(int idPaper) {
         return controladoraPersistencia.obtenerValoracionesPorPaper(idPaper);
+    }
+
+    public boolean crearComentarioGrupo(ComentarioGrupo comentario) {
+        boolean exito = false;
+        if (controladoraPersistencia.crearComentarioGrupo(comentario)) exito = true;
+        return exito;
     }
 
 

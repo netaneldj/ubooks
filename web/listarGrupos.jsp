@@ -101,7 +101,7 @@
                                     Lector lector = controladoraLogica.obtenerLectorPorID(Integer.parseInt(id_usuario));
                                     if(grupo.esMiembro(lector)){
                                     %>    
-                                            <form action="verPaper.jsp" method="get" style="display: inline;">
+                                            <form action="SvVerGrupo" method="get" style="display: inline;">
                                                 <input type="hidden" name="id" value="<%= grupo.getId() %>">
                                                 <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Entrar</button>
                                             </form> 
