@@ -175,6 +175,10 @@ public class ControladoraLogica {
         return controladoraPersistencia.obtenerGrupos();
     }
     
+    public List<Grupo>obtenerGruposPorIdUsuario(Integer id){
+        return controladoraPersistencia.obtenerGruposPorIdUsuario(id);
+    }
+    
     public Grupo obtenerGrupoPorId(Integer id){
         return controladoraPersistencia.obtenerGrupoPorId(id);
     }

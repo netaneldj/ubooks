@@ -166,7 +166,7 @@
                                 <% } %>
                                 <span>Página <%= paginaGrupo %> de <%= (int) Math.ceil((double) totalComentarios / itemsPorPagina) %></span>
                                 <% if (paginaGrupo < (int) Math.ceil((double) totalComentarios / itemsPorPagina)) { %>
-                                    <a href="verGrupo.jsp?paginaGrupo=<%= paginaGrupo + 1 %>">Siguiente &raquo;</a>
+                                    <a href="verGrupo.jsp?paginaGrupo=<%= paginaGrupo + 1 %>" >Siguiente &raquo;</a>
                                 <% } %>
                             </div>
                         

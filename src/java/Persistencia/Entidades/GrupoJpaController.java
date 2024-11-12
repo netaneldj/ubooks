@@ -5,6 +5,7 @@
 package Persistencia.Entidades;
 
 import Logica.Entidades.Grupo;
+import Logica.Entidades.Lector;
 import Persistencia.Entidades.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -13,7 +14,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -98,6 +102,29 @@ public class GrupoJpaController  implements Serializable{
         }
     }
     
+    public List<Grupo> findGrupoByLector(Lector lector) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Grupo> cq = cb.createQuery(Grupo.class);
+            Root<Grupo> grupo = cq.from(Grupo.class);
+
+            Expression<List<Lector>> miembros = grupo.get("miembros");
+            
+            
+            
+            cq.select(grupo).where(cb.isMember(lector, miembros));
+            
+            Query q = em.createQuery(cq).setParameter("id", lector.getId());
+            
+            return q.getResultList();
+        } finally {
+            em.close();
+        }
+    }
+    
+
+    
     public void edit(Grupo grupo) throws NonexistentEntityException, Exception {
         EntityManager em = null;
         try {
@@ -120,6 +147,8 @@ public class GrupoJpaController  implements Serializable{
             }
         }
     }
+
+
 
 
 }
