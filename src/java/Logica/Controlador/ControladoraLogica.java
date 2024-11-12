@@ -21,8 +21,8 @@ public class ControladoraLogica {
         controladoraPersistencia = new ControladoraPersistencia();
     }
      
-    public boolean insertarValoracion(int idPaper, int idUsuario, int calificacion, String comentario) {
-        boolean exito = controladoraPersistencia.insertarValoracion(idPaper, idUsuario, calificacion, comentario);
+    public boolean insertarValoracion(Paper paper, Lector lector, int calificacion, String comentario) {
+        boolean exito = controladoraPersistencia.crearValoracion(paper, lector, calificacion, comentario);
         return exito;
     }
     

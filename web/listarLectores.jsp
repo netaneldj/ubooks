@@ -51,9 +51,9 @@
                     <div class="nav-collapse">
                         <ul class="nav pull-right">
                             <li class="">						
-                                <a href="gestion.jsp" class="">
+                                <a href="inicio.jsp" class="">
                                     <i class="icon-chevron-left"></i>
-                                    Regresar a la pagina de gestion
+                                    Regresar al inicio
                                 </a>
 
                             </li>
@@ -84,6 +84,7 @@
                                     <th><center>Genero</center></th>
                                     <th><center>Es autor</center></th>
                                     <th><center>Nombre de usuario</center></th>
+                                    <th><center>Acceder al perfil</center></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -93,7 +94,7 @@
                                             List<Lector> lectores = controladoraLogica.obtenerLectores();
                                             for (Lector lector : lectores) {
                                         %>
-                                        <td><center><%=lector.getId()%></center></td>
+                                <td><center><%=lector.getId()%></center></td>
                                 <td><center><%=lector.getNombre()%></center></td>
                                 <td><center><%=lector.getApellido()%></center></td>
                                 <td><center><%=controladoraLogica.convertirDateAString(lector.getNacimiento())%></center></td>
@@ -102,6 +103,16 @@
                                 <td><center><%=lector.getGenero()%></center></td>
                                 <td><center><%= (lector.getEsAutor() ? "Si" : "No") %></center></td>
                                 <td><center><%=lector.getUsuario().getNombreUsuario()%></center></td>
+                                <td class="align-middle">
+                                    <center>
+                                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                <form action="SvSeleccionarLector" method="GET" style="display: inline;">
+                                                    <input type="hidden" name="id_lector" value="<%= lector.getId() %>">
+                                                    <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Ver</button>
+                                                </form>
+                                            </div>
+                                    </center>
+                                </td>
                                 </tr>
                                 <% }%>
                                 </tbody>

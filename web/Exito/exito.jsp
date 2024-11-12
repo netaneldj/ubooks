@@ -33,9 +33,9 @@
                     <div class="nav-collapse">
                         <ul class="nav pull-right">			
                             <li class="">						
-                                <a href="../gestion.jsp" class="">
+                                <a href="../inicio.jsp" class="">
                                     <i class="icon-chevron-left"></i>
-                                    Regresar a la pagina de gestion
+                                    Regresar al inicio
                                 </a>					
                             </li>
                         </ul>			
@@ -53,17 +53,9 @@
                         <h2>Operación realizada con exito!</h2>
 
                         <div class="error-details">
-                            Ahora puedes continuar operando desde la pagina de <a href="../gestion.jsp">GESTION</a>
+                            Ahora puedes continuar operando desde la pagina de <a href="../inicio.jsp">INICIO</a>
 
-                        </div> <!-- /error-details -->
-
-                        <div class="error-actions">
-                            <a href="../inicio.jsp" class="btn btn-large btn-primary">
-                                <i class="icon-chevron-left"></i>
-                                &nbsp;
-                                Regresar a la pagina de inicio						
-                            </a>					
-                        </div> <!-- /error-actions -->							
+                        </div> <!-- /error-details -->						
                     </div> <!-- /error-container -->						
                 </div> <!-- /span12 -->		
             </div> <!-- /row -->	
