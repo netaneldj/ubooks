@@ -146,6 +146,12 @@
                                                 <input type="hidden" name="paginaOriginal" value="<%= "verGrupo.jsp" %>">
                                                 <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Ver</button>
                                             </form>
+                                            <form action="verGrupo.jsp" method="POST" style="text-align: right;clear:left;">
+                                                <input type="hidden" name="usuario" value="<%= id_usuario %>">
+                                                <input type="hidden" name="grupo" value="<%= grupo.getId() %>">
+                                                <input type="hidden" name="paginaOriginal" value="<%= "verGrupo.jsp" %>">
+                                                <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Responder</button>
+                                            </form>
                                             <br/>
                                         </li>
                                     <% } %>
