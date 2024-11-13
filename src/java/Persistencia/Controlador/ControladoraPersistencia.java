@@ -99,8 +99,8 @@ public class ControladoraPersistencia {
         return grupoJpaController.findGrupoEntities();
     }
     
-    public List<Grupo> obtenerGruposPorIdUsuario(Integer id) {
-       Lector miembro = obtenerLectorPorIdUsuario(id);
+    public List<Grupo> obtenerGruposPorIdLector(Integer id) {
+       Lector miembro = obtenerLectorPorID(id);
        return grupoJpaController.findGrupoByLector(miembro);
     }
     
