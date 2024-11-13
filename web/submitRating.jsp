@@ -26,7 +26,9 @@
         String id_usuario = "0";
         String nombreUsuario = "";
         String id_lector = "0";
+        String id_paper = "";
         Lector lector = null; // Inicializamos lector
+        Paper paper = null;
         Cookie[] cookies = request.getCookies();
 
         // Obtiene id_usuario y id_lector de las cookies
@@ -36,7 +38,9 @@
                     id_usuario = cookie.getValue();
                 } else if (cookie.getName().equals("id_lector")) {
                     id_lector = cookie.getValue();
-                }
+                } else if(cookie.getName().equals("id_paper")) { 
+                id_paper = cookie.getValue();
+            }
             }
         }
 
@@ -47,18 +51,13 @@
             try {
                 nombreUsuario = controladoraLogica.obtenerUsuarioPorID(Integer.parseInt(id_usuario)).getNombreUsuario();
                 lector = controladoraLogica.obtenerLectorPorID(Integer.parseInt(id_lector));
+                paper = controladoraLogica.obtenerPaperPorID(Integer.parseInt(id_paper));
+                System.out.println("LECTOR " + lector.getNombre());
+                System.out.println("PAPER " + paper.getNombre());
             } catch (Exception e) {
                 e.printStackTrace();
                 response.sendRedirect("error.jsp"); // Redirige a una página de error específica si ocurre una excepción
             }
-        }
-
-        // Obtén el id del Paper y crea la cookie si está presente
-        String idPaper = request.getParameter("idPaper");
-        if (idPaper != null) {
-            Cookie paperCookie = new Cookie("paper_id", idPaper);
-            paperCookie.setMaxAge(60 * 60);
-            response.addCookie(paperCookie);
         }
 
         // Maneja la valoración enviada
@@ -67,12 +66,12 @@
         int valoracionNumerica = valoracionNumericaStr != null ? Integer.parseInt(valoracionNumericaStr) : 0;
 
         if (valoracionNumerica > 0) {
-            if (comentario == null && comentario.isEmpty()){
+            if (comentario == null || comentario.isEmpty()){
                 comentario = "NULL";
             }
-            controladoraLogica.insertarValoracion(Integer.parseInt(idPaper), Integer.parseInt(id_usuario), valoracionNumerica, comentario);
+            controladoraLogica.insertarValoracion(paper, lector, valoracionNumerica, comentario);
             request.setAttribute("mensajeExito", "Tu valoración ha sido enviada correctamente.");
-            response.sendRedirect("submitedRating.jsp?id=" + idPaper);
+            response.sendRedirect("submitedRating.jsp?id=" + id_paper);
         }
 
         // Mostrar mensaje de éxito si se envió una valoración

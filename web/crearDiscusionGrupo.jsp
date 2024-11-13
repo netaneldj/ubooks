@@ -9,7 +9,7 @@
   
  <head>
     <meta charset="utf-8">
-    <title>Registrar Paper - Ubooks</title>
+    <title>Crear Grupo - Ubooks</title>
 
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes"> 
@@ -27,14 +27,13 @@
 
 <body>
 	<%
-            /*
+            
             HttpSession sesion = request.getSession();
-            String nombreUsuario = (String) request.getSession().getAttribute("nombreUsuario");
-
-            if (nombreUsuario == null) {
-                response.sendRedirect("index.jsp");
-            } else {
-            */ 
+            String idGrupo = request.getParameter("grupo");
+            String idUsuario = request.getParameter("usuario");
+            String paginaOriginal = request.getParameter("paginaOriginal");
+           
+            
         %>
 	<div class="navbar navbar-fixed-top">
 	
@@ -61,9 +60,9 @@
 						
 					</li>
 					<li class="">						
-						<a href="inicio.jsp" class="">
+						<a href="gestion.jsp" class="">
 							<i class="icon-chevron-left"></i>
-							Regresar al inicio
+							Regresar a la pagina de gestion
 						</a>
 						
 					</li>
@@ -83,49 +82,34 @@
 	
 	<div class="content clearfix">
 		
-		<form action="SvAgregarPaper" method="POST" id="1">
+		<form action="SvCrearDiscusiónGrupo" method="POST" id="1">
 		
-			<h1>Registrar Paper</h1>			
+			<h1>Crear Discusion</h1>			
 			
 			<div class="login-fields">
 				
-				<p>Importar un paper:</p>
+				<p>Crear Discucion:</p>
                                 
 				<div class="field">
-					<label for="doi">Doi:</label>	
-					<input type="text" id="doi" name="doi" value="" placeholder="Doi" class="login" required/>
+					<label for="nombre">Titulo:</label>	
+					<input type="text" id="titulo" name="titulo" value="" placeholder="Titulo" class="login" required/>
 				</div> <!-- /field -->                                
 				
 				<div class="field">
-					<label for="nombre">Nombre</label>
-					<input type="text" id="nombre" name="nombre" value="" placeholder="Nombre" class="login" required/>
+					<label for="nombre">Descripción:</label>
+					<textarea id="desc" name="desc" rows="4" class="login"></textarea>
 				</div> <!-- /field -->
                                 
-                                <p>Autor: <select name="id_lector"> </p>
-                                <%
-                                    ControladoraLogica controladoraLogica = new ControladoraLogica();        
-                                    List<Lector> autores = controladoraLogica.obtenerAutores();
-                                            for (Lector autor : autores) {
-                                %>
-                                <option value=<%=autor.getId()%>><%=autor.getNombre()+" "+autor.getApellido()%></option>
-                                <% }%>
-                                </select> <!-- /field -->    
-                               <p>Genero: <select name="genero"> </p>
-                                <%
-                                            for (GeneroPaper genero : GeneroPaper.values()) {
-                                        %>
-                                <option><%=genero%></option>
-                                <% }%>
-                                </select> <!-- /field -->
-				<div class="field">
-					<label for="resumen">Resumen:</label>
-					<input type="text" id="resumen" name="resumen" value="" placeholder="Resumen" class="login" required/>
-				</div> <!-- /field -->
+                               
 				
 			</div> <!-- /login-fields -->
-			
+                        
+			<input type="hidden" name="grupo" value="<%= idGrupo %>">
+                        <input type="hidden" name="lector" value="<%= idUsuario %>">
+                        <input type="hidden" name="paginaOriginal" value="<%= paginaOriginal %>">
+                        
 			<div class="login-actions">					
-				<button class="button btn btn-primary btn-large">Registrar</button>
+				<button class="button btn btn-primary btn-large">Crear</button>
 				
 			</div> <!-- .actions -->
 			

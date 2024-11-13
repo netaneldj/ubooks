@@ -2,6 +2,7 @@ package Logica.Entidades;
 
 import Logica.Controlador.ControladoraLogica;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
@@ -46,16 +47,21 @@ public class Lector extends Persona implements Serializable {
     )
     private List<Usuario> seguidos;
 
+    @OneToMany
+    private List<Paper> misPapers;
+
     public Lector() {
+        misPapers = new ArrayList<>();
     }
 
-    public Lector(Integer id, Usuario usuario, String nombre, String apellido, Date nacimiento, IdiomaPaper idioma, GeneroPaper genero, Boolean esAutor) {
+    public Lector(Integer id, Usuario usuario, String nombre, String apellido, Date nacimiento, IdiomaPaper idioma, GeneroPaper genero, Boolean esAutor, List<Paper> misPapers) {
         super(nombre, apellido, nacimiento);
         this.id = id;
         this.usuario = usuario;
         this.idioma = idioma;
         this.genero = genero;
         this.esAutor = esAutor;
+        this.misPapers = misPapers;
     }
 
     public int getId() {
@@ -124,5 +130,26 @@ public class Lector extends Persona implements Serializable {
 
     public void setSeguidos(List<Usuario> seguidos) {
         this.seguidos = seguidos;
+    }
+	
+    public void setMisPapers(List<Paper> misPapers){
+        this.misPapers = misPapers;
+    }
+    
+    public List<Paper> getMisPapers(){
+        return misPapers;
+    }
+    
+    public void addPaper(Paper paper){
+        misPapers.add(paper);
+    }
+    
+    public Boolean siguePaper(Paper paper){
+        for(Paper miPaper: misPapers){
+            if(paper.getId()==(miPaper.getId())){
+                return true;
+            }
+        }
+        return false;
     }
 }

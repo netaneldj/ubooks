@@ -1,5 +1,6 @@
 package Logica.Controlador;
 
+import Logica.Entidades.ComentarioGrupo;
 import Logica.Entidades.GeneroPaper;
 import Logica.Entidades.Grupo;
 import Logica.Entidades.Lector;
@@ -21,8 +22,8 @@ public class ControladoraLogica {
         controladoraPersistencia = new ControladoraPersistencia();
     }
      
-    public boolean insertarValoracion(int idPaper, int idUsuario, int calificacion, String comentario) {
-        boolean exito = controladoraPersistencia.insertarValoracion(idPaper, idUsuario, calificacion, comentario);
+    public boolean insertarValoracion(Paper paper, Lector lector, int calificacion, String comentario) {
+        boolean exito = controladoraPersistencia.crearValoracion(paper, lector, calificacion, comentario);
         return exito;
     }
     
@@ -178,6 +179,14 @@ public class ControladoraLogica {
         return controladoraPersistencia.obtenerGrupos();
     }
     
+    public List<Grupo>obtenerGruposPorIdLector(Integer id){
+        return controladoraPersistencia.obtenerGruposPorIdLector(id);
+    }
+    
+    public Grupo obtenerGrupoPorId(Integer id){
+        return controladoraPersistencia.obtenerGrupoPorId(id);
+    }
+    
     public int obtenerCantidadUsuarios() {
         return controladoraPersistencia.obtenerCantidadUsuarios();
     }
@@ -212,6 +221,10 @@ public class ControladoraLogica {
     
     public boolean modificarPaper(Paper paper) {
         return controladoraPersistencia.modificarPaper(paper);
+    }
+    
+    public boolean modificarGrupo(Grupo grupo) {
+        return controladoraPersistencia.modificarGrupo(grupo); 
     }
     
     public static synchronized Date convertirStringADate(String fecha) {
@@ -275,4 +288,12 @@ public class ControladoraLogica {
     public List<Valoracion> obtenerValoracionesPorPaper(int idPaper) {
         return controladoraPersistencia.obtenerValoracionesPorPaper(idPaper);
     }
+
+    public boolean crearComentarioGrupo(ComentarioGrupo comentario) {
+        boolean exito = false;
+        if (controladoraPersistencia.crearComentarioGrupo(comentario)) exito = true;
+        return exito;
+    }
+
+
 }

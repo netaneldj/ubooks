@@ -1,10 +1,11 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/JSP_Servlet/Servlet.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
  */
 package Servlets;
 
 import Logica.Controlador.ControladoraLogica;
+import Logica.Entidades.ComentarioGrupo;
 import Logica.Entidades.GeneroPaper;
 import Logica.Entidades.Lector;
 import Logica.Entidades.Paper;
@@ -17,26 +18,24 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-
-@WebServlet(name = "SvCrearGrupo", urlPatterns = {"/SvCrearGrupo"})
-public class SvCrearGrupo extends HttpServlet {
-
-
+@WebServlet(name = "SvCrearDiscusiónGrupo", urlPatterns = {"/SvCrearDiscusiónGrupo"})
+public class SvCrearDiscusiónGrupo extends HttpServlet{
+    
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
     
-
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         try {
             ControladoraLogica controladoraLogica = new ControladoraLogica();
+            String paginaOriginal = request.getParameter("paginaOriginal");
         
-            Grupo grupo = new Grupo();
+            ComentarioGrupo discusion = new ComentarioGrupo();
 
-            String nombre = request.getParameter("nombre");
-            String tema = request.getParameter("tema");
+            String titulo = request.getParameter("titulo");
+            String descripción = request.getParameter("desc");
            
             String id_usuario = "0";
             Cookie[] cookies = request.getCookies();
@@ -47,14 +46,18 @@ public class SvCrearGrupo extends HttpServlet {
             }
             }
             Lector lectorCreador = controladoraLogica.obtenerLectorPorUsuario(Integer.valueOf(id_usuario));
-            grupo.setNombre(nombre);
-            grupo.setTema(tema);
-            grupo.addMiembro(lectorCreador);
+            Grupo grupo = controladoraLogica.obtenerGrupoPorId(Integer.valueOf(request.getParameter("grupo")));
+            discusion.setTitulo(titulo);
+            discusion.setCreador(lectorCreador);
+            discusion.setComentario(descripción);
 
-            boolean exito = controladoraLogica.crearGrupo(grupo);
+            boolean exito = controladoraLogica.crearComentarioGrupo(discusion);
 
             if (exito) {
-                response.sendRedirect("Exito/exito.jsp");
+                grupo.addComentario(discusion);
+                controladoraLogica.modificarGrupo(grupo);
+                request.getContextPath();
+                response.setHeader("Refresh", "0; URL=" + request.getContextPath()+'/'+ paginaOriginal);
             } else {
                 response.sendRedirect("Error/error.jsp");
             }
