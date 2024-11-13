@@ -1,5 +1,6 @@
 package Logica.Controlador;
 
+import Logica.Entidades.ComentarioGrupo;
 import Logica.Entidades.GeneroPaper;
 import Logica.Entidades.Grupo;
 import Logica.Entidades.Lector;
@@ -174,6 +175,14 @@ public class ControladoraLogica {
         return controladoraPersistencia.obtenerGrupos();
     }
     
+    public List<Grupo>obtenerGruposPorIdLector(Integer id){
+        return controladoraPersistencia.obtenerGruposPorIdLector(id);
+    }
+    
+    public Grupo obtenerGrupoPorId(Integer id){
+        return controladoraPersistencia.obtenerGrupoPorId(id);
+    }
+    
     public int obtenerCantidadUsuarios() {
         return controladoraPersistencia.obtenerCantidadUsuarios();
     }
@@ -208,6 +217,10 @@ public class ControladoraLogica {
     
     public boolean modificarPaper(Paper paper) {
         return controladoraPersistencia.modificarPaper(paper);
+    }
+    
+    public boolean modificarGrupo(Grupo grupo) {
+        return controladoraPersistencia.modificarGrupo(grupo); 
     }
     
     public static synchronized Date convertirStringADate(String fecha) {
@@ -271,4 +284,12 @@ public class ControladoraLogica {
     public List<Valoracion> obtenerValoracionesPorPaper(int idPaper) {
         return controladoraPersistencia.obtenerValoracionesPorPaper(idPaper);
     }
+
+    public boolean crearComentarioGrupo(ComentarioGrupo comentario) {
+        boolean exito = false;
+        if (controladoraPersistencia.crearComentarioGrupo(comentario)) exito = true;
+        return exito;
+    }
+
+
 }
