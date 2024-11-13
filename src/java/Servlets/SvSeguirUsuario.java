@@ -6,6 +6,7 @@ import Logica.Entidades.IdiomaPaper;
 import Logica.Entidades.Lector;
 import Logica.Entidades.Usuario;
 import java.io.IOException;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -32,15 +33,20 @@ public class SvSeguirUsuario extends HttpServlet {
         try {
             if (controladora.lectorSiguePefil(perfilPropioId, perfilId)) {
                 // Si ya lo sigue, dejar de seguir
-                lector.getSeguidos().removeIf(usuario -> usuario.getId().equals(usuario_seguido.getId()));
+                for (int i=0; i < lector.getSeguidos().size(); i++) {
+                    if (Objects.equals(lector.getSeguidos().get(i).getId(), usuario_seguido.getId())) {
+                        lector.getSeguidos().remove(i);
+                        break;
+                    }
+                }     
             } else {
                 // Si no lo sigue, empezar a seguir
-                Usuario usuario = controladora.obtenerUsuarioPorIdLector(perfilId);
-                lector.getSeguidos().add(usuario);
+                lector.getSeguidos().add(usuario_seguido);
             }
             controladora.modificarLector(lector);
             // Redirige al perfil actual para actualizar la vista
-            response.sendRedirect("perfilOtroLector.jsp?perfilId=" + perfilId);
+            request.getContextPath();
+            response.setHeader("Refresh", "0; URL=" + request.getContextPath()+"/perfilOtroLector.jsp?perfilId="+perfilId);
         } catch (Exception e) {
             // Manejo de errores
             response.sendError(HttpServletResponse.SC_INTERNAL_SERVER_ERROR, "Ocurrió un error al intentar seguir al usuario.");
