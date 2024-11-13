@@ -108,22 +108,6 @@ public class Lector extends Persona implements Serializable {
         this.esAutor = esAutor;
     }
     
-    public Boolean siguePerfil(int id) throws Exception {
-        ControladoraLogica controladora = new ControladoraLogica();
-        Usuario usuario_ = controladora.obtenerUsuarioPorIdLector(id);
-        
-        if (usuario_ == null) {
-            throw new Exception("El usuario solicitado no existe.");
-        } else {
-            for (Usuario seguido : this.seguidos) {
-                if (Objects.equals(seguido.getId(), usuario_.getId())) {
-                    return true;
-                }
-            }                  
-            return false;
-        }
-    }
-    
     public List<Usuario> getSeguidos() {
         return seguidos;
     }

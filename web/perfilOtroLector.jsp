@@ -161,7 +161,7 @@
                         <div class="span6">
                             <div class="widget" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
                                 <%
-                                    boolean siguePerfil = usuarioLector.siguePerfil(lector.getId());
+                                    boolean siguePerfil = controladoraLogica.lectorSiguePefil(usuarioLector.getId(), lector.getId());
                                 %>
                                 <div class="widget-header" style="display: flex; align-items: center;">
                                     <i class="icon-user" style="margin-right: 10px;"></i>
@@ -169,7 +169,7 @@
                                         <span>Perfil Lector</span>
                                         <form action="SvSeguirUsuario" method="post" style="margin: 0;">
                                             <input type="hidden" name="perfilId" value="<%=lector.getId()%>" />
-                                            <input type="hidden" name="perfilPropioId" value="<%=id_usuario%>" />
+                                            <input type="hidden" name="perfilPropioId" value="<%=usuarioLector.getId()%>" />
                                             <button type="submit" class="btn btn-primary">
                                                 <%= siguePerfil ? "Dejar de seguir" : "Seguir" %>
                                             </button>

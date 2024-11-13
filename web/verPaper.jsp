@@ -55,14 +55,15 @@
     String id_usuario = "0";
     String nombreUsuario = "";
     String id_paper = "";
-    Paper paper;
+    Paper paper = null;
+    Lector lector = null;
     Cookie[] cookies = request.getCookies();
     for(Cookie cookie : cookies){
         if(cookie.getName().equals("id_usuario")) { 
             id_usuario = cookie.getValue();
         } else if(cookie.getName().equals("id_paper")) { 
                 id_paper = cookie.getValue();
-            }
+        }
     }
     if (id_usuario.equals("0")) {  
         response.sendRedirect("index.jsp");

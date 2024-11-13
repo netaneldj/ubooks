@@ -13,6 +13,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class ControladoraLogica {
     
@@ -293,6 +294,20 @@ public class ControladoraLogica {
         boolean exito = false;
         if (controladoraPersistencia.crearComentarioGrupo(comentario)) exito = true;
         return exito;
+    }
+    
+    public boolean lectorSiguePefil(int id_lector, int id_lector_seguido) {
+        Lector lector = this.obtenerLectorPorID(id_lector);
+        Usuario usuario_seguido = this.obtenerUsuarioPorIdLector(id_lector_seguido);
+        if (lector == null || usuario_seguido == null) {
+            return false;
+        }
+        for (Usuario seguido : lector.getSeguidos()) {
+            if (Objects.equals(seguido.getId(), usuario_seguido.getId())) {
+                return true;
+            }
+        }                  
+        return false;
     }
 
 

@@ -25,13 +25,14 @@ public class SvSeguirUsuario extends HttpServlet {
         int perfilPropioId = Integer.parseInt(request.getParameter("perfilPropioId"));
         // Obtén el lector actual desde la sesión
         ControladoraLogica controladora = new ControladoraLogica();
-        Lector lector = controladora.obtenerLectorPorIdUsuario(perfilPropioId);
+        Lector lector = controladora.obtenerLectorPorID(perfilPropioId);
+        Usuario usuario_seguido = controladora.obtenerUsuarioPorIdLector(perfilId);
 
         // Verifica si el lector ya sigue al perfil
         try {
-            if (lector.siguePerfil(perfilId)) {
+            if (controladora.lectorSiguePefil(perfilPropioId, perfilId)) {
                 // Si ya lo sigue, dejar de seguir
-                lector.getSeguidos().removeIf(usuario -> usuario.getId() == perfilId);
+                lector.getSeguidos().removeIf(usuario -> usuario.getId().equals(usuario_seguido.getId()));
             } else {
                 // Si no lo sigue, empezar a seguir
                 Usuario usuario = controladora.obtenerUsuarioPorIdLector(perfilId);
