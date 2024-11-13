@@ -54,36 +54,30 @@
     HttpSession sesion = request.getSession();
     String id_usuario = "0";
     String nombreUsuario = "";
-    String id_lector = "0";
-    Lector lector;
+    String id_paper = "";
+    Paper paper;
     Cookie[] cookies = request.getCookies();
     for(Cookie cookie : cookies){
         if(cookie.getName().equals("id_usuario")) { 
             id_usuario = cookie.getValue();
-        } else if(cookie.getName().equals("id_lector")) { 
-            id_lector = cookie.getValue();
-        }
+        } else if(cookie.getName().equals("id_paper")) { 
+                id_paper = cookie.getValue();
+            }
     }
-    if (id_usuario.equals("0"))  
+    if (id_usuario.equals("0")) {  
         response.sendRedirect("index.jsp");
-    else
+    } else {
         nombreUsuario = controladoraLogica.obtenerUsuarioPorID(Integer.parseInt(id_usuario)).getNombreUsuario();
         lector = controladoraLogica.obtenerLectorPorIdUsuario(Integer.parseInt(id_usuario));
-        
-    String idPaper = request.getParameter("id");
-    Paper paper = null;
-    if (idPaper != null) {
-        // Crear la cookie con el ID del paper
-        Cookie paperCookie = new Cookie("paper_id", idPaper);
-        paperCookie.setMaxAge(60 * 60); // 1 hora de duración
-        response.addCookie(paperCookie);
-
-        // obtener el paper
-        paper = controladoraLogica.obtenerPaperPorID(Integer.parseInt(idPaper));
-    }
-
-    // Obtener lista de valoraciones del Paper
-    List<Valoracion> valoraciones = controladoraLogica.obtenerValoracionesPorPaper(Integer.parseInt(idPaper));
+        paper = controladoraLogica.obtenerPaperPorID(Integer.parseInt(id_paper));
+    }    
+     /****************** PAGINADO ******************/
+    int itemsPorPagina = 2; // Número de items por página
+    int paginaValoracion = request.getParameter("paginaValoracion") != null ? Integer.parseInt(request.getParameter("paginaValoracion")) : 1;
+    int inicioValoracion = (paginaValoracion - 1) * itemsPorPagina;
+    List<Valoracion> misValoraciones = controladoraLogica.obtenerValoracionesPorPaper(Integer.parseInt(id_paper));
+    int totalValoraciones = misValoraciones.size();
+    List<Valoracion> misValoracionesPaginadas = misValoraciones.subList(inicioValoracion, Math.min(inicioValoracion + itemsPorPagina, totalValoraciones));
 %>
 
 <div class="navbar navbar-fixed-top">
@@ -112,20 +106,55 @@
         <div class="container">
             <ul class="mainnav">
                 <li class="active">
-                    <a href="inicio.jsp">
-                        <i class="icon-home"></i>
-                        <span>Inicio</span> 
-                    </a>
-                </li>                           
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                        class="icon-book"></i><span>Lectores</span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="registrarLector.jsp" >Registrar</a></li>
+                                    <li><a href="listarLectores.jsp" >Listar</a></li>
+                                    <li><a href="buscarLectorPorNombre.jsp" >Buscar</a></li>
+                                    <li><a href="modificarLector.jsp" >Modificar</a></li>
+                                    <li><a href="eliminarLector.jsp" >Eliminar</a></li>
+                                </ul>                                    
+                            </li>
+                        </ul>
+                    </div>
+                </li>
                 <li class="active">
-                    <a href="gestion.jsp">
-                        <i class="icon-list-alt"></i>
-                        <span>Gestión</span> 
-                    </a>
-                </li>                     
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                        class="icon-pencil"></i><span>Papers</span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="registrarPaper.jsp" >Registrar</a></li>
+                                    <li><a href="listarPapers.jsp" >Listar</a></li>
+                                    <li><a href="buscarPaper.jsp" >Buscar</a></li>
+                                    <li><a href="modificarPaper.jsp" >Modificar</a></li>
+                                    <li><a href="eliminarPaper.jsp" >Eliminar</a></li>
+                                </ul>                                    
+                            </li>
+                        </ul>
+                    </div>
+                </li>
+                <li class="active">
+                    <div class="nav-collapse">
+                        <ul class="nav">
+                            <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
+                                        class="icon-user"></i><span>Grupos</span></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="registrarGrupo.jsp" >Registrar</a></li>
+                                    <li><a href="listarGrupos.jsp" >Listar</a></li>
+                                </ul>                                    
+                            </li>
+                        </ul>
+                    </div>
+                </li>                        
             </ul>
         </div>
+        <!-- /container --> 
     </div>
+    <!-- /subnavbar-inner --> 
 </div>
 
 <div class="main">
@@ -215,14 +244,14 @@
                             <h3>Valoraciones de otros usuarios</h3>
                         </div>
                         <div class="widget-content">
-                            <% if (valoraciones != null && !valoraciones.isEmpty()) { %>
+                            <% if (misValoracionesPaginadas != null && !misValoracionesPaginadas.isEmpty()) { %>
                                 <ul class="list-group">
-                                    <% for (Valoracion valoracion : valoraciones) { %>
+                                    <% for (Valoracion valoracion : misValoracionesPaginadas) { %>
                                         <li class="list-group-item">
-                                            <strong><%= controladoraLogica.obtenerUsuarioPorID(valoracion.getIdUsuario()).getNombreUsuario() %>:</strong>
+                                            <strong><%= controladoraLogica.obtenerLectorPorID(valoracion.getLector().getId()).getNombre()%>:</strong>
                                             <span class="rating">
                                                 <% for (int i = 0; i < 5; i++) { %>
-                                                    <span style="color: <%= i < valoracion.getValoracionNumerica() ? "gold" : "#ddd" %>;">★</span>
+                                                    <span style="color: <%= i < valoracion.getValoracionNumerica() ? "gold" : "#ddd" %>;"></span>
                                                 <% } %>
                                             </span>
                                             <p><%= valoracion.getComentario() %></p>
@@ -233,6 +262,15 @@
                                 <p>No hay valoraciones aún.</p>
                             <% } %>
                         </div>
+                        <div class="pagination">
+                            <% if (paginaValoracion > 1) { %>
+                                <a href="verPaper.jsp?paginaValoracion=<%= paginaValoracion - 1 %>">&laquo; Anterior</a>
+                            <% } %>
+                            <span>Página <%= paginaValoracion %> de <%= (int) Math.ceil((double) totalValoraciones / itemsPorPagina) %></span>
+                            <% if (paginaValoracion < (int) Math.ceil((double) totalValoraciones / itemsPorPagina)) { %>
+                                <a href="verPaper.jsp?paginaValoracion=<%= paginaValoracion + 1 %>">Siguiente &raquo;</a>
+                            <% } %>
+                        </div>  
                     </div>
                 </div>
 

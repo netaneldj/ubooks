@@ -1,6 +1,7 @@
 package Servlets;
 
 import Logica.Controlador.ControladoraLogica;
+import Logica.Entidades.Lector;
 import Logica.Entidades.Usuario;
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -37,6 +38,11 @@ public class SvIngresar extends HttpServlet {
                 Cookie id_usuario = new Cookie("id_usuario", usuario.getId().toString());
                 id_usuario.setMaxAge(60*60);
                 response.addCookie(id_usuario);
+                
+                Lector lector = controladoraLogica.obtenerLectorPorIdUsuario(usuario.getId());
+                Cookie id_lector = new Cookie("id_lector", String.valueOf(lector.getId()));
+                id_lector.setMaxAge(60*60);
+                response.addCookie(id_lector);
 
                 response.sendRedirect("inicio.jsp");
             } else {

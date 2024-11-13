@@ -1,12 +1,12 @@
 package Servlets;
 
 import Logica.Controlador.ControladoraLogica;
+import Logica.Entidades.GeneroPaper;
+import Logica.Entidades.IdiomaPaper;
 import Logica.Entidades.Lector;
-import Logica.Entidades.Paper;
 import Logica.Entidades.Usuario;
 import java.io.IOException;
 import java.util.Date;
-import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -14,8 +14,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "SvBuscarLectorPorNombre", urlPatterns = {"/SvBuscarLectorPorNombre"})
-public class SvBuscarLectorPorNombre extends HttpServlet {
+@WebServlet(name = "SvSeleccionarPaper", urlPatterns = {"/SvSeleccionarPaper"})
+public class SvSeleccionarPaper extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
@@ -24,14 +24,10 @@ public class SvBuscarLectorPorNombre extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Cookie usuario = new Cookie("nombre_usuario", request.getParameter("nombre_usuario"));
-        Cookie esAutor = new Cookie("es_autor", Objects.isNull(request.getParameter("autor")) ? "No" : "Si");
-                 
-        usuario.setMaxAge(60*60);
-        response.addCookie(usuario);
-        response.addCookie(esAutor);
-
-        response.sendRedirect("mostrarLectores.jsp");
+        Cookie lector = new Cookie("id_paper", request.getParameter("id_paper"));
+        lector.setMaxAge(60*60);
+        response.addCookie(lector);
+        response.sendRedirect("verPaper.jsp");
     }
 
     @Override

@@ -78,6 +78,23 @@ public class ControladoraPersistencia {
         return exito;
     }
     
+     public boolean crearValoracion(Paper paper, Lector lector, int calificacion, String comentario){
+        boolean exito = false;
+        try {
+            Valoracion valoracion = new Valoracion();
+            valoracion.setPaper(paper);
+            valoracion.setLector(lector);
+            valoracion.setValoracionNumerica(calificacion);
+            valoracion.setComentario(comentario);
+            valoracionJpaController.create(valoracion);
+            logger.log(Level.INFO, "ControladoraPersistencia: Valoracion creada con exito!");
+            exito = true;
+        } catch(Exception e){
+            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al crear valoracion: %s",e.getMessage());
+        }
+        return exito;
+    }
+    
     
     public List<Usuario> obtenerUsuarios() {
         return usuarioJpaController.findUsuarioEntities();
@@ -220,26 +237,6 @@ public class ControladoraPersistencia {
             logger.log(Level.SEVERE, "ControladoraPersistencia: Error al borrar paper: {0}", e.getMessage());
         }
         return false;
-    }
-
-    public boolean insertarValoracion(int idPaper, int idUsuario, int calificacion, String comentario) {
-        boolean exito = false;
-        try {
-            // Crear una instancia de Valoracion y asignar valores
-            Valoracion valoracion = new Valoracion();
-            valoracion.setIdPaper(idPaper);
-            valoracion.setIdUsuario(idUsuario);
-            valoracion.setValoracionNumerica(calificacion);
-            valoracion.setComentario(comentario);
-
-            // Llamar al método create de ValoracionJpaController
-            valoracionJpaController.create(valoracion);
-            logger.log(Level.INFO, "ControladoraPersistencia: Valoracion insertada con exito!");
-            exito = true;
-        } catch (Exception e) {
-            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al insertar valoracion: {0}", e.getMessage());
-        }
-        return exito;
     }
 
     public List<Valoracion> obtenerValoracionesPorPaper(int idPaper) {
