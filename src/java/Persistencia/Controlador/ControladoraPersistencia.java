@@ -225,4 +225,8 @@ public class ControladoraPersistencia {
         return valoracionJpaController.findValoracionesByPaperId(idPaper);
     }
 
+    public Usuario obtenerUsuarioPorIdLector(int idLector) {
+        return usuarioJpaController.findUsuarioByLectorId(idLector);
+    }
+
 }

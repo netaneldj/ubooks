@@ -28,9 +28,10 @@
         <%
         ControladoraLogica controladoraLogica = new ControladoraLogica();
         HttpSession sesion = request.getSession();
-        String id_usuario = "0";
+        String id_usuario = "0"; 
         String nombreUsuario = "";
         String id_lector = "";
+        Lector usuarioLector;
         Lector lector;
         Cookie[] cookies = request.getCookies();
         for(Cookie cookie : cookies){
@@ -44,14 +45,15 @@
             response.sendRedirect("index.jsp");
         else
             nombreUsuario = controladoraLogica.obtenerUsuarioPorID(Integer.parseInt(id_usuario)).getNombreUsuario();
+            usuarioLector = controladoraLogica.obtenerLectorPorIdUsuario(Integer.parseInt(id_usuario));
             lector = controladoraLogica.obtenerLectorPorID(Integer.parseInt(id_lector));
         /****************** PAGINADO ******************/
         int itemsPorPagina = 2; // Número de items por página
         int paginaLector = request.getParameter("paginaLector") != null ? Integer.parseInt(request.getParameter("paginaLector")) : 1;
         int inicioLector = (paginaLector - 1) * itemsPorPagina;
-        List<Lector> misLectores = controladoraLogica.obtenerLectores();
+        List<Usuario> misLectores = lector.getSeguidos();
         int totalLectores = misLectores.size();
-        List<Lector> misLectoresPaginados = misLectores.subList(inicioLector, Math.min(inicioLector + itemsPorPagina, totalLectores));
+        List<Usuario> misLectoresPaginados = misLectores.subList(inicioLector, Math.min(inicioLector + itemsPorPagina, totalLectores));
         
         int paginaAutor= request.getParameter("paginaAutor") != null ? Integer.parseInt(request.getParameter("paginaAutor")) : 1;
         int inicioAutor = (paginaAutor - 1) * itemsPorPagina;
@@ -118,9 +120,21 @@
                     <div class="row">
                         <div class="span6">
                             <div class="widget" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
-                                <div class="widget-header">
-                                    <i class="icon-user"></i>
-                                    <h3> Perfil Lector</h3>
+                                <%
+                                    boolean siguePerfil = usuarioLector.siguePerfil(lector.getId());
+                                %>
+                                <div class="widget-header" style="display: flex; align-items: center;">
+                                    <i class="icon-user" style="margin-right: 10px;"></i>
+                                    <h3 style="flex-grow: 1; display: flex; justify-content: space-between; align-items: center;">
+                                        <span>Perfil Lector</span>
+                                        <form action="SvSeguirUsuario" method="post" style="margin: 0;">
+                                            <input type="hidden" name="perfilId" value="<%=lector.getId()%>" />
+                                            <input type="hidden" name="perfilPropioId" value="<%=id_usuario%>" />
+                                            <button type="submit" class="btn btn-primary">
+                                                <%= siguePerfil ? "Dejar de seguir" : "Seguir" %>
+                                            </button>
+                                        </form>
+                                    </h3>
                                 </div>
                                 <div class="widget-content">
                                     <form>
@@ -174,7 +188,11 @@
                                 <div class="widget-content">
                                     <ul class="messages_layout widget-list">
                                         <%      
-                                            for (Lector miLector : misLectoresPaginados) {
+                                            for (Usuario miUsuario : misLectoresPaginados) {
+                                                Lector miLector = controladoraLogica.obtenerLectorPorIdUsuario(miUsuario.getId());
+                                                if (miLector.getEsAutor()){
+                                                    continue;
+                                                }                                            
                                         %>
                                             <li class="from_user leftLector">
                                                 <a href="listarLectores.jsp" class="avatar">
@@ -223,7 +241,11 @@
                                 <div class="widget-content">
                                     <ul class="messages_layout widget-list">
                                         <%      
-                                            for (Lector miAutor : misAutoresPaginados) {
+                                            for (Usuario miUsuario : misLectoresPaginados) {
+                                                Lector miAutor= controladoraLogica.obtenerLectorPorIdUsuario(miUsuario.getId());
+                                                if (!miAutor.getEsAutor()){
+                                                    continue;
+                                                }  
                                         %>
                                             <li class="from_user leftLector">
                                                 <a href="listarLectores.jsp" class="avatar">
@@ -317,7 +339,6 @@
             </div>
         </div>
         <!-- /main -->
-
         <!-- /footer --> 
         <div class="footer">
             <div class="footer-inner">

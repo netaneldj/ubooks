@@ -154,6 +154,10 @@ public class ControladoraLogica {
         return controladoraPersistencia.obtenerLectorPorIdUsuario(idUsuario);
     }
     
+    public Usuario obtenerUsuarioPorIdLector(int idLector) {
+        return controladoraPersistencia.obtenerUsuarioPorIdLector(idLector);
+    }
+    
     public List<Usuario> obtenerUsuarios() {
         return controladoraPersistencia.obtenerUsuarios();
     }
