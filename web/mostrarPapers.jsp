@@ -53,9 +53,9 @@
                     <div class="nav-collapse">
                         <ul class="nav pull-right">
                             <li class="">						
-                                <a href="gestion.jsp" class="">
+                                <a href="inicio.jsp" class="">
                                     <i class="icon-chevron-left"></i>
-                                    Regresar a la pagina de gestion
+                                    Regresar al inicio
                                 </a>
 
                             </li>
@@ -83,6 +83,7 @@
                                     <th><center>Genero</center></th>
                                     <th><center>Autor</center></th>
                                     <th><center>Resumen</center></th>
+                                    <th><center>Acceder al foro</center></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -112,6 +113,16 @@
                                 <td><center><%=paper.getGenero()%></center></td>
                                 <td><center><%=paper.getAutor().getNombre()+" "+paper.getAutor().getApellido()%></center></td>
                                 <td><center><%=paper.getResumen()%></center></td>
+                                <td class="align-middle">
+                                    <center>
+                                            <div style="display: flex; justify-content: space-between; align-items: center;">
+                                                <form action="SvSeleccionarPaper" method="GET" style="display: inline;">
+                                                    <input type="hidden" name="id_paper" value="<%= paper.getId() %>">
+                                                    <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Ver</button>
+                                                </form>
+                                            </div>
+                                    </center>
+                                </td>
                                 </tr>
                                 <% }%>
                                 </tbody>

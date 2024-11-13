@@ -1,5 +1,6 @@
 package Logica.Controlador;
 
+import Logica.Entidades.ComentarioGrupo;
 import Logica.Entidades.GeneroPaper;
 import Logica.Entidades.Grupo;
 import Logica.Entidades.Lector;
@@ -12,6 +13,7 @@ import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 
 public class ControladoraLogica {
     
@@ -21,8 +23,8 @@ public class ControladoraLogica {
         controladoraPersistencia = new ControladoraPersistencia();
     }
      
-    public boolean insertarValoracion(int idPaper, int idUsuario, int calificacion, String comentario) {
-        boolean exito = controladoraPersistencia.insertarValoracion(idPaper, idUsuario, calificacion, comentario);
+    public boolean insertarValoracion(Paper paper, Lector lector, int calificacion, String comentario) {
+        boolean exito = controladoraPersistencia.crearValoracion(paper, lector, calificacion, comentario);
         return exito;
     }
     
@@ -154,6 +156,10 @@ public class ControladoraLogica {
         return controladoraPersistencia.obtenerLectorPorIdUsuario(idUsuario);
     }
     
+    public Usuario obtenerUsuarioPorIdLector(int idLector) {
+        return controladoraPersistencia.obtenerUsuarioPorIdLector(idLector);
+    }
+    
     public List<Usuario> obtenerUsuarios() {
         return controladoraPersistencia.obtenerUsuarios();
     }
@@ -172,6 +178,14 @@ public class ControladoraLogica {
     
     public List<Grupo> obtenerGrupos(){
         return controladoraPersistencia.obtenerGrupos();
+    }
+    
+    public List<Grupo>obtenerGruposPorIdLector(Integer id){
+        return controladoraPersistencia.obtenerGruposPorIdLector(id);
+    }
+    
+    public Grupo obtenerGrupoPorId(Integer id){
+        return controladoraPersistencia.obtenerGrupoPorId(id);
     }
     
     public int obtenerCantidadUsuarios() {
@@ -208,6 +222,10 @@ public class ControladoraLogica {
     
     public boolean modificarPaper(Paper paper) {
         return controladoraPersistencia.modificarPaper(paper);
+    }
+    
+    public boolean modificarGrupo(Grupo grupo) {
+        return controladoraPersistencia.modificarGrupo(grupo); 
     }
     
     public static synchronized Date convertirStringADate(String fecha) {
@@ -271,4 +289,26 @@ public class ControladoraLogica {
     public List<Valoracion> obtenerValoracionesPorPaper(int idPaper) {
         return controladoraPersistencia.obtenerValoracionesPorPaper(idPaper);
     }
+
+    public boolean crearComentarioGrupo(ComentarioGrupo comentario) {
+        boolean exito = false;
+        if (controladoraPersistencia.crearComentarioGrupo(comentario)) exito = true;
+        return exito;
+    }
+    
+    public boolean lectorSiguePefil(int id_lector, int id_lector_seguido) {
+        Lector lector = this.obtenerLectorPorID(id_lector);
+        Usuario usuario_seguido = this.obtenerUsuarioPorIdLector(id_lector_seguido);
+        if (lector == null || usuario_seguido == null) {
+            return false;
+        }
+        for (Usuario seguido : lector.getSeguidos()) {
+            if (Objects.equals(seguido.getId(), usuario_seguido.getId())) {
+                return true;
+            }
+        }                  
+        return false;
+    }
+
+
 }

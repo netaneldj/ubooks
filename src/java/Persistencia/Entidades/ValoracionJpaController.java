@@ -1,5 +1,6 @@
 package Persistencia.Entidades;
 
+import Logica.Entidades.Lector;
 import Logica.Entidades.Valoracion;  // Asegúrate de que tienes esta clase
 import Persistencia.Entidades.exceptions.NonexistentEntityException;
 import java.io.Serializable;
@@ -9,6 +10,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -135,9 +137,12 @@ public class ValoracionJpaController implements Serializable {
     public List<Valoracion> findValoracionesByPaperId(int idPaper) {
         EntityManager em = getEntityManager();
         try {
-            Query query = em.createQuery("SELECT v FROM Valoracion v WHERE v.idPaper = :idPaper");
-            query.setParameter("idPaper", idPaper);
-            return query.getResultList();
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Valoracion> cq = cb.createQuery(Valoracion.class);
+            Root<Valoracion> valoracion = cq.from(Valoracion.class);
+            cq.select(valoracion).where(cb.equal(valoracion.get("paper").get("id"), idPaper));
+            Query q = em.createQuery(cq);
+            return q.getResultList();
         } finally {
             em.close();
         }

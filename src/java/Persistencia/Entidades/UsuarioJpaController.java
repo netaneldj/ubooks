@@ -5,6 +5,7 @@
  */
 package Persistencia.Entidades;
 
+import Logica.Entidades.Lector;
 import Logica.Entidades.Usuario;
 import Persistencia.Entidades.exceptions.NonexistentEntityException;
 import java.io.Serializable;
@@ -13,7 +14,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
+import javax.persistence.NoResultException;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 
@@ -127,6 +130,48 @@ public class UsuarioJpaController implements Serializable {
             em.close();
         }
     }
+/*
+    public Usuario findUsuarioByLectorId(int idLector) {
+        EntityManager em = getEntityManager();
+        try {
+            CriteriaBuilder cb = em.getCriteriaBuilder();
+            CriteriaQuery<Integer> cq = cb.createQuery(Integer.class);
+            Root<Lector> lector = cq.from(Lector.class);  // Se hace la consulta sobre Lector
+            cq.select(lector.get("usuarioId"))  // Se selecciona el campo usuario_id
+              .where(cb.equal(lector.get("id"), idLector));  // Se filtra por el id del lector
+            Query q = em.createQuery(cq);
+            Integer usuarioId = (Integer) q.getSingleResult();  // Obtiene el usuario_id
+
+            // Ahora se obtiene el Usuario completo usando el usuarioId
+            if (usuarioId != null) {
+                return findUsuario(usuarioId);  // Busca el Usuario por su id
+            }
+            return null;
+        } catch (NoResultException e) {
+            return null;  // Devuelve null si no se encuentra el resultado
+        } finally {
+            em.close();
+        }
+    }
+*/
+    public Usuario findUsuarioByLectorId(int idLector) {
+    EntityManager em = getEntityManager();
+    try {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Usuario> cq = cb.createQuery(Usuario.class);
+        Root<Lector> lector = cq.from(Lector.class);  // Hacemos la consulta sobre Lector
+        cq.select(lector.get("usuario"))  // Seleccionamos la relación usuario
+          .where(cb.equal(lector.get("id"), idLector));  // Filtramos por el id del lector
+        Query q = em.createQuery(cq);
+        return (Usuario) q.getSingleResult();  // Devolvemos el Usuario completo
+    } catch (NoResultException e) {
+        return null;  // Si no se encuentra el resultado, devolvemos null
+    } finally {
+        em.close();
+    }
+}
+
+
 
     public int getUsuarioCount() {
         EntityManager em = getEntityManager();

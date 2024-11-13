@@ -1,3 +1,9 @@
+<%@page import="Logica.Entidades.ComentarioGrupo"%>
+<%@page import="Logica.Entidades.Grupo"%>
+<%@page import="Logica.Entidades.Paper"%>
+<%@page import="Logica.Entidades.GeneroPaper"%>
+<%@page import="Logica.Entidades.IdiomaPaper"%>
+<%@page import="Logica.Entidades.Usuario"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="Logica.Entidades.Lector"%>
 <%@page import="java.util.List"%>
@@ -7,9 +13,10 @@
 
 <!DOCTYPE html>
 <html lang="es">
+    
     <head>
         <meta charset="utf-8">
-        <title>Inicio - Ubooks</title>
+        <title>Perfil - Ubooks</title>
         <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
         <meta name="apple-mobile-web-app-capable" content="yes">
         <link href="resources/css/bootstrap.min.css" rel="stylesheet">
@@ -24,19 +31,28 @@
         <%
         ControladoraLogica controladoraLogica = new ControladoraLogica();
         HttpSession sesion = request.getSession();
-        String id_usuario = "0";
+        String id_grupo = "0";
         String nombreUsuario = "";
+        String id_usuario = "";
+        Grupo grupo;
         Cookie[] cookies = request.getCookies();
         for(Cookie cookie : cookies){
-            if(cookie.getName().equals("id_usuario")) { 
+            if(cookie.getName().equals("id_grupo")) { 
+                id_grupo = cookie.getValue();
+            }else  if(cookie.getName().equals("id_usuario")) { 
                 id_usuario = cookie.getValue();
-                break;
             }
         }
-        if (id_usuario.equals("0"))  
-            response.sendRedirect("index.jsp");
-        else
-            nombreUsuario = controladoraLogica.obtenerUsuarioPorID(Integer.parseInt(id_usuario)).getNombreUsuario();
+        grupo = controladoraLogica.obtenerGrupoPorId(Integer.valueOf( id_grupo));
+        nombreUsuario = controladoraLogica.obtenerUsuarioPorID(Integer.valueOf(id_usuario)).getNombreUsuario();
+        /****************** PAGINADO ******************/
+        int itemsPorPagina = 9; // Número de items por página
+        int paginaGrupo = request.getParameter("paginaGrupo") != null ? Integer.parseInt(request.getParameter("paginaGrupo")) : 1;
+        int inicioLector = (paginaGrupo - 1) * itemsPorPagina;
+        List<ComentarioGrupo> misCometarios = grupo.getComentarios();
+        int totalComentarios = misCometarios.size();
+        List<ComentarioGrupo> misCometariosPaginados = misCometarios.subList(inicioLector, Math.min(inicioLector + itemsPorPagina, totalComentarios));
+        
         %>
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
@@ -51,7 +67,7 @@
                                 <ul class="dropdown-menu">
                                     <li><a href="perfilLector.jsp" >Perfil</a></li>
                                     <li><a href="index.jsp" >Cerrar sesion</a></li>
-                                </ul>                                    
+                                </ul>
                             </li>
                         </ul>
                     </div>
@@ -120,85 +136,82 @@
         <!-- /subnavbar -->
         <div class="main">
             <div class="main-inner">
-                <div class="container">
-                    <div class="row">
-                        <div class="span6">
-                            <!-- /widget -->
-                            <div class="widget">
-                                <div class="widget-header"> <i class="icon-user"></i>
-                                    <h3> Lectores</h3>
-                                </div>
-                                <!-- /widget-header -->
-                                <div class="widget-content">
-                                    <ul class="messages_layout">
-                                        <%      
-                                                    List<Lector> lectores = controladoraLogica.obtenerLectores();
-                                                            for (Lector lector : lectores) {
-                                                %>
-                                                <li class="from_user leftLector" <a href="listarLectores.jsp" class="avatar"><img src="resources/img/mensaje_lector.png"/></a>
-                                                <div class="message_wrap"> <span class="arrow"></span>
-                                                    <div class="info"> <a class="name"><%=lector.getNombre()+" "+lector.getApellido()%></a>
-                                                        <div class="options_arrow">
-                                                            <div class="dropdown pull-right"> <a class="dropdown-toggle " id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#"> <i class=" icon-caret-down"></i> </a>
-                                                                <ul class="dropdown-menu " role="menu" aria-labelledby="dLabel">
-                                                                    <li><a href="registrarLector.jsp"><i class=" icon-plus-sign icon-large"></i> Registrar</a></li>
-                                                                    <li><a href="modificarLector.jsp"><i class=" icon-edit icon-large"></i> Modificar</a></li>
-                                                                    <li><a href="eliminarLector.jsp"><i class=" icon-trash icon-large"></i> Borrar</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                         <div class="text"><%=lector.getUsuario().getEmail()%></div>
-                                                </div>
-                                                </li>
-                                        <% }%>
-                                    </ul>
-                                </div>
-                                <!-- /widget-content --> 
-                            </div>
-                            <!-- /widget --> 
-                        </div>
-                        <!-- /span6 -->
-                        <div class="span6">
-                            <div class="widget">
-                                <div class="widget-header"> <i class="icon-bookmark"></i>
-                                    <h3> Accesos rapidos</h3>
-                                </div>
-                                <!-- /widget-header -->
-                                <div class="widget-content">
-                                    <div class="shortcuts"> 
-                                        <a href="buscarLectorPorNombre.jsp" class="shortcut"><i class="shortcut-icon icon-book"></i><span class="shortcut-label">Buscar Lector</span> </a>
-                                        <a href="buscarPaper.jsp" class="shortcut"><i class="shortcut-icon icon-pencil"></i><span class="shortcut-label">Buscar Paper</span> </a>
-                                        <!-- /shortcuts --> 
-                                    </div>
-                                    <!-- /widget-content --> 
-                                </div>
-                            </div>
-                            <!-- /widget -->
-                        </div>
-                        <!-- /span6 --> 
-                    </div>
-                    <!-- /row --> 
+            <div class="text", style="font-size:900%">
+                <center><%= grupo.getNombre()%></center>
+                 <br/>
+                 <br/>
+                 <br/>
+               <div class="text", style="font-size:50%">
+                <center><%= grupo.getTema()%></center> 
                 </div>
-                <!-- /container --> 
             </div>
-            <!-- /main-inner --> 
+            
+            <form action="crearDiscusionGrupo.jsp" method="POST" style="display: inline;">
+                <input type="hidden" name="usuario" value="<%= id_usuario %>">
+                <input type="hidden" name="grupo" value="<%= grupo.getId() %>">
+                <input type="hidden" name="paginaOriginal" value="<%= "verGrupo.jsp" %>">
+                <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Crear discusión</button>
+            </form>
+
+            <div class="widget" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                        <div class="widget-header">
+                            <i class="icon-comment"></i>
+                            <h3>Discusiones</h3>
+                        </div>
+                        <div class="widget-content">
+                            <% if (grupo.getCantidadComentarios()>0) { %>
+                                <ul class="list-group">
+                                    <% for (ComentarioGrupo comentario : misCometariosPaginados) { %>
+                                        <li class="list-group-item" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                                            <p><%= comentario.getCreador().getNombre() %></p>
+                                            <div class="text", style="font-size:200%"><%= comentario.getTitulo() %>:</div>
+                                            <p  style="font-size:200%"><%= comentario.getComentario() %></p>
+                                            <span class="rating" >
+                                                <% for (int i = 0; i < comentario.getRespuestas().size(); i++) { 
+                                                    //if(i==3) break;
+                                                %>
+                                                <p style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-top: 20px;"><%= comentario.getRespuestas().get(i) %></p>
+                                                <% } %>
+                                            </span>
+                                            <form action="verGrupo.jsp" method="POST" style="text-align: right;clear:left;">
+                                                <input type="hidden" name="usuario" value="<%= id_usuario %>">
+                                                <input type="hidden" name="grupo" value="<%= grupo.getId() %>">
+                                                <input type="hidden" name="paginaOriginal" value="<%= "verGrupo.jsp" %>">
+                                                <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Ver</button>
+                                            </form>
+                                            <form action="verGrupo.jsp" method="POST" style="text-align: right;clear:left;">
+                                                <input type="hidden" name="usuario" value="<%= id_usuario %>">
+                                                <input type="hidden" name="grupo" value="<%= grupo.getId() %>">
+                                                <input type="hidden" name="paginaOriginal" value="<%= "verGrupo.jsp" %>">
+                                                <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Responder</button>
+                                            </form>
+                                            <br/>
+                                        </li>
+                                    <% } %>
+
+                                </ul>
+                            <% } else { %>
+                                <p>No hay Discusiones.</p>
+                            <% } %>
+                        <div class="pagination">
+                                <% if (paginaGrupo > 1) { %>
+                                    <a href="verGrupo.jsp?paginaGrupo=<%= paginaGrupo - 1 %>">&laquo; Anterior</a>
+                                <% } %>
+                                <span>Página <%= paginaGrupo %> de <%= (int) Math.ceil((double) totalComentarios / itemsPorPagina) %></span>
+                                <% if (paginaGrupo < (int) Math.ceil((double) totalComentarios / itemsPorPagina)) { %>
+                                    <a href="verGrupo.jsp?paginaGrupo=<%= paginaGrupo + 1 %>" >Siguiente &raquo;</a>
+                                <% } %>
+                            </div>
+                        
+                        </div>
+                    </div>
+         </div>
         </div>
         <!-- /main -->
 
         <!-- /footer --> 
-        <div class="footer">
-            <div class="footer-inner">
-                <div class="container">
-                    <div class="row">
-                        <div class="span12">
-                            &copy; 2021 <a href="https://netaneldj.github.io/" target="_blank"> Netanel David Jamilis </a>
-                        </div> <!-- /span12 -->
-                    </div> <!-- /row -->
-                </div> <!-- /container -->
-            </div> <!-- /footer-inner -->
-        </div> <!-- /footer -->
-        <!-- Le javascript
+        
+        <!-- Le javascript --->
         ================================================== --> 
         <!-- Placed at the end of the document so the pages load faster --> 
         <script src="resources/js/jquery-1.7.2.min.js"></script> 

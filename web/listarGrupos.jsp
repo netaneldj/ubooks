@@ -52,9 +52,9 @@
                     <div class="nav-collapse">
                         <ul class="nav pull-right">
                             <li class="">						
-                                <a href="gestion.jsp" class="">
+                                <a href="inicio.jsp" class="">
                                     <i class="icon-chevron-left"></i>
-                                    Regresar a la pagina de gestion
+                                    Regresar al inicio
                                 </a>
 
                             </li>
@@ -81,6 +81,7 @@
                                     <th><center>Tema</center></th>
                                     <th><center>Miembros</center></th>
                                     <th><center>Comentarios</center></th>
+                                    <th><center></center></th>
                                 </tr>
                                 </thead>
                                 <tbody>
@@ -95,6 +96,25 @@
                                 <td><center><%=grupo.getTema()%></center></td>
                                 <td><center><%=grupo.getCantidadMiembros()%></center></td>
                                 <td><center><%=grupo.getCantidadComentarios()%></center></td>
+                                <td><center>
+                                <%
+                                    Lector lector = controladoraLogica.obtenerLectorPorID(Integer.parseInt(id_usuario));
+                                    if(grupo.esMiembro(lector)){
+                                    %>    
+                                            <form action="SvVerGrupo" method="get" style="display: inline;">
+                                                <input type="hidden" name="id" value="<%= grupo.getId() %>">
+                                                <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Entrar</button>
+                                            </form> 
+                                    <% }else{
+                                    %>
+                                            <form action="SvUnirmeGrupo" method="POST" style="display: inline;">
+                                                <input type="hidden" name="lector" value="<%= lector.getId() %>">
+                                                <input type="hidden" name="grupo" value="<%= grupo.getId() %>">
+                                                <input type="hidden" name="paginaOriginal" value="<%= "listarGrupos.jsp" %>">
+                                                <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Unirme</button>
+                                            </form>
+                                <%}%>
+                                </center></td>
                                 </tr>
                                 <% }%>
                                 </tbody>

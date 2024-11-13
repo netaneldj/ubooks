@@ -33,9 +33,9 @@
                     <div class="nav-collapse">
                         <ul class="nav pull-right">			
                             <li class="">						
-                                <a href="../inicio.jsp" class="">
+                                <a href="../gestion.jsp" class="">
                                     <i class="icon-chevron-left"></i>
-                                    Regresar al inicio
+                                    Regresar a la pagina de gestion
                                 </a>					
                             </li>
                         </ul>			
@@ -50,12 +50,22 @@
                     <div class="error-container">
                         <h1> (っ◔◡◔)っ ❤ </h1>
 
-                        <h2>Operación realizada con exito!</h2>
-
-                        <div class="error-details">
-                            Ahora puedes continuar operando desde la pagina de <a href="../inicio.jsp">INICIO</a>
-
-                        </div> <!-- /error-details -->						
+                        <h2>Gracias por unirte al grupo!</h2>
+                        </div> <!-- /error-details -->
+                        <div class="error-actions">
+                            <a href="../inicio.jsp" class="btn btn-large btn-primary">
+                                <i class="icon-chevron-left"></i>
+                                &nbsp;
+                                Ingresar al grupo						
+                            </a>					
+                        </div>
+                        <div class="error-actions">
+                            <a href="../inicio.jsp" class="btn btn-large btn-primary">
+                                <i class="icon-chevron-left"></i>
+                                &nbsp;
+                                Regresar a la pagina de inicio						
+                            </a>					
+                        </div> <!-- /error-actions -->							
                     </div> <!-- /error-container -->						
                 </div> <!-- /span12 -->		
             </div> <!-- /row -->	
