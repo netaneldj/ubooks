@@ -243,25 +243,23 @@ public class ControladoraPersistencia {
         return valoracionJpaController.findValoracionesByPaperId(idPaper);
     }
 
+    public Usuario obtenerUsuarioPorIdLector(int idLector) {
+        return usuarioJpaController.findUsuarioByLectorId(idLector);
+    }
+
     public Grupo obtenerGrupoPorId(Integer id) {
         return grupoJpaController.findGrupo(id); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
     }
 
     public boolean crearComentarioGrupo(ComentarioGrupo comentario) {
-       {
-        boolean exito = false;
-        try {
-            comentarioGrupoJpaController.create(comentario);
-            logger.log(Level.INFO, "ControladoraPersistencia: Grupo creado con exito!");
-            exito = true;
-        } catch(Exception e){
-            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al crear lector: %s",e.getMessage());
-        }
-        return exito;
+		boolean exito = false;
+		try {
+			comentarioGrupoJpaController.create(comentario);
+			logger.log(Level.INFO, "ControladoraPersistencia: Grupo creado con exito!");
+			exito = true;
+		} catch(Exception e){
+			logger.log(Level.SEVERE, "ControladoraPersistencia: Error al crear lector: %s",e.getMessage());
+		}
+		return exito;
     }
-    }
-
-
-
-
 }
