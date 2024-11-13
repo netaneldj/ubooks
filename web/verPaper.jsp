@@ -68,7 +68,7 @@
         response.sendRedirect("index.jsp");
     else
         nombreUsuario = controladoraLogica.obtenerUsuarioPorID(Integer.parseInt(id_usuario)).getNombreUsuario();
-        lector = controladoraLogica.obtenerLectorPorID(Integer.parseInt(id_lector));
+        lector = controladoraLogica.obtenerLectorPorIdUsuario(Integer.parseInt(id_usuario));
         
     String idPaper = request.getParameter("id");
     Paper paper = null;
@@ -138,6 +138,19 @@
                             <i class="icon-user"></i>
                             <h3> Paper</h3>
                         </div>
+                        <%
+                        if(lector.siguePaper(paper)){
+                        %>                                        
+                             <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em; color:black ">Guardado</button>
+                            <% }else{
+                        %>    
+                                <form action="SvGuardarPaper" method="POST" style="display: inline;">
+                                    <input type="hidden" name="lector" value="<%= lector.getId() %>">
+                                    <input type="hidden" name="paper" value="<%= paper.getId() %>">
+                                    <input type="hidden" name="paginaOriginal" value="<%= "verPaper.jsp" %>">
+                                    <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Guardar</button>
+                                </form>
+                                <%}%>
                         <div class="widget-content">
                             <form>
                                 <div class="field">

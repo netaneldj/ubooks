@@ -58,7 +58,7 @@
         
         int paginaPaper= request.getParameter("paginaPaper") != null ? Integer.parseInt(request.getParameter("paginaPaper")) : 1;
         int inicioPaper = (paginaPaper - 1) * itemsPorPagina;
-        List<Paper> misPapers = controladoraLogica.obtenerPapers();
+        List<Paper> misPapers = controladoraLogica.obtenerLectorPorIdUsuario(Integer.valueOf(id_usuario)).getMisPapers();
         int totalPapers = misPapers.size();
         List<Paper> misPapersPaginados = misPapers.subList(inicioPaper, Math.min(inicioPaper + itemsPorPagina, totalPapers));
         

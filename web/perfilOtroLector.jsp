@@ -62,13 +62,13 @@
         
         int paginaPaper= request.getParameter("paginaPaper") != null ? Integer.parseInt(request.getParameter("paginaPaper")) : 1;
         int inicioPaper = (paginaPaper - 1) * itemsPorPagina;
-        List<Paper> misPapers = controladoraLogica.obtenerPapers();
+        List<Paper> misPapers = lector.getMisPapers();
         int totalPapers = misPapers.size();
         List<Paper> misPapersPaginados = misPapers.subList(inicioPaper, Math.min(inicioPaper + itemsPorPagina, totalPapers));
         
         int paginaGrupo= request.getParameter("paginaGrupo") != null ? Integer.parseInt(request.getParameter("paginaGrupo")) : 1;
         int inicioGrupo = (paginaGrupo - 1) * itemsPorPagina;
-        List<Grupo> misGrupos = controladoraLogica.obtenerGruposPorIdUsuario(Integer.valueOf(id_lector));
+        List<Grupo> misGrupos = controladoraLogica.obtenerGruposPorIdLector(lector.getId());
         int totalGrupos = misGrupos.size();
         List<Grupo> misGruposPaginados = misGrupos.subList(inicioGrupo, Math.min(inicioGrupo + itemsPorPagina, totalGrupos));
         %>
