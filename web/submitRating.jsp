@@ -52,8 +52,6 @@
                 nombreUsuario = controladoraLogica.obtenerUsuarioPorID(Integer.parseInt(id_usuario)).getNombreUsuario();
                 lector = controladoraLogica.obtenerLectorPorID(Integer.parseInt(id_lector));
                 paper = controladoraLogica.obtenerPaperPorID(Integer.parseInt(id_paper));
-                System.out.println("LECTOR " + lector.getNombre());
-                System.out.println("PAPER " + paper.getNombre());
             } catch (Exception e) {
                 e.printStackTrace();
                 response.sendRedirect("error.jsp"); // Redirige a una página de error específica si ocurre una excepción
