@@ -1,6 +1,7 @@
 package Logica.Entidades;
 
 import java.io.Serializable;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -22,17 +23,20 @@ public class Paper implements Serializable {
     private String resumen;
     @Enumerated(EnumType.STRING)
     private GeneroPaper genero;
+    @Column(name = "PROMEDIO_VALORACION_NUMERICA")
+    private double promedioValoracionNumerica;
 
     public Paper() {
     }
 
-    public Paper(Integer id, String doi, String nombre, Lector autor, String resumen, GeneroPaper genero) {
+    public Paper(Integer id, String doi, String nombre, Lector autor, String resumen, GeneroPaper genero, double promedioValoracionNumerica) {
         this.id = id;
         this.doi = doi;
         this.nombre = nombre;
         this.autor = autor;
         this.resumen = resumen;
         this.genero = genero;
+        this.promedioValoracionNumerica = promedioValoracionNumerica;
     }
 
     public Integer getId() {
@@ -81,5 +85,15 @@ public class Paper implements Serializable {
     public void setResumen(String resumen) {
         this.resumen = resumen;
     }
+
+    public double getPromedioValoracionNumerica() {
+        return promedioValoracionNumerica;
+    }
+
+    public void setPromedioValoracionNumerica(double promedioValoracionNumerica) {
+        this.promedioValoracionNumerica = promedioValoracionNumerica;
+    }
+    
+    
     
 }

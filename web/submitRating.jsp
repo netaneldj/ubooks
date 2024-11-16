@@ -68,6 +68,7 @@
                 comentario = "NULL";
             }
             controladoraLogica.insertarValoracion(paper, lector, valoracionNumerica, comentario);
+            controladoraLogica.actualizarPromedioValoracionPaper(Integer.valueOf(id_paper));
             request.setAttribute("mensajeExito", "Tu valoración ha sido enviada correctamente.");
             response.sendRedirect("submitedRating.jsp?id=" + id_paper);
         }

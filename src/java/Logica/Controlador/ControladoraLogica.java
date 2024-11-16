@@ -289,6 +289,27 @@ public class ControladoraLogica {
     public List<Valoracion> obtenerValoracionesPorPaper(int idPaper) {
         return controladoraPersistencia.obtenerValoracionesPorPaper(idPaper);
     }
+    
+    public double obtenerPromedioValoracionPaper(int idPaper) {
+        int sumaValoraciones = 0;
+        List<Valoracion> valoraciones = controladoraPersistencia.obtenerValoracionesPorPaper(idPaper);
+        
+        if (valoraciones == null || valoraciones.isEmpty()) {
+            return sumaValoraciones;
+        }
+        
+        for (Valoracion valoracion : valoraciones) {
+            sumaValoraciones += valoracion.getValoracionNumerica();
+        }
+        
+        return (double) sumaValoraciones/valoraciones.size();
+    }
+    
+    public boolean actualizarPromedioValoracionPaper(int idPaper) {
+        Paper paper = controladoraPersistencia.obtenerPaperPorID(idPaper);
+        paper.setPromedioValoracionNumerica(obtenerPromedioValoracionPaper(idPaper));
+        return controladoraPersistencia.modificarPaper(paper);
+    }
 
     public boolean crearComentarioGrupo(ComentarioGrupo comentario) {
         boolean exito = false;
