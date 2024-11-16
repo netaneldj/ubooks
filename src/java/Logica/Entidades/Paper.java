@@ -23,19 +23,22 @@ public class Paper implements Serializable {
     private String resumen;
     @Enumerated(EnumType.STRING)
     private GeneroPaper genero;
+    @Enumerated(EnumType.STRING)
+    private IdiomaPaper idioma;
     @Column(name = "PROMEDIO_VALORACION_NUMERICA")
     private double promedioValoracionNumerica;
 
     public Paper() {
     }
 
-    public Paper(Integer id, String doi, String nombre, Lector autor, String resumen, GeneroPaper genero, double promedioValoracionNumerica) {
+    public Paper(Integer id, String doi, String nombre, Lector autor, String resumen, GeneroPaper genero, IdiomaPaper idioma, double promedioValoracionNumerica) {
         this.id = id;
         this.doi = doi;
         this.nombre = nombre;
         this.autor = autor;
         this.resumen = resumen;
         this.genero = genero;
+        this.idioma = idioma;
         this.promedioValoracionNumerica = promedioValoracionNumerica;
     }
 
@@ -84,6 +87,14 @@ public class Paper implements Serializable {
 
     public void setResumen(String resumen) {
         this.resumen = resumen;
+    }
+
+    public IdiomaPaper getIdioma() {
+        return idioma;
+    }
+
+    public void setIdioma(IdiomaPaper idioma) {
+        this.idioma = idioma;
     }
 
     public double getPromedioValoracionNumerica() {

@@ -3,6 +3,7 @@ package Logica.Controlador;
 import Logica.Entidades.ComentarioGrupo;
 import Logica.Entidades.GeneroPaper;
 import Logica.Entidades.Grupo;
+import Logica.Entidades.IdiomaPaper;
 import Logica.Entidades.Lector;
 import Logica.Entidades.Paper;
 import Logica.Entidades.Usuario;
@@ -11,9 +12,11 @@ import Persistencia.Controlador.ControladoraPersistencia;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class ControladoraLogica {
     
@@ -174,6 +177,13 @@ public class ControladoraLogica {
     
     public List<Paper> obtenerPapers() {
         return controladoraPersistencia.obtenerPapers();
+    }
+    
+    public List<Paper> obtenerPapersPorIdiomaOrdenadosPorCalificacion(IdiomaPaper idioma) {
+        return controladoraPersistencia.obtenerPapers().stream()
+                .filter(paper -> paper.getIdioma().toString().equals(idioma.toString()))
+                .sorted(Comparator.comparing(Paper::getPromedioValoracionNumerica))
+                .collect(Collectors.toList());
     }
     
     public List<Grupo> obtenerGrupos(){
