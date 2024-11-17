@@ -152,18 +152,27 @@
                                 <div class="widget-content">
                                     <ul class="messages_layout">
                                         <%      
-                                                            for (Paper misPapersPaginados : misPapersRecomendadosPorCalificacionPaginados) {
+                                                            for (Paper miPaperRecomendado : misPapersRecomendadosPorCalificacionPaginados) {
                                                 %>
                                                 <li class="from_user leftLector" <a href="listarLectores.jsp" class="avatar"><img src="resources/img/mensaje_libro.png"/></a>
                                                 <div class="message_wrap"> <span class="arrow"></span>
-                                                    <div class="info"> <a class="name"><%=misPapersPaginados.getNombre()%></a>
+                                                    <div class="info"> <a class="name"><%=miPaperRecomendado.getNombre()%></a>
                                                         <span class="rating">
                                                             <% for (int i = 0; i < 5; i++) { %>
-                                                            <span style="color: <%= i < (int) Math.round(controladoraLogica.obtenerPromedioValoracionPaper(misPapersPaginados.getId())) ? "gold" : "#ddd" %>;">★</span>
+                                                            <span style="color: <%= i < (int) Math.round(controladoraLogica.obtenerPromedioValoracionPaper(miPaperRecomendado.getId())) ? "gold" : "#ddd" %>;">★</span>
                                                             <% } %>
                                                         </span>
-                                                    </div>
-                                                         <div class="text"><%=misPapersPaginados.getAutor().getNombre() + " " + misPapersPaginados.getAutor().getApellido()%></div>
+                                                        <div class="options_arrow">
+                                                            <div class="dropdown pull-right"> 
+                                                                <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">
+                                                                    <i class="icon-caret-down"></i> 
+                                                                </a>
+                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                                                                    <li><a href="SvSeleccionarPaper?id_paper=<%= miPaperRecomendado.getId() %>"><i class="icon-info-sign icon-large"></i> Ver</a></li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>                                                        
+                                                         <div class="text"><%=miPaperRecomendado.getAutor().getNombre() + " " + miPaperRecomendado.getAutor().getApellido()%></div>
                                                 </div>
                                                 </li>
                                         <% }%>
