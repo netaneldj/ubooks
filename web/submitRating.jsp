@@ -1,3 +1,4 @@
+<%@page import="java.util.Objects"%>
 <%@page import="Logica.Entidades.Paper"%>
 <%@page import="Logica.Entidades.GeneroPaper"%>
 <%@page import="Logica.Entidades.IdiomaPaper"%>
@@ -64,8 +65,8 @@
         int valoracionNumerica = valoracionNumericaStr != null ? Integer.parseInt(valoracionNumericaStr) : 0;
 
         if (valoracionNumerica > 0) {
-            if (comentario == null || comentario.isEmpty()){
-                comentario = "NULL";
+            if (Objects.isNull(comentario)){
+                comentario = "";
             }
             controladoraLogica.insertarValoracion(paper, lector, valoracionNumerica, comentario);
             controladoraLogica.actualizarPromedioValoracionPaper(Integer.valueOf(id_paper));

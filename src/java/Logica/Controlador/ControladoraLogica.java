@@ -182,7 +182,7 @@ public class ControladoraLogica {
     public List<Paper> obtenerPapersPorIdiomaOrdenadosPorCalificacion(IdiomaPaper idioma) {
         return controladoraPersistencia.obtenerPapers().stream()
                 .filter(paper -> paper.getIdioma().toString().equals(idioma.toString()))
-                .sorted(Comparator.comparing(Paper::getPromedioValoracionNumerica))
+                .sorted(Comparator.comparing(Paper::getPromedioValoracionNumerica).reversed())
                 .collect(Collectors.toList());
     }
     
