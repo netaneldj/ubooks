@@ -185,7 +185,7 @@
                                 <%}%>
                         <div class="widget-content">
                             <form>
-                                <span class="rating">
+                                <span class="rating" style="direction: ltr;">
                                     <% for (int i = 0; i < 5; i++) { %>
                                         <span style="color: <%= i < promedioValoracionPaper ? "gold" : "#ddd" %>; font-size: 30px;">★</span>
                                     <% } %>
