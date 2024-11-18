@@ -22,7 +22,7 @@ public class Paper implements Serializable {
     private String resumen;
     @Enumerated(EnumType.STRING)
     private GeneroPaper genero;
-
+    
     public Paper() {
     }
 

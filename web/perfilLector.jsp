@@ -1,3 +1,4 @@
+<%@page import="Logica.Entidades.MiPaper"%>
 <%@page import="Logica.Entidades.Grupo"%>
 <%@page import="Logica.Entidades.Paper"%>
 <%@page import="Logica.Entidades.GeneroPaper"%>
@@ -59,9 +60,9 @@
         
         int paginaPaper= request.getParameter("paginaPaper") != null ? Integer.parseInt(request.getParameter("paginaPaper")) : 1;
         int inicioPaper = (paginaPaper - 1) * itemsPorPagina;
-        List<Paper> misPapers = controladoraLogica.obtenerLectorPorIdUsuario(Integer.valueOf(id_usuario)).getMisPapers();
+        List<MiPaper> misPapers = controladoraLogica.obtenerLectorPorIdUsuario(Integer.valueOf(id_usuario)).getMisPapers();
         int totalPapers = misPapers.size();
-        List<Paper> misPapersPaginados = misPapers.subList(inicioPaper, Math.min(inicioPaper + itemsPorPagina, totalPapers));
+        List<MiPaper> misPapersPaginados = misPapers.subList(inicioPaper, Math.min(inicioPaper + itemsPorPagina, totalPapers));
         
         int paginaGrupo= request.getParameter("paginaGrupo") != null ? Integer.parseInt(request.getParameter("paginaGrupo")) : 1;
         int inicioGrupo = (paginaGrupo - 1) * itemsPorPagina;
@@ -156,10 +157,15 @@
                     <div class="row">
                         <div class="span6">
                             <div class="widget" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px;">
-                                <div class="widget-header">
-                                    <i class="icon-user"></i>
-                                    <h3> Perfil Lector</h3>
+                                
+                                <div class="widget-header" style="display: flex; align-items: center;">
+                                    <i class="icon-user" style="margin-right: 10px;"></i>
+                                    <h3 style="flex-grow: 1; display: flex; justify-content: space-between; align-items: center;">
+                                        <span>Perfil Lector</span>
+                                            <span> Puntos: <%=lector.getPuntos()%> </span>
+                                    </h3>
                                 </div>
+                                    
                                 <div class="widget-content">
                                     <form>
                                         <div class="field">
@@ -318,7 +324,7 @@
                                 <div class="widget-content">
                                     <ul class="messages_layout widget-list">
                                         <%      
-                                            for (Paper miPaper : misPapersPaginados) {
+                                            for (MiPaper miPaper : misPapersPaginados) {
                                         %>
                                             <li class="from_user leftLector">
                                                 <a href="listarPapers.jsp" class="avatar">

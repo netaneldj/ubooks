@@ -13,6 +13,7 @@ import Logica.Entidades.Paper;
 import Logica.Entidades.Usuario;
 import java.io.IOException;
 import java.util.Date;
+import java.util.List;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -20,8 +21,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "SvGuardarPaper", urlPatterns = {"/SvGuardarPaper"})
-public class SvGuardarPaper extends HttpServlet{
+@WebServlet(name = "SvGuardarPaperLeido", urlPatterns = {"/SvGuardarPaperLeido"})
+public class SvGuardarPaperLeido extends HttpServlet{
         protected void processRequest(HttpServletRequest request, HttpServletResponse response)
            throws ServletException, IOException {
     }
@@ -43,12 +44,28 @@ public class SvGuardarPaper extends HttpServlet{
             Lector lector = controladoraLogica.obtenerLectorPorID(idLector);
             Paper paper = controladoraLogica.obtenerPaperPorID(idPaper);
             
-            MiPaper miPaper = new MiPaper();
-            miPaper.setLeido(EnumLeido.NO_LEIDO);
-            miPaper.setPaper(paper);
-                    
-            lector.addPaper(miPaper);
+            List<MiPaper> misPapers = lector.getMisPapers();
             
+            Boolean coincidencia = false;
+            int posicionPaper = 0;
+            
+            for(int i = 0; i < misPapers.size(); i++) {
+                MiPaper p = misPapers.get(i);
+                if( p.getId().equals(paper.getId()) && !(p.getLeido().equals(EnumLeido.LEIDO) ) ){
+                    posicionPaper = i;
+                    lector.addPuntos();
+                    coincidencia = true;
+                    break;
+                }
+            }
+            
+            if (coincidencia){
+                //System.out.print("ENTRE en coincidencia");
+                misPapers.get(posicionPaper).setLeido(EnumLeido.LEIDO);
+                lector.setMisPapers(misPapers);
+            }
+            
+            controladoraLogica.modificarMiPaper(misPapers);
             controladoraLogica.modificarLector(lector);
             request.getContextPath();
             response.setHeader("Refresh", "0; URL=" + request.getContextPath()+'/'+ paginaOriginal+"?id="+id_paper);

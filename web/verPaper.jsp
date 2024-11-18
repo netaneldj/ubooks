@@ -181,6 +181,23 @@
                                     <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Guardar</button>
                                 </form>
                                 <%}%>
+         
+                                    <%
+                        if(lector.paperLeido(paper)){
+                        %>                                        
+                             <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em; color:black ">Ya leido</button>
+                            <% }else{
+                        %>    
+                                <form action="SvGuardarPaperLeido" method="POST" style="display: inline;">
+                                    <input type="hidden" name="lector" value="<%= lector.getId() %>">
+                                    <input type="hidden" name="paper" value="<%= paper.getId() %>">
+                                    <input type="hidden" name="paginaOriginal" value="<%= "verPaper.jsp" %>">
+                                    <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Marcar como Leido</button>
+                                </form>
+                                <%}%>        
+                                
+                                
+                                
                         <div class="widget-content">
                             <form>
                                 <div class="field">
