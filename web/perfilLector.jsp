@@ -421,7 +421,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="span12">
-                            &copy; 2021 <a href="https://netaneldj.github.io/" target="_blank"> Netanel David Jamilis </a>
+                            &copy; 2024 Gestión del Desarrollo de Sistemas Informáticos - Grupo 11
                         </div> <!-- /span12 -->
                     </div> <!-- /row -->
                 </div> <!-- /container -->

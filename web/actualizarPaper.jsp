@@ -1,3 +1,5 @@
+<%@page import="Logica.Entidades.IdiomaPaper"%>
+<%@page import="Logica.Entidades.GeneroPaper"%>
 <%@page import="Logica.Entidades.Paper"%>
 <%@page import="Logica.Entidades.Lector"%>
 <%@page import="Logica.Controlador.ControladoraLogica"%>
@@ -101,6 +103,26 @@
                                     <option value=<%=autor.getId()%>><%=autor.getNombre()+" "+autor.getApellido()%></option>
                                     <% }}%>
                                     </select> <!-- /field -->
+                                    
+                                     <p>Genero: <select name="genero"> </p>
+                                        <option selected><%=paper.getGenero()%></option>
+                                    <%
+                                                for (GeneroPaper genero : GeneroPaper.values()) {
+                                                    if (!genero.equals(paper.getGenero())){
+                                            %>
+                                    <option><%=genero%></option>
+                                    <% }}%>
+                                    </select> <!-- /field -->
+
+                                    <p>Idioma: <select name="idioma"> </p>
+                                    <option selected><%=paper.getIdioma()%></option>
+                                    <%
+                                                for (IdiomaPaper idioma : IdiomaPaper.values()) {
+                                                    if (!idioma.equals(paper.getIdioma())){
+                                            %>
+                                    <option><%=idioma%></option>
+                                    <% }}%>
+                                    </select> <!-- /field --> 
                                     
                                     <div class="field">
                                         <label for="resumen">Resumen:</label>	
