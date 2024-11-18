@@ -5,6 +5,7 @@ import Logica.Entidades.GeneroPaper;
 import Logica.Entidades.Grupo;
 import Logica.Entidades.IdiomaPaper;
 import Logica.Entidades.Lector;
+import Logica.Entidades.MiPaper;
 import Logica.Entidades.Paper;
 import Logica.Entidades.Usuario;
 import Logica.Entidades.Valoracion;
@@ -230,6 +231,13 @@ public class ControladoraLogica {
         return controladoraPersistencia.modificarLector(lector);
     }
     
+    
+    public boolean modificarMiPaper(List<MiPaper> misPapers) {
+        return controladoraPersistencia.modificarMiPaper(misPapers);
+    }
+
+            
+            
     public boolean modificarPaper(Paper paper) {
         return controladoraPersistencia.modificarPaper(paper);
     }

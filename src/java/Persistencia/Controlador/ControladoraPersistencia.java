@@ -4,6 +4,7 @@ import Logica.Entidades.ComentarioGrupo;
 import Logica.Entidades.GeneroPaper;
 import Logica.Entidades.Grupo;
 import Logica.Entidades.Lector;
+import Logica.Entidades.MiPaper;
 import Logica.Entidades.Paper;
 import Logica.Entidades.Usuario;
 import Logica.Entidades.Valoracion;
@@ -11,6 +12,7 @@ import Persistencia.Entidades.ComentarioGrupoJpaController;
 import Persistencia.Entidades.LectorJpaController;
 import Persistencia.Entidades.PaperJpaController;
 import Persistencia.Entidades.GrupoJpaController;
+import Persistencia.Entidades.MiPaperJpaController;
 import Persistencia.Entidades.UsuarioJpaController;
 import Persistencia.Entidades.ValoracionJpaController;
 import Persistencia.Entidades.exceptions.NonexistentEntityException;
@@ -22,6 +24,8 @@ public class ControladoraPersistencia {
     private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     
     LectorJpaController lectorJpaController = new LectorJpaController();
+    MiPaperJpaController miPaperJpaController = new MiPaperJpaController();
+
     UsuarioJpaController usuarioJpaController = new UsuarioJpaController();
     PaperJpaController paperJpaController = new PaperJpaController();
     ValoracionJpaController valoracionJpaController = new ValoracionJpaController();
@@ -169,6 +173,22 @@ public class ControladoraPersistencia {
         return exito;
     }
     
+    
+    
+    public boolean modificarMiPaper(List<MiPaper> misPapers) {
+        boolean exito = false;
+        for (MiPaper p : misPapers){
+            try {
+                miPaperJpaController.edit(p);
+                logger.log(Level.INFO, "ControladoraPersistencia: MiPaper modificado con exito!");
+                exito = true;
+            } catch (Exception e) {
+                logger.log(Level.SEVERE, "ControladoraPersistencia: Error al modificar MiPaper: {0}", e.getMessage());
+            }
+        }
+        return exito;
+    }
+            
     public boolean modificarLector(Lector lector) {
         boolean exito = false;
         try {
