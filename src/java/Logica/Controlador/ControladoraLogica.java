@@ -3,6 +3,7 @@ package Logica.Controlador;
 import Logica.Entidades.ComentarioGrupo;
 import Logica.Entidades.GeneroPaper;
 import Logica.Entidades.Grupo;
+import Logica.Entidades.IdiomaPaper;
 import Logica.Entidades.Lector;
 import Logica.Entidades.Paper;
 import Logica.Entidades.Usuario;
@@ -11,9 +12,11 @@ import Persistencia.Controlador.ControladoraPersistencia;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 public class ControladoraLogica {
     
@@ -176,6 +179,13 @@ public class ControladoraLogica {
         return controladoraPersistencia.obtenerPapers();
     }
     
+    public List<Paper> obtenerPapersPorIdiomaOrdenadosPorCalificacion(IdiomaPaper idioma) {
+        return controladoraPersistencia.obtenerPapers().stream()
+                .filter(paper -> paper.getIdioma().toString().equals(idioma.toString()))
+                .sorted(Comparator.comparing(Paper::getPromedioValoracionNumerica).reversed())
+                .collect(Collectors.toList());
+    }
+    
     public List<Grupo> obtenerGrupos(){
         return controladoraPersistencia.obtenerGrupos();
     }
@@ -288,6 +298,27 @@ public class ControladoraLogica {
     // Método agregado para obtener valoraciones de un Paper específico
     public List<Valoracion> obtenerValoracionesPorPaper(int idPaper) {
         return controladoraPersistencia.obtenerValoracionesPorPaper(idPaper);
+    }
+    
+    public double obtenerPromedioValoracionPaper(int idPaper) {
+        int sumaValoraciones = 0;
+        List<Valoracion> valoraciones = controladoraPersistencia.obtenerValoracionesPorPaper(idPaper);
+        
+        if (valoraciones == null || valoraciones.isEmpty()) {
+            return sumaValoraciones;
+        }
+        
+        for (Valoracion valoracion : valoraciones) {
+            sumaValoraciones += valoracion.getValoracionNumerica();
+        }
+        
+        return (double) sumaValoraciones/valoraciones.size();
+    }
+    
+    public boolean actualizarPromedioValoracionPaper(int idPaper) {
+        Paper paper = controladoraPersistencia.obtenerPaperPorID(idPaper);
+        paper.setPromedioValoracionNumerica(obtenerPromedioValoracionPaper(idPaper));
+        return controladoraPersistencia.modificarPaper(paper);
     }
 
     public boolean crearComentarioGrupo(ComentarioGrupo comentario) {

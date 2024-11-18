@@ -51,25 +51,6 @@
 			<a class="brand" href="inicio.jsp">
 				Ubooks				
 			</a>		
-			
-			<div class="nav-collapse">
-				<ul class="nav pull-right">
-					<li class="">						
-						<a href="index.jsp" class="">
-							¿Ya tienes una cuenta? Ingresa ahora
-						</a>
-						
-					</li>
-					<li class="">						
-						<a href="inicio.jsp" class="">
-							<i class="icon-chevron-left"></i>
-							Regresar al inicio
-						</a>
-						
-					</li>
-				</ul>
-				
-			</div><!--/.nav-collapse -->	
 	
 		</div> <!-- /container -->
 		
@@ -113,12 +94,6 @@
 	</div> <!-- /content -->
 	
 </div> <!-- /account-container -->
-
-
-<!-- Text Under Box -->
-<div class="login-extra">
-	¿Ya tienes una cuenta? <a href="index.jsp">Ingresa ahora</a>
-</div> <!-- /login-extra -->
 
 
 <script src="js/jquery-1.7.2.min.js"></script>

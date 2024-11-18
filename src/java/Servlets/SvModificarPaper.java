@@ -1,6 +1,8 @@
 package Servlets;
 
 import Logica.Controlador.ControladoraLogica;
+import Logica.Entidades.GeneroPaper;
+import Logica.Entidades.IdiomaPaper;
 import Logica.Entidades.Lector;
 import Logica.Entidades.Paper;
 import Logica.Entidades.Usuario;
@@ -49,6 +51,8 @@ public class SvModificarPaper extends HttpServlet {
             String nombre = request.getParameter("nombre");
             Integer idLector = Integer.parseInt(request.getParameter("id_lector"));
             String resumen = request.getParameter("resumen");
+            GeneroPaper genero = GeneroPaper.valueOf(request.getParameter("genero"));
+            IdiomaPaper idioma = IdiomaPaper.valueOf(request.getParameter("idioma"));
             
             Lector lector = controladoraLogica.obtenerLectorPorID(idLector);
 
@@ -62,6 +66,8 @@ public class SvModificarPaper extends HttpServlet {
                 paper.setNombre(nombre);
                 paper.setAutor(lector);
                 paper.setResumen(resumen);
+                paper.setGenero(genero);
+                paper.setIdioma(idioma);
                 controladoraLogica.modificarPaper(paper);
                 response.sendRedirect("Exito/exito.jsp");
             }
