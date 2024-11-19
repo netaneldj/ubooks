@@ -112,21 +112,21 @@
                                     <input type="email" id="email" name="email" value="" placeholder="Email" class="login" required/>
 				</div> <!-- /field -->   
                                 
-                                <p>Idioma preferencia: <select name="idioma"> </p>
+                                <p>Idioma preferencia: <select name="idioma"> 
                                 <%
                                             for (IdiomaPaper idioma : IdiomaPaper.values()) {
                                         %>
                                 <option><%=idioma%></option>
                                 <% }%>
-                                </select> <!-- /field -->
+                                </select> </p><!-- /field -->
                                 
-                                <p>Genero preferencia: <select name="genero"> </p>
+                                <p>Genero preferencia: <select name="genero">
                                 <%
                                             for (GeneroPaper genero : GeneroPaper.values()) {
                                         %>
                                 <option><%=genero%></option>
                                 <% }%>
-                                </select> <!-- /field -->    
+                                </select> </p> <!-- /field -->    
                                 
                                 <p>Soy autor: <input type="checkbox" id="autor" name="autor" class="login"/></p> <!-- /field -->                                      
                                 

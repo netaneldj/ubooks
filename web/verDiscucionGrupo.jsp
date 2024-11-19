@@ -1,3 +1,4 @@
+<%@page import="Logica.Entidades.ComentarioRespuesta"%>
 <%@page import="Logica.Entidades.ComentarioGrupo"%>
 <%@page import="Logica.Entidades.Grupo"%>
 <%@page import="Logica.Entidades.Paper"%>
@@ -35,6 +36,8 @@
         String nombreUsuario = "";
         String id_usuario = "";
         Grupo grupo;
+        ComentarioGrupo comentarioPrincipal;
+        String comentarioId = request.getParameter("comentario");
         Cookie[] cookies = request.getCookies();
         for(Cookie cookie : cookies){
             if(cookie.getName().equals("id_grupo")) { 
@@ -44,14 +47,15 @@
             }
         }
         grupo = controladoraLogica.obtenerGrupoPorId(Integer.valueOf( id_grupo));
+        comentarioPrincipal = controladoraLogica.obtenerComentarioGrupoPorId(Integer.valueOf(comentarioId));
         nombreUsuario = controladoraLogica.obtenerUsuarioPorID(Integer.valueOf(id_usuario)).getNombreUsuario();
         /****************** PAGINADO ******************/
         int itemsPorPagina = 9; // Número de items por página
-        int paginaGrupo = request.getParameter("paginaGrupo") != null ? Integer.parseInt(request.getParameter("paginaGrupo")) : 1;
-        int inicioLector = (paginaGrupo - 1) * itemsPorPagina;
-        List<ComentarioGrupo> misCometarios = grupo.getComentarios();
-        int totalComentarios = misCometarios.size();
-        List<ComentarioGrupo> misCometariosPaginados = misCometarios.subList(inicioLector, Math.min(inicioLector + itemsPorPagina, totalComentarios));
+        int paginaComentario = request.getParameter("paginaGrupo") != null ? Integer.parseInt(request.getParameter("paginaGrupo")) : 1;
+        int inicioLector = (paginaComentario - 1) * itemsPorPagina;
+        List<ComentarioRespuesta> misRespuestas = comentarioPrincipal.getRespuestas();
+        int totalComentarios = misRespuestas.size();
+        List<ComentarioRespuesta> misRespuestasPaginadas = misRespuestas.subList(inicioLector, Math.min(inicioLector + itemsPorPagina, totalComentarios));
         
         %>
         <div class="navbar navbar-fixed-top">
@@ -134,58 +138,31 @@
             <!-- /subnavbar-inner --> 
         </div>
         <!-- /subnavbar -->
-        <div class="main">
-            <div class="main-inner">
-            <div class="text", style="font-size:900%">
-                <center><%= grupo.getNombre()%></center>
-                 <br/>
-                 <br/>
-                 <br/>
-               <div class="text", style="font-size:50%">
-                <center><%= grupo.getTema()%></center> 
-                </div>
-            </div>
-
-
-            <div class="widget" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-top: 20px;">
-                        <div class="widget-header">
+         <div class="widget" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                        <div class="widget-header" style="display: flex; align-items: center;">
                             <i class="icon-comment"></i>
-                            <h3>Discusiones</h3>
-                            <form action="crearDiscusionGrupo.jsp" method="POST" style="display: inline;">
+                            <h3 style="flex-grow: 1; display: flex; justify-content: space-between; align-items: center;">Discusiones
+                            <form action="responderDiscusionGrupo.jsp" method="POST" style="text-align: right;clear:left;">
                                 <input type="hidden" name="usuario" value="<%= id_usuario %>">
-                                <input type="hidden" name="grupo" value="<%= grupo.getId() %>">
-                                <input type="hidden" name="paginaOriginal" value="<%= "verGrupo.jsp" %>">
-                                <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Crear discusión</button>
+                                <input type="hidden" name="comentario" value="<%= comentarioPrincipal.getId() %>">
+                                <input type="hidden" name="paginaOriginal" value="<%= "verDiscucionGrupo.jsp" %>">
+                                <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Responder</button>
                             </form>
+                            </h3>
                         </div>
                         <div class="widget-content">
+                            <ul class="list-group">
+                            <li class="list-group-item" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                                <p><%= comentarioPrincipal.getCreador().getNombre() %></p>
+                                    <div class="text", style="font-size:200%"><%= comentarioPrincipal.getTitulo() %>:</div>
+                                    <p  style="font-size:200%"><%= comentarioPrincipal.getComentario() %>
+                                </p>
+                            </li>
                             <% if (grupo.getCantidadComentarios()>0) { %>
-                                <ul class="list-group">
-                                    <% for (ComentarioGrupo comentario : misCometariosPaginados) { %>
+                                    <% for (ComentarioRespuesta respuesta : misRespuestasPaginadas) { %>
                                         <li class="list-group-item" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-top: 20px;">
-                                            <p><%= comentario.getCreador().getNombre() %></p>
-                                            <div class="text", style="font-size:200%"><%= comentario.getTitulo() %>:</div>
-                                            <p  style="font-size:200%"><%= comentario.getComentario() %></p>
-                                            <span class="rating" >
-                                                <% for (int i = 0; i < comentario.getRespuestas().size(); i++) { 
-                                                    //if(i==3) break;
-                                                %>
-                                                <p style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-top: 20px;"><%= comentario.getRespuestas().get(i) %></p>
-                                                <% } %>
-                                            </span>
-                                            <form action="verDiscucionGrupo.jsp" method="POST" style="text-align: right;clear:left;">
-                                                <input type="hidden" name="usuario" value="<%= id_usuario %>">
-                                                <input type="hidden" name="comentario" value="<%= comentario.getId() %>">
-                                                <input type="hidden" name="paginaOriginal" value="<%= "verDiscucionGrupo.jsp" %>">
-                                                <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Ver</button>
-                                            </form>
-                                            <form action="verGrupo.jsp" method="POST" style="text-align: right;clear:left;">
-                                                <input type="hidden" name="usuario" value="<%= id_usuario %>">
-                                                <input type="hidden" name="grupo" value="<%= grupo.getId() %>">
-                                                <input type="hidden" name="paginaOriginal" value="<%= "verGrupo.jsp" %>">
-                                                <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Responder</button>
-                                            </form>
-                                            <br/>
+                                            <p><%= respuesta.getCreador().getNombre() %></p>
+                                            <div class="text", style="font-size:200%"><%= respuesta.getComentario() %>:</div>
                                         </li>
                                     <% } %>
 
@@ -193,26 +170,13 @@
                             <% } else { %>
                                 <p>No hay Discusiones.</p>
                             <% } %>
-                        <div class="pagination">
-                                <% if (paginaGrupo > 1) { %>
-                                    <a href="verGrupo.jsp?paginaGrupo=<%= paginaGrupo - 1 %>">&laquo; Anterior</a>
-                                <% } %>
-                                <span>Página <%= paginaGrupo %> de <%= (int) Math.ceil((double) totalComentarios / itemsPorPagina) %></span>
-                                <% if (paginaGrupo < (int) Math.ceil((double) totalComentarios / itemsPorPagina)) { %>
-                                    <a href="verGrupo.jsp?paginaGrupo=<%= paginaGrupo + 1 %>" >Siguiente &raquo;</a>
-                                <% } %>
-                            </div>
-                        
                         </div>
-                    </div>
-         </div>
-        </div>
-        <!-- /main -->
+                            
+            <!-- /main -->
 
         <!-- /footer --> 
         
         <!-- Le javascript --->
-        ================================================== --> 
         <!-- Placed at the end of the document so the pages load faster --> 
         <script src="resources/js/jquery-1.7.2.min.js"></script> 
         <script src="resources/js/excanvas.min.js"></script> 

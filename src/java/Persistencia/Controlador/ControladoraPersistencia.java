@@ -1,6 +1,7 @@
 package Persistencia.Controlador;
 
 import Logica.Entidades.ComentarioGrupo;
+import Logica.Entidades.ComentarioRespuesta;
 import Logica.Entidades.GeneroPaper;
 import Logica.Entidades.Grupo;
 import Logica.Entidades.Lector;
@@ -9,6 +10,7 @@ import Logica.Entidades.Paper;
 import Logica.Entidades.Usuario;
 import Logica.Entidades.Valoracion;
 import Persistencia.Entidades.ComentarioGrupoJpaController;
+import Persistencia.Entidades.ComentarioRespuestaJpaController;
 import Persistencia.Entidades.LectorJpaController;
 import Persistencia.Entidades.PaperJpaController;
 import Persistencia.Entidades.GrupoJpaController;
@@ -31,6 +33,7 @@ public class ControladoraPersistencia {
     ValoracionJpaController valoracionJpaController = new ValoracionJpaController();
     GrupoJpaController grupoJpaController = new GrupoJpaController();
     ComentarioGrupoJpaController comentarioGrupoJpaController = new ComentarioGrupoJpaController();
+    ComentarioRespuestaJpaController comentarioRespuestaJpaController = new ComentarioRespuestaJpaController();
 
     public ControladoraPersistencia() {}
     
@@ -213,6 +216,18 @@ public class ControladoraPersistencia {
         return exito;
     }
     
+    public boolean modificarComentarioGrupo(ComentarioGrupo comentario) {
+        boolean exito = false;
+        try {
+            comentarioGrupoJpaController.edit(comentario);
+            logger.log(Level.INFO, "ControladoraPersistencia: comentario modificado con exito!");
+            exito = true;
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al modificar comentario: {0}", e.getMessage());
+        }
+        return exito;
+    }
+    
     
     public boolean modificarGrupo(Grupo grupo) {
         boolean exito = false;
@@ -268,7 +283,7 @@ public class ControladoraPersistencia {
     }
 
     public Grupo obtenerGrupoPorId(Integer id) {
-        return grupoJpaController.findGrupo(id); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return grupoJpaController.findGrupo(id);
     }
 
     public boolean crearComentarioGrupo(ComentarioGrupo comentario) {
@@ -282,4 +297,24 @@ public class ControladoraPersistencia {
 		}
 		return exito;
     }
+
+    public boolean crearComentarioRespuesta(ComentarioRespuesta respuesta) {
+        boolean exito = false;
+		try {
+			comentarioRespuestaJpaController.create(respuesta);
+			logger.log(Level.INFO, "ControladoraPersistencia: respuesta creado con exito!");
+			exito = true;
+		} catch(Exception e){
+			logger.log(Level.SEVERE, "ControladoraPersistencia: Error al crear respuesta: %s",e.getMessage());
+		}
+		return exito;
+    }
+    
+    public ComentarioGrupo obtenerComentarioGrupoPorId(Integer id) {
+        return comentarioGrupoJpaController.findComentarioGrupo(id);
+    }
+
+
+
+
 }

@@ -93,7 +93,7 @@
                                         <input type="text" id="nombre" name="nombre" value="<%=paper.getNombre()%>" placeholder="Nombre" class="login" required/>
                                     </div> <!-- /field -->
 
-                                    <p>Autor: <select name="id_lector"> </p>
+                                    <p>Autor: <select name="id_lector"> 
                                     <option value=<%=paper.getAutor().getId()%> selected><%=paper.getAutor().getNombre()+" "+paper.getAutor().getApellido()%></option>
                                     <%
                                                 List<Lector> autores = controladoraLogica.obtenerAutores();
@@ -102,9 +102,9 @@
                                     %>
                                     <option value=<%=autor.getId()%>><%=autor.getNombre()+" "+autor.getApellido()%></option>
                                     <% }}%>
-                                    </select> <!-- /field -->
+                                    </select></p> <!-- /field -->
                                     
-                                     <p>Genero: <select name="genero"> </p>
+                                     <p>Genero: <select name="genero">
                                         <option selected><%=paper.getGenero()%></option>
                                     <%
                                                 for (GeneroPaper genero : GeneroPaper.values()) {
@@ -112,9 +112,9 @@
                                             %>
                                     <option><%=genero%></option>
                                     <% }}%>
-                                    </select> <!-- /field -->
+                                    </select> </p> <!-- /field -->
 
-                                    <p>Idioma: <select name="idioma"> </p>
+                                    <p>Idioma: <select name="idioma">
                                     <option selected><%=paper.getIdioma()%></option>
                                     <%
                                                 for (IdiomaPaper idioma : IdiomaPaper.values()) {
@@ -122,7 +122,7 @@
                                             %>
                                     <option><%=idioma%></option>
                                     <% }}%>
-                                    </select> <!-- /field --> 
+                                    </select> </p> <!-- /field --> 
                                     
                                     <div class="field">
                                         <label for="resumen">Resumen:</label>	
