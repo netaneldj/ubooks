@@ -32,6 +32,11 @@ public class ControladoraLogica {
         return exito;
     }
     
+    public boolean actualizarBiografia(Lector lector, String nuevaBiografia) {
+        boolean exito = controladoraPersistencia.actualizarBiografia(lector, nuevaBiografia);
+        return exito;
+    } 
+    
     public boolean crearUsuario(Usuario usuario) {
         boolean exito = false;
         if (controladoraPersistencia.crearUsuario(usuario)) exito = true;

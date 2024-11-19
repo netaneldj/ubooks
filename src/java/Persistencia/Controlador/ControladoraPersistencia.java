@@ -82,6 +82,22 @@ public class ControladoraPersistencia {
         return exito;
     }
     
+    public boolean actualizarBiografia(Lector lector, String nuevaBiografia) {
+        boolean exito = false;
+        
+        try {
+            lector.setBiografia(nuevaBiografia);
+            lectorJpaController.edit(lector);
+            logger.log(Level.INFO, "ControladoraPersistencia: Actualización de la biografía exitosa!");
+            
+            exito = true;
+        } catch(Exception e){
+            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al actualizar la biografía: %s",e.getMessage());
+        }
+        
+        return exito;
+    }
+    
      public boolean crearValoracion(Paper paper, Lector lector, int calificacion, String comentario){
         boolean exito = false;
         try {
