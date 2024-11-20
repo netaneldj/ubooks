@@ -71,7 +71,7 @@
                             <form action="SvModificarPaper" method="GET">
                                 <h1>Modificar Paper</h1>			
                                 <div class="login-fields">
-                                    <p>Paper: <select name="id_paper"> </p>
+                                    <p>Paper: <select name="id_paper"> 
                                     <%
                                         ControladoraLogica controladoraLogica = new ControladoraLogica();        
                                         List<Paper> papers = controladoraLogica.obtenerPapers();
@@ -79,7 +79,7 @@
                                     %>
                                     <option value=<%=paper.getId()%>><%=paper.getNombre()+" "+paper.getAutor().getNombre()+" "+paper.getAutor().getApellido()%></option>
                                     <% }%>
-                                    </select> <!-- /field -->
+                                    </select> </p><!-- /field -->
 
                                 </div> <!-- /login-fields -->
 

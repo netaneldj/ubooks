@@ -1,3 +1,4 @@
+<%@page import="java.util.Objects"%>
 <%@page import="Logica.Entidades.Paper"%>
 <%@page import="Logica.Entidades.Valoracion"%>
 <%@page import="Logica.Entidades.Lector"%>
@@ -79,6 +80,7 @@
     List<Valoracion> misValoraciones = controladoraLogica.obtenerValoracionesPorPaper(Integer.parseInt(id_paper));
     int totalValoraciones = misValoraciones.size();
     List<Valoracion> misValoracionesPaginadas = misValoraciones.subList(inicioValoracion, Math.min(inicioValoracion + itemsPorPagina, totalValoraciones));
+    int promedioValoracionPaper = Objects.isNull(paper.getPromedioValoracionNumerica()) ? 0 : (int) Math.round(paper.getPromedioValoracionNumerica());
 %>
 
 <div class="navbar navbar-fixed-top">
@@ -181,8 +183,31 @@
                                     <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Guardar</button>
                                 </form>
                                 <%}%>
+         
+                                    <%
+                        if(lector.paperLeido(paper)){
+                        %>                                        
+                             <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em; color:black ">Ya leido</button>
+                            <% }else{
+                        %>    
+                                <form action="SvGuardarPaperLeido" method="POST" style="display: inline;">
+                                    <input type="hidden" name="lector" value="<%= lector.getId() %>">
+                                    <input type="hidden" name="paper" value="<%= paper.getId() %>">
+                                    <input type="hidden" name="paginaOriginal" value="<%= "verPaper.jsp" %>">
+                                    <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Marcar como Leido</button>
+                                </form>
+                                <%}%>        
+                                
+                                
+                                
                         <div class="widget-content">
                             <form>
+                                <span class="rating" style="direction: ltr;">
+                                    <% for (int i = 0; i < 5; i++) { %>
+                                        <span style="color: <%= i < promedioValoracionPaper ? "gold" : "#ddd" %>; font-size: 30px;">★</span>
+                                    <% } %>
+                                </span>
+                           
                                 <div class="field">
                                     <label for="nombre">Nombre:</label>
                                     <input type="text" id="nombre" name="nombre" value="<%=paper != null ? paper.getNombre() : ""%>" class="login" readonly/>
@@ -252,7 +277,7 @@
                                             <strong><%= controladoraLogica.obtenerLectorPorID(valoracion.getLector().getId()).getNombre()%>:</strong>
                                             <span class="rating">
                                                 <% for (int i = 0; i < 5; i++) { %>
-                                                    <span style="color: <%= i < valoracion.getValoracionNumerica() ? "gold" : "#ddd" %>;"></span>
+                                                    <span style="color: <%= i < valoracion.getValoracionNumerica() ? "gold" : "#ddd" %>;">★</span>
                                                 <% } %>
                                             </span>
                                             <p><%= valoracion.getComentario() %></p>

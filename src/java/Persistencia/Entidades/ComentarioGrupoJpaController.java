@@ -50,4 +50,36 @@ public class ComentarioGrupoJpaController implements Serializable{
             }
         }
     }
+
+    public ComentarioGrupo findComentarioGrupo(Integer id) {
+         EntityManager em = getEntityManager();
+        try {
+            return em.find(ComentarioGrupo.class, id);
+        } finally {
+            em.close();
+        }
+    }
+
+    public void edit(ComentarioGrupo comentario) throws NonexistentEntityException, Exception {
+        EntityManager em = null;
+        try {
+            em = getEntityManager();
+            em.getTransaction().begin();
+            comentario = em.merge(comentario);
+            em.getTransaction().commit();
+        } catch (Exception ex) {
+            String msg = ex.getLocalizedMessage();
+            if (msg == null || msg.length() == 0) {
+                Integer id = comentario.getId();
+                if (findComentarioGrupo(id) == null) {
+                    throw new NonexistentEntityException("The paper with id " + id + " no longer exists.");
+                }
+            }
+            throw ex;
+        } finally {
+            if (em != null) {
+                em.close();
+            }
+        }
+    }
 }

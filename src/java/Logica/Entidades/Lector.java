@@ -26,6 +26,8 @@ public class Lector extends Persona implements Serializable {
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Integer id;
     
+    private int puntos;
+    
     @OneToOne
     private Usuario usuario;
     
@@ -48,13 +50,13 @@ public class Lector extends Persona implements Serializable {
     private List<Usuario> seguidos;
 
     @OneToMany
-    private List<Paper> misPapers;
-
+    private List<MiPaper> misPapers;
+    
     public Lector() {
         misPapers = new ArrayList<>();
     }
 
-    public Lector(Integer id, Usuario usuario, String nombre, String apellido, Date nacimiento, IdiomaPaper idioma, GeneroPaper genero, Boolean esAutor, List<Paper> misPapers) {
+    public Lector(Integer id, Usuario usuario, String nombre, String apellido, Date nacimiento, IdiomaPaper idioma, GeneroPaper genero, Boolean esAutor, List<MiPaper> misPapers) {
         super(nombre, apellido, nacimiento);
         this.id = id;
         this.usuario = usuario;
@@ -62,6 +64,7 @@ public class Lector extends Persona implements Serializable {
         this.genero = genero;
         this.esAutor = esAutor;
         this.misPapers = misPapers;
+        this.puntos = 0;
     }
 
     public int getId() {
@@ -116,24 +119,47 @@ public class Lector extends Persona implements Serializable {
         this.seguidos = seguidos;
     }
 	
-    public void setMisPapers(List<Paper> misPapers){
+    public void setMisPapers(List<MiPaper> misPapers){
         this.misPapers = misPapers;
     }
     
-    public List<Paper> getMisPapers(){
+    public List<MiPaper> getMisPapers(){
         return misPapers;
     }
     
-    public void addPaper(Paper paper){
+    public void addPaper(MiPaper paper){
         misPapers.add(paper);
     }
     
     public Boolean siguePaper(Paper paper){
-        for(Paper miPaper: misPapers){
+        for(MiPaper miPaper: misPapers){
             if(paper.getId()==(miPaper.getId())){
                 return true;
             }
         }
         return false;
     }
+ 
+    public Boolean paperLeido(Paper paper){
+        for(MiPaper miPaper: misPapers){
+            if( (paper.getId().equals(miPaper.getId())) && (miPaper.getLeido().equals(EnumLeido.LEIDO))){
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public void addPuntos(){
+        this.puntos += 100;
+    }
+    
+    public void setPuntos(int puntos){
+        this.puntos = puntos;
+    }
+    
+    public int getPuntos(){
+        return this.puntos;
+    }
+    
+    
 }

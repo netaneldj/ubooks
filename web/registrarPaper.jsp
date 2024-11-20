@@ -1,3 +1,4 @@
+<%@page import="Logica.Entidades.IdiomaPaper"%>
 <%@page import="Logica.Entidades.GeneroPaper"%>
 <%@page import="Logica.Entidades.Usuario"%>
 <%@page import="Logica.Entidades.Lector"%>
@@ -51,25 +52,6 @@
 			<a class="brand" href="inicio.jsp">
 				Ubooks				
 			</a>		
-			
-			<div class="nav-collapse">
-				<ul class="nav pull-right">
-					<li class="">						
-						<a href="index.jsp" class="">
-							¿Ya tienes una cuenta? Ingresa ahora
-						</a>
-						
-					</li>
-					<li class="">						
-						<a href="inicio.jsp" class="">
-							<i class="icon-chevron-left"></i>
-							Regresar al inicio
-						</a>
-						
-					</li>
-				</ul>
-				
-			</div><!--/.nav-collapse -->	
 	
 		</div> <!-- /container -->
 		
@@ -101,7 +83,7 @@
 					<input type="text" id="nombre" name="nombre" value="" placeholder="Nombre" class="login" required/>
 				</div> <!-- /field -->
                                 
-                                <p>Autor: <select name="id_lector"> </p>
+                                <p>Autor: <select name="id_lector">
                                 <%
                                     ControladoraLogica controladoraLogica = new ControladoraLogica();        
                                     List<Lector> autores = controladoraLogica.obtenerAutores();
@@ -109,14 +91,23 @@
                                 %>
                                 <option value=<%=autor.getId()%>><%=autor.getNombre()+" "+autor.getApellido()%></option>
                                 <% }%>
-                                </select> <!-- /field -->    
-                               <p>Genero: <select name="genero"> </p>
+                                </select>  </p><!-- /field -->    
+                               <p>Genero: <select name="genero"> 
                                 <%
                                             for (GeneroPaper genero : GeneroPaper.values()) {
                                         %>
                                 <option><%=genero%></option>
                                 <% }%>
-                                </select> <!-- /field -->
+                                </select></p> <!-- /field -->
+                                
+                                <p>Idioma: <select name="idioma">
+                                <%
+                                            for (IdiomaPaper idioma : IdiomaPaper.values()) {
+                                        %>
+                                <option><%=idioma%></option>
+                                <% }%>
+                                </select> </p> <!-- /field -->                                
+                                
 				<div class="field">
 					<label for="resumen">Resumen:</label>
 					<input type="text" id="resumen" name="resumen" value="" placeholder="Resumen" class="login" required/>
@@ -134,12 +125,6 @@
 	</div> <!-- /content -->
 	
 </div> <!-- /account-container -->
-
-
-<!-- Text Under Box -->
-<div class="login-extra">
-	¿Ya tienes una cuenta? <a href="index.jsp">Ingresa ahora</a>
-</div> <!-- /login-extra -->
 
 
 <script src="js/jquery-1.7.2.min.js"></script>

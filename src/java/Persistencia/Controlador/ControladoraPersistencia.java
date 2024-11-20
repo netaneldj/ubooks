@@ -1,16 +1,20 @@
 package Persistencia.Controlador;
 
 import Logica.Entidades.ComentarioGrupo;
+import Logica.Entidades.ComentarioRespuesta;
 import Logica.Entidades.GeneroPaper;
 import Logica.Entidades.Grupo;
 import Logica.Entidades.Lector;
+import Logica.Entidades.MiPaper;
 import Logica.Entidades.Paper;
 import Logica.Entidades.Usuario;
 import Logica.Entidades.Valoracion;
 import Persistencia.Entidades.ComentarioGrupoJpaController;
+import Persistencia.Entidades.ComentarioRespuestaJpaController;
 import Persistencia.Entidades.LectorJpaController;
 import Persistencia.Entidades.PaperJpaController;
 import Persistencia.Entidades.GrupoJpaController;
+import Persistencia.Entidades.MiPaperJpaController;
 import Persistencia.Entidades.UsuarioJpaController;
 import Persistencia.Entidades.ValoracionJpaController;
 import Persistencia.Entidades.exceptions.NonexistentEntityException;
@@ -22,11 +26,14 @@ public class ControladoraPersistencia {
     private final static Logger logger = Logger.getLogger(Logger.GLOBAL_LOGGER_NAME);
     
     LectorJpaController lectorJpaController = new LectorJpaController();
+    MiPaperJpaController miPaperJpaController = new MiPaperJpaController();
+
     UsuarioJpaController usuarioJpaController = new UsuarioJpaController();
     PaperJpaController paperJpaController = new PaperJpaController();
     ValoracionJpaController valoracionJpaController = new ValoracionJpaController();
     GrupoJpaController grupoJpaController = new GrupoJpaController();
     ComentarioGrupoJpaController comentarioGrupoJpaController = new ComentarioGrupoJpaController();
+    ComentarioRespuestaJpaController comentarioRespuestaJpaController = new ComentarioRespuestaJpaController();
 
     public ControladoraPersistencia() {}
     
@@ -75,6 +82,22 @@ public class ControladoraPersistencia {
         } catch(Exception e){
             logger.log(Level.SEVERE, "ControladoraPersistencia: Error al crear lector: %s",e.getMessage());
         }
+        return exito;
+    }
+    
+    public boolean actualizarBiografia(Lector lector, String nuevaBiografia) {
+        boolean exito = false;
+        
+        try {
+            lector.setBiografia(nuevaBiografia);
+            lectorJpaController.edit(lector);
+            logger.log(Level.INFO, "ControladoraPersistencia: Actualización de la biografía exitosa!");
+            
+            exito = true;
+        } catch(Exception e){
+            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al actualizar la biografía: %s",e.getMessage());
+        }
+        
         return exito;
     }
     
@@ -169,6 +192,22 @@ public class ControladoraPersistencia {
         return exito;
     }
     
+    
+    
+    public boolean modificarMiPaper(List<MiPaper> misPapers) {
+        boolean exito = false;
+        for (MiPaper p : misPapers){
+            try {
+                miPaperJpaController.edit(p);
+                logger.log(Level.INFO, "ControladoraPersistencia: MiPaper modificado con exito!");
+                exito = true;
+            } catch (Exception e) {
+                logger.log(Level.SEVERE, "ControladoraPersistencia: Error al modificar MiPaper: {0}", e.getMessage());
+            }
+        }
+        return exito;
+    }
+            
     public boolean modificarLector(Lector lector) {
         boolean exito = false;
         try {
@@ -189,6 +228,18 @@ public class ControladoraPersistencia {
             exito = true;
         } catch (Exception e) {
             logger.log(Level.SEVERE, "ControladoraPersistencia: Error al modificar paper: {0}", e.getMessage());
+        }
+        return exito;
+    }
+    
+    public boolean modificarComentarioGrupo(ComentarioGrupo comentario) {
+        boolean exito = false;
+        try {
+            comentarioGrupoJpaController.edit(comentario);
+            logger.log(Level.INFO, "ControladoraPersistencia: comentario modificado con exito!");
+            exito = true;
+        } catch (Exception e) {
+            logger.log(Level.SEVERE, "ControladoraPersistencia: Error al modificar comentario: {0}", e.getMessage());
         }
         return exito;
     }
@@ -248,7 +299,7 @@ public class ControladoraPersistencia {
     }
 
     public Grupo obtenerGrupoPorId(Integer id) {
-        return grupoJpaController.findGrupo(id); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+        return grupoJpaController.findGrupo(id);
     }
 
     public boolean crearComentarioGrupo(ComentarioGrupo comentario) {
@@ -262,4 +313,24 @@ public class ControladoraPersistencia {
 		}
 		return exito;
     }
+
+    public boolean crearComentarioRespuesta(ComentarioRespuesta respuesta) {
+        boolean exito = false;
+		try {
+			comentarioRespuestaJpaController.create(respuesta);
+			logger.log(Level.INFO, "ControladoraPersistencia: respuesta creado con exito!");
+			exito = true;
+		} catch(Exception e){
+			logger.log(Level.SEVERE, "ControladoraPersistencia: Error al crear respuesta: %s",e.getMessage());
+		}
+		return exito;
+    }
+    
+    public ComentarioGrupo obtenerComentarioGrupoPorId(Integer id) {
+        return comentarioGrupoJpaController.findComentarioGrupo(id);
+    }
+
+
+
+
 }

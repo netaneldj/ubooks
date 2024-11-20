@@ -24,9 +24,9 @@ public class SvSeleccionarPaper extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        Cookie lector = new Cookie("id_paper", request.getParameter("id_paper"));
-        lector.setMaxAge(60*60);
-        response.addCookie(lector);
+        Cookie paper = new Cookie("id_paper", request.getParameter("id_paper"));
+        paper.setMaxAge(60*60);
+        response.addCookie(paper);
         response.sendRedirect("verPaper.jsp");
     }
 

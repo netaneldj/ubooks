@@ -1,5 +1,7 @@
+<%@page import="Logica.Entidades.MiPaper"%>
 <%@page import="Logica.Entidades.Grupo"%>
 <%@page import="Logica.Entidades.Paper"%>
+<%@page import="Logica.Entidades.MiPaper"%>
 <%@page import="Logica.Entidades.GeneroPaper"%>
 <%@page import="Logica.Entidades.IdiomaPaper"%>
 <%@page import="Logica.Entidades.Usuario"%>
@@ -64,9 +66,9 @@
         
         int paginaPaper= request.getParameter("paginaPaper") != null ? Integer.parseInt(request.getParameter("paginaPaper")) : 1;
         int inicioPaper = (paginaPaper - 1) * itemsPorPagina;
-        List<Paper> misPapers = lector.getMisPapers();
+        List<MiPaper> misPapers = lector.getMisPapers();
         int totalPapers = misPapers.size();
-        List<Paper> misPapersPaginados = misPapers.subList(inicioPaper, Math.min(inicioPaper + itemsPorPagina, totalPapers));
+        List<MiPaper> misPapersPaginados = misPapers.subList(inicioPaper, Math.min(inicioPaper + itemsPorPagina, totalPapers));
         
         int paginaGrupo= request.getParameter("paginaGrupo") != null ? Integer.parseInt(request.getParameter("paginaGrupo")) : 1;
         int inicioGrupo = (paginaGrupo - 1) * itemsPorPagina;
@@ -185,6 +187,10 @@
                                         <div class="field">
                                             <label for="apellido">Apellido:</label>  
                                             <input type="text" id="apellido" name="apellido" value="<%=lector.getApellido()%>" class="login" readonly/>
+                                        </div>
+                                        <div class="field">
+                                            <label for="biografia">Biografia:</label>  
+                                            <input type="text" id="biografia" name="biografia" value="<%=lector.getBiografia()%>" class="login" readonly/>
                                         </div>
                                         <div class="field">
                                             <label for="nacimiento">Fecha de nacimiento:</label>  
@@ -334,7 +340,7 @@
                                 <div class="widget-content">
                                     <ul class="messages_layout widget-list">
                                         <%      
-                                            for (Paper miPaper : misPapersPaginados) {
+                                            for (MiPaper miPaper : misPapersPaginados) {
                                         %>
                                             <li class="from_user leftLector">
                                                 <a href="listarPapers.jsp" class="avatar">
@@ -343,7 +349,7 @@
                                                 <div class="message_wrap"> 
                                                     <span class="arrow"></span>
                                                     <div class="info"> 
-                                                        <a class="name"><%=miPaper.getNombre()%></a>
+                                                        <a class="name"><%=miPaper.getPaper().getNombre()%></a>
                                                         <div class="options_arrow">
                                                             <div class="dropdown pull-right"> 
                                                                 <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">
@@ -357,7 +363,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="text"><%=miPaper.getAutor().getNombre()+ " " + miPaper.getAutor().getApellido()%></div>
+                                                    <div class="text"><%=miPaper.getPaper().getAutor().getNombre()+ " " + miPaper.getPaper().getAutor().getApellido()%></div>
                                                 </div>
                                             </li>
                                         <% } %>
@@ -429,7 +435,7 @@
                 <div class="container">
                     <div class="row">
                         <div class="span12">
-                            &copy; 2021 <a href="https://netaneldj.github.io/" target="_blank"> Netanel David Jamilis </a>
+                            &copy; 2024 Gestión del Desarrollo de Sistemas Informáticos - Grupo 11
                         </div> <!-- /span12 -->
                     </div> <!-- /row -->
                 </div> <!-- /container -->

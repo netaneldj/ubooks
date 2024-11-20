@@ -1,3 +1,4 @@
+<%@page import="Logica.Entidades.ComentarioGrupo"%>
 <%@page import="Logica.Entidades.GeneroPaper"%>
 <%@page import="Logica.Entidades.Usuario"%>
 <%@page import="Logica.Entidades.Lector"%>
@@ -27,14 +28,13 @@
 
 <body>
 	<%
-            /*
+            ControladoraLogica controladoraLogica = new ControladoraLogica();
             HttpSession sesion = request.getSession();
-            String nombreUsuario = (String) request.getSession().getAttribute("nombreUsuario");
-
-            if (nombreUsuario == null) {
-                response.sendRedirect("index.jsp");
-            } else {
-            */ 
+            String idComentario = request.getParameter("comentario");
+            String idUsuario = request.getParameter("usuario");
+            String paginaOriginal = request.getParameter("paginaOriginal");
+            ComentarioGrupo comentario = controladoraLogica.obtenerComentarioGrupoPorId(Integer.valueOf(idComentario));
+            
         %>
 	<div class="navbar navbar-fixed-top">
 	
@@ -50,7 +50,7 @@
 			
 			<a class="brand" href="inicio.jsp">
 				Ubooks				
-			</a>		
+			</a>
 	
 		</div> <!-- /container -->
 		
@@ -64,28 +64,34 @@
 	
 	<div class="content clearfix">
 		
-		<form action="SvCrearGrupo" method="POST" id="1">
+		<form action="SvResponderDiscusiónGrupo" method="POST" id="1">
 		
-			<h1>Crear Grupo</h1>			
+			<h1>Responder Discusion</h1>			
 			
 			<div class="login-fields">
 				
-				<p>Crear Grupo:</p>
+				<p>Responder Discucion:</p>
                                 
-				<div class="field">
-					<label for="nombre">Nombre:</label>	
-					<input type="text" id="nombre" name="nombre" value="" placeholder="Nombre" class="login" required/>
-				</div> <!-- /field -->                                
+                                <p><%= comentario.getCreador().getNombre() %>:</p>
+                                 <p><%= comentario.getTitulo() %></p>
+                                  <p> <%= comentario.getComentario() %></p>
+                                                              
 				
 				<div class="field">
-					<label for="nombre">Tema:</label>
-					<input type="text" id="tema" name="tema" value="" placeholder="Tema" class="login" required/>
+					<label for="nombre">Respuesta:</label>
+					<textarea id="desc" name="resp" rows="4" class="login"></textarea>
 				</div> <!-- /field -->
+                                
+                               
 				
 			</div> <!-- /login-fields -->
-			
+                        
+			<input type="hidden" name="comentario" value="<%= comentario.getId() %>">
+                        <input type="hidden" name="lector" value="<%= idUsuario %>">
+                        <input type="hidden" name="paginaOriginal" value="<%= paginaOriginal %>">
+                        
 			<div class="login-actions">					
-				<button class="button btn btn-primary btn-large">Crear</button>
+				<button class="button btn btn-primary btn-large">responder</button>
 				
 			</div> <!-- .actions -->
 			
@@ -94,7 +100,6 @@
 	</div> <!-- /content -->
 	
 </div> <!-- /account-container -->
-
 
 <script src="js/jquery-1.7.2.min.js"></script>
 <script src="js/bootstrap.js"></script>

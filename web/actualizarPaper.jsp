@@ -1,3 +1,5 @@
+<%@page import="Logica.Entidades.IdiomaPaper"%>
+<%@page import="Logica.Entidades.GeneroPaper"%>
 <%@page import="Logica.Entidades.Paper"%>
 <%@page import="Logica.Entidades.Lector"%>
 <%@page import="Logica.Controlador.ControladoraLogica"%>
@@ -91,7 +93,7 @@
                                         <input type="text" id="nombre" name="nombre" value="<%=paper.getNombre()%>" placeholder="Nombre" class="login" required/>
                                     </div> <!-- /field -->
 
-                                    <p>Autor: <select name="id_lector"> </p>
+                                    <p>Autor: <select name="id_lector"> 
                                     <option value=<%=paper.getAutor().getId()%> selected><%=paper.getAutor().getNombre()+" "+paper.getAutor().getApellido()%></option>
                                     <%
                                                 List<Lector> autores = controladoraLogica.obtenerAutores();
@@ -100,7 +102,27 @@
                                     %>
                                     <option value=<%=autor.getId()%>><%=autor.getNombre()+" "+autor.getApellido()%></option>
                                     <% }}%>
-                                    </select> <!-- /field -->
+                                    </select></p> <!-- /field -->
+                                    
+                                     <p>Genero: <select name="genero">
+                                        <option selected><%=paper.getGenero()%></option>
+                                    <%
+                                                for (GeneroPaper genero : GeneroPaper.values()) {
+                                                    if (!genero.equals(paper.getGenero())){
+                                            %>
+                                    <option><%=genero%></option>
+                                    <% }}%>
+                                    </select> </p> <!-- /field -->
+
+                                    <p>Idioma: <select name="idioma">
+                                    <option selected><%=paper.getIdioma()%></option>
+                                    <%
+                                                for (IdiomaPaper idioma : IdiomaPaper.values()) {
+                                                    if (!idioma.equals(paper.getIdioma())){
+                                            %>
+                                    <option><%=idioma%></option>
+                                    <% }}%>
+                                    </select> </p> <!-- /field --> 
                                     
                                     <div class="field">
                                         <label for="resumen">Resumen:</label>	

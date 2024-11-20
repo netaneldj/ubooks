@@ -15,16 +15,26 @@ public abstract class Persona {
     private String apellido;
     @Temporal(TemporalType.DATE)
     private Date nacimiento;
+    private String biografia;
 
     public Persona() {
+    }
+    
+    public String getBiografia() {
+        return this.biografia;
+    }
+    
+    public String setBiografia(String nuevaBiografia) {
+        return this.biografia = nuevaBiografia;
     }
 
     public Persona(String nombre, String apellido, Date nacimiento) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.nacimiento = nacimiento;
+        this.biografia = "";
     }
-
+    
     public String getNombre() {
         return nombre;
     }
