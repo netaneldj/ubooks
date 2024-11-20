@@ -102,7 +102,7 @@
                                         <input type="email" id="email" name="email" value="<%=lector.getUsuario().getEmail()%>" placeholder="Email" class="login" required/>
                                     </div> <!-- /field -->
                                     
-                                    <p>Idioma preferencia: <select name="idioma"> </p>
+                                    <p>Idioma preferencia: <select name="idioma">
                                         <option selected><%=lector.getIdioma()%></option>
                                     <%
                                                 for (IdiomaPaper idioma : IdiomaPaper.values()) {
@@ -110,9 +110,9 @@
                                             %>
                                     <option><%=idioma%></option>
                                     <% }}%>
-                                    </select> <!-- /field -->
+                                    </select>  </p><!-- /field -->
 
-                                    <p>Genero preferencia: <select name="genero"> </p>
+                                    <p>Genero preferencia: <select name="genero"> 
                                     <option selected><%=lector.getGenero()%></option>
                                     <%
                                                 for (GeneroPaper genero : GeneroPaper.values()) {
@@ -120,7 +120,7 @@
                                             %>
                                     <option><%=genero%></option>
                                     <% }}%>
-                                    </select> <!-- /field -->   
+                                    </select></p> <!-- /field -->   
                                     
                                     <p>Soy autor: <input type="checkbox" id="autor" name="autor" value=<%=lector.getEsAutor()%> class="login"/></p> <!-- /field -->                                                                          
                                     

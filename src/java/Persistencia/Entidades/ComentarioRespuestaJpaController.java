@@ -14,12 +14,12 @@ import javax.persistence.Persistence;
  *
  * @author bruno
  */
-public class CometarioRespuestaJpaController implements Serializable {
-        public CometarioRespuestaJpaController(EntityManagerFactory emf) {
+public class ComentarioRespuestaJpaController implements Serializable {
+        public ComentarioRespuestaJpaController(EntityManagerFactory emf) {
         this.emf = emf;
     }
     
-    public CometarioRespuestaJpaController(){
+    public ComentarioRespuestaJpaController(){
         emf = Persistence.createEntityManagerFactory("UbooksPU");
     }
     
