@@ -155,7 +155,7 @@
     <div class="main-inner">
         <div class="container">
             <div class="row">
-                <div class="span6">
+                <div class="span6 pull-left">
                     <!-- PRIMER PANEL: Recomendaciones mejor calificados -->
                     <div class="widget">
                         <div class="widget-header"> <i class="icon-user"></i>
@@ -190,7 +190,26 @@
                             <% } %>
                         </div>
                     </div>
-
+                </div>
+                <!-- Panel de Accesos Rápidos a la derecha -->
+                <div class="span6 pull-right">
+                    <div class="widget">
+                        <div class="widget-header"> <i class="icon-bookmark"></i>
+                            <h3> Accesos rápidos</h3>
+                        </div>
+                        <!-- /widget-header -->
+                        <div class="widget-content">
+                            <div class="shortcuts"> 
+                                <a href="buscarLectorPorNombre.jsp" class="shortcut"><i class="shortcut-icon icon-book"></i><span class="shortcut-label">Buscar Lector</span> </a>
+                                <a href="buscarPaper.jsp" class="shortcut"><i class="shortcut-icon icon-pencil"></i><span class="shortcut-label">Buscar Paper</span> </a>
+                                <!-- /shortcuts --> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="span6 pull-left">
                     <!-- SEGUNDO PANEL: Recomendaciones por Género -->
                     <div class="widget">
                         <div class="widget-header"> <i class="icon-user"></i>
@@ -223,23 +242,6 @@
                             <% if (paginaRecomendacionPaperGenero < (int) Math.ceil((double) totalPapersRecomendadosPorGenero / itemsPorPagina)) { %>
                                 <a href="inicio.jsp?paginaRecomendacionPaperGenero=<%= paginaRecomendacionPaperGenero + 1 %>">Siguiente &raquo;</a>
                             <% } %>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Panel de Accesos Rápidos a la derecha -->
-                <div class="span3 pull-right">
-                    <div class="widget">
-                        <div class="widget-header"> <i class="icon-bookmark"></i>
-                            <h3> Accesos rápidos</h3>
-                        </div>
-                        <!-- /widget-header -->
-                        <div class="widget-content">
-                            <div class="shortcuts"> 
-                                <a href="buscarLectorPorNombre.jsp" class="shortcut"><i class="shortcut-icon icon-book"></i><span class="shortcut-label">Buscar Lector</span> </a>
-                                <a href="buscarPaper.jsp" class="shortcut"><i class="shortcut-icon icon-pencil"></i><span class="shortcut-label">Buscar Paper</span> </a>
-                                <!-- /shortcuts --> 
-                            </div>
                         </div>
                     </div>
                 </div>
