@@ -57,6 +57,19 @@
         );
 
         
+        /****************** PAGINADO RECOMENDACIONES POR GÉNERO ******************/
+        int paginaRecomendacionPaperGenero = request.getParameter("paginaRecomendacionPaperGenero") != null 
+            ? Integer.parseInt(request.getParameter("paginaRecomendacionPaperGenero")) 
+            : 1;
+        int inicioRecomendacionPaperGenero = (paginaRecomendacionPaperGenero - 1) * itemsPorPagina;
+
+        List<Paper> misPapersRecomendadosPorGenero = controladoraLogica.obtenerPapersPorGenero(lector.getGenero());
+        int totalPapersRecomendadosPorGenero = misPapersRecomendadosPorGenero.size();
+
+        List<Paper> misPapersRecomendadosPorGeneroPaginados = misPapersRecomendadosPorGenero.subList(
+            inicioRecomendacionPaperGenero, 
+            Math.min(inicioRecomendacionPaperGenero + itemsPorPagina, totalPapersRecomendadosPorGenero)
+            );
         %>
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
@@ -137,87 +150,108 @@
             </div>
             <!-- /subnavbar-inner --> 
         </div>
-        <!-- /subnavbar -->
-        <div class="main">
-            <div class="main-inner">
-                <div class="container">
-                    <div class="row">
-                        <div class="span6">
-                            <!-- /widget -->
-                            <div class="widget">
-                                <div class="widget-header"> <i class="icon-user"></i>
-                                    <h3> Recomendaciones mejor calificados</h3>
-                                </div>
-                                <!-- /widget-header -->
-                                <div class="widget-content">
-                                    <ul class="messages_layout">
-                                        <%      
-                                                            for (Paper miPaperRecomendado : misPapersRecomendadosPorCalificacionPaginados) {
-                                                %>
-                                                <li class="from_user leftLector" <a href="listarLectores.jsp" class="avatar"><img src="resources/img/mensaje_libro.png"/></a>
-                                                <div class="message_wrap"> <span class="arrow"></span>
-                                                    <div class="info"> <a class="name"><%=miPaperRecomendado.getNombre()%></a>
-                                                        <span class="rating">
-                                                            <% for (int i = 0; i < 5; i++) { %>
-                                                            <span style="color: <%= i < (int) Math.round(controladoraLogica.obtenerPromedioValoracionPaper(miPaperRecomendado.getId())) ? "gold" : "#ddd" %>;">★</span>
-                                                            <% } %>
-                                                        </span>
-                                                        <div class="options_arrow">
-                                                            <div class="dropdown pull-right"> 
-                                                                <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">
-                                                                    <i class="icon-caret-down"></i> 
-                                                                </a>
-                                                                <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                                                    <li><a href="SvSeleccionarPaper?id_paper=<%= miPaperRecomendado.getId() %>"><i class="icon-info-sign icon-large"></i> Ver</a></li>
-                                                                </ul>
-                                                            </div>
-                                                        </div>                                                        
-                                                         <div class="text"><%=miPaperRecomendado.getAutor().getNombre() + " " + miPaperRecomendado.getAutor().getApellido()%></div>
-                                                </div>
-                                                </li>
-                                        <% }%>
-                                    </ul>
-                                </div>
-                                <!-- /widget-content --> 
-                            </div>
-                            <!-- /widget --> 
-                            <div class="pagination">
-                                <% if (paginaRecomendacionPaperCalificacion > 1) { %>
-                                    <a href="inicio.jsp?paginaRecomendacionPaperCalificacion=<%= paginaRecomendacionPaperCalificacion - 1 %>">&laquo; Anterior</a>
-                                <% } %>
-                                <span>Página <%= paginaRecomendacionPaperCalificacion %> de <%= (int) Math.ceil((double) totalPapersRecomendadosPorCalificacion / itemsPorPagina) %></span>
-                                <% if (paginaRecomendacionPaperCalificacion < (int) Math.ceil((double) totalPapersRecomendadosPorCalificacion / itemsPorPagina)) { %>
-                                    <a href="inicio.jsp?paginaRecomendacionPaperCalificacion=<%= paginaRecomendacionPaperCalificacion + 1 %>">Siguiente &raquo;</a>
-                                <% } %>
-                            </div>                                 
+        <!-- HEADER Y NAVBAR AQUI -->
+<div class="main">
+    <div class="main-inner">
+        <div class="container">
+            <div class="row">
+                <div class="span6">
+                    <!-- PRIMER PANEL: Recomendaciones mejor calificados -->
+                    <div class="widget">
+                        <div class="widget-header"> <i class="icon-user"></i>
+                            <h3> Recomendaciones mejor calificados</h3>
                         </div>
-                        <!-- /span6 -->
-                        <div class="span6">
-                            <div class="widget">
-                                <div class="widget-header"> <i class="icon-bookmark"></i>
-                                    <h3> Accesos rapidos</h3>
-                                </div>
-                                <!-- /widget-header -->
-                                <div class="widget-content">
-                                    <div class="shortcuts"> 
-                                        <a href="buscarLectorPorNombre.jsp" class="shortcut"><i class="shortcut-icon icon-book"></i><span class="shortcut-label">Buscar Lector</span> </a>
-                                        <a href="buscarPaper.jsp" class="shortcut"><i class="shortcut-icon icon-pencil"></i><span class="shortcut-label">Buscar Paper</span> </a>
-                                        <!-- /shortcuts --> 
-                                    </div>
-                                    <!-- /widget-content --> 
-                                </div>
-                            </div>
-                            <!-- /widget -->
+                        <div class="widget-content">
+                            <ul class="messages_layout">
+                                <% for (Paper miPaperRecomendado : misPapersRecomendadosPorCalificacionPaginados) { %>
+                                    <li class="from_user leftLector">
+                                        <a href="listarLectores.jsp" class="avatar"><img src="resources/img/mensaje_libro.png"/></a>
+                                        <div class="message_wrap"> <span class="arrow"></span>
+                                            <div class="info"> <a class="name"><%=miPaperRecomendado.getNombre()%></a>
+                                                <span class="rating">
+                                                    <% for (int i = 0; i < 5; i++) { %>
+                                                        <span style="color: <%= i < (int) Math.round(controladoraLogica.obtenerPromedioValoracionPaper(miPaperRecomendado.getId())) ? "gold" : "#ddd" %>;">★</span>
+                                                    <% } %>
+                                                </span>
+                                                <div class="text"><%=miPaperRecomendado.getAutor().getNombre() + " " + miPaperRecomendado.getAutor().getApellido()%></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                <% } %>
+                            </ul>
                         </div>
-                        <!-- /span6 --> 
+                        <div class="pagination">
+                            <% if (paginaRecomendacionPaperCalificacion > 1) { %>
+                                <a href="inicio.jsp?paginaRecomendacionPaperCalificacion=<%= paginaRecomendacionPaperCalificacion - 1 %>">&laquo; Anterior</a>
+                            <% } %>
+                            <span>Página <%= paginaRecomendacionPaperCalificacion %> de <%= (int) Math.ceil((double) totalPapersRecomendadosPorCalificacion / itemsPorPagina) %></span>
+                            <% if (paginaRecomendacionPaperCalificacion < (int) Math.ceil((double) totalPapersRecomendadosPorCalificacion / itemsPorPagina)) { %>
+                                <a href="inicio.jsp?paginaRecomendacionPaperCalificacion=<%= paginaRecomendacionPaperCalificacion + 1 %>">Siguiente &raquo;</a>
+                            <% } %>
+                        </div>
                     </div>
-                    <!-- /row --> 
+
+                    <!-- SEGUNDO PANEL: Recomendaciones por Género -->
+                    <div class="widget">
+                        <div class="widget-header"> <i class="icon-user"></i>
+                            <h3> Recomendaciones por Género</h3>
+                        </div>
+                        <div class="widget-content">
+                            <ul class="messages_layout">
+                                <% for (Paper miPaperRecomendado : misPapersRecomendadosPorGeneroPaginados) { %>
+                                    <li class="from_user leftLector">
+                                        <a href="listarLectores.jsp" class="avatar"><img src="resources/img/mensaje_libro.png"/></a>
+                                        <div class="message_wrap"> <span class="arrow"></span>
+                                            <div class="info"> <a class="name"><%=miPaperRecomendado.getNombre()%></a>
+                                                <span class="rating">
+                                                    <% for (int i = 0; i < 5; i++) { %>
+                                                        <span style="color: <%= i < (int) Math.round(controladoraLogica.obtenerPromedioValoracionPaper(miPaperRecomendado.getId())) ? "gold" : "#ddd" %>;">★</span>
+                                                    <% } %>
+                                                </span>
+                                                <div class="text"><%=miPaperRecomendado.getAutor().getNombre() + " " + miPaperRecomendado.getAutor().getApellido()%></div>
+                                            </div>
+                                        </div>
+                                    </li>
+                                <% } %>
+                            </ul>
+                        </div>
+                        <div class="pagination">
+                            <% if (paginaRecomendacionPaperGenero > 1) { %>
+                                <a href="inicio.jsp?paginaRecomendacionPaperGenero=<%= paginaRecomendacionPaperGenero - 1 %>">&laquo; Anterior</a>
+                            <% } %>
+                            <span>Página <%= paginaRecomendacionPaperGenero %> de <%= (int) Math.ceil((double) totalPapersRecomendadosPorGenero / itemsPorPagina) %></span>
+                            <% if (paginaRecomendacionPaperGenero < (int) Math.ceil((double) totalPapersRecomendadosPorGenero / itemsPorPagina)) { %>
+                                <a href="inicio.jsp?paginaRecomendacionPaperGenero=<%= paginaRecomendacionPaperGenero + 1 %>">Siguiente &raquo;</a>
+                            <% } %>
+                        </div>
+                    </div>
                 </div>
-                <!-- /container --> 
+
+                <!-- Panel de Accesos Rápidos a la derecha -->
+                <div class="span3 pull-right">
+                    <div class="widget">
+                        <div class="widget-header"> <i class="icon-bookmark"></i>
+                            <h3> Accesos rápidos</h3>
+                        </div>
+                        <!-- /widget-header -->
+                        <div class="widget-content">
+                            <div class="shortcuts"> 
+                                <a href="buscarLectorPorNombre.jsp" class="shortcut"><i class="shortcut-icon icon-book"></i><span class="shortcut-label">Buscar Lector</span> </a>
+                                <a href="buscarPaper.jsp" class="shortcut"><i class="shortcut-icon icon-pencil"></i><span class="shortcut-label">Buscar Paper</span> </a>
+                                <!-- /shortcuts --> 
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- /span3 --> 
             </div>
-            <!-- /main-inner --> 
+            <!-- /row --> 
         </div>
-        <!-- /main -->
+        <!-- /container --> 
+    </div>
+    <!-- /main-inner --> 
+</div>
+<!-- /main -->
 
         <!-- /footer --> 
         <div class="footer">
