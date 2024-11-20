@@ -154,10 +154,10 @@
                         <div class="widget-content">
                             
                             <div style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-top: 20px;">
-                                <p><%= comentarioPrincipal.getCreador().getNombre() %>:</p>
-                                    <u class="text", style="font-size:300%"><%= comentarioPrincipal.getTitulo() %></u>
-                                    <br/>
-                                    <p  style="font-size:200%"><%= comentarioPrincipal.getComentario() %>
+                                <p style="padding: 20px;line-height: 1;"><%= comentarioPrincipal.getCreador().getNombre() %>:</p>
+                                <u class="text", style="font-size:300%;padding: 20px;margin: 10px;margin-left: 20px;line-height: 0.25;"><%= comentarioPrincipal.getTitulo() %></u>
+                                <br/>
+                                <p  style="font-size:200%;padding: 20px;margin: 10px;margin-left: 20px;line-height: 0.25;"><%= comentarioPrincipal.getComentario() %>
                                 </p>
                             </div>
                         <div class="widget-header" style="align-items: center;">
@@ -172,8 +172,8 @@
                             <% if (grupo.getCantidadComentarios()>0) { %>
                                     <% for (ComentarioRespuesta respuesta : misRespuestasPaginadas) { %>
                                         <li class="list-group-item" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-top: 20px;">
-                                            <p><%= respuesta.getCreador().getNombre() %>:</p>
-                                            <div class="text", style="font-size:200%"><%= respuesta.getComentario() %></div>
+                                            <p ><%= respuesta.getCreador().getNombre() %>:</p>
+                                            <div class="text", style="font-size:200%;padding: 20px;margin: 10px;margin-left: 20px;line-height: 0.25;"><%= respuesta.getComentario() %></div>
                                         </li>
                                     <% } %>
 
