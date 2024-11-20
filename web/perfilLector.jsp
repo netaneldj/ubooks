@@ -178,7 +178,7 @@
                                         </div>
                                         <div class="field">
                                             <label for="biografia">Biografia:</label>  
-                                            <input type="text" id="biografia" name="biografia" value="<%=lector.getBiografia()%>" class="login"/>
+                                            <input type="text" id="biografia" name="biografia" value="<%=lector.getBiografia()%>" class="login" readonly/>
                                         </div>
                                         <div class="field">
                                             <label for="nacimiento">Fecha de nacimiento:</label>  
