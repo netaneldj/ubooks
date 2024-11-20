@@ -35,12 +35,15 @@
                 break;
             }
         }
-        if (id_usuario.equals("0"))  
+        if (id_usuario.equals("0"))  {
             response.sendRedirect("index.jsp");
-        else
+            return;
+        } else {
             nombreUsuario = controladoraLogica.obtenerUsuarioPorID(Integer.parseInt(id_usuario)).getNombreUsuario();
             lector = controladoraLogica.obtenerLectorPorIdUsuario(Integer.parseInt(id_usuario));
-          /****************** PAGINADO ******************/
+        
+        }
+        /****************** PAGINADO ******************/
         int itemsPorPagina = 2; // Número de items por página
         int paginaRecomendacionPaperCalificacion = request.getParameter("paginaRecomendacionPaperCalificacion") != null 
             ? Integer.parseInt(request.getParameter("paginaRecomendacionPaperCalificacion")) 
