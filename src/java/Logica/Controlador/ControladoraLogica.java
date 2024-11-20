@@ -199,6 +199,13 @@ public class ControladoraLogica {
                 .collect(Collectors.toList());
     }
     
+    public List<Paper> obtenerPapersPorGenero(GeneroPaper genero){
+        return controladoraPersistencia.obtenerPapers().stream()
+                .filter(paper -> paper.getGenero().toString().equals(genero.toString()))
+                .sorted(Comparator.comparing(Paper::getPromedioValoracionNumerica).reversed())
+                .collect(Collectors.toList());
+    }
+    
     public List<Grupo> obtenerGrupos(){
         return controladoraPersistencia.obtenerGrupos();
     }
