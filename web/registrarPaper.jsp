@@ -83,7 +83,7 @@
 					<input type="text" id="nombre" name="nombre" value="" placeholder="Nombre" class="login" required/>
 				</div> <!-- /field -->
                                 
-                                <p>Autor: <select name="id_lector"> </p>
+                                <p>Autor: <select name="id_lector">
                                 <%
                                     ControladoraLogica controladoraLogica = new ControladoraLogica();        
                                     List<Lector> autores = controladoraLogica.obtenerAutores();
@@ -91,22 +91,22 @@
                                 %>
                                 <option value=<%=autor.getId()%>><%=autor.getNombre()+" "+autor.getApellido()%></option>
                                 <% }%>
-                                </select> <!-- /field -->    
-                               <p>Genero: <select name="genero"> </p>
+                                </select>  </p><!-- /field -->    
+                               <p>Genero: <select name="genero"> 
                                 <%
                                             for (GeneroPaper genero : GeneroPaper.values()) {
                                         %>
                                 <option><%=genero%></option>
                                 <% }%>
-                                </select> <!-- /field -->
+                                </select></p> <!-- /field -->
                                 
-                                <p>Idioma: <select name="idioma"> </p>
+                                <p>Idioma: <select name="idioma">
                                 <%
                                             for (IdiomaPaper idioma : IdiomaPaper.values()) {
                                         %>
                                 <option><%=idioma%></option>
                                 <% }%>
-                                </select> <!-- /field -->                                
+                                </select> </p> <!-- /field -->                                
                                 
 				<div class="field">
 					<label for="resumen">Resumen:</label>

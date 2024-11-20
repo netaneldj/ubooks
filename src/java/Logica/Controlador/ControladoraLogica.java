@@ -1,6 +1,7 @@
 package Logica.Controlador;
 
 import Logica.Entidades.ComentarioGrupo;
+import Logica.Entidades.ComentarioRespuesta;
 import Logica.Entidades.GeneroPaper;
 import Logica.Entidades.Grupo;
 import Logica.Entidades.IdiomaPaper;
@@ -31,6 +32,11 @@ public class ControladoraLogica {
         boolean exito = controladoraPersistencia.crearValoracion(paper, lector, calificacion, comentario);
         return exito;
     }
+    
+    public boolean actualizarBiografia(Lector lector, String nuevaBiografia) {
+        boolean exito = controladoraPersistencia.actualizarBiografia(lector, nuevaBiografia);
+        return exito;
+    } 
     
     public boolean crearUsuario(Usuario usuario) {
         boolean exito = false;
@@ -63,6 +69,12 @@ public class ControladoraLogica {
         return exito;
     }
     
+    public boolean crearComentarioRespuesta(ComentarioRespuesta respuesta) {
+        boolean exito = false;
+        if (controladoraPersistencia.crearComentarioRespuesta(respuesta)) exito = true;
+        return exito;
+    }
+     
     public boolean esUsuarioValido(String nombreUsuario, String contrasenia) {
        boolean valido = false;
        List<Usuario> usuarios= controladoraPersistencia.obtenerUsuarios();
@@ -253,6 +265,10 @@ public class ControladoraLogica {
         return controladoraPersistencia.modificarGrupo(grupo); 
     }
     
+    public boolean modificarComentarioGrupo(ComentarioGrupo comentario) {
+        return controladoraPersistencia.modificarComentarioGrupo(comentario); 
+    }
+    
     public static synchronized Date convertirStringADate(String fecha) {
         return Date.from(LocalDate.parse(fecha).atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
@@ -355,6 +371,14 @@ public class ControladoraLogica {
         }                  
         return false;
     }
+    
+    public ComentarioGrupo obtenerComentarioGrupoPorId (Integer id){
+        return controladoraPersistencia.obtenerComentarioGrupoPorId(id);
+    }
+
+
+
+
 
 
 }

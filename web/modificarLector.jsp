@@ -70,7 +70,7 @@
                             <form action="SvModificarLector" method="GET">
                                 <h1>Modificar Lector</h1>			
                                 <div class="login-fields">
-                                    <p>Lector: <select name="id_lector"> </p>
+                                    <p>Lector: <select name="id_lector"> 
                                     <%
                                         ControladoraLogica controladoraLogica = new ControladoraLogica();        
                                         List<Lector> lectores = controladoraLogica.obtenerLectores();
@@ -78,7 +78,7 @@
                                     %>
                                     <option value=<%=lector.getId()%>><%=lector.getNombre()+" "+lector.getApellido()%></option>
                                     <% }%>
-                                    </select> <!-- /field -->
+                                    </select></p> <!-- /field -->
 
                                 </div> <!-- /login-fields -->
 
