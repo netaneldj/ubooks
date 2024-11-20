@@ -103,6 +103,11 @@
 				</div> <!-- /field -->
                                 
                                 <div class="field">
+                                            <label for="biografia">Biografia:</label>  
+                                            <input type="text" id="biografia" name="biografia" value="HOLA, SOY NUEVO EN UBooks!!" class="login"/>
+                                </div>
+                                
+                                <div class="field">
 					<label for="nacimiento">Fecha de nacimiento:</label>	
 					<input type="date" form="1" name="nacimiento" min="1900-01-01" max="2099-12-31" value="" placeholder="" class="login" required/>
                                 </div> <!-- /field -->
