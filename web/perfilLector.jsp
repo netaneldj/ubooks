@@ -167,7 +167,7 @@
                                 </div>
                                     
                                 <div class="widget-content">
-                                    <form action="guardarPerfil.jsp" method="post">
+                                    <form>
                                         <div class="field">
                                             <label for="nombre">Nombre:</label>
                                             <input type="text" id="nombre" name="nombre" value="<%=lector.getNombre()%>" class="login" readonly/>
@@ -180,7 +180,6 @@
                                             <label for="biografia">Biografia:</label>  
                                             <input type="text" id="biografia" name="biografia" value="<%=lector.getBiografia()%>" class="login"/>
                                         </div>
-                                        <button type="submit">Guardar</button>
                                         <div class="field">
                                             <label for="nacimiento">Fecha de nacimiento:</label>  
                                             <input type="date" form="1" name="nacimiento" value="<%=controladoraLogica.convertirDateAString2(lector.getNacimiento())%>" class="login" readonly/>
