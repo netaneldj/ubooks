@@ -136,17 +136,13 @@
         <!-- /subnavbar -->
         <div class="main">
             <div class="main-inner">
-            <div class="text", style="font-size:900%; text-align:center;">
-                <u ><%= grupo.getNombre()%></u>
-                 <br/>
-                 <br/>
-                 <br/>
-                 <br/>
-               <div class="text", style="font-size:50%">
+            <div class="text", style="font-size:900%; text-align:center;padding: 20px;margin: 10px;margin-left: -10px;line-height: 1;">
+                <div><u ><%= grupo.getNombre()%></u></div>
+
+            </div>
+           <div class="text", style="font-size:450%;padding: 20px;margin: 10px;margin-left: -10px;line-height: 1;">
                 <center><%= grupo.getTema()%></center> 
                 </div>
-            </div>
-
 
             <div class="widget" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-top: 20px;">
                         <div class="widget-header">
@@ -215,7 +211,6 @@
         <!-- /footer --> 
         
         <!-- Le javascript --->
-        ================================================== --> 
         <!-- Placed at the end of the document so the pages load faster --> 
         <script src="resources/js/jquery-1.7.2.min.js"></script> 
         <script src="resources/js/excanvas.min.js"></script> 
