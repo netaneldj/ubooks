@@ -45,6 +45,7 @@ public class SvModificarLector extends HttpServlet {
             int id = Integer.parseInt(id_lector);
             String nombre = request.getParameter("nombre");
             String apellido = request.getParameter("apellido");
+            String biografia = request.getParameter("biografia");
             Date nacimiento = ControladoraLogica.convertirStringADate(request.getParameter("nacimiento"));
             String nombreUsuario = request.getParameter("nombreUsuario");
             String contrasenia = request.getParameter("contrasenia");
@@ -63,6 +64,7 @@ public class SvModificarLector extends HttpServlet {
                 Usuario usuario = controladoraLogica.obtenerUsuarioPorID(lector.getId());
                 lector.setNombre(nombre);
                 lector.setApellido(apellido);
+                lector.setBiografia(biografia);
                 lector.setNacimiento(nacimiento);
                 lector.setIdioma(dioma);
                 lector.setGenero(genero);

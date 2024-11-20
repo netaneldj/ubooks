@@ -1,6 +1,7 @@
 <%@page import="Logica.Entidades.MiPaper"%>
 <%@page import="Logica.Entidades.Grupo"%>
 <%@page import="Logica.Entidades.Paper"%>
+<%@page import="Logica.Entidades.MiPaper"%>
 <%@page import="Logica.Entidades.GeneroPaper"%>
 <%@page import="Logica.Entidades.IdiomaPaper"%>
 <%@page import="Logica.Entidades.Usuario"%>
@@ -186,6 +187,10 @@
                                         <div class="field">
                                             <label for="apellido">Apellido:</label>  
                                             <input type="text" id="apellido" name="apellido" value="<%=lector.getApellido()%>" class="login" readonly/>
+                                        </div>
+                                        <div class="field">
+                                            <label for="biografia">Biografia:</label>  
+                                            <input type="text" id="biografia" name="biografia" value="<%=lector.getBiografia()%>" class="login" readonly/>
                                         </div>
                                         <div class="field">
                                             <label for="nacimiento">Fecha de nacimiento:</label>  

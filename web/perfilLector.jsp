@@ -177,6 +177,10 @@
                                             <input type="text" id="apellido" name="apellido" value="<%=lector.getApellido()%>" class="login" readonly/>
                                         </div>
                                         <div class="field">
+                                            <label for="biografia">Biografia:</label>  
+                                            <input type="text" id="biografia" name="biografia" value="<%=lector.getBiografia()%>" class="login" readonly/>
+                                        </div>
+                                        <div class="field">
                                             <label for="nacimiento">Fecha de nacimiento:</label>  
                                             <input type="date" form="1" name="nacimiento" value="<%=controladoraLogica.convertirDateAString2(lector.getNacimiento())%>" class="login" readonly/>
                                         </div>
