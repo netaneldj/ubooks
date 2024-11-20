@@ -178,7 +178,7 @@
                                         </div>
                                         <div class="field">
                                             <label for="biografia">Biografia:</label>  
-                                            <input type="text" id="biografia" name="biografia" value=""<%=lector.getBiografia()%>" class="login"/>
+                                            <input type="text" id="biografia" name="biografia" value="<%=lector.getBiografia()%>" class="login"/>
                                         </div>
                                         <button type="submit">Guardar</button>
                                         <div class="field">

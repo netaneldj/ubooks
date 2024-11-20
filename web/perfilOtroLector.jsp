@@ -1,5 +1,6 @@
 <%@page import="Logica.Entidades.Grupo"%>
 <%@page import="Logica.Entidades.Paper"%>
+<%@page import="Logica.Entidades.MiPaper"%>
 <%@page import="Logica.Entidades.GeneroPaper"%>
 <%@page import="Logica.Entidades.IdiomaPaper"%>
 <%@page import="Logica.Entidades.Usuario"%>
@@ -64,9 +65,9 @@
         
         int paginaPaper= request.getParameter("paginaPaper") != null ? Integer.parseInt(request.getParameter("paginaPaper")) : 1;
         int inicioPaper = (paginaPaper - 1) * itemsPorPagina;
-        List<Paper> misPapers = lector.getMisPapers();
+        List<MiPaper> misPapers = lector.getMisPapers();
         int totalPapers = misPapers.size();
-        List<Paper> misPapersPaginados = misPapers.subList(inicioPaper, Math.min(inicioPaper + itemsPorPagina, totalPapers));
+        List<MiPaper> misPapersPaginados = misPapers.subList(inicioPaper, Math.min(inicioPaper + itemsPorPagina, totalPapers));
         
         int paginaGrupo= request.getParameter("paginaGrupo") != null ? Integer.parseInt(request.getParameter("paginaGrupo")) : 1;
         int inicioGrupo = (paginaGrupo - 1) * itemsPorPagina;
@@ -185,6 +186,10 @@
                                         <div class="field">
                                             <label for="apellido">Apellido:</label>  
                                             <input type="text" id="apellido" name="apellido" value="<%=lector.getApellido()%>" class="login" readonly/>
+                                        </div>
+                                        <div class="field">
+                                            <label for="biografia">Biografia:</label>  
+                                            <input type="text" id="biografia" name="biografia" value="<%=lector.getBiografia()%>" class="login"/>
                                         </div>
                                         <div class="field">
                                             <label for="nacimiento">Fecha de nacimiento:</label>  
@@ -334,7 +339,7 @@
                                 <div class="widget-content">
                                     <ul class="messages_layout widget-list">
                                         <%      
-                                            for (Paper miPaper : misPapersPaginados) {
+                                            for (MiPaper miPaper : misPapersPaginados) {
                                         %>
                                             <li class="from_user leftLector">
                                                 <a href="listarPapers.jsp" class="avatar">

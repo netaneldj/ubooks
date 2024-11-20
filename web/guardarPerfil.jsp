@@ -27,7 +27,7 @@
         </style>
     </head>
 <body>
-    <%
+    <%   
         ControladoraLogica controladoraLogica = new ControladoraLogica();
         HttpSession sesion = request.getSession();
         String id_usuario = "0";
@@ -35,7 +35,6 @@
         String id_lector = "0";
         String id_paper = "";
         Lector lector = null; // Inicializamos lector
-        Paper paper = null;
         Cookie[] cookies = request.getCookies();
 
         // Obtiene id_usuario y id_lector de las cookies
@@ -45,9 +44,7 @@
                     id_usuario = cookie.getValue();
                 } else if (cookie.getName().equals("id_lector")) {
                     id_lector = cookie.getValue();
-                } else if(cookie.getName().equals("id_paper")) { 
-                id_paper = cookie.getValue();
-            }
+                } 
             }
         }
         
@@ -58,26 +55,17 @@
             try {
                 nombreUsuario = controladoraLogica.obtenerUsuarioPorID(Integer.parseInt(id_usuario)).getNombreUsuario();
                 lector = controladoraLogica.obtenerLectorPorID(Integer.parseInt(id_lector));
-                paper = controladoraLogica.obtenerPaperPorID(Integer.parseInt(id_paper));
             } catch (Exception e) {
                 e.printStackTrace();
-                response.sendRedirect("error.jsp"); // Redirige a una página de error específica si ocurre una excepción
+                response.sendRedirect("error.jsp"); 
             }
         }
 
         // Maneja la valoración enviada
         String nuevaBiografia = request.getParameter("biografia");
-        
-       //System.out.println("mundo!");
-       //System.out.printf("LA NUEVA BIOGRFIA ES: \n", nuevaBiografia);
-        
         controladoraLogica.actualizarBiografia(lector, nuevaBiografia);
-
         request.setAttribute("mensajeExito", "Tu biografia ha sido actulizada correctamente.");
         response.sendRedirect("perfilLector.jsp" );
-        }
-
-   
     %>
 
     <!-- Contenido adicional del JSP -->
