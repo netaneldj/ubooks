@@ -1,3 +1,4 @@
+<%@page import="Logica.Entidades.MiPaper"%>
 <%@page import="Logica.Entidades.Grupo"%>
 <%@page import="Logica.Entidades.Paper"%>
 <%@page import="Logica.Entidades.MiPaper"%>
@@ -348,7 +349,7 @@
                                                 <div class="message_wrap"> 
                                                     <span class="arrow"></span>
                                                     <div class="info"> 
-                                                        <a class="name"><%=miPaper.getNombre()%></a>
+                                                        <a class="name"><%=miPaper.getPaper().getNombre()%></a>
                                                         <div class="options_arrow">
                                                             <div class="dropdown pull-right"> 
                                                                 <a class="dropdown-toggle" id="dLabel" role="button" data-toggle="dropdown" data-target="#" href="#">
@@ -362,7 +363,7 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <div class="text"><%=miPaper.getAutor().getNombre()+ " " + miPaper.getAutor().getApellido()%></div>
+                                                    <div class="text"><%=miPaper.getPaper().getAutor().getNombre()+ " " + miPaper.getPaper().getAutor().getApellido()%></div>
                                                 </div>
                                             </li>
                                         <% } %>
