@@ -33,7 +33,7 @@
         HttpSession sesion = request.getSession();
         String id_grupo = "0";
         String nombreUsuario = "";
-        String id_usuario = "";
+        String id_usuario = "0";
         Grupo grupo;
         Cookie[] cookies = request.getCookies();
         for(Cookie cookie : cookies){
@@ -136,8 +136,9 @@
         <!-- /subnavbar -->
         <div class="main">
             <div class="main-inner">
-            <div class="text", style="font-size:900%">
-                <center><%= grupo.getNombre()%></center>
+            <div class="text", style="font-size:900%; text-align:center;">
+                <u ><%= grupo.getNombre()%></u>
+                 <br/>
                  <br/>
                  <br/>
                  <br/>
@@ -168,20 +169,22 @@
                                             <p  style="font-size:200%"><%= comentario.getComentario() %></p>
                                             <span class="rating" >
                                                 <% for (int i = 0; i < comentario.getRespuestas().size(); i++) { 
-                                                    //if(i==3) break;
+                                                    if(i==3) break;
                                                 %>
-                                                <p style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-top: 20px;"><%= comentario.getRespuestas().get(i) %></p>
+                                               <div class="list-group-item" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-top: 20px;text-indent:20px;">
+                                                   <p> <%= comentario.getRespuestas().get(i).getCreador().getNombre() %>:</p>
+                                                   <p> <%= comentario.getRespuestas().get(i).getComentario() %></p>
+                                                </div>
                                                 <% } %>
                                             </span>
-                                            <form action="verDiscucionGrupo.jsp" method="POST" style="text-align: right;clear:left;">
-                                                <input type="hidden" name="usuario" value="<%= id_usuario %>">
+                                            <br/>
+                                            <form action="SvVerDiscusionGrupo" method="get" style="text-align: right;clear:left;">
                                                 <input type="hidden" name="comentario" value="<%= comentario.getId() %>">
-                                                <input type="hidden" name="paginaOriginal" value="<%= "verDiscucionGrupo.jsp" %>">
                                                 <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Ver</button>
                                             </form>
-                                            <form action="verGrupo.jsp" method="POST" style="text-align: right;clear:left;">
+                                             <form action="responderDiscusionGrupo.jsp" method="POST" style="text-align: right;clear:left;">
                                                 <input type="hidden" name="usuario" value="<%= id_usuario %>">
-                                                <input type="hidden" name="grupo" value="<%= grupo.getId() %>">
+                                                <input type="hidden" name="comentario" value="<%= comentario.getId() %>">
                                                 <input type="hidden" name="paginaOriginal" value="<%= "verGrupo.jsp" %>">
                                                 <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Responder</button>
                                             </form>

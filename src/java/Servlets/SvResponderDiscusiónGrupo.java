@@ -29,7 +29,7 @@ public class SvResponderDiscusiónGrupo extends HttpServlet{
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        try {
+        //try {
             ControladoraLogica controladoraLogica = new ControladoraLogica();
             String paginaOriginal = request.getParameter("paginaOriginal");
         
@@ -54,14 +54,14 @@ public class SvResponderDiscusiónGrupo extends HttpServlet{
 
             if (exito) {
                 comentarioPrincipal.addRespuesta(respuesta);
-                controladoraLogica.modificarComentarioGrupo(comentarioPrincipal);
+                boolean resultado = controladoraLogica.modificarComentarioGrupo(comentarioPrincipal);
                 request.getContextPath();
-                response.setHeader("Refresh", "0; URL=" + request.getContextPath()+'/'+ "inicio.jsp");
+                response.setHeader("Refresh", "0; URL=" + request.getContextPath()+'/'+ paginaOriginal);
             } else {
                 response.sendRedirect("Error/error.jsp");
             }
-        } catch(Exception e) {
+        /*} catch(Exception e) {
             response.sendRedirect("Error/error.jsp");
-        }
+        }*/
     }
 }
