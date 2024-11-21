@@ -199,10 +199,17 @@ public class ControladoraLogica {
                 .collect(Collectors.toList());
     }
     
-    public List<Paper> obtenerPapersPorGenero(GeneroPaper genero){
+    public List<Paper> obtenerPapersPorGenero(GeneroPaper genero, IdiomaPaper idioma){
         return controladoraPersistencia.obtenerPapers().stream()
-                .filter(paper -> paper.getGenero().toString().equals(genero.toString()))
+                .filter(paper -> paper.getGenero().toString().equals(genero.toString()) && paper.getIdioma().toString().equals(idioma.toString()))
                 .sorted(Comparator.comparing(Paper::getPromedioValoracionNumerica).reversed())
+                .collect(Collectors.toList());
+    }
+    
+    public List<Paper> obtenerPapersNuevos(IdiomaPaper idioma){
+        return controladoraPersistencia.obtenerPapers().stream()
+                .filter(paper -> paper.getIdioma().toString().equals(idioma.toString()))
+                .sorted(Comparator.comparing(Paper::getId).reversed())
                 .collect(Collectors.toList());
     }
     
