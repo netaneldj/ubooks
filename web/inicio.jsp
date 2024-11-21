@@ -123,11 +123,11 @@
                                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                                                 class="icon-book"></i><span>Lectores</span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="registrarLector.jsp" >Registrar</a></li>
+                                            <!--<li><a href="registrarLector.jsp" >Registrar</a></li>-->
                                             <li><a href="listarLectores.jsp" >Listar</a></li>
                                             <li><a href="buscarLectorPorNombre.jsp" >Buscar</a></li>
-                                            <li><a href="modificarLector.jsp" >Modificar</a></li>
-                                            <li><a href="eliminarLector.jsp" >Eliminar</a></li>
+                                            <!--<li><a href="modificarLector.jsp" >Modificar</a></li>
+                                            <li><a href="eliminarLector.jsp" >Eliminar</a></li>-->
                                         </ul>                                    
                                     </li>
                                 </ul>
