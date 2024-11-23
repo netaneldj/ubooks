@@ -27,7 +27,7 @@ public class ControladoraLogica {
     public ControladoraLogica(){
         controladoraPersistencia = new ControladoraPersistencia();
     }
-     
+      
     public boolean insertarValoracion(Paper paper, Lector lector, int calificacion, String comentario) {
         boolean exito = controladoraPersistencia.crearValoracion(paper, lector, calificacion, comentario);
         return exito;
@@ -166,6 +166,10 @@ public class ControladoraLogica {
 
     public List<Lector> obtenerLectoresPorNombre(String nombre, String esAutor) {
         return controladoraPersistencia.obtenerLectoresPorNombre(nombre, esAutor);
+    }
+    
+    public List<Grupo> obtenerGruposPorNombre(String nombreGrupo) {
+        return controladoraPersistencia.obtenerGruposPorNombre(nombreGrupo);
     }
     
     public Lector obtenerLectorPorIdUsuario(int idUsuario) {

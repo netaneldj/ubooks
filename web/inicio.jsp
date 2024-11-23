@@ -142,6 +142,7 @@
                                         <ul class="dropdown-menu">
                                             <li><a href="registrarGrupo.jsp" >Registrar</a></li>
                                             <li><a href="listarGrupos.jsp" >Listar</a></li>
+                                            <li><a href="buscarGrupos.jsp" >Buscar</a></li>
                                         </ul>                                    
                                     </li>
                                 </ul>
