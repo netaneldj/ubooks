@@ -34,6 +34,7 @@
         String id_grupo = "0";
         String nombreUsuario = "";
         String id_usuario = "0";
+        String filtro = null;
         Grupo grupo;
         Cookie[] cookies = request.getCookies();
         for(Cookie cookie : cookies){
@@ -41,6 +42,8 @@
                 id_grupo = cookie.getValue();
             }else  if(cookie.getName().equals("id_usuario")) { 
                 id_usuario = cookie.getValue();
+            }else if(cookie.getName().equals("filtro")){
+                filtro = cookie.getValue();
             }
         }
         grupo = controladoraLogica.obtenerGrupoPorId(Integer.valueOf( id_grupo));
@@ -50,6 +53,9 @@
         int paginaGrupo = request.getParameter("paginaGrupo") != null ? Integer.parseInt(request.getParameter("paginaGrupo")) : 1;
         int inicioLector = (paginaGrupo - 1) * itemsPorPagina;
         List<ComentarioGrupo> misCometarios = grupo.getComentarios();
+        if(filtro != null){
+            misCometarios = controladoraLogica.obtenerCometariosPorFiltro(filtro,grupo);
+        }
         int totalComentarios = misCometarios.size();
         List<ComentarioGrupo> misCometariosPaginados = misCometarios.subList(inicioLector, Math.min(inicioLector + itemsPorPagina, totalComentarios));
         
@@ -154,6 +160,11 @@
                                 <input type="hidden" name="grupo" value="<%= grupo.getId() %>">
                                 <input type="hidden" name="paginaOriginal" value="<%= "verGrupo.jsp" %>">
                                 <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Crear discusión</button>
+                            </form>
+                            <form action="SvBuscarDiscusion" method="GET" style="display: inline; float: right;">
+                                <input type="text" name="filtro"style=" margin-top: 8px" placeholder="Buscar..">
+                                <input type="hidden" name="paginaOriginal" value="verGrupo.jsp">
+                                <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">buscar</button>
                             </form>
                         </div>
                         <div class="widget-content">

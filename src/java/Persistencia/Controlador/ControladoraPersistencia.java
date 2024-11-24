@@ -330,6 +330,10 @@ public class ControladoraPersistencia {
         return comentarioGrupoJpaController.findComentarioGrupo(id);
     }
 
+    public List<ComentarioGrupo> obtenerCometariosPorFiltro(String filtro, Grupo grupo) {
+        return comentarioGrupoJpaController.findComentariosPorFiltro(filtro, grupo);
+    }
+
 
 
 

@@ -276,6 +276,11 @@ public class ControladoraLogica {
         return controladoraPersistencia.modificarComentarioGrupo(comentario); 
     }
     
+    public  List<ComentarioGrupo> obtenerCometariosPorFiltro(String filtro, Grupo grupo) {
+        return controladoraPersistencia.obtenerCometariosPorFiltro(filtro,grupo);
+    }
+    
+    
     public static synchronized Date convertirStringADate(String fecha) {
         return Date.from(LocalDate.parse(fecha).atStartOfDay(ZoneId.systemDefault()).toInstant());
     }
