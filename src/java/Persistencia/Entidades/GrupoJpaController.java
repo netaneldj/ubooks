@@ -92,6 +92,28 @@ public class GrupoJpaController  implements Serializable{
             em.close();
         }
     }
+    
+public List<Grupo> findGruposByNombre(String nombre) {
+    EntityManager em = getEntityManager();
+    try {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<Grupo> cq = cb.createQuery(Grupo.class);
+        Root<Grupo> grupo = cq.from(Grupo.class);
+         
+        Expression<String> nombreGrupo = cb.concat(grupo.get("nombre"), " ");
+          
+        cq.select(grupo)
+            .where(cb.and(           
+                cb.like(cb.lower(nombreGrupo), "%" + nombre.toLowerCase() + "%")
+            ));
+   
+        Query q = em.createQuery(cq);
+        return q.getResultList();
+    } finally {
+        em.close();
+    }
+ }
+    
 
     public Grupo findGrupo(Integer id) {
         EntityManager em = getEntityManager();

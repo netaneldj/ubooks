@@ -176,6 +176,10 @@ public class ControladoraPersistencia {
         return lectorJpaController.findLectoresByName(nombreLector, esAutor);
     }
     
+    public List<Grupo> obtenerGruposPorNombre(String nombreGrupo){
+        return grupoJpaController.findGruposByNombre(nombreGrupo);
+    }
+    
     public int obtenerCantidadPapers() {
         return paperJpaController.getPaperCount();
     }
