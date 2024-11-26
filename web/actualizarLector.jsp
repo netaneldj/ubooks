@@ -83,6 +83,43 @@
                                         Lector lector = controladoraLogica.obtenerLectorPorID(Integer.parseInt(id_lector));
                                      %>
                                     <div class="field">
+                                        <label for="email">Email:</label>    
+                                        <input type="email" id="email" name="email" value="<%=lector.getUsuario().getEmail()%>" placeholder="Email" class="login" required/>
+                                    </div> <!-- /field -->
+                                    <div class="field">
+                                        <label for="imagenPerfil">Foto de perfil:</label>
+                                        <select id="imagenPerfil" name="imagenPerfil" class="login" onchange="actualizarImagen()">
+                                            <%
+                                                // Generar opciones dinámicas para las imágenes de perfil
+                                                for (int i = 1; i <= 6; i++) {
+                                            %>
+                                                <option value="<%= i %>" <%= (lector.getImagenPerfil() == i) ? "selected" : "" %>>Perfil <%= i %></option>
+                                            <%
+                                                }
+                                            %>
+                                        </select>
+
+                                        <!-- Mostrar la imagen predeterminada (basada en el valor seleccionado) -->
+                                        <div style="margin-top: 10px; text-align: center;">
+                                            <img id="imagenPerfilSeleccionada" 
+                                                 src="resources/img/Perfil<%= lector.getImagenPerfil() %>.jpg" 
+                                                 alt="Imagen actual" 
+                                                 style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 1px solid #ddd;">
+                                        </div>
+                                    </div>
+
+                                    <script>
+                                        // Esta función actualizará la imagen cuando se seleccione una opción del desplegable
+                                        function actualizarImagen() {
+                                            // Obtener el valor seleccionado del desplegable
+                                            var imagenSeleccionada = document.getElementById('imagenPerfil').value;
+                                            // Obtener el elemento de imagen
+                                            var imagenElemento = document.getElementById('imagenPerfilSeleccionada');
+                                            // Cambiar la fuente de la imagen según el valor seleccionado
+                                            imagenElemento.src = 'resources/img/Perfil' + imagenSeleccionada + '.jpg';
+                                        }
+                                    </script>
+                                    <div class="field">
                                         <label for="nombre">Nombre:</label>
                                         <input type="text" id="nombre" name="nombre" value="<%=lector.getNombre()%>" placeholder="Nombre" class="login" required/>
                                     </div> <!-- /field -->
