@@ -171,16 +171,13 @@
                             <ul class="list-group">
                             <% if (grupo.getCantidadComentarios()>0) { %>
                                     <% for (ComentarioRespuesta respuesta : misRespuestasPaginadas) { %>
-                                        <li class="list-group-item" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-top: 20px;">
+                                        <div class="list-group-item" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-top: 20px;">
                                             <p ><%= respuesta.getCreador().getNombre() %>:</p>
                                             <div class="text", style="font-size:200%;padding: 20px;margin: 10px;margin-left: 20px;line-height: 0.25;"><%= respuesta.getComentario() %></div>
-                                        </li>
+                                        </div>
                                     <% } %>
 
                                 </ul>
-                            <% } else { %>
-                                <p>No hay Discusiones.</p>
-                            <% } %>
                             <div class="pagination">
                                 <% if (paginaComentario > 1) { %>
                                     <a href="verDiscucionGrupo.jsp?paginaGrupo=<%= paginaComentario - 1 %>">&laquo; Anterior</a>
@@ -190,6 +187,10 @@
                                     <a href="verDiscucionGrupo.jsp?paginaGrupo=<%= paginaComentario + 1 %>" >Siguiente &raquo;</a>
                                 <% } %>
                             </div>
+                            <% } else { %>
+                                <p>No hay Discusiones.</p>
+                            <% } %>
+
                         </div>         
             </div>
         </div>   
