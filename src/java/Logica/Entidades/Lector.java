@@ -137,7 +137,7 @@ public class Lector extends Persona implements Serializable {
     
     public Boolean siguePaper(Paper paper){
         for(MiPaper miPaper: misPapers){
-            if(paper.getId()==(miPaper.getId())){
+            if(paper.getId()==(miPaper.getIdPaper())){
                 return true;
             }
         }
@@ -146,7 +146,7 @@ public class Lector extends Persona implements Serializable {
  
     public Boolean paperLeido(Paper paper){
         for(MiPaper miPaper: misPapers){
-            if( (paper.getId().equals(miPaper.getId())) && (miPaper.getLeido().equals(EnumLeido.LEIDO))){
+            if( (paper.getId().equals(miPaper.getIdPaper())) && (miPaper.getLeido().equals(EnumLeido.LEIDO))){
                 return true;
             }
         }
