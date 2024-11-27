@@ -6,6 +6,7 @@ package Persistencia.Entidades;
 
 import Logica.Entidades.ComentarioGrupo;
 import Logica.Entidades.Grupo;
+import Logica.Entidades.Lector;
 import Persistencia.Entidades.exceptions.NonexistentEntityException;
 import java.io.Serializable;
 import java.util.List;
@@ -14,7 +15,10 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Query;
 import javax.persistence.EntityNotFoundException;
 import javax.persistence.Persistence;
+import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Expression;
+import javax.persistence.criteria.Root;
 
 /**
  *
@@ -81,5 +85,31 @@ public class ComentarioGrupoJpaController implements Serializable{
                 em.close();
             }
         }
+    }
+
+    public List<ComentarioGrupo> findComentariosPorFiltro(String filtro, Grupo grupo) {
+        EntityManager em = getEntityManager();
+    try {
+        CriteriaBuilder cb = em.getCriteriaBuilder();
+        CriteriaQuery<ComentarioGrupo> cq = cb.createQuery(ComentarioGrupo.class);
+        Root<ComentarioGrupo> comentario = cq.from(ComentarioGrupo.class);
+
+         
+        Expression<String> nombreCompleto = cb.concat(comentario.get("creador").get("nombre"), " ");
+        nombreCompleto = cb.concat(nombreCompleto, comentario.get("creador").get("apellido"));
+        
+       List<ComentarioGrupo> todosLosComentarios = grupo.getComentarios();
+       //comentario.in(todosLosComentarios);
+        
+        cq.select(comentario)
+        .where(cb.and(comentario.in(todosLosComentarios), cb.or(cb.like(cb.lower(nombreCompleto), "%" + filtro.toLowerCase() + "%"),
+            cb.like(comentario.get("titulo"), "%" + filtro.toLowerCase() + "%"))))
+        ;
+        
+        Query q = em.createQuery(cq);
+        return q.getResultList();
+    } finally {
+        em.close();
+    }
     }
 }

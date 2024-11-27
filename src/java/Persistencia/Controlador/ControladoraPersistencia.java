@@ -176,6 +176,10 @@ public class ControladoraPersistencia {
         return lectorJpaController.findLectoresByName(nombreLector, esAutor);
     }
     
+    public List<Grupo> obtenerGruposPorNombre(String nombreGrupo){
+        return grupoJpaController.findGruposByNombre(nombreGrupo);
+    }
+    
     public int obtenerCantidadPapers() {
         return paperJpaController.getPaperCount();
     }
@@ -328,6 +332,10 @@ public class ControladoraPersistencia {
     
     public ComentarioGrupo obtenerComentarioGrupoPorId(Integer id) {
         return comentarioGrupoJpaController.findComentarioGrupo(id);
+    }
+
+    public List<ComentarioGrupo> obtenerCometariosPorFiltro(String filtro, Grupo grupo) {
+        return comentarioGrupoJpaController.findComentariosPorFiltro(filtro, grupo);
     }
 
 

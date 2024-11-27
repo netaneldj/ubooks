@@ -105,11 +105,12 @@
                                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
                                                 class="icon-book"></i><span>Lectores</span></a>
                                         <ul class="dropdown-menu">
-                                            <li><a href="registrarLector.jsp" >Registrar</a></li>
+                                            <!--<li><a href="registrarLector.jsp" >Registrar</a></li>-->
                                             <li><a href="listarLectores.jsp" >Listar</a></li>
                                             <li><a href="buscarLectorPorNombre.jsp" >Buscar</a></li>
-                                            <li><a href="modificarLector.jsp" >Modificar</a></li>
-                                            <li><a href="eliminarLector.jsp" >Eliminar</a></li>
+                                            <li><a href="verRanking.jsp" >Ver Ranking</a></li>
+                                            <!--<li><a href="modificarLector.jsp" >Modificar</a></li>
+                                            <li><a href="eliminarLector.jsp" >Eliminar</a></li>-->
                                         </ul>                                    
                                     </li>
                                 </ul>
@@ -161,13 +162,25 @@
                                 <div class="widget-header" style="display: flex; align-items: center;">
                                     <i class="icon-user" style="margin-right: 10px;"></i>
                                     <h3 style="flex-grow: 1; display: flex; justify-content: space-between; align-items: center;">
-                                        <span>Perfil Lector</span>
-                                            <span> Puntos: <%=lector.getPuntos()%> </span>
+                                        <span>Perfil Lector</span>                                      
+                                        <span> Puntos: <%=lector.getPuntos()%> </span>
                                     </h3>
                                 </div>
                                     
+                                    
                                 <div class="widget-content">
+                                        <form action="SvModificarLector" method="GET" style="display: inline;">
+                                            <input type="hidden" name="id_lector" value="<%= lector.getId() %>">
+                                            <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Modificar</button>
+                                        </form>  
                                     <form>
+                                    <!-- Contenedor de foto de perfil -->
+                                        <div style="text-align: center;"> 
+                                            <div style="width: 120px; height: 120px; border-radius: 98%; border: 1px solid #ddd; overflow: hidden; margin: 0 auto;">
+                                            <img src="<%=lector.getRutaImagenPerfil()%>"                                                style="width: 100%; height: 100%; object-fit: cover;">
+                                            </div>
+                                            <p style="margin-top: 10px; font-size: 0.9em; color: #555;">Foto de perfil</p>
+                                        </div>
                                         <div class="field">
                                             <label for="nombre">Nombre:</label>
                                             <input type="text" id="nombre" name="nombre" value="<%=lector.getNombre()%>" class="login" readonly/>
@@ -242,9 +255,9 @@
                                                                     <i class="icon-caret-down"></i> 
                                                                 </a>
                                                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                                                    <li><a href="registrarLector.jsp"><i class="icon-plus-sign icon-large"></i> Registrar</a></li>
+                                                                    <!--<li><a href="registrarLector.jsp"><i class="icon-plus-sign icon-large"></i> Registrar</a></li>
                                                                     <li><a href="modificarLector.jsp"><i class="icon-edit icon-large"></i> Modificar</a></li>
-                                                                    <li><a href="eliminarLector.jsp"><i class="icon-trash icon-large"></i> Borrar</a></li>
+                                                                    <li><a href="eliminarLector.jsp"><i class="icon-trash icon-large"></i> Borrar</a></li>-->
                                                                 </ul>
                                                             </div>
                                                         </div>
@@ -295,9 +308,9 @@
                                                                     <i class="icon-caret-down"></i> 
                                                                 </a>
                                                                 <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
-                                                                    <li><a href="registrarLector.jsp"><i class="icon-plus-sign icon-large"></i> Registrar</a></li>
+                                                                    <!--<li><a href="registrarLector.jsp"><i class="icon-plus-sign icon-large"></i> Registrar</a></li>
                                                                     <li><a href="modificarLector.jsp"><i class="icon-edit icon-large"></i> Modificar</a></li>
-                                                                    <li><a href="eliminarLector.jsp"><i class="icon-trash icon-large"></i> Borrar</a></li>
+                                                                    <li><a href="eliminarLector.jsp"><i class="icon-trash icon-large"></i> Borrar</a></li>-->
                                                                 </ul>
                                                             </div>
                                                         </div>

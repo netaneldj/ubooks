@@ -30,8 +30,12 @@ public class MiPaper implements Serializable {
         this.paper = paper;
     }
 
-    public Integer getId() {
+    public Integer getId() { //Este te da el id del MiPaper
         return id;
+    }
+    
+    public Integer getIdPaper() { // Este te da el id del Paper
+        return this.paper.getId();
     }
 
     public void setId(Integer id) {
