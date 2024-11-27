@@ -28,6 +28,7 @@ public class Lector extends Persona implements Serializable {
     
     private int puntos;
     
+    @Column(name = "FOTO_PERFIL")
     private int fotoPerfil;
     
     @OneToOne
