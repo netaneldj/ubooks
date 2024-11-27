@@ -22,7 +22,32 @@
         <link href="resources/css/pages/signin.css" rel="stylesheet" type="text/css">
         <link href="resources/css/pages/dashboard.css" rel="stylesheet">
     </head>
+<style>
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Diseño adaptable */
+      gap: 10px;
+      padding: 10px;
+    }
 
+    .profile-icon {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid transparent; /* Sin borde por defecto */
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+    }
+
+    .profile-icon:hover {
+      border-color: #007BFF; /* Resalta con un borde azul al pasar el ratón */
+    }
+
+    .profile-icon.selected {
+      border-color: #FF5733; /* Resalta con un borde naranja cuando está seleccionado */
+    }
+ </style>
     <body>
         <%
             /*
@@ -82,6 +107,47 @@
                                             }
                                         Lector lector = controladoraLogica.obtenerLectorPorID(Integer.parseInt(id_lector));
                                      %>
+                                    <div class="field">
+                                        <label for="email">Email:</label>    
+                                        <input type="email" id="email" name="email" value="<%=lector.getUsuario().getEmail()%>" placeholder="Email" class="login" required/>
+                                    </div> <!-- /field -->
+
+                                <div class="field">
+                                    <label for="imagenPerfil">Foto de perfil:</label>
+
+                                    <!-- Grilla con imágenes -->
+                                    <div class="profile-grid">
+                                        <%
+                                            // Renderizar las imágenes en un bucle
+                                            for (int i = 1; i <= 6; i++) {
+                                        %>
+                                            <img 
+                                                src="resources/img/Perfil<%= i %>.jpg" 
+                                                alt="Perfil <%= i %>" 
+                                                data-id="<%= i %>" 
+                                                class="profile-icon"
+                                                onclick="seleccionarImagen('<%= i %>', this)">
+                                        <%
+                                            }
+                                        %>
+                                    </div>
+
+                                    <!-- Campo oculto para enviar la imagen seleccionada al servidor -->
+                                    <input type="hidden" id="imagenPerfilInput" name="imagenPerfil" value="<%=lector.getImagenPerfil()%>">
+                                </div>
+
+                                <script>
+                                    // Función que selecciona una imagen
+                                    function seleccionarImagen(id, elemento) {
+                                        // Actualizar el valor del campo oculto con el ID de la imagen seleccionada
+                                        document.getElementById('imagenPerfilInput').value = id;
+
+                                        // Resaltar la imagen seleccionada
+                                        var iconos = document.querySelectorAll('.profile-icon');
+                                        iconos.forEach(icono => icono.classList.remove('selected'));
+                                        elemento.classList.add('selected');
+                                    }
+                                </script>
                                     <div class="field">
                                         <label for="nombre">Nombre:</label>
                                         <input type="text" id="nombre" name="nombre" value="<%=lector.getNombre()%>" placeholder="Nombre" class="login" required/>

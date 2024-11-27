@@ -53,6 +53,7 @@ public class SvModificarLector extends HttpServlet {
             IdiomaPaper dioma = IdiomaPaper.valueOf(request.getParameter("idioma"));
             GeneroPaper genero = GeneroPaper.valueOf(request.getParameter("genero"));
             Boolean esAutor = request.getParameter("autor") != null;
+            int imagenPerfil = Integer.parseInt(request.getParameter("imagenPerfil"));
 
             ControladoraLogica controladoraLogica = new ControladoraLogica();
             boolean existeLector = controladoraLogica.verificarLectorPorID(id);
@@ -68,6 +69,7 @@ public class SvModificarLector extends HttpServlet {
                 lector.setNacimiento(nacimiento);
                 lector.setIdioma(dioma);
                 lector.setGenero(genero);
+                lector.setImagenPerfil(imagenPerfil);
                 usuario.setNombreUsuario(nombreUsuario);
                 usuario.setContrasenia(contrasenia);
                 usuario.setEmail(email);

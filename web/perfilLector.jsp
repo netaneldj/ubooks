@@ -166,12 +166,20 @@
                                     </h3>
                                 </div>
                                     
+                                    
                                 <div class="widget-content">
                                         <form action="SvModificarLector" method="GET" style="display: inline;">
                                             <input type="hidden" name="id_lector" value="<%= lector.getId() %>">
                                             <button type="submit" class="btn btn-small btn-primary" style="display: inline; padding: 2px 8px; font-size: 0.85em;">Modificar</button>
                                         </form>  
                                     <form>
+                                    <!-- Contenedor de foto de perfil -->
+                                        <div style="text-align: center;"> 
+                                            <div style="width: 120px; height: 120px; border-radius: 98%; border: 1px solid #ddd; overflow: hidden; margin: 0 auto;">
+                                            <img src="<%=lector.getRutaImagenPerfil()%>"                                                style="width: 100%; height: 100%; object-fit: cover;">
+                                            </div>
+                                            <p style="margin-top: 10px; font-size: 0.9em; color: #555;">Foto de perfil</p>
+                                        </div>
                                         <div class="field">
                                             <label for="nombre">Nombre:</label>
                                             <input type="text" id="nombre" name="nombre" value="<%=lector.getNombre()%>" class="login" readonly/>
