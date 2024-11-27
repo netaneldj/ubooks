@@ -51,7 +51,7 @@ public class SvGuardarPaperLeido extends HttpServlet{
             
             for(int i = 0; i < misPapers.size(); i++) {
                 MiPaper p = misPapers.get(i);
-                if( p.getId().equals(paper.getId()) && !(p.getLeido().equals(EnumLeido.LEIDO) ) ){
+                if( p.getIdPaper().equals(paper.getId()) && !(p.getLeido().equals(EnumLeido.LEIDO) ) ){
                     posicionPaper = i;
                     lector.addPuntos();
                     coincidencia = true;

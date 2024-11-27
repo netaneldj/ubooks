@@ -6,7 +6,7 @@ Bootstrap Admin Template by EGrappler.com
 
 
 /** Base Body Styles **/
-body{ background: url(../../img/libro-logo.png); color:#838383; font: 13px/1.7em 'Open Sans';}
+body{ background: url(../../img/libro-logo.png);  color:#838383; font: 13px/1.7em 'Open Sans';}
 
 
 .account-container {
@@ -57,8 +57,6 @@ body{ background: url(../../img/libro-logo.png); color:#838383; font: 13px/1.7em
 .username-field { background: url(../../img/ingreso/user.png) no-repeat; }
 
 .password-field { background: url(../../img/ingreso/password.png) no-repeat; }
-
-
 
 
 .login-actions {
@@ -244,5 +242,5 @@ span.login-checkbox > input[type='checkbox']:checked + label {
 		width: 204px;
 		padding-left: 6px;
 	}
-	
+
 }
