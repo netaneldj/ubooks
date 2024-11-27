@@ -22,7 +22,32 @@
         <link href="resources/css/pages/signin.css" rel="stylesheet" type="text/css">
         <link href="resources/css/pages/dashboard.css" rel="stylesheet">
     </head>
+<style>
+    .profile-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Diseño adaptable */
+      gap: 10px;
+      padding: 10px;
+    }
 
+    .profile-icon {
+      width: 100px;
+      height: 100px;
+      object-fit: cover;
+      border-radius: 8px;
+      border: 2px solid transparent; /* Sin borde por defecto */
+      cursor: pointer;
+      transition: border-color 0.3s ease;
+    }
+
+    .profile-icon:hover {
+      border-color: #007BFF; /* Resalta con un borde azul al pasar el ratón */
+    }
+
+    .profile-icon.selected {
+      border-color: #FF5733; /* Resalta con un borde naranja cuando está seleccionado */
+    }
+ </style>
     <body>
         <%
             /*
@@ -86,39 +111,43 @@
                                         <label for="email">Email:</label>    
                                         <input type="email" id="email" name="email" value="<%=lector.getUsuario().getEmail()%>" placeholder="Email" class="login" required/>
                                     </div> <!-- /field -->
-                                    <div class="field">
-                                        <label for="imagenPerfil">Foto de perfil:</label>
-                                        <select id="imagenPerfil" name="imagenPerfil" class="login" onchange="actualizarImagen()">
-                                            <%
-                                                // Generar opciones dinámicas para las imágenes de perfil
-                                                for (int i = 1; i <= 6; i++) {
-                                            %>
-                                                <option value="<%= i %>" <%= (lector.getImagenPerfil() == i) ? "selected" : "" %>>Perfil <%= i %></option>
-                                            <%
-                                                }
-                                            %>
-                                        </select>
 
-                                        <!-- Mostrar la imagen predeterminada (basada en el valor seleccionado) -->
-                                        <div style="margin-top: 10px; text-align: center;">
-                                            <img id="imagenPerfilSeleccionada" 
-                                                 src="resources/img/Perfil<%= lector.getImagenPerfil() %>.jpg" 
-                                                 alt="Imagen actual" 
-                                                 style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 1px solid #ddd;">
-                                        </div>
+                                <div class="field">
+                                    <label for="imagenPerfil">Foto de perfil:</label>
+
+                                    <!-- Grilla con imágenes -->
+                                    <div class="profile-grid">
+                                        <%
+                                            // Renderizar las imágenes en un bucle
+                                            for (int i = 1; i <= 6; i++) {
+                                        %>
+                                            <img 
+                                                src="resources/img/Perfil<%= i %>.jpg" 
+                                                alt="Perfil <%= i %>" 
+                                                data-id="<%= i %>" 
+                                                class="profile-icon"
+                                                onclick="seleccionarImagen('<%= i %>', this)">
+                                        <%
+                                            }
+                                        %>
                                     </div>
 
-                                    <script>
-                                        // Esta función actualizará la imagen cuando se seleccione una opción del desplegable
-                                        function actualizarImagen() {
-                                            // Obtener el valor seleccionado del desplegable
-                                            var imagenSeleccionada = document.getElementById('imagenPerfil').value;
-                                            // Obtener el elemento de imagen
-                                            var imagenElemento = document.getElementById('imagenPerfilSeleccionada');
-                                            // Cambiar la fuente de la imagen según el valor seleccionado
-                                            imagenElemento.src = 'resources/img/Perfil' + imagenSeleccionada + '.jpg';
-                                        }
-                                    </script>
+                                    <!-- Campo oculto para enviar la imagen seleccionada al servidor -->
+                                    <input type="hidden" id="imagenPerfilInput" name="imagenPerfil" value="<%=lector.getImagenPerfil()%>">
+                                </div>
+
+                                <script>
+                                    // Función que selecciona una imagen
+                                    function seleccionarImagen(id, elemento) {
+                                        // Actualizar el valor del campo oculto con el ID de la imagen seleccionada
+                                        document.getElementById('imagenPerfilInput').value = id;
+
+                                        // Resaltar la imagen seleccionada
+                                        var iconos = document.querySelectorAll('.profile-icon');
+                                        iconos.forEach(icono => icono.classList.remove('selected'));
+                                        elemento.classList.add('selected');
+                                    }
+                                </script>
                                     <div class="field">
                                         <label for="nombre">Nombre:</label>
                                         <input type="text" id="nombre" name="nombre" value="<%=lector.getNombre()%>" placeholder="Nombre" class="login" required/>

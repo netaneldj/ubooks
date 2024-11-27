@@ -40,6 +40,7 @@ public class SvAgregarLector extends HttpServlet {
             IdiomaPaper dioma = IdiomaPaper.valueOf(request.getParameter("idioma"));
             GeneroPaper genero = GeneroPaper.valueOf(request.getParameter("genero"));
             Boolean esAutor = request.getParameter("autor") != null;
+            int imagenPerfil = Integer.parseInt(request.getParameter("imagenPerfil"));
 
             usuario.setNombreUsuario(nombreUsuario);
             usuario.setContrasenia(contrasenia);
@@ -53,6 +54,7 @@ public class SvAgregarLector extends HttpServlet {
             lector.setIdioma(dioma);
             lector.setGenero(genero);
             lector.setEsAutor(esAutor);
+            lector.setImagenPerfil(imagenPerfil);
 
             boolean exito = controladoraLogica.crearLectorUsuario(lector,usuario);
 
