@@ -4,13 +4,8 @@
  */
 package Servlets;
 
-import Logica.Controlador.ControladoraLogica;
-import Logica.Entidades.GeneroPaper;
-import Logica.Entidades.IdiomaPaper;
-import Logica.Entidades.Lector;
-import Logica.Entidades.Usuario;
 import java.io.IOException;
-import java.util.Date;
+import java.util.Objects;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.Cookie;
@@ -18,25 +13,37 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-@WebServlet(name = "SvVerGrupo", urlPatterns = {"/SvVerGrupo"})
-public class SvVerGrupo extends HttpServlet{
-    
+/**
+ *
+ * @author bruno
+ */
+@WebServlet(name = "SvBuscarDiscusion", urlPatterns = {"/SvBuscarDiscusion"})
+public class SvBuscarDiscusion extends HttpServlet {
+
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
     }
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
-        throws ServletException, IOException {
-        Cookie grupo = new Cookie("id_grupo", request.getParameter("id"));
-        grupo.setMaxAge(60*60);
-        Cookie filtro = new Cookie("filtro", null);
-        filtro.setMaxAge(0);
-        response.addCookie(grupo);
+            throws ServletException, IOException {
+        Cookie filtro = new Cookie("filtro", request.getParameter("filtro"));
+                 
+        filtro.setMaxAge(60*60);
         response.addCookie(filtro);
-
-        response.sendRedirect("verGrupo.jsp");
+    
+        response.sendRedirect(request.getParameter("paginaOriginal"));
     }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+    }
+
+    @Override
+    public String getServletInfo() {
+        return "Short description";
+    }// </editor-fold>
 
     
 }

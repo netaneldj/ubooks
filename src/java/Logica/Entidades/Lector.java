@@ -28,6 +28,9 @@ public class Lector extends Persona implements Serializable {
     
     private int puntos;
     
+    @Column(name = "FOTO_PERFIL")
+    private int fotoPerfil;
+    
     @OneToOne
     private Usuario usuario;
     
@@ -64,6 +67,7 @@ public class Lector extends Persona implements Serializable {
         this.genero = genero;
         this.esAutor = esAutor;
         this.misPapers = misPapers;
+        this.fotoPerfil = 0;
         this.puntos = 0;
     }
 
@@ -159,6 +163,20 @@ public class Lector extends Persona implements Serializable {
     
     public int getPuntos(){
         return this.puntos;
+    }
+    
+    public int getImagenPerfil(){
+        return this.fotoPerfil;
+    }
+    
+    public String getRutaImagenPerfil() {
+        return getImagenPerfil() != 0 
+            ? "resources/img/Perfil" + getImagenPerfil() + ".jpg" 
+            : "https://via.placeholder.com/150?text=Foto";
+}
+
+    public void setImagenPerfil(int imagenPerfil) {
+        this.fotoPerfil = imagenPerfil;
     }
     
     

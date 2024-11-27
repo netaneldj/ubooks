@@ -27,7 +27,7 @@ public class ControladoraLogica {
     public ControladoraLogica(){
         controladoraPersistencia = new ControladoraPersistencia();
     }
-     
+      
     public boolean insertarValoracion(Paper paper, Lector lector, int calificacion, String comentario) {
         boolean exito = controladoraPersistencia.crearValoracion(paper, lector, calificacion, comentario);
         return exito;
@@ -168,6 +168,10 @@ public class ControladoraLogica {
         return controladoraPersistencia.obtenerLectoresPorNombre(nombre, esAutor);
     }
     
+    public List<Grupo> obtenerGruposPorNombre(String nombreGrupo) {
+        return controladoraPersistencia.obtenerGruposPorNombre(nombreGrupo);
+    }
+    
     public Lector obtenerLectorPorIdUsuario(int idUsuario) {
         return controladoraPersistencia.obtenerLectorPorIdUsuario(idUsuario);
     }
@@ -199,10 +203,17 @@ public class ControladoraLogica {
                 .collect(Collectors.toList());
     }
     
-    public List<Paper> obtenerPapersPorGenero(GeneroPaper genero){
+    public List<Paper> obtenerPapersPorGenero(GeneroPaper genero, IdiomaPaper idioma){
         return controladoraPersistencia.obtenerPapers().stream()
-                .filter(paper -> paper.getGenero().toString().equals(genero.toString()))
+                .filter(paper -> paper.getGenero().toString().equals(genero.toString()) && paper.getIdioma().toString().equals(idioma.toString()))
                 .sorted(Comparator.comparing(Paper::getPromedioValoracionNumerica).reversed())
+                .collect(Collectors.toList());
+    }
+    
+    public List<Paper> obtenerPapersNuevos(IdiomaPaper idioma){
+        return controladoraPersistencia.obtenerPapers().stream()
+                .filter(paper -> paper.getIdioma().toString().equals(idioma.toString()))
+                .sorted(Comparator.comparing(Paper::getId).reversed())
                 .collect(Collectors.toList());
     }
     
@@ -268,6 +279,11 @@ public class ControladoraLogica {
     public boolean modificarComentarioGrupo(ComentarioGrupo comentario) {
         return controladoraPersistencia.modificarComentarioGrupo(comentario); 
     }
+    
+    public  List<ComentarioGrupo> obtenerCometariosPorFiltro(String filtro, Grupo grupo) {
+        return controladoraPersistencia.obtenerCometariosPorFiltro(filtro,grupo);
+    }
+    
     
     public static synchronized Date convertirStringADate(String fecha) {
         return Date.from(LocalDate.parse(fecha).atStartOfDay(ZoneId.systemDefault()).toInstant());
