@@ -141,7 +141,7 @@
                             <div class="nav-collapse">
                                 <ul class="nav">
                                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                                                class="icon-user"></i><span>Grupos</span></a>
+                                                class="icon-group"></i><span>Grupos</span></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="registrarGrupo.jsp" >Registrar</a></li>
                                             <li><a href="listarGrupos.jsp" >Listar</a></li>
