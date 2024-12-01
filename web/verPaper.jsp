@@ -20,7 +20,7 @@
     <link href="resources/css/font-awesome.css" rel="stylesheet">
     <link href="resources/css/style.css" rel="stylesheet">
     <link href="resources/css/pages/dashboard.css" rel="stylesheet">
-    <style>
+    <style style="font-family: Times New Roman">
         .rating {
             display: flex;
             direction: rtl;

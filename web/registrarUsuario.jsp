@@ -18,7 +18,7 @@
         <link href="resources/css/pages/signin.css" rel="stylesheet" type="text/css">
     </head>
 
-    <body>
+    <body style="font-family: Times New Roman">
         <%
             String id_usuario = "0";
             Cookie[] cookies = request.getCookies();
