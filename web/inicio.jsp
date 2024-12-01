@@ -1,3 +1,7 @@
+<%@page import="java.util.stream.IntStream"%>
+<%@page import="java.util.Arrays"%>
+<%@page import="java.util.Collections"%>
+<%@page import="java.util.Comparator"%>
 <%@page import="Logica.Entidades.Paper"%>
 <%@page import="java.util.Calendar"%>
 <%@page import="Logica.Entidades.Lector"%>
@@ -88,6 +92,25 @@
             inicioRecomendacionPaperNuevos, 
             Math.min(inicioRecomendacionPaperNuevos + itemsPorPagina, totalPapersRecomendadosNuevos)
             );
+        
+        List<Lector> ranking = controladoraLogica.obtenerLectores();
+        Collections.sort(ranking, new Comparator<Lector>() {
+        @Override
+        public int compare(Lector l1, Lector l2) {
+            return Integer.compare(l2.getPuntos(), l1.getPuntos());
+        }
+        }); 
+
+        int paginaRankingLectores = request.getParameter("paginaRankingLectores") != null 
+        ? Integer.parseInt(request.getParameter("paginaRankingLectores")) 
+        : 1;
+        int itemsPorPaginaRanking = 4;
+        int totalLectores = ranking.size();
+        int totalPaginas = (int) Math.ceil((double) totalLectores / itemsPorPaginaRanking);
+        int inicio = (paginaRankingLectores - 1) * itemsPorPaginaRanking;
+        int fin = Math.min(inicio + itemsPorPaginaRanking, totalLectores);
+        List<Lector> rankingPaginado = ranking.subList(inicio, fin);
+        
         %>
         <div class="navbar navbar-fixed-top">
             <div class="navbar-inner">
@@ -267,6 +290,59 @@
                 </div>
                 <!-- /span3 --> 
             </div>
+                        
+                        
+            <div class="row">
+            <div class="span6 pull-left">
+                <!-- PANEL: Ranking de Lectores -->
+                <div class="widget">
+                    <div class="widget-header"> <i class="icon-star"></i>
+                        <h3>Ranking de Lectores</h3>
+                    </div>
+                    <div class="widget-content">
+                        <ul class="messages_layout">
+                            <% 
+                                //int posicion = 1;
+                                for (Lector un_lector : rankingPaginado) {
+                            %>
+                            <li class="from_user leftLector">
+                                <div class="message_wrap">
+                                    <span class="arrow"></span>
+                                        <div class="info">
+                                        <%
+                                            int posicion = 0;
+                                            for (int i = 0; i < ranking.size(); i++) {
+                                                if (ranking.get(i).getId() == un_lector.getId()) {
+                                                    posicion = i;
+                                                }
+                                            }
+                                        %>                                     
+                                        <div class="info"> <a class="name">Puesto: <%=  (posicion + 1) + " - " + un_lector.getNombre() + " " + un_lector.getApellido() %></a>
+                                        <div class="text"><strong>Puntos: <%= un_lector.getPuntos()%></strong> </div>
+                                    </div>
+                                </div>
+                            </div>
+                                </li>
+                            <% 
+                                } 
+                            %>
+                        </ul>
+                    </div>
+            <!-- Paginación si fuera necesaria -->
+                    <div class="pagination">
+                        <% if (paginaRankingLectores > 1) { %>
+                            <a href="inicio.jsp?paginaRankingLectores=<%= paginaRankingLectores - 1 %>">&laquo; Anterior</a>
+                        <% } %>
+                        <span>Página <%= paginaRankingLectores %> de <%= (int) Math.ceil((double) totalLectores / itemsPorPaginaRanking) %></span>
+                        <% if (paginaRankingLectores < (int) Math.ceil((double) totalLectores / itemsPorPaginaRanking)) { %>
+                            <a href="inicio.jsp?paginaRankingLectores=<%= paginaRankingLectores + 1 %>">Siguiente &raquo;</a>
+                        <% } %>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+                        
             <!-- /row --> 
             <div class="row">
                 <div class="span6 pull-left">
