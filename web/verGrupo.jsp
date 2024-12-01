@@ -142,6 +142,7 @@
         </div>
         <!-- /subnavbar -->
         <div class="main">
+            <div class="container" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-top: 20px;">
             <div class="main-inner">
             <div style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-top: 20px; background-color: white">
             <div class="text", style="font-size:300%; text-align:left;padding: 20px;margin: 10px;margin-left: -10px;line-height: 1;">
@@ -226,6 +227,7 @@
                         </div>
                     </div>
          </div>
+        </div>
         </div>
         <!-- /main -->
 
