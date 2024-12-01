@@ -241,7 +241,7 @@
                             <h3>Calificación</h3>
                         </div>
                         <div class="widget-content">
-                            <form action="submitRating.jsp" method="post">
+                            <form action="SvEnviarValoracion" method="POST">
                                 <div class="rating">
                                     <input type="radio" name="valoracion" id="star5" value="5" />
                                     <label for="star5">★</label>
