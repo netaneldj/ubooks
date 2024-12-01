@@ -27,7 +27,7 @@
 <link href="resources/css/pages/signin.css" rel="stylesheet" type="text/css">
 
 </head>
- <style>
+ <style style="font-family: Times New Roman">
     .profile-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(100px, 1fr)); /* Diseño adaptable */

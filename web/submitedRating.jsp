@@ -22,7 +22,7 @@
         }
     </style>
 </head>
-<body>
+<body style="font-family: Times New Roman">
     <div class="container">
             <div class="alert alert-success" role="alert">
                 <strong>¡Éxito! Gracias por enviarnos tu valoracion.</strong> 

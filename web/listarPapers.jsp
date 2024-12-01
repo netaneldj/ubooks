@@ -37,7 +37,7 @@
         <link href="resources/css/pages/dashboard.css" rel="stylesheet">
     </head>
 
-    <body>
+    <body style="font-family: Times New Roman">
         <%
             String id_usuario = "0";
             Cookie[] cookies = request.getCookies();

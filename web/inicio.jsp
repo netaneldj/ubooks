@@ -21,7 +21,7 @@
         <link href="resources/css/style.css" rel="stylesheet">
         <link href="resources/css/pages/dashboard.css" rel="stylesheet">
     </head>
-    <body>
+    <body style="font-family: Times New Roman">
         <%
         ControladoraLogica controladoraLogica = new ControladoraLogica();
         HttpSession sesion = request.getSession();

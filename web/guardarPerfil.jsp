@@ -26,7 +26,7 @@
             /* Estilos CSS aquí */
         </style>
     </head>
-<body>
+<body style="font-family: Times New Roman">
     <%   
         ControladoraLogica controladoraLogica = new ControladoraLogica();
         HttpSession sesion = request.getSession();

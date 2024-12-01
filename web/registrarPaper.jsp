@@ -26,7 +26,7 @@
 
 </head>
 
-<body>
+<body style="font-family: Times New Roman">
 	<%
             /*
             HttpSession sesion = request.getSession();
