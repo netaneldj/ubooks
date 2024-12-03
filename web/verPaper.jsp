@@ -208,7 +208,12 @@
                                         <span style="color: <%= i < promedioValoracionPaper ? "gold" : "#ddd" %>; font-size: 30px;">★</span>
                                     <% } %>
                                 </span>
-                           
+                                <div style="text-align: center;"> 
+                                    <div style="width: 120px; height: 120px; border-radius: 98%; border: 1px solid #ddd; overflow: hidden; margin: 0 auto;">
+                                    <img src="<%=paper.getRutaImagenPortada()%>"                                                style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                    <p style="margin-top: 10px; font-size: 0.9em; color: #555;">Foto de portada</p>
+                                </div>                           
                                 <div class="field">
                                     <label for="nombre">Nombre:</label>
                                     <input type="text" id="nombre" name="nombre" value="<%=paper != null ? paper.getNombre() : ""%>" class="login" readonly/>

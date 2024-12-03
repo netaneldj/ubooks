@@ -27,6 +27,8 @@ public class Paper implements Serializable {
     private IdiomaPaper idioma;
     @Column(name = "PROMEDIO_VALORACION_NUMERICA")
     private double promedioValoracionNumerica;
+    @Column(name = "FOTO_PORTADA")
+    private int fotoPortada;
 
     public Paper() {
     }
@@ -40,6 +42,7 @@ public class Paper implements Serializable {
         this.genero = genero;
         this.idioma = idioma;
         this.promedioValoracionNumerica = promedioValoracionNumerica;
+        this.fotoPortada = 0;
     }
 
     public Integer getId() {
@@ -105,6 +108,19 @@ public class Paper implements Serializable {
         this.promedioValoracionNumerica = promedioValoracionNumerica;
     }
     
+    public int getFotoPortada(){
+        return this.fotoPortada;
+    }
+    
+    public String getRutaImagenPortada() {
+        return getFotoPortada() != 0 
+            ? "resources/img/paper" + getFotoPortada() + ".jpg" 
+            : "https://via.placeholder.com/150?text=Foto";
+}
+
+    public void setFotoPortada(int fotoPortada) {
+        this.fotoPortada = fotoPortada;
+    }
     
     
 }

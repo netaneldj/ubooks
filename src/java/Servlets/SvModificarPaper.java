@@ -53,6 +53,7 @@ public class SvModificarPaper extends HttpServlet {
             String resumen = request.getParameter("resumen");
             GeneroPaper genero = GeneroPaper.valueOf(request.getParameter("genero"));
             IdiomaPaper idioma = IdiomaPaper.valueOf(request.getParameter("idioma"));
+            Integer fotoPortada = Integer.parseInt(request.getParameter("fotoPortada"));
             
             Lector lector = controladoraLogica.obtenerLectorPorID(idLector);
 
@@ -68,6 +69,7 @@ public class SvModificarPaper extends HttpServlet {
                 paper.setResumen(resumen);
                 paper.setGenero(genero);
                 paper.setIdioma(idioma);
+                paper.setFotoPortada(fotoPortada);
                 controladoraLogica.modificarPaper(paper);
                 response.sendRedirect("Exito/exito.jsp");
             }
