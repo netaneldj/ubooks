@@ -20,7 +20,7 @@
     <link href="resources/css/font-awesome.css" rel="stylesheet">
     <link href="resources/css/style.css" rel="stylesheet">
     <link href="resources/css/pages/dashboard.css" rel="stylesheet">
-    <style>
+    <style style="font-family: Times New Roman">
         .rating {
             display: flex;
             direction: rtl;
@@ -145,7 +145,7 @@
                     <div class="nav-collapse">
                         <ul class="nav">
                             <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                                        class="icon-user"></i><span>Grupos</span></a>
+                                        class="icon-group"></i><span>Grupos</span></a>
                                 <ul class="dropdown-menu">
                                     <li><a href="registrarGrupo.jsp" >Registrar</a></li>
                                     <li><a href="listarGrupos.jsp" >Listar</a></li>
@@ -208,7 +208,12 @@
                                         <span style="color: <%= i < promedioValoracionPaper ? "gold" : "#ddd" %>; font-size: 30px;">★</span>
                                     <% } %>
                                 </span>
-                           
+                                <div style="text-align: center;"> 
+                                    <div style="width: 120px; height: 120px; border-radius: 98%; border: 1px solid #ddd; overflow: hidden; margin: 0 auto;">
+                                    <img src="<%=paper.getRutaImagenPortada()%>"                                                style="width: 100%; height: 100%; object-fit: cover;">
+                                    </div>
+                                    <p style="margin-top: 10px; font-size: 0.9em; color: #555;">Foto de portada</p>
+                                </div>                           
                                 <div class="field">
                                     <label for="nombre">Nombre:</label>
                                     <input type="text" id="nombre" name="nombre" value="<%=paper != null ? paper.getNombre() : ""%>" class="login" readonly/>
@@ -241,7 +246,7 @@
                             <h3>Calificación</h3>
                         </div>
                         <div class="widget-content">
-                            <form action="submitRating.jsp" method="post">
+                            <form action="SvEnviarValoracion" method="POST">
                                 <div class="rating">
                                     <input type="radio" name="valoracion" id="star5" value="5" />
                                     <label for="star5">★</label>

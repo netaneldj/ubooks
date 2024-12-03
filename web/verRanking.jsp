@@ -24,7 +24,7 @@
         <link href="resources/css/pages/dashboard.css" rel="stylesheet">
 
     </head>
-    <body>
+    <body style="font-family: Times New Roman">
         <%
 
        

@@ -27,7 +27,7 @@
         <link href="resources/css/style.css" rel="stylesheet">
         <link href="resources/css/pages/dashboard.css" rel="stylesheet">
     </head>
-    <body>
+    <body style="font-family: Times New Roman">
         <%
         ControladoraLogica controladoraLogica = new ControladoraLogica();
         HttpSession sesion = request.getSession();
@@ -125,7 +125,7 @@
                             <div class="nav-collapse">
                                 <ul class="nav">
                                     <li class="dropdown"><a href="#" class="dropdown-toggle" data-toggle="dropdown"><i
-                                                class="icon-user"></i><span>Grupos</span></a>
+                                                class="icon-group"></i><span>Grupos</span></a>
                                         <ul class="dropdown-menu">
                                             <li><a href="registrarGrupo.jsp" >Registrar</a></li>
                                             <li><a href="listarGrupos.jsp" >Listar</a></li>
@@ -142,6 +142,7 @@
         </div>
         <!-- /subnavbar -->
         <div class="main">
+            <div class="container" style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-top: 20px;">
             <div class="main-inner">
             <div style="border: 1px solid #ddd; padding: 20px; border-radius: 8px; margin-top: 20px; background-color: white">
             <div class="text", style="font-size:300%; text-align:left;padding: 20px;margin: 10px;margin-left: -10px;line-height: 1;">
@@ -226,6 +227,7 @@
                         </div>
                     </div>
          </div>
+        </div>
         </div>
         <!-- /main -->
 

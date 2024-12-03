@@ -48,7 +48,7 @@
       border-color: #FF5733; /* Resalta con un borde naranja cuando está seleccionado */
     }
  </style>
-    <body>
+    <body style="font-family: Times New Roman">
         <%
             /*
             HttpSession sesion = request.getSession();
